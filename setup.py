@@ -22,14 +22,14 @@ with open('README.md', 'r', 'utf-8') as f:
 requires = ['requests', 'ratelim', 'click', 'six', 'future']
 
 setup(
-    name='geocoder',
+    name='geocoder3',
     version=version,
     description="Geocoder is a simple and consistent geocoding library.",
     long_description=readme,
-    author='Denis Carriere',
-    author_email='carriere.denis@gmail.com',
-    url='https://github.com/DenisCarriere/geocoder',
-    download_url='https://github.com/DenisCarriere/geocoder',
+    author='Andrey Shpak',
+    author_email='ashpak@ashpak.ru',
+    url='https://github.com/insspb/geocoder3',
+    download_url='https://github.com/insspb/geocoder3',
     license="The MIT License",
     entry_points='''
         [console_scripts]
@@ -43,16 +43,16 @@ setup(
     zip_safe=False,
     keywords='geocoder arcgis tomtom opencage google bing here',
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: Apache Software License',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Internet',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',
