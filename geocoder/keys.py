@@ -26,6 +26,8 @@ geocodefarm_key = os.environ.get('GEOCODEFARM_API_KEY')
 tgos_key = os.environ.get('TGOS_API_KEY')
 locationiq_key = os.environ.get('LOCATIONIQ_API_KEY')
 ipinfo_key = os.environ.get('IPINFO_API_KEY')
+yandex_key = os.environ.get('YANDEX_API_KEY')
+
 
 class CanadapostKeyLazySingleton(object):
 
