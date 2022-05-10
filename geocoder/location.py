@@ -1,8 +1,7 @@
 import re
+from statistics import mean
 
 import geocoder
-
-from statistics import mean
 
 
 class Location(object):
