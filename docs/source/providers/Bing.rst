@@ -106,4 +106,3 @@ References
 
 - `Bing Maps REST Services <http://msdn.microsoft.com/en-us/library/ff701714.aspx>`_
 - `Bing Geocode Limits <https://msdn.microsoft.com/en-us/library/gg585136.aspx>`_
-

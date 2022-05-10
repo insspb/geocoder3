@@ -13,4 +13,3 @@ def test_ipfinder():
     assert g.url         == "https://api.ipfinder.io/v1/1.0.0.0?token=free&format=json"
     assert g.status      == "ok"
     assert g.headers.get('user-agent')      == "geocoder Python-client"
-

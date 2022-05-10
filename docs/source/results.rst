@@ -233,4 +233,3 @@ Compliant providers
 - :doc:`Google Places <providers/Google>`
 - :doc:`Geonames <providers/GeoNames>`
 - :doc:`Mapbox <providers/Mapbox>`
-

@@ -35,6 +35,3 @@ References
 ----------
 
 - `GeoOttawa Map <http://maps.ottawa.ca/geoottawa/>`_
-
-
-

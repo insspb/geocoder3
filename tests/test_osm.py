@@ -29,4 +29,3 @@ def test_detailed_query():
     assert g.postal == "45326"
     assert "ellern" in g.street.lower()
     assert g.ok
-
