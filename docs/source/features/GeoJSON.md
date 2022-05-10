@@ -1,6 +1,10 @@
 # GeoJSON Support
 
-GeoJSON is a format for encoding a variety of geographic data structures. A complete GeoJSON data structure is always an object (in JSON terms). In GeoJSON, an object consists of a collection of name/value pairs -- also called members. For each member, the name is always a string. Member values are either a string, number, object, array or one of the literals: true, false, and null.
+GeoJSON is a format for encoding a variety of geographic data structures. A complete
+GeoJSON data structure is always an object (in JSON terms). In GeoJSON, an object
+consists of a collection of name/value pairs -- also called members. For each member,
+the name is always a string. Member values are either a string, number, object, array or
+one of the literals: true, false, and null.
 
 [GeoJSON Specification](http://geojson.org/geojson-spec.html)
 
@@ -14,7 +18,9 @@ g.geojson
 
 ## GeoJSON Output
 
-The difference between the GeoJSON and JSON response is the `geometry` attribute is in accordance with GeoJSON specification; All attributes are nested in the `properties` attribute and the `bbox` (bounding box) is formatted to the GeoJSON spec.
+The difference between the GeoJSON and JSON response is the `geometry` attribute is in
+accordance with GeoJSON specification; All attributes are nested in the `properties`
+attribute and the `bbox` (bounding box) is formatted to the GeoJSON spec.
 
 ```json
 {

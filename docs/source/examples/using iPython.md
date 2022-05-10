@@ -1,14 +1,15 @@
 # Using iPython
 
 ```bash
-$ pip install ipython
-$ ipython
+pip install ipython
+ipython
 ```
 
 Using the **TAB** key after entering '.' you will see all the available **providers**.
 
 ```python
 import geocoder
+
 g = geocoder.
 # geocoder.api             geocoder.geolytica       geocoder.mapquest
 # geocoder.arcgis          geocoder.geonames        geocoder.nokia

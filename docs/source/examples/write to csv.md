@@ -13,6 +13,7 @@ with open('test.csv', 'wb') as f:
     writer.writeheader()
     writer.writerow(g.json)
 ```
+
 **Note**: The `fieldnames` is new in 1.1.3, `attributes` in the earlier versions.
 
 ## Multiple Address
@@ -20,7 +21,6 @@ with open('test.csv', 'wb') as f:
 The CSV file used for **locations.csv**.
 
 Using `delimiter` for parsing a CSV might include `<\t> <;> <|> <,>`
-
 
 | location    | extra      |
 |-------------|-----------|

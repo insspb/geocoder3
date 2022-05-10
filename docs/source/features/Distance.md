@@ -1,6 +1,7 @@
 # Distance Tool
 
-The distance tool measures the Great Circle distance between the surface of the earth between two or multiple points.
+The distance tool measures the Great Circle distance between the surface of the earth
+between two or multiple points.
 
 ![Distance Tool](https://pbs.twimg.com/media/CAbDTPKW8AAQ68l.png:large)
 
@@ -10,9 +11,12 @@ The distance tool measures the Great Circle distance between the surface of the 
 
 ### Python & CLI
 
-Simply add as many locations into the `distance` function, to change the units of measurement include the `units` parameter.
+Simply add as many locations into the `distance` function, to change the units of
+measurement include the `units` parameter.
 
-When entering a location string it will geocode it automatically using the given `provider` parameter. Some warning errors might occur when trying to geocode too many string locations, this is a combination of rate limits or a lost URL connection.
+When entering a location string it will geocode it automatically using the
+given `provider` parameter. Some warning errors might occur when trying to geocode too
+many string locations, this is a combination of rate limits or a lost URL connection.
 
 When using the CLI, simply raise the `--distance` flag to use the distance tool.
 
@@ -95,7 +99,7 @@ geocoder.distance(point1, point2)
 
 ## Parameters
 
-- `location` : Your search  locations you want geocoded. (min 2x locations)
+- `location` : Your search locations you want geocoded. (min 2x locations)
 - `units` :  Unit of measurement. (default=kilometers)
     - kilometers
     - miles

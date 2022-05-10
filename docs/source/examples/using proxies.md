@@ -1,6 +1,7 @@
 # Using Proxies
 
-Using proxies will hide the IP address of the client computer when calling a request using the Python Geocoder.
+Using proxies will hide the IP address of the client computer when calling a request
+using the Python Geocoder.
 
 ```python
 import geocoder

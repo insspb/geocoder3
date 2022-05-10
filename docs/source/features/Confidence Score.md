@@ -4,14 +4,21 @@ Based from [OpenCage API](https://geocoder.opencagedata.com/api#quickstart)
 
 ## Geocoding Confidence
 
-The OpenCage Geocoder will always attempt to find a match for as many parts of a query as it can, but this isn't always possible to do. Where a partial match is made, for example a street name can be matched but a specific house number on that street cannot be matched, the geocoder will still return a result but the granularity of the match will not be as high as if the house number was matched.
+The OpenCage Geocoder will always attempt to find a match for as many parts of a query
+as it can, but this isn't always possible to do. Where a partial match is made, for
+example a street name can be matched but a specific house number on that street cannot
+be matched, the geocoder will still return a result but the granularity of the match
+will not be as high as if the house number was matched.
 
-The confidence that the geocoder has in a match returned in the confidence field. This contains a value between 0 and 10, where 0 reflects no confidence and 10 reflects high confidence.
+The confidence that the geocoder has in a match returned in the confidence field. This
+contains a value between 0 and 10, where 0 reflects no confidence and 10 reflects high
+confidence.
 
-Confidence is calculated by measuring the distance in kilometres between the South West and North East corners of each results bounding box; a smaller distance represents a high confidence while a large distance represents a lower confidence.
+Confidence is calculated by measuring the distance in kilometres between the South West
+and North East corners of each results bounding box; a smaller distance represents a
+high confidence while a large distance represents a lower confidence.
 
 Please note, you can supply the optional min_confidence parameter (see below).
-
 
 |Score |       Description          |
 |:----:|:---------------------------|
