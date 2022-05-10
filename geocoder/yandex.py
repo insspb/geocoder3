@@ -86,7 +86,7 @@ class YandexResult(OneResult):
 
     @property
     def _locality(self):
-        return self._subAdministrativeArea.get('Locality', {})
+        return self._subAdministrativeArea.get('Locality') or {}
 
     @property
     def city(self):
