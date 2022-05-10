@@ -1,39 +1,34 @@
-#!/usr/bin/python
-# coding: utf8
-
-from __future__ import absolute_import
-
 import logging
-import requests
-import ratelim
 
-from geocoder.base import OneResult, MultipleResultsQuery
+import ratelim
+import requests
+
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class FreeGeoIPResult(OneResult):
-
     @property
     def lat(self):
-        return self.raw.get('latitude')
+        return self.raw.get("latitude")
 
     @property
     def lng(self):
-        return self.raw.get('longitude')
+        return self.raw.get("longitude")
 
     @property
     def address(self):
         if self.city:
-            return u'{0}, {1} {2}'.format(self.city, self.state, self.country)
+            return "{0}, {1} {2}".format(self.city, self.state, self.country)
         elif self.state:
-            return u'{0}, {1}'.format(self.state, self.country)
+            return "{0}, {1}".format(self.state, self.country)
         elif self.country:
-            return u'{0}'.format(self.country)
-        return u''
+            return "{0}".format(self.country)
+        return ""
 
     @property
     def postal(self):
-        zip_code = self.raw.get('zip_code')
-        postal_code = self.raw.get('postal_code')
+        zip_code = self.raw.get("zip_code")
+        postal_code = self.raw.get("postal_code")
         if zip_code:
             return zip_code
         if postal_code:
@@ -41,55 +36,55 @@ class FreeGeoIPResult(OneResult):
 
     @property
     def city(self):
-        return self.raw.get('city')
+        return self.raw.get("city")
 
     @property
     def state(self):
-        return self.raw.get('region')
+        return self.raw.get("region")
 
     @property
     def region_code(self):
-        return self.raw.get('region_code')
+        return self.raw.get("region_code")
 
     @property
     def country(self):
-        return self.raw.get('country_name')
+        return self.raw.get("country_name")
 
     @property
     def country_code3(self):
-        return self.raw.get('country_code3')
+        return self.raw.get("country_code3")
 
     @property
     def continent(self):
-        return self.raw.get('continent')
+        return self.raw.get("continent")
 
     @property
     def timezone(self):
-        return self.raw.get('timezone')
+        return self.raw.get("timezone")
 
     @property
     def area_code(self):
-        return self.raw.get('area_code')
+        return self.raw.get("area_code")
 
     @property
     def dma_code(self):
-        return self.raw.get('dma_code')
+        return self.raw.get("dma_code")
 
     @property
     def offset(self):
-        return self.raw.get('offset')
+        return self.raw.get("offset")
 
     @property
     def organization(self):
-        return self.raw.get('organization')
+        return self.raw.get("organization")
 
     @property
     def ip(self):
-        return self.raw.get('ip')
+        return self.raw.get("ip")
 
     @property
     def time_zone(self):
-        return self.raw.get('time_zone')
+        return self.raw.get("time_zone")
 
 
 class FreeGeoIPQuery(MultipleResultsQuery):
@@ -109,10 +104,11 @@ class FreeGeoIPQuery(MultipleResultsQuery):
     -------------
     https://freegeoip.live/
     """
-    provider = 'freegeoip'
-    method = 'geocode'
 
-    _URL = 'https://freegeoip.live/json/'
+    provider = "freegeoip"
+    method = "geocode"
+
+    _URL = "https://freegeoip.live/json/"
     _RESULT_CLASS = FreeGeoIPResult
     _KEY_MANDATORY = False
 
@@ -127,7 +123,8 @@ class FreeGeoIPQuery(MultipleResultsQuery):
     def _adapt_results(self, json_response):
         return [json_response]
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = FreeGeoIPQuery('99.240.181.199')
+    g = FreeGeoIPQuery("99.240.181.199")
     g.debug()

@@ -1,21 +1,10 @@
-#!/usr/bin/python
-# coding: utf8
-
-from __future__ import absolute_import, print_function
-from geocoder.bing_batch import BingBatch, BingBatchResult
-
-import io
 import csv
-import sys
+import io
 
-PY2 = sys.version_info < (3, 0)
-csv_io = io.BytesIO if PY2 else io.StringIO
-csv_encode = (lambda input: input) if PY2 else (lambda input: input.encode('utf-8'))
-csv_decode = (lambda input: input) if PY2 else (lambda input: input.decode('utf-8'))
+from geocoder.bing_batch import BingBatch, BingBatchResult
 
 
 class BingBatchForwardResult(BingBatchResult):
-
     @property
     def lat(self):
         coord = self._content
@@ -33,10 +22,10 @@ class BingBatchForwardResult(BingBatchResult):
         return bool(self._content)
 
     def debug(self, verbose=True):
-        with csv_io() as output:
-            print('\n', file=output)
-            print('Bing Batch result\n', file=output)
-            print('-----------\n', file=output)
+        with io.StringIO() as output:
+            print("\n", file=output)
+            print("Bing Batch result\n", file=output)
+            print("-----------\n", file=output)
             print(self._content, file=output)
 
             if verbose:
@@ -46,36 +35,43 @@ class BingBatchForwardResult(BingBatchResult):
 
 
 class BingBatchForward(BingBatch):
-    method = 'batch'
+    method = "batch"
     _RESULT_CLASS = BingBatchForwardResult
 
     def generate_batch(self, addresses):
-        out = csv_io()
+        out = io.StringIO()
         writer = csv.writer(out)
-        writer.writerow([
-            'Id',
-            'GeocodeRequest/Query',
-            'GeocodeResponse/Point/Latitude',
-            'GeocodeResponse/Point/Longitude'
-        ])
+        writer.writerow(
+            [
+                "Id",
+                "GeocodeRequest/Query",
+                "GeocodeResponse/Point/Latitude",
+                "GeocodeResponse/Point/Longitude",
+            ]
+        )
 
         for idx, address in enumerate(addresses):
             writer.writerow([idx, address, None, None])
 
-        return csv_encode("Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()))
+        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode(
+            "utf-8"
+        )
 
     def _adapt_results(self, response):
-        result = csv_io(csv_decode(response))
+        result = io.StringIO(response.decode("utf-8"))
         # Skipping first line with Bing header
         next(result)
 
         rows = {}
         for row in csv.DictReader(result):
-            rows[row['Id']] = [row['GeocodeResponse/Point/Latitude'], row['GeocodeResponse/Point/Longitude']]
+            rows[row["Id"]] = [
+                row["GeocodeResponse/Point/Latitude"],
+                row["GeocodeResponse/Point/Longitude"],
+            ]
 
         return rows
 
 
-if __name__ == '__main__':
-    g = BingBatchForward(['Denver,CO', 'Boulder,CO'], key=None)
+if __name__ == "__main__":
+    g = BingBatchForward(["Denver,CO", "Boulder,CO"], key=None)
     g.debug()

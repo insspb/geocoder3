@@ -1,8 +1,6 @@
-#!/usr/bin/python
-# coding: utf8
 import geocoder
 
-location = '8.8.8.8'
+location = "8.8.8.8"
 
 
 def test_maxmind():

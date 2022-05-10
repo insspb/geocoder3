@@ -86,4 +86,3 @@ References
 
 .. _addr tag: http://wiki.openstreetmap.org/wiki/Key:addr
 .. _Nominatim Install: http://wiki.openstreetmap.org/wiki/Nominatim/Installation
-

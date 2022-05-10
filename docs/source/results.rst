@@ -160,7 +160,7 @@ Overview
 Some Geocoder results will contain a BBox/Bounds of the geographical extent of the result.
 There are two different widely adopted formats:
 
-- `Bounds`: 
+- `Bounds`:
     An Object defined which was first implemented by **Google Maps API** and adopted by many other providers such as Leaflet.
 
     .. code-block:: python
@@ -180,7 +180,7 @@ There are two different widely adopted formats:
 
 The major difference between both is the coordinates are flipped (LatLng => LngLat).
 
-How to use 
+How to use
 ----------
 
 BBox or Bounds can be used in geocoding queries to limit the search to the given area. The two formats are accepted.
@@ -192,8 +192,8 @@ Let's look at a basic search for 'Paris'
     >>> import geocoder
     >>> g = geocoder.geonames('Paris', maxRows=3, key='<USERNAME>')
     >>> print([(r.address, r.country, r.latlng) for r in g])
-    [ ('Paris', 'France', ['48.85341', '2.3488']), 
-      ('Paris', 'United States', ['33.66094', '-95.55551']), 
+    [ ('Paris', 'France', ['48.85341', '2.3488']),
+      ('Paris', 'United States', ['33.66094', '-95.55551']),
       ('Paris', 'Denmark', ['56.51417', '8.48996'])]
 
 Now, if you are **not** interested in any of those matches, you might have an hard time to find yours. That's where proximity comes into play.
@@ -233,4 +233,3 @@ Compliant providers
 - :doc:`Google Places <providers/Google>`
 - :doc:`Geonames <providers/GeoNames>`
 - :doc:`Mapbox <providers/Mapbox>`
-

@@ -1,21 +1,10 @@
-#!/usr/bin/python
-# coding: utf8
-
-from __future__ import absolute_import, print_function
-from geocoder.bing_batch import BingBatch, BingBatchResult
-
-import io
 import csv
-import sys
+import io
 
-PY2 = sys.version_info < (3, 0)
-csv_io = io.BytesIO if PY2 else io.StringIO
-csv_encode = (lambda input: input) if PY2 else (lambda input: input.encode('utf-8'))
-csv_decode = (lambda input: input) if PY2 else (lambda input: input.decode('utf-8'))
+from geocoder.bing_batch import BingBatch, BingBatchResult
 
 
 class BingBatchReverseResult(BingBatchResult):
-
     @property
     def address(self):
         address = self._content
@@ -51,10 +40,10 @@ class BingBatchReverseResult(BingBatchResult):
         return bool(self._content)
 
     def debug(self, verbose=True):
-        with csv_io() as output:
-            print('\n', file=output)
-            print('Bing Batch result\n', file=output)
-            print('-----------\n', file=output)
+        with io.StringIO() as output:
+            print("\n", file=output)
+            print("Bing Batch result\n", file=output)
+            print("-----------\n", file=output)
             print(self._content, file=output)
 
             if verbose:
@@ -65,47 +54,53 @@ class BingBatchReverseResult(BingBatchResult):
 
 class BingBatchReverse(BingBatch):
 
-    method = 'batch_reverse'
+    method = "batch_reverse"
     _RESULT_CLASS = BingBatchReverseResult
 
     def generate_batch(self, locations):
-        out = csv_io()
+        out = io.StringIO()
         writer = csv.writer(out)
-        writer.writerow([
-            'Id',
-            'ReverseGeocodeRequest/Location/Latitude',
-            'ReverseGeocodeRequest/Location/Longitude',
-            'GeocodeResponse/Address/FormattedAddress',
-            'GeocodeResponse/Address/Locality',
-            'GeocodeResponse/Address/PostalCode',
-            'GeocodeResponse/Address/AdminDistrict',
-            'GeocodeResponse/Address/CountryRegion'
-        ])
+        writer.writerow(
+            [
+                "Id",
+                "ReverseGeocodeRequest/Location/Latitude",
+                "ReverseGeocodeRequest/Location/Longitude",
+                "GeocodeResponse/Address/FormattedAddress",
+                "GeocodeResponse/Address/Locality",
+                "GeocodeResponse/Address/PostalCode",
+                "GeocodeResponse/Address/AdminDistrict",
+                "GeocodeResponse/Address/CountryRegion",
+            ]
+        )
 
         for idx, location in enumerate(locations):
-            writer.writerow([idx, location[0], location[1], None, None, None, None, None])
+            writer.writerow(
+                [idx, location[0], location[1], None, None, None, None, None]
+            )
 
-        return csv_encode("Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()))
+        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode(
+            "utf-8"
+        )
 
     def _adapt_results(self, response):
         # print(type(response))
-        result = csv_io(csv_decode(response))
+        result = io.StringIO(response.decode("utf-8"))
         # Skipping first line with Bing header
         next(result)
 
         rows = {}
         for row in csv.DictReader(result):
-            rows[row['Id']] = [
-                row['GeocodeResponse/Address/FormattedAddress'],
-                row['GeocodeResponse/Address/Locality'],
-                row['GeocodeResponse/Address/PostalCode'],
-                row['GeocodeResponse/Address/AdminDistrict'],
-                row['GeocodeResponse/Address/CountryRegion']
+            rows[row["Id"]] = [
+                row["GeocodeResponse/Address/FormattedAddress"],
+                row["GeocodeResponse/Address/Locality"],
+                row["GeocodeResponse/Address/PostalCode"],
+                row["GeocodeResponse/Address/AdminDistrict"],
+                row["GeocodeResponse/Address/CountryRegion"],
             ]
 
         return rows
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     g = BingBatchReverse([(40.7943, -73.970859), (48.845580, 2.321807)], key=None)
     g.debug()

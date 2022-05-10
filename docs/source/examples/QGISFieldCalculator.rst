@@ -29,6 +29,6 @@ Find the **geocode** expression in the **Geocoder** function list, the final res
 
 .. code-block:: bash
 
-    geocode("address")  
+    geocode("address")
 
 Once the wkt field is added, you can then save your document as a CSV format and in the **Layer Options** define the **GEOMETRY** = **AS_WKT**.

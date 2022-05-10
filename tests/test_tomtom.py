@@ -1,8 +1,6 @@
-# coding: utf8
-
 import geocoder
 
-location = 'Ottawa'
+location = "Ottawa"
 
 
 def test_tomtom():

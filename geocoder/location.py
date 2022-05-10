@@ -1,18 +1,12 @@
-#!/usr/bin/python
-# coding: utf8
-
 import re
+from statistics import mean
+
 import geocoder
-from six import string_types
-try:
-    from statistics import mean
-except ImportError:
-    def mean(args):
-        return sum(args) / len(args)
 
 
 class Location(object):
-    """ Location container """
+    """Location container"""
+
     lat = None
     lng = None
 
@@ -34,7 +28,7 @@ class Location(object):
 
     def _check_input(self, location):
         # Checking for a LatLng String
-        if isinstance(location, string_types):
+        if isinstance(location, str):
             expression = r"[-]?\d+[.]?[-]?[\d]+"
             pattern = re.compile(expression)
             match = pattern.findall(location)
@@ -43,7 +37,7 @@ class Location(object):
                 self._check_for_list([lat, lng])
             else:
                 # Check for string to Geocode using a provider
-                provider = self.kwargs.get('provider', 'osm')
+                provider = self.kwargs.get("provider", "osm")
                 g = geocoder.get(location, provider=provider)
                 if g.ok:
                     self.lat, self.lng = g.lat, g.lng
@@ -57,7 +51,7 @@ class Location(object):
             self._check_for_dict(location)
 
         # Checking for a Geocoder Class
-        elif hasattr(location, 'latlng'):
+        elif hasattr(location, "latlng"):
             if location.latlng:
                 self.lat, self.lng = location.latlng
 
@@ -86,20 +80,21 @@ class Location(object):
                     return self.lat, self.lng
                 else:
                     raise ValueError(
-                        "Coords are not within the world's geographical boundary")
+                        "Coords are not within the world's geographical boundary"
+                    )
             else:
                 raise ValueError("Coordinates must be numbers")
 
     def _check_for_dict(self, location):
         # Standard LatLng list or tuple with 2 number values
-        if 'lat' in location and 'lng' in location:
-            lat = location['lat']
-            lng = location['lng']
+        if "lat" in location and "lng" in location:
+            lat = location["lat"]
+            lng = location["lng"]
             self._check_for_list([lat, lng])
 
-        if 'y' in location and 'x' in location:
-            lat = location['y']
-            lng = location['x']
+        if "y" in location and "x" in location:
+            lat = location["y"]
+            lng = location["x"]
             self._check_for_list([lat, lng])
 
     @property
@@ -124,8 +119,8 @@ class Location(object):
 
     def __str__(self):
         if self.ok:
-            return u'{0}, {1}'.format(self.lat, self.lng)
-        return u''
+            return "{0}, {1}".format(self.lat, self.lng)
+        return ""
 
 
 class BBox(object):
@@ -137,40 +132,51 @@ class BBox(object):
     def factory(cls, arg):
         # validate input first
         if not isinstance(arg, (list, dict)):
-            raise ValueError(
-                "BBox factory only accept a dict or a list as argument")
+            raise ValueError("BBox factory only accept a dict or a list as argument")
         # we have a dict... just check which fields are given
         if isinstance(arg, dict):
-            if 'southwest' in arg:
+            if "southwest" in arg:
                 return cls(bounds=arg)
-            elif 'bbox' in arg:
-                return cls(bbox=arg['bbox'])
-            elif 'bounds' in arg:
-                return cls(bounds=arg['bounds'])
-            elif 'lat' in arg:
-                return cls(lat=arg['lat'], lng=arg['lng'])
-            elif 'west' in arg:
-                return cls(west=arg['west'], south=arg['south'],
-                           east=arg['east'], north=arg['north'])
+            elif "bbox" in arg:
+                return cls(bbox=arg["bbox"])
+            elif "bounds" in arg:
+                return cls(bounds=arg["bounds"])
+            elif "lat" in arg:
+                return cls(lat=arg["lat"], lng=arg["lng"])
+            elif "west" in arg:
+                return cls(
+                    west=arg["west"],
+                    south=arg["south"],
+                    east=arg["east"],
+                    north=arg["north"],
+                )
             else:
                 raise ValueError(
-                    "Could not found valid values in dict to create a bbox")
-        # we have a list... guess what to call according to the number of parameters given:
+                    "Could not found valid values in dict to create a bbox"
+                )
+        # we have a list.guess what to call according to the number of parameters given:
         if len(arg) == 2:
             lat, lng = arg
             return cls(lat=lat, lng=lng)
         elif len(arg) == 4:
             return cls(bbox=arg)
         else:
-            raise ValueError(
-                "Could not found valid values in list to create a bbox")
+            raise ValueError("Could not found valid values in list to create a bbox")
 
-    def __init__(self, bbox=None, bounds=None,
-                 lat=None, lng=None,
-                 west=None, south=None, east=None, north=None):
-        if bounds is not None and bounds.get('southwest') and bounds.get('northeast'):
-            self.south, self.west = map(float, bounds['southwest'])
-            self.north, self.east = map(float, bounds['northeast'])
+    def __init__(
+        self,
+        bbox=None,
+        bounds=None,
+        lat=None,
+        lng=None,
+        west=None,
+        south=None,
+        east=None,
+        north=None,
+    ):
+        if bounds is not None and bounds.get("southwest") and bounds.get("northeast"):
+            self.south, self.west = map(float, bounds["southwest"])
+            self.north, self.east = map(float, bounds["northeast"])
         elif bbox is not None and all(bbox):
             self.west, self.south, self.east, self.north = map(float, bbox)
         elif lat is not None and lng is not None:
@@ -178,9 +184,10 @@ class BBox(object):
             self.north = float(lat) + self.DEGREES_TOLERANCE
             self.west = float(lng) - self.DEGREES_TOLERANCE
             self.east = float(lng) + self.DEGREES_TOLERANCE
-        elif not None in [west, south, east, north]:
+        elif None not in [west, south, east, north]:
             self.west, self.south, self.east, self.north = map(
-                float, [west, south, east, north])
+                float, [west, south, east, north]
+            )
         else:
             raise ValueError("Could not create BBox/Bounds from given arguments")
 
@@ -215,11 +222,11 @@ class BBox(object):
     @property
     def as_dict(self):
         return {
-            'northeast': [self.north, self.east],
-            'southwest': [self.south, self.west]
+            "northeast": [self.north, self.east],
+            "southwest": [self.south, self.west],
         }
 
 
-if __name__ == '__main__':
-    l = Location([0.0, 0.0])
-    print(l.lng)
+if __name__ == "__main__":
+    loc = Location([0.0, 0.0])
+    print(loc.lng)

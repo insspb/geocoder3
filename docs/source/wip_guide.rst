@@ -104,7 +104,7 @@ Let's detail those three steps
 * (**Setup**) The first modification will be to provide the *metadata* needed for the query, namely:
     * what class to use for the result
     * what url to query
-    * which key to use 
+    * which key to use
 
 ::
 
@@ -175,11 +175,11 @@ Let's detail those three steps
 More examples
 -------------
 
-Please have a look on the providers already "migrated", like 
+Please have a look on the providers already "migrated", like
 
 * geonames
 * bing
 * mapbox
 * mapquest
 
-The full list is available on the `README <https://github.com/DenisCarriere/geocoder/blob/master/README.md>`_ 
+The full list is available on the `README <https://github.com/DenisCarriere/geocoder/blob/master/README.md>`_

@@ -60,4 +60,3 @@ References
 ----------
 
 - `OpenCage Geocoding Services <https://opencagedata.com/api>`_
-

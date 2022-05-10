@@ -1,18 +1,13 @@
-#!/usr/bin/python
-# coding: utf8
-from __future__ import absolute_import
-
-import logging
 import json
+import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class OsmResult(OneResult):
-
     def __init__(self, json_content):
         # create safe shortcuts
-        self._address = json_content.get('address', {})
+        self._address = json_content.get("address", {})
 
         # proceed with super.__init__
         super(OsmResult, self).__init__(json_content)
@@ -23,19 +18,19 @@ class OsmResult(OneResult):
 
     @property
     def lat(self):
-        lat = self.raw.get('lat')
+        lat = self.raw.get("lat")
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = self.raw.get('lon')
+        lng = self.raw.get("lon")
         if lng:
             return float(lng)
 
     @property
     def bbox(self):
-        _boundingbox = self.raw.get('boundingbox')
+        _boundingbox = self.raw.get("boundingbox")
         if _boundingbox:
             south = float(_boundingbox[0])
             west = float(_boundingbox[2])
@@ -49,19 +44,19 @@ class OsmResult(OneResult):
 
     @property
     def address(self):
-        return self.raw.get('display_name')
+        return self.raw.get("display_name")
 
     @property
     def housenumber(self):
-        return self._address.get('house_number')
+        return self._address.get("house_number")
 
     @property
     def street(self):
-        return self._address.get('road')
+        return self._address.get("road")
 
     @property
     def postal(self):
-        return self._address.get('postcode')
+        return self._address.get("postcode")
 
     # ============================ #
     # Populated settlements, urban #
@@ -82,7 +77,7 @@ class OsmResult(OneResult):
         Note: the British English spelling is used rather than the
               American English spelling of neighborhood.
         """
-        return self._address.get('neighbourhood')
+        return self._address.get("neighbourhood")
 
     @property
     def suburb(self):
@@ -98,7 +93,7 @@ class OsmResult(OneResult):
         - industrial districts or recreation areas within a settlements with
           specific names.
         """
-        return self._address.get('suburb')
+        return self._address.get("suburb")
 
     @property
     def quarter(self):
@@ -110,7 +105,7 @@ class OsmResult(OneResult):
 
         The term quarter is sometimes used synonymously for neighbourhood.
         """
-        return self._address.get('quarter')
+        return self._address.get("quarter")
 
     # ====================================== #
     # Populated settlements, urban and rural #
@@ -125,7 +120,7 @@ class OsmResult(OneResult):
         countries of the former Soviet Union, where a lot of such unofficial
         settlements exist
         """
-        return self._address.get('hamlet')
+        return self._address.get("hamlet")
 
     @property
     def farm(self):
@@ -134,7 +129,7 @@ class OsmResult(OneResult):
         A farm that has its own name. If the farm is not a part of bigger
         settlement use place=isolated_dwelling. See also landuse=farmyard
         """
-        return self._address.get('hamlet')
+        return self._address.get("hamlet")
 
     @property
     def locality(self):
@@ -142,7 +137,7 @@ class OsmResult(OneResult):
 
         For an unpopulated named place.
         """
-        return self._address.get('locality')
+        return self._address.get("locality")
 
     @property
     def isolated_dwelling(self):
@@ -150,7 +145,7 @@ class OsmResult(OneResult):
 
         Smallest kind of human settlement. No more than 2 households.
         """
-        return self._address.get('hamlet')
+        return self._address.get("hamlet")
 
     @property
     def hamlet(self):
@@ -159,7 +154,7 @@ class OsmResult(OneResult):
         A smaller rural community typically with less than 100-200 inhabitants,
         few infrastructure.
         """
-        return self._address.get('hamlet')
+        return self._address.get("hamlet")
 
     @property
     def village(self):
@@ -172,7 +167,7 @@ class OsmResult(OneResult):
 
         See place=neighbourhood on how to tag divisions within a larger village
         """
-        return self._address.get('village')
+        return self._address.get("village")
 
     @property
     def town(self):
@@ -187,7 +182,7 @@ class OsmResult(OneResult):
         See place=neighbourhood and possibly also place=suburb on how to tag
         divisions within a town.
         """
-        return self._address.get('town')
+        return self._address.get("town")
 
     @property
     def island(self):
@@ -197,7 +192,7 @@ class OsmResult(OneResult):
         place=islet for very small islandsIdentifies the coastline of an
         island (> 1 km2), also consider place=islet for very small islands
         """
-        return self._address.get('island')
+        return self._address.get("island")
 
     @property
     def city(self):
@@ -213,7 +208,7 @@ class OsmResult(OneResult):
         within a city. The outskirts of urban settlements may or may not match
         the administratively declared boundary of the city.
         """
-        return self._address.get('city')
+        return self._address.get("city")
 
     # ================================ #
     # Administratively declared places #
@@ -222,37 +217,37 @@ class OsmResult(OneResult):
     @property
     def municipality(self):
         """admin_level=8"""
-        return self._address.get('municipality')
+        return self._address.get("municipality")
 
     @property
     def county(self):
         """admin_level=6"""
-        return self._address.get('county')
+        return self._address.get("county")
 
     @property
     def district(self):
         """admin_level=5/6"""
-        return self._address.get('city_district')
+        return self._address.get("city_district")
 
     @property
     def state(self):
         """admin_level=4"""
-        return self._address.get('state')
+        return self._address.get("state")
 
     @property
     def region(self):
         """admin_level=3"""
-        return self._address.get('state')
+        return self._address.get("state")
 
     @property
     def country(self):
         """admin_level=2"""
-        return self._address.get('country')
+        return self._address.get("country")
 
     @property
     def country_code(self):
         """admin_level=2"""
-        return self._address.get('country_code')
+        return self._address.get("country_code")
 
     # ======================== #
     # Quality Control & Others #
@@ -268,39 +263,39 @@ class OsmResult(OneResult):
 
     @property
     def population(self):
-        return self.raw.get('population')
+        return self.raw.get("population")
 
     @property
     def license(self):
-        return self.raw.get('license')
+        return self.raw.get("license")
 
     @property
     def type(self):
-        return self.raw.get('type')
+        return self.raw.get("type")
 
     @property
     def importance(self):
-        return self.raw.get('importance')
+        return self.raw.get("importance")
 
     @property
     def icon(self):
-        return self.raw.get('icon')
+        return self.raw.get("icon")
 
     @property
     def osm_type(self):
-        return self.raw.get('osm_type')
+        return self.raw.get("osm_type")
 
     @property
     def osm_id(self):
-        return self.raw.get('osm_id')
+        return self.raw.get("osm_id")
 
     @property
     def place_id(self):
-        return self.raw.get('place_id')
+        return self.raw.get("place_id")
 
     @property
     def place_rank(self):
-        return self.raw.get('place_rank')
+        return self.raw.get("place_rank")
 
 
 class OsmQuery(MultipleResultsQuery):
@@ -314,32 +309,34 @@ class OsmQuery(MultipleResultsQuery):
     -------------
     http://wiki.openstreetmap.org/wiki/Nominatim
     """
-    provider = 'osm'
-    method = 'geocode'
 
-    _URL = 'https://nominatim.openstreetmap.org/search'
+    provider = "osm"
+    method = "geocode"
+
+    _URL = "https://nominatim.openstreetmap.org/search"
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         # backward compatitibility for 'limit' (now maxRows)
-        if 'limit' in kwargs:
+        if "limit" in kwargs:
             logging.warning(
-                "argument 'limit' in OSM is deprecated and should be replaced with maxRows")
-            kwargs['maxRows'] = kwargs['limit']
+                "argument 'limit' is deprecated and should be replaced with maxRows"
+            )
+            kwargs["maxRows"] = kwargs["limit"]
         # build params
         return {
-            'q': location,
-            'format': 'jsonv2',
-            'addressdetails': 1,
-            'limit': kwargs.get('maxRows', 1),
+            "q": location,
+            "format": "jsonv2",
+            "addressdetails": 1,
+            "limit": kwargs.get("maxRows", 1),
         }
 
     def _before_initialize(self, location, **kwargs):
-        """ Check if specific URL has not been provided, otherwise, use cls._URL"""
-        url = kwargs.get('url', '')
-        if url.lower() == 'localhost':
-            self.url = 'http://localhost/nominatim/search'
+        """Check if specific URL has not been provided, otherwise, use cls._URL"""
+        url = kwargs.get("url", "")
+        if url.lower() == "localhost":
+            self.url = "http://localhost/nominatim/search"
         elif url:
             self.url = url
         # else:  do not change self.url, which is cls._URL
@@ -356,41 +353,43 @@ class OsmQueryDetail(MultipleResultsQuery):
     -------------
     http://wiki.openstreetmap.org/wiki/Nominatim
     """
-    provider = 'osm'
-    method = 'details'
 
-    _URL = 'https://nominatim.openstreetmap.org/search'
+    provider = "osm"
+    method = "details"
+
+    _URL = "https://nominatim.openstreetmap.org/search"
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         # backward compatitibility for 'limit' (now maxRows)
-        if 'limit' in kwargs:
+        if "limit" in kwargs:
             logging.warning(
-                "argument 'limit' in OSM is deprecated and should be replaced with maxRows")
-            kwargs['maxRows'] = kwargs['limit']
+                "argument 'limit'is deprecated and should be replaced with maxRows"
+            )
+            kwargs["maxRows"] = kwargs["limit"]
         # build params
         query = {
-            'format': 'jsonv2',
-            'addressdetails': 1,
-            'limit': kwargs.get('maxRows', 1),
+            "format": "jsonv2",
+            "addressdetails": 1,
+            "limit": kwargs.get("maxRows", 1),
         }
         query.update(kwargs)
         return query
 
     def _before_initialize(self, location, **kwargs):
-        """ Check if specific URL has not been provided, otherwise, use cls._URL"""
-        url = kwargs.get('url', '')
-        if url.lower() == 'localhost':
-            self.url = 'http://localhost/nominatim/search'
+        """Check if specific URL has not been provided, otherwise, use cls._URL"""
+        url = kwargs.get("url", "")
+        if url.lower() == "localhost":
+            self.url = "http://localhost/nominatim/search"
         elif url:
             self.url = url
         # else:  do not change self.url, which is cls._URL
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = OsmQuery('Ottawa, Ontario')
+    g = OsmQuery("Ottawa, Ontario")
     g.debug()
-    g = OsmQuery('Ottawa, Ontario', maxRows=5)
+    g = OsmQuery("Ottawa, Ontario", maxRows=5)
     print(json.dumps(g.geojson, indent=4))

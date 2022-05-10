@@ -17,7 +17,7 @@ geocoder.bing            geocoder.google          geocoder.timezone
 geocoder.canadapost      geocoder.ip              geocoder.yahoo
 geocoder.cli             geocoder.keys            geocoder.tomtom
 geocoder.elevation       geocoder.location        geocoder.places
-...       
+...  
 ```
 
 Using the **TAB** key again, you can see all the available **attributes**.
@@ -41,5 +41,5 @@ g.headers             g.provider            g.wkt
 g.help                g.quality             g.x
 g.json                g.route               g.y
 g.lat                 g.short_name
-...    
+...  
 ```

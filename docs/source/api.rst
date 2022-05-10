@@ -19,7 +19,7 @@ Or on any of the supported `Linux distros`_:
 .. code-block:: bash
 
     $ sudo snap install geocoder
-    
+
 GitHub Install
 --------------
 
@@ -146,9 +146,9 @@ propagated up to the caller. This will be an instance of `requests.exceptions.Re
     >>> import geocoder
     >>> g = geocoder.osm("Tower Bridge, London", url="http://nonexistent.example.com")
     Traceback (most recent call last):
-    
+
     ...
-    
+
     requests.exceptions.ConnectionError: HTTPConnectionPool(host='nonexistent.example.com', port=80): Max retries exceeded with url: /?limit=1&format=jsonv2&addressdetails=1&q=foo (Caused by NewConnectionError('<requests.packages.urllib3.connection.HTTPConnection object at 0x7f6b004d9390>: Failed to establish a new connection: [Errno -2] Name or service not known',))
 
 If geocoder was able to contact the server, but no result could be found for the given search terms, the `ok`

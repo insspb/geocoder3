@@ -1,20 +1,15 @@
-#!/usr/bin/python
-# coding: utf8
-
-from __future__ import absolute_import
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import google_key
 from geocoder.location import Location
 
 
 class ElevationResult(OneResult):
-
     @property
     def status(self):
         if self.elevation:
-            return 'OK'
+            return "OK"
         else:
-            return 'ERROR - No Elevation found'
+            return "ERROR - No Elevation found"
 
     @property
     def ok(self):
@@ -32,11 +27,11 @@ class ElevationResult(OneResult):
 
     @property
     def elevation(self):
-        return self.raw.get('elevation')
+        return self.raw.get("elevation")
 
     @property
     def resolution(self):
-        return self.raw.get('resolution')
+        return self.raw.get("resolution")
 
 
 class ElevationQuery(MultipleResultsQuery):
@@ -53,27 +48,27 @@ class ElevationQuery(MultipleResultsQuery):
     -------------
     https://developers.google.com/maps/documentation/elevation/
     """
-    provider = 'google'
-    method = 'elevation'
 
-    _URL = 'https://maps.googleapis.com/maps/api/elevation/json'
+    provider = "google"
+    method = "elevation"
+
+    _URL = "https://maps.googleapis.com/maps/api/elevation/json"
     _RESULT_CLASS = ElevationResult
     _KEY = google_key
 
     def _build_params(self, location, provider_key, **kwargs):
         params = {
             # required
-            'key': provider_key,
-
-            'locations': str(Location(location))
+            "key": provider_key,
+            "locations": str(Location(location)),
         }
 
         return params
 
     def _adapt_results(self, json_response):
-        return json_response['results']
+        return json_response["results"]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     g = ElevationQuery([45.123, -76.123])
     g.debug()

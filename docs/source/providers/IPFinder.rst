@@ -1,8 +1,8 @@
 IP Finder.io
 ==========
 
-Use the ipfinder.io IP lookup API to quickly and simply integrate IP geolocation 
-into your script or website. Save yourself the hassle of setting up local GeoIP 
+Use the ipfinder.io IP lookup API to quickly and simply integrate IP geolocation
+into your script or website. Save yourself the hassle of setting up local GeoIP
 libraries and having to remember to regularly update the data.
 
 Geocoding (IP Address)
@@ -51,7 +51,7 @@ Command Line Interface
 
     $ geocode '1.0.0.0' --provider ipfinder | jq .
     $ # use API Key
-    $ geocode '1.0.0.0' --provider ipfinder --key <key>  | jq . 
+    $ geocode '1.0.0.0' --provider ipfinder --key <key>  | jq .
 
 
 Parameters

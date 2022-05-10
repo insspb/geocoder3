@@ -1,14 +1,11 @@
-#!/usr/bin/python
-# coding: utf8
-
 import geocoder
 
-location = 'Ottawa, Ontario'
-city = 'Ottawa'
+location = "Ottawa, Ontario"
+city = "Ottawa"
 ottawa = (45.4215296, -75.6971930)
 
-winnetka = 'Winnetka'
-winnetka_bbox = [-118.604794,34.172684,-118.500938,34.236144]
+winnetka = "Winnetka"
+winnetka_bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
 
 
 def test_mapbox():
@@ -40,7 +37,7 @@ def test_mapbox_with_bbox():
 
 
 def test_mapbox_reverse():
-    g = geocoder.mapbox(ottawa, method='reverse')
+    g = geocoder.mapbox(ottawa, method="reverse")
     assert g.ok
 
 

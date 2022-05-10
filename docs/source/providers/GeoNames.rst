@@ -28,7 +28,7 @@ Geocoding
 
 Geonames web service support a lot of filters that you can use to refine your query. Here follows a list from the `official documentation <http://www.geonames.org/export/geonames-search.html>`_
 
-- 'name', 'name_equals', 'name_startsWith', 
+- 'name', 'name_equals', 'name_startsWith',
 - 'maxRows', 'startRow',
 - 'country', 'countryBias', 'continentCode',
 - 'adminCode1', 'adminCode2', 'adminCode3',
@@ -37,7 +37,7 @@ Geonames web service support a lot of filters that you can use to refine your qu
 - 'isNameRequired', 'tag', 'operator', 'charset'
 - 'east', 'west', 'north', 'south'
 
-They are all supported 
+They are all supported
 
 .. code-block:: python
 
@@ -75,7 +75,7 @@ This is also supported by Geocoder, which will expect an array instead of the no
 Proximity
 ---------
 
-As mentioned above, Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box. 
+As mentioned above, Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box.
 
 .. code-block:: python
 
