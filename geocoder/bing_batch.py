@@ -1,6 +1,3 @@
-
-
-
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import bing_key
 
@@ -8,10 +5,7 @@ import time
 import io
 import requests
 import logging
-import sys
 
-PY2 = sys.version_info < (3, 0)
-csv_io = io.BytesIO if PY2 else io.StringIO
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,7 +28,7 @@ class BingBatchResult(OneResult):
             return coord[1]
 
     def debug(self, verbose=True):
-        with csv_io() as output:
+        with io.StringIO() as output:
             print('\n', file=output)
             print('{} result\n'.format(self.__class__.__name__), file=output)
             print('-----------\n', file=output)

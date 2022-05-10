@@ -1,7 +1,7 @@
-
-
-
-import six
+import hashlib
+import hmac
+import base64
+from urllib.parse import urlparse, urlencode
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key, google_client, google_client_secret
 from collections import OrderedDict
@@ -226,15 +226,6 @@ class GoogleQuery(MultipleResultsQuery):
         Returns:
         The signature as a dictionary #signed request URL
         """
-        import hashlib
-        import hmac
-        import base64
-        if six.PY3:
-            from urllib.parse import urlparse, urlencode
-        else:
-            from urllib import urlencode
-            from urlparse import urlparse
-
         # Return if any parameters aren't given
         if not base_url or not self.client_secret or not self.client:
             return None

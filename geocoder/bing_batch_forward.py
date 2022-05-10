@@ -1,16 +1,7 @@
-
-
-
 from geocoder.bing_batch import BingBatch, BingBatchResult
 
 import io
 import csv
-import sys
-
-PY2 = sys.version_info < (3, 0)
-csv_io = io.BytesIO if PY2 else io.StringIO
-csv_encode = (lambda input: input) if PY2 else (lambda input: input.encode('utf-8'))
-csv_decode = (lambda input: input) if PY2 else (lambda input: input.decode('utf-8'))
 
 
 class BingBatchForwardResult(BingBatchResult):
@@ -32,7 +23,7 @@ class BingBatchForwardResult(BingBatchResult):
         return bool(self._content)
 
     def debug(self, verbose=True):
-        with csv_io() as output:
+        with io.StringIO() as output:
             print('\n', file=output)
             print('Bing Batch result\n', file=output)
             print('-----------\n', file=output)
@@ -49,7 +40,7 @@ class BingBatchForward(BingBatch):
     _RESULT_CLASS = BingBatchForwardResult
 
     def generate_batch(self, addresses):
-        out = csv_io()
+        out = io.StringIO()
         writer = csv.writer(out)
         writer.writerow([
             'Id',
@@ -61,10 +52,10 @@ class BingBatchForward(BingBatch):
         for idx, address in enumerate(addresses):
             writer.writerow([idx, address, None, None])
 
-        return csv_encode("Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()))
+        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode("utf-8")
 
     def _adapt_results(self, response):
-        result = csv_io(csv_decode(response))
+        result = io.StringIO(response.decode("utf-8"))
         # Skipping first line with Bing header
         next(result)
 

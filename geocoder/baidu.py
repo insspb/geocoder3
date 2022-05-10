@@ -5,7 +5,9 @@
 from collections import OrderedDict
 import logging
 import re
-import six
+import hashlib
+
+from urllib.parse import urlencode, quote, quote_plus
 
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import baidu_key, baidu_security_key
@@ -92,13 +94,6 @@ class BaiduQuery(MultipleResultsQuery):
         """
         Signs a request url with a security key.
         """
-        import hashlib
-
-        if six.PY3:
-            from urllib.parse import urlencode, quote, quote_plus
-        else:
-            from urllib import urlencode, quote, quote_plus
-
         if not base_url or not self.security_key:
             return None
 

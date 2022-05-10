@@ -1,8 +1,5 @@
-
-
 import re
 import geocoder
-from six import string_types
 try:
     from statistics import mean
 except ImportError:
@@ -33,7 +30,7 @@ class Location(object):
 
     def _check_input(self, location):
         # Checking for a LatLng String
-        if isinstance(location, string_types):
+        if isinstance(location, str):
             expression = r"[-]?\d+[.]?[-]?[\d]+"
             pattern = re.compile(expression)
             match = pattern.findall(location)

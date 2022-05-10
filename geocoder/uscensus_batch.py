@@ -1,18 +1,10 @@
-
-
 from geocoder.base import OneResult, MultipleResultsQuery
 
 import logging
 import io
 import csv
-import sys
 import requests
 
-
-PY2 = sys.version_info < (3, 0)
-csv_io = io.BytesIO if PY2 else io.StringIO
-csv_encode = (lambda input: input) if PY2 else (lambda input: input.encode('utf-8'))
-csv_decode = (lambda input: input) if PY2 else (lambda input: input.decode('utf-8'))
 
 LOGGER = logging.getLogger(__name__)
 
@@ -63,13 +55,13 @@ class USCensusBatch(MultipleResultsQuery):
     _KEY_MANDATORY = False
 
     def generate_batch(self, locations):
-        out = csv_io()
+        out = io.StringIO()
         writer = csv.writer(out)
 
         for idx, address in enumerate(locations):
             writer.writerow([idx, address, None, None, None])
 
-        return csv_encode(out.getvalue())
+        return out.getvalue().encode("utf-8")
 
     def _build_params(self, locations, provider_key, **kwargs):
         self.batch = self.generate_batch(locations)
@@ -109,7 +101,7 @@ class USCensusBatch(MultipleResultsQuery):
         return False
 
     def _adapt_results(self, response):
-        result = csv_io(csv_decode(response))
+        result = io.StringIO(response.decode("utf-8"))
 
         rows = {}
         for row in csv.reader(result):
