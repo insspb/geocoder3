@@ -1,12 +1,13 @@
-import requests
 import json
 import logging
-from io import StringIO
 from collections import OrderedDict
 from collections.abc import MutableSequence
+from io import StringIO
 from urllib.parse import urlparse
 
-from geocoder.distance import Distance # noqa
+import requests
+
+from geocoder.distance import Distance  # noqa
 
 LOGGER = logging.getLogger(__name__)
 

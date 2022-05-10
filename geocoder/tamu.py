@@ -4,7 +4,7 @@
 
 import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import tamu_key
 
 

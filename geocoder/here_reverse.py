@@ -2,8 +2,8 @@
 
 
 
+from geocoder.here import HereQuery, HereResult
 from geocoder.location import Location
-from geocoder.here import HereResult, HereQuery
 
 
 class HereReverseResult(HereResult):

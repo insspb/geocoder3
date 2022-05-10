@@ -1,7 +1,7 @@
 
 
 
-from geocoder.google import GoogleResult, GoogleQuery
+from geocoder.google import GoogleQuery, GoogleResult
 from geocoder.location import Location
 
 

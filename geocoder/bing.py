@@ -1,9 +1,10 @@
 
 
 
-from geocoder.base import OneResult, MultipleResultsQuery
-from geocoder.keys import bing_key
 import re
+
+from geocoder.base import MultipleResultsQuery, OneResult
+from geocoder.keys import bing_key
 
 
 class BingResult(OneResult):

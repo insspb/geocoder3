@@ -1,5 +1,6 @@
 
 import requests_mock
+
 import geocoder
 
 location = 'Ottawa'

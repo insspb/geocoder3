@@ -1,10 +1,11 @@
 
 
-import re
-import requests
 import logging
+import re
 
-from geocoder.base import OneResult, MultipleResultsQuery
+import requests
+
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import tgos_key
 
 

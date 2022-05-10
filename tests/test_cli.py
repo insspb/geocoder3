@@ -1,6 +1,5 @@
 import subprocess
 
-
 location = 'Ottawa, Ontario'
 
 

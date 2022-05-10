@@ -2,14 +2,13 @@
 
 
 
-from collections import OrderedDict
+import hashlib
 import logging
 import re
-import hashlib
+from collections import OrderedDict
+from urllib.parse import quote, quote_plus, urlencode
 
-from urllib.parse import urlencode, quote, quote_plus
-
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import baidu_key, baidu_security_key
 
 

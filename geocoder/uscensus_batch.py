@@ -1,10 +1,10 @@
-from geocoder.base import OneResult, MultipleResultsQuery
-
-import logging
-import io
 import csv
+import io
+import logging
+
 import requests
 
+from geocoder.base import MultipleResultsQuery, OneResult
 
 LOGGER = logging.getLogger(__name__)
 

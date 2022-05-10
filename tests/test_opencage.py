@@ -1,7 +1,9 @@
 
 import os
-import geocoder
+
 import requests_mock
+
+import geocoder
 
 address = 'The Happy Goat, Ottawa'
 location = 'Ottawa, Ontario'

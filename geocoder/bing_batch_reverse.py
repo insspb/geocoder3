@@ -1,7 +1,7 @@
-from geocoder.bing_batch import BingBatch, BingBatchResult
-
-import io
 import csv
+import io
+
+from geocoder.bing_batch import BingBatch, BingBatchResult
 
 
 class BingBatchReverseResult(BingBatchResult):

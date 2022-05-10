@@ -1,7 +1,7 @@
 
 
-from codecs import open
 import re
+from codecs import open
 
 try:
     from setuptools import setup

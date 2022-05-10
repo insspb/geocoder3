@@ -3,10 +3,11 @@
 
 
 import logging
-import requests
-import ratelim
 
-from geocoder.base import OneResult, MultipleResultsQuery
+import ratelim
+import requests
+
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class FreeGeoIPResult(OneResult):

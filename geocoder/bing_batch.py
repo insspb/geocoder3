@@ -1,11 +1,11 @@
-from geocoder.base import OneResult, MultipleResultsQuery
-from geocoder.keys import bing_key
-
-import time
 import io
-import requests
 import logging
+import time
 
+import requests
+
+from geocoder.base import MultipleResultsQuery, OneResult
+from geocoder.keys import bing_key
 
 LOGGER = logging.getLogger(__name__)
 

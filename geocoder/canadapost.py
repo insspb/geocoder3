@@ -3,7 +3,7 @@
 
 import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import canadapost_key_getter
 
 

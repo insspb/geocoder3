@@ -1,7 +1,7 @@
 
 
 
-from geocoder.bing import BingResult, BingQuery
+from geocoder.bing import BingQuery, BingResult
 from geocoder.location import Location
 
 

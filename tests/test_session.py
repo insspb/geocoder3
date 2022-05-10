@@ -1,7 +1,8 @@
 
 
-import geocoder
 import requests
+
+import geocoder
 
 try:
     import mock

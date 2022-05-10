@@ -1,8 +1,9 @@
 import json
-import pytest
-import geocoder
 
+import pytest
 import requests_mock
+
+import geocoder
 
 address = 'The Happy Goat, Ottawa'
 location = 'Ottawa, Ontario'

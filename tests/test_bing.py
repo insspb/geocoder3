@@ -1,5 +1,7 @@
 from builtins import str
+
 import requests_mock
+
 import geocoder
 
 location = 'Ottawa, Ontario'

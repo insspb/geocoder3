@@ -1,10 +1,10 @@
 
 
 
-import logging
 import json
+import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class OsmResult(OneResult):

@@ -1,5 +1,7 @@
 import re
+
 import geocoder
+
 try:
     from statistics import mean
 except ImportError:

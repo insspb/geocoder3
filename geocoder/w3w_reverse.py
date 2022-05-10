@@ -2,7 +2,7 @@
 
 
 
-from geocoder.w3w import W3WResult, W3WQuery
+from geocoder.w3w import W3WQuery, W3WResult
 
 
 class W3WReverseResult(W3WResult):

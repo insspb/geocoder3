@@ -31,15 +31,50 @@ __version__ = '2.0.0'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2022 Andrey Shpak'
 
-# CORE
-from geocoder.api import get, yahoo, bing, geonames, mapquest, google, mapbox  # noqa
-from geocoder.api import nokia, osm, tomtom, geolytica, arcgis, opencage, locationiq  # noqa
-from geocoder.api import maxmind, ipinfo, freegeoip, ottawa, here, baidu, gaode, w3w, ipfinder  # noqa
-from geocoder.api import yandex, mapzen, komoot, tamu, geocodefarm, tgos, uscensus  # noqa
-from geocoder.api import gisgraphy, geocodexyz # noqa
-
 # EXTRAS
-from geocoder.api import timezone, elevation, places, ip, canadapost, reverse, distance, location  # noqa
+# CORE
+from geocoder.api import (  # noqa
+    arcgis,
+    baidu,
+    bing,
+    canadapost,
+    distance,
+    elevation,
+    freegeoip,
+    gaode,
+    geocodefarm,
+    geocodexyz,
+    geolytica,
+    geonames,
+    get,
+    gisgraphy,
+    google,
+    here,
+    ip,
+    ipfinder,
+    ipinfo,
+    komoot,
+    location,
+    locationiq,
+    mapbox,
+    mapquest,
+    mapzen,
+    maxmind,
+    nokia,
+    opencage,
+    osm,
+    ottawa,
+    places,
+    reverse,
+    tamu,
+    tgos,
+    timezone,
+    tomtom,
+    uscensus,
+    w3w,
+    yahoo,
+    yandex,
+)
 
 # CLI
 from geocoder.cli import cli  # noqa

@@ -1,8 +1,8 @@
 
 
 
-from geocoder.osm import OsmQuery
 from geocoder.location import Location
+from geocoder.osm import OsmQuery
 
 
 class OsmReverse(OsmQuery):

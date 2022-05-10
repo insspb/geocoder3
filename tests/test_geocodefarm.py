@@ -1,7 +1,8 @@
 
 
-import geocoder
 import requests_mock
+
+import geocoder
 
 location = 'New York City'
 coordinates = [45.3, -75.4]

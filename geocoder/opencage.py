@@ -4,9 +4,9 @@
 
 import logging
 
-from geocoder.location import BBox
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import opencage_key
+from geocoder.location import BBox
 
 
 class OpenCageResult(OneResult):

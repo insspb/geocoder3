@@ -3,7 +3,7 @@
 
 import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 def _correct_empty_dict(obj, key, alt=''):

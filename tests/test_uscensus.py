@@ -1,7 +1,8 @@
 
 
-import geocoder
 import requests_mock
+
+import geocoder
 
 us_address = '595 Market St'
 us_city = 'San Francisco'

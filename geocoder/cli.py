@@ -2,14 +2,14 @@
 
 
 
-import click
-import json
-import geocoder
-import os
 import fileinput
+import json
+import os
 
+import click
+
+import geocoder
 from geocoder.api import options
-
 
 providers = sorted(options.keys())
 methods = ['geocode', 'reverse', 'elevation', 'timezone', 'places']
