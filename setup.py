@@ -26,6 +26,7 @@ setup(
     version=version,
     description="Geocoder is a simple and consistent geocoding library.",
     long_description=readme,
+    long_description_content_type="text/markdown",
     author='Andrey Shpak',
     author_email='ashpak@ashpak.ru',
     url='https://github.com/insspb/geocoder3',
