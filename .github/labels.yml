@@ -1,0 +1,111 @@
+- name: "topic: CI/CD"
+  color: "54f449"
+  description: "This issue/PR relates to CI/CD pipeline change"
+
+- name: "topic: code style"
+  color: "54f449"
+  description: "This issue/PR relates to code style."
+
+- name: "topic: tests"
+  color: "54f449"
+  description: "This issue/PR relates to tests, QA, CI."
+
+- name: "topic: deprecated"
+  color: "999999"
+  description: "Feature or component marked as deprecated and will be removed"
+
+- name: "topic: documentation"
+  color: "54f449"
+  description: "This issue/PR relates to or includes documentation."
+
+- name: "topic: filters"
+  color: "54f449"
+  description: "This issue/PR relates to filters."
+
+- name: "topic: utils"
+  color: "54f449"
+  description: "This issue/PR relates to utils."
+
+- name: "topic: mixins"
+  color: "54f449"
+  description: "This issue/PR relates to mixins."
+
+- name: "topic: others"
+  color: "54f449"
+  description: "This issue/PR relates to other project parts."
+
+- name: "type: breaking-change"
+  color: "310372"
+  description: "Marks an important and likely breaking old interface change."
+
+- name: "type: feature"
+  color: "310372"
+  description: "New feature implementation"
+
+- name: "type: enhancement"
+  color: "310372"
+  description: "Enhancement update for old feature"
+
+- name: "type: good first issue"
+  color: "310372"
+  description: "Good for newcomers"
+
+- name: "type: bug"
+  color: "b71914"
+  description: "Something isn't working"
+
+- name: "log:added"
+  color: "ff935e"
+  description: "Changelog mark label. Marks new added features."
+
+- name: "log:breaking-change"
+  color: "ff935e"
+  description: "Changelog mark label. Marks breaking changes."
+
+- name: "log:changed"
+  color: "ff935e"
+  description: "Changelog mark label. Marks old, but changed features."
+
+- name: "log:deprecated"
+  color: "ff935e"
+  description: "Changelog mark label. Marks deprecated features, that will be removed in next major release."
+
+- name: "log:fixed"
+  color: "ff935e"
+  description: "Changelog mark label. Marks fixed bug issues."
+
+- name: "log:removed"
+  color: "ff935e"
+  description: "Changelog mark label. Marks removed features."
+
+- name: "log:skip-changelog"
+  color: "ff935e"
+  description: "Should be excluded from the changelog."
+
+- name: "question"
+  color: "d876e3"
+  description: "User questions, not related to issues"
+
+- name: "decision: duplicate"
+  color: "eeeeee"
+  description: "This issue or pull request already exists"
+
+- name: "decision: wontfix"
+  color: "eeeeee"
+  description: "This will not be worked on"
+
+- name: "decision: wontmerge"
+  color: "eeeeee"
+  description: "PR Only: This pull request will not be merged (problem described in comments)"
+
+- name: "stage: waiting-for-contributor"
+  color: "efc1ae"
+  description: "Waiting for answer from original contributor."
+
+- name: "stage: WIP"
+  color: "efc1ae"
+  description: "Work In Progress"
+
+- name: "stage: help wanted"
+  color: "efc1ae"
+  description: "Extra attention is needed"

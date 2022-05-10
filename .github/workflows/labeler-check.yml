@@ -1,0 +1,20 @@
+name: Labels verification
+
+on:
+  pull_request:
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run Labeler
+        uses: crazy-max/ghaction-github-labeler@v3.1.1
+        with:
+          yaml-file: .github/labels.yml
+          dry-run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

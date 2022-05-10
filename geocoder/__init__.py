@@ -25,12 +25,12 @@ Consistant JSON responses from various providers.
 
 """
 
-__title__ = 'geocoder'
-__author__ = 'Denis Carriere'
-__author_email__ = 'carriere.denis@gmail.com'
-__version__ = '1.38.1'
+__title__ = 'geocoder3'
+__author__ = 'Andrey Shpak'
+__author_email__ = 'ashpak@ashpak.ru'
+__version__ = '2.0.0'
 __license__ = 'MIT'
-__copyright__ = 'Copyright (c) 2013-2016 Denis Carriere'
+__copyright__ = 'Copyright (c) 2022 Andrey Shpak'
 
 # CORE
 from geocoder.api import get, yahoo, bing, geonames, mapquest, google, mapbox  # noqa
