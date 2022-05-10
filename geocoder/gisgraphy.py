@@ -62,7 +62,7 @@ class GisgraphyQuery(MultipleResultsQuery):
     _URL = 'https://services.gisgraphy.com/geocoding/'
     _RESULT_CLASS = GisgraphyResult
     _KEY_MANDATORY = False
-    
+
     def _build_headers(self, provider_key, **kwargs):
         return {
             'Referer': "https://services.gisgraphy.com",

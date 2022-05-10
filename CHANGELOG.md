@@ -128,7 +128,7 @@ Table of releases
 - refactored mapbox
 - refactored bing
 - fixed issue #272: Install with python 3.5 29 days ago
-- fixed issue #270: Orderedset can't be installed without C++? 
+- fixed issue #270: Orderedset can't be installed without C++?
 
 ## [1.25.0] - 2017-08-04
 
@@ -143,4 +143,4 @@ Table of releases
 **[See on Pypi](https://pypi.python.org/pypi/geocoder/1.24.1) (Coverage 54%)**
 
 - added coverage in make file
-- refactored base.py to add support for multiple results with geonames. 
+- refactored base.py to add support for multiple results with geonames.

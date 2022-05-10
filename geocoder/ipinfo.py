@@ -84,7 +84,7 @@ class IpinfoQuery(MultipleResultsQuery):
 
     def _build_params(self, location, provider_key, **kwargs):
         return {}
-    
+
     def _before_initialize(self, location, **kwargs):
         if location.lower() == 'me' or location == '':
             self.url = 'http://ipinfo.io/json'

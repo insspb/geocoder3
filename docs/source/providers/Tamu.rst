@@ -11,7 +11,7 @@ separately, rather than as a single string.  Because of this requirement,
 the "location", "city", "state", and "zipcode" parameters are all required
 when using the Tamu provider.  The "location" parameter should contain only
 the street address of the location.
- 
+
 Geocoding
 ~~~~~~~~~
 

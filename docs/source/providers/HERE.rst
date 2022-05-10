@@ -45,7 +45,7 @@ Reverse Geocoding
 Using API Key
 -------------
 
-If you want to use your own `app_id` & `app_code`, you must register an app 
+If you want to use your own `app_id` & `app_code`, you must register an app
 at the `HERE Developer <https://developer.here.com/geocoder>`_.
 
 .. code-block:: python
