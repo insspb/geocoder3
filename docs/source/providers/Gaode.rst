@@ -11,10 +11,9 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder # pip install geocoder
-    >>> g = geocoder.gaode('方恒国际中心A座', key='<API KEY>')
-    >>> g.json
-    ...
+    import geocoder # pip install geocoder
+    g = geocoder.gaode('方恒国际中心A座', key='<API KEY>')
+    g.json
 
 Command Line Interface
 ----------------------

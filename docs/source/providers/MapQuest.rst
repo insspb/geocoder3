@@ -12,10 +12,10 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.mapquest('San Francisco, CA', key='<API KEY>')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.mapquest('San Francisco, CA', key='<API KEY>')
+    g.json
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 
@@ -23,38 +23,36 @@ A bounding box can be supplied as an array of the form [minX, minY, maxX, maxY] 
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
-    >>> g = geocoder.here("Winnetka", bbox=bbox)
-    >>> g.lng, g.lat
-    (-118.571098, 34.213299)
-    >>> g = geocoder.here("Winnetka")
-    >>> g.lng, g.lat
-    (-87.734719, 42.107106)
-    ...
+    import geocoder
+
+    bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
+    g = geocoder.here("Winnetka", bbox=bbox)
+    g.lng, g.lat
+    # (-118.571098, 34.213299)
+    g = geocoder.here("Winnetka")
+    g.lng, g.lat
+    # (-87.734719, 42.107106)
 
 This provider gives access to batch geocoding services that allow you to geocode up to 100 addresses at the same time.
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.mapquest(['Mountain View, CA', 'Boulder, Co'], method='batch')
-    >>> for result in g:
-    ...   print(result.address, result.latlng)
-    ...
-    ('Mountain View', [37.39008, -122.08139])
-    ('Boulder', [40.015831, -105.27927])
-    ...
+    import geocoder
+    g = geocoder.mapquest(['Mountain View, CA', 'Boulder, Co'], method='batch')
+    for result in g:
+        print(result.address, result.latlng)
+    # ('Mountain View', [37.39008, -122.08139])
+    # ('Boulder', [40.015831, -105.27927])
 
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.mapquest([45.15, -75.14], method='reverse', key='<API KEY>')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.mapquest([45.15, -75.14], method='reverse', key='<API KEY>')
+    g.json
 
 Command Line Interface
 ----------------------

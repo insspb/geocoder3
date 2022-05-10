@@ -11,43 +11,41 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google('Mountain View, CA')
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.google('Mountain View, CA')
+    g.json
 
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google([45.15, -75.14], method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.google([45.15, -75.14], method='reverse')
+    g.json
 
 Timezone
 ~~~~~~~~
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google([45.15, -75.14], method='timezone')
-    >>> g.timeZoneName
-    'Eastern Daylight Time'
-    >>> g.timeZoneId
-    'America/Toronto'
-    >>> g.dstOffset
-    3600
-    >>> g.rawOffset
-    -18000
+    import geocoder
+    g = geocoder.google([45.15, -75.14], method='timezone')
+    g.timeZoneName
+    # 'Eastern Daylight Time'
+    g.timeZoneId
+    # 'America/Toronto'
+    g.dstOffset
+    # 3600
+    g.rawOffset
+    # -18000
 
 Component Filtering
 ~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
-    >>> g = geocoder.google("Santa Cruz", components="country:ES")
+    g = geocoder.google("Santa Cruz", components="country:ES")
 
 Read me at Google's Geocoding API
 
@@ -59,29 +57,27 @@ Places
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google('white house', method='places')
-    >>> g.latlng
-    [38.8976763, -77.0365298]
-    >>> g.address
-    u'1600 Pennsylvania Ave NW, Washington, DC 20500, United States'
-    >>> g.json
-    ...
-
+    import geocoder
+    g = geocoder.google('white house', method='places')
+    g.latlng
+    # [38.8976763, -77.0365298]
+    g.address
+    # u'1600 Pennsylvania Ave NW, Washington, DC 20500, United States'
+    g.json
 
 Elevation
 ~~~~~~~~~
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google([45.15, -75.14], method='elevation')
-    >>> g.meters
-    71.0
-    >>> g.feet
-    232.9
-    >>> g.resolution
-    38.17580795288086
+    import geocoder
+    g = geocoder.google([45.15, -75.14], method='elevation')
+    g.meters
+    # 71.0
+    g.feet
+    # 232.9
+    g.resolution
+    # 38.17580795288086
 
 Command Line Interface
 ----------------------

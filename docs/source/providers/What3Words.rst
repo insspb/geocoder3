@@ -13,20 +13,20 @@ Geocoding (3 Words)
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.w3w('embedded.fizzled.trial')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.w3w('embedded.fizzled.trial')
+    g.json
 
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.w3w([45.15, -75.14], method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.w3w([45.15, -75.14], method='reverse')
+    g.json
 
 Command Line Interface
 ----------------------

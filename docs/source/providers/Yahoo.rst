@@ -11,10 +11,9 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.yahoo('San Francisco, CA')
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.yahoo('San Francisco, CA')
+    g.json
 
 Command Line Interface
 ----------------------

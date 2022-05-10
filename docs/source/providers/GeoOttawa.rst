@@ -8,10 +8,11 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.ottawa('453 Booth Street')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.ottawa('453 Booth Street')
+    g.json
+
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 

@@ -11,10 +11,9 @@ $ geocode "Ottawa ON" --cache
 ```
 
 ```python
->>> import geocoder
->>> g = geocoder.google("Ottawa ON", cache="<database>")
->>> g.json
-{...}
+import geocoder
+g = geocoder.google("Ottawa ON", cache="<database>")
+g.json
 ```
 
 **Batch geocode**
@@ -41,7 +40,7 @@ $ geocode "Ottawa ON" --cache "<database>" \
 ```
 
 ```python
->>> g = geocoder.google("Ottawa ON",
+g = geocoder.google("Ottawa ON",
                         cache="<database>",
                         username="<user>",
                         password="<pass>",

@@ -17,23 +17,23 @@ things shouldn't be this hard.
 
 .. code-block:: python
 
-    >>> import requests
-    >>> url = 'https://maps.googleapis.com/maps/api/geocode/json'
-    >>> params = {'sensor': 'false', 'address': 'Mountain View, CA'}
-    >>> r = requests.get(url, params=params)
-    >>> results = r.json()['results']
-    >>> location = results[0]['geometry']['location']
-    >>> location['lat'], location['lng']
-    (37.3860517, -122.0838511)
+    import requests
+    url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    params = {'sensor': 'false', 'address': 'Mountain View, CA'}
+    r = requests.get(url, params=params)
+    results = r.json()['results']
+    location = results[0]['geometry']['location']
+    location['lat'], location['lng']
+    # (37.3860517, -122.0838511)
 
 Now lets use Geocoder to do the same task.
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google('Mountain View, CA')
-    >>> g.latlng
-    (37.3860517, -122.0838511)
+    import geocoder
+    g = geocoder.google('Mountain View, CA')
+    g.latlng
+    # (37.3860517, -122.0838511)
 
 Testimonials
 ------------

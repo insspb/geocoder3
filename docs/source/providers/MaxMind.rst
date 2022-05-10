@@ -12,14 +12,14 @@ Geocoding (IP Address)
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.maxmind('199.7.157.0')
-    >>> g.latlng
-    [45.413140, -75.656703]
-    >>> g.city
-    'Toronto'
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.maxmind('199.7.157.0')
+    g.latlng
+    # [45.413140, -75.656703]
+    g.city
+    # 'Toronto'
+    g.json
 
 Geocode your own IP
 ~~~~~~~~~~~~~~~~~~~
@@ -28,14 +28,14 @@ To retrieve your own IP address, simply have `''` or `'me'` as the input.
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.maxmind('me')
-    >>> g.latlng
-    [45.413140, -75.656703]
-    >>> g.ip
-    '199.7.157.0'
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.maxmind('me')
+    g.latlng
+    # [45.413140, -75.656703]
+    g.ip
+    # '199.7.157.0'
+    g.json
 
 
 Command Line Interface

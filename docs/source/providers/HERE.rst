@@ -10,10 +10,9 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.here('Espoo, Finland')
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.here('Espoo, Finland')
+    g.json
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 
@@ -21,15 +20,14 @@ A bounding box can be supplied as an array of the form [minX, minY, maxX, maxY] 
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
-    >>> g = geocoder.here("Winnetka", bbox=bbox)
-    >>> g.address
-    "Winnetka, CA, United States"
-    >>> g = geocoder.here("Winnetka")
-    >>> g.address
-    "Winnetka, IL, United States"
-    ...
+    import geocoder
+    bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
+    g = geocoder.here("Winnetka", bbox=bbox)
+    g.address
+    # "Winnetka, CA, United States"
+    g = geocoder.here("Winnetka")
+    g.address
+    # "Winnetka, IL, United States"
 
 Please refer to :ref:`this section <bbox>` for more details.
 Reverse Geocoding
@@ -37,10 +35,9 @@ Reverse Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.google([45.15, -75.14], method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.google([45.15, -75.14], method='reverse')
+    g.json
 
 Using API Key
 -------------
@@ -50,7 +47,7 @@ at the `HERE Developer <https://developer.here.com/geocoder>`_.
 
 .. code-block:: python
 
-    >>> g = geocoder.here('Espoo, Finland',
+    g = geocoder.here('Espoo, Finland',
                            app_id='<YOUR APP ID>',
                            app_code='<YOUR APP CODE>')
 

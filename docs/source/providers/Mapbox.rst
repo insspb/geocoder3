@@ -9,10 +9,9 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.mapbox('San Francisco, CA', key='<TOKEN>')
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.mapbox('San Francisco, CA', key='<TOKEN>')
+    g.json
 
 This provider may return multiple results. You can access those results as described in the page ':doc:`/results`'.
 
@@ -20,22 +19,22 @@ Request feature data that best matches input and is biased to the given {latitud
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> latlng = [45.3, -66.1]
-    >>> g = geocoder.mapbox("200 Queen Street", proximity=latlng)
-    >>> g.address
-    "200 Queen St W, Saint John, New Brunswick E2M 2C8, Canada"
-    >>> g = geocoder.mapbox("200 Queen Street")
-    >>> g.address
-    "200 Queen Street, Colac, Victoria 3250, Australia"
-    >>> bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
-    >>> g = geocoder.mapbox("Winnetka", bbox=bbox)
-    >>> g.address
-    "Winnetka, Winnetka, California 91306, United States"
-    >>> g = geocoder.mapbox("Winnetka")
-    >>> g.address
-    "Winnetka Heights, Dallas, Texas 75211, United States"
-    ...
+    import geocoder
+
+    latlng = [45.3, -66.1]
+    g = geocoder.mapbox("200 Queen Street", proximity=latlng)
+    g.address
+    # "200 Queen St W, Saint John, New Brunswick E2M 2C8, Canada"
+    g = geocoder.mapbox("200 Queen Street")
+    g.address
+    # "200 Queen Street, Colac, Victoria 3250, Australia"
+    bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
+    g = geocoder.mapbox("Winnetka", bbox=bbox)
+    g.address
+    # "Winnetka, Winnetka, California 91306, United States"
+    g = geocoder.mapbox("Winnetka")
+    g.address
+    # "Winnetka Heights, Dallas, Texas 75211, United States"
 
 Please refer to :ref:`this section <bbox>` for more details.
 
@@ -44,11 +43,10 @@ Reverse Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> latlng = [45.3, -105.1]
-    >>> g = geocoder.mapbox(latlng, method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+    latlng = [45.3, -105.1]
+    g = geocoder.mapbox(latlng, method='reverse')
+    g.json
 
 Command Line Interface
 ----------------------

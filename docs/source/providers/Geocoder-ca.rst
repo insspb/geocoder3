@@ -9,10 +9,10 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.geolytica('Ottawa, ON')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.geolytica('Ottawa, ON')
+    g.json
 
 Command Line Interface
 ----------------------

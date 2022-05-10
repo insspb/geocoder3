@@ -7,8 +7,8 @@ Well-known text (WKT) is a text markup language for representing vector geometry
 # Python Example
 
 ```python
->>> import geocoder
->>> g = geocoder.google('New York City')
->>> g.wkt
-'POINT(-74.0111421 40.7069226)'
+import geocoder
+g = geocoder.google('New York City')
+g.wkt
+# 'POINT(-74.0111421 40.7069226)'
 ```

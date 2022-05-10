@@ -17,15 +17,14 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.tamu(
+    import geocoder
+    g = geocoder.tamu(
                 '595 Market St',
                 city='San Francisco',
                 state='California',
                 zipcode='94105',
                 key='demo')
-    >>> g.json
-    ...
+    g.json
 
 Command Line Interface
 ----------------------

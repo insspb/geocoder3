@@ -19,12 +19,12 @@ When using the CLI, simply raise the `--distance` flag to use the distance tool.
 #### Simple use
 
 ```python
->>> from geocoder import distance
->>> d = distance("Ottawa, ON", "Toronto, ON")
->>> print(d)
-353.80
->>> type(d)
-float
+from geocoder import distance
+d = distance("Ottawa, ON", "Toronto, ON")
+print(d)
+# 353.80
+type(d)
+# float
 ```
 
 ```bash
@@ -36,8 +36,8 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance
 
 ```python
 # Default provider="bing"
->>> distance("Ottawa, ON", "Toronto, ON", provider="google")
-353.80
+distance("Ottawa, ON", "Toronto, ON", provider="google")
+# 353.80
 ```
 
 ```bash
@@ -50,8 +50,8 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance --provider="google"
 ```python
 # Default units='kilometers'
 # Ex: kilometers, miles, feet, meters
->>> distance("Ottawa, ON", "Toronto, ON", units="miles")
-219.84
+distance("Ottawa, ON", "Toronto, ON", units="miles")
+# 219.84
 ```
 
 ```bash
@@ -62,8 +62,8 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance --units="miles"
 #### Using LatLng strings or lists
 
 ```python
->>> distance([45.07, -75.49], "43.30, -80.15")
-351.94
+distance([45.07, -75.49], "43.30, -80.15")
+# 351.94
 ```
 
 ```bash
@@ -74,8 +74,8 @@ $ geocode "[45.07, -76.49]", "43.30, -80.15" --distance
 #### 3 or more locations
 
 ```python
->>> distance("Ottawa, ON", "Toronto, ON", "Montreal, QC")
-521.18
+distance("Ottawa, ON", "Toronto, ON", "Montreal, QC")
+# 521.18
 ```
 
 ```bash
@@ -86,11 +86,11 @@ $ geocode "Ottawa, ON", "Toronto, ON", "Montreal, QC" --distance
 #### Input Geocoder objects
 
 ```python
->>> import geocoder
->>> point1 = geocoder.google("Ottawa, ON")
->>> point2 = geocoder.bing("Toronto, ON")
->>> geocoder.distance(point1, point2)
-353.80
+import geocoder
+point1 = geocoder.google("Ottawa, ON")
+point2 = geocoder.bing("Toronto, ON")
+geocoder.distance(point1, point2)
+# 353.80
 ```
 
 ## Parameters

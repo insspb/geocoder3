@@ -8,14 +8,13 @@ As for now, Geocoder always returns one result: the best match according to the 
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.geonames('Mountain View, CA')
-    >>> g.latlng
-    ['37.38605', '-122.08385']
-    >>> g.country
-    'United States'
-    >>> g.json
-    ...
+    import geocoder
+    g = geocoder.geonames('Mountain View, CA')
+    g.latlng
+    # ['37.38605', '-122.08385']
+    g.country
+    # 'United States'
+    g.json
 
 
 A **Work** is **In Progress** to support multiple results (you will find which providers support this feature on the `README file <https://github.com/DenisCarriere/geocoder/blob/master/README.md>`_).
@@ -26,16 +25,16 @@ Simply add *maxRows* in your query:
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.geonames('Mountain View, CA', maxRows=5)
-    >>> for result in g:
-    ...   print(result.address, result.latlng)
-    ...
-    Mountain View ['37.38605', '-122.08385']
-    Mountain View Elementary School ['34.0271', '-117.59116']
-    Best Western Plus Mountainview Inn and Suites ['51.79516', '-114.62793']
-    Best Western Mountainview Inn ['49.3338', '-123.1446']
-    Mountain View Post Office ['37.393', '-122.07774']
+    import geocoder
+    g = geocoder.geonames('Mountain View, CA', maxRows=5)
+    for result in g:
+       print(result.address, result.latlng)
+
+    # Mountain View ['37.38605', '-122.08385']
+    # Mountain View Elementary School ['34.0271', '-117.59116']
+    # Best Western Plus Mountainview Inn and Suites ['51.79516', '-114.62793']
+    # Best Western Mountainview Inn ['49.3338', '-123.1446']
+    # Mountain View Post Office ['37.393', '-122.07774']
 
 
 Extending without breaking
@@ -48,35 +47,33 @@ The objective is to allow access to multiple results, without breaking the lib, 
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.geonames('Mountain View, CA', maxRows=5)
+    import geocoder
+    g = geocoder.geonames('Mountain View, CA', maxRows=5)
 
     # API calls still work on best match
-    >>> g.latlng
-    ['37.38605', '-122.08385']
-    >>> g.country
-    'United States'
-    >>> g.json
-    ...
+    g.latlng
+    # ['37.38605', '-122.08385']
+    g.country
+    # 'United States'
+    g.json
 
     # the returned object support __len__, __getitem__, __iter__
-    >>> print(len(g))
-    5
-    >>> g[3].latlng
-    ['49.3338', '-123.1446']
-    >>> for result in g:
-    ...   print(result.address, result.latlng)
-    ...
+    print(len(g))
+    # 5
+    g[3].latlng
+    # ['49.3338', '-123.1446']
+    for result in g:
+        print(result.address, result.latlng)
 
 Note that the API calls are done on the best match from the provider, but you can change this behaviour by explicitly setting the default result to your desired one with the method *set_default_result*:
 
 .. code-block:: python
 
-    >>> g.set_default_result(3)
-    >>> g.latlng
-    ['49.3338', '-123.1446']
+    g.set_default_result(3)
+    g.latlng
+    # ['49.3338', '-123.1446']
     >>> g.address
-    'Best Western Plus Mountainview Inn and Suites'
+    # 'Best Western Plus Mountainview Inn and Suites'
 
 "Breaking" change
 -----------------
@@ -90,15 +87,15 @@ e.g. provider not supporting multiple results:
     >>> import geocoder
     >>> g = geocoder.google('Mountain View, CA')
     >>> g.geojson
-    {
-    'type':'Feature',
-    'properties':{
-        'address':'Mountain View, CA, USA',
-        ...
-    },
-    'bbox':[...],
-    'geometry':{...}
-    }
+    # {
+    # 'type':'Feature',
+    # 'properties':{
+    #     'address':'Mountain View, CA, USA',
+    #     ...
+    # },
+    # 'bbox':[...],
+    # 'geometry':{...}
+    # }
 
 Instead, the *geojson* property will apply to **all** results, therefore returning a *FeatureCollection* of all *Features*:
 
@@ -107,27 +104,27 @@ Instead, the *geojson* property will apply to **all** results, therefore returni
     >>> import geocoder
     >>> g = geocoder.geonames('Mountain View, CA', maxRows=2)
     >>> g.geojson
-    {
-    'type':'FeatureCollection',
-    'features':[
-        {
-            'type':'Feature',
-            'properties':{
-                'address':'Mountain View',
-                ...
-            },
-            'geometry':{...}
-        },
-        {
-            'type':'Feature',
-            'properties':{
-                'address':'Mountain View Elementary School',
-                ...
-            },
-            'geometry':{...}
-        }
-    ]
-    }
+    # {
+    # 'type':'FeatureCollection',
+    # 'features':[
+    #     {
+    #         'type':'Feature',
+    #         'properties':{
+    #             'address':'Mountain View',
+    #             ...
+    #         },
+    #         'geometry':{...}
+    #     },
+    #     {
+    #         'type':'Feature',
+    #         'properties':{
+    #             'address':'Mountain View Elementary School',
+    #             ...
+    #         },
+    #         'geometry':{...}
+    #     }
+    # ]
+    # }
 
 More ?
 ------

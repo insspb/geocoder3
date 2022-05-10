@@ -7,10 +7,9 @@ GeoJSON is a format for encoding a variety of geographic data structures. A comp
 ## Python Example
 
 ```python
->>> import geocoder
->>> g = geocoder.google("New York City")
->>> g.geojson
-...
+import geocoder
+g = geocoder.google("New York City")
+g.geojson
 ```
 
 ## GeoJSON Output

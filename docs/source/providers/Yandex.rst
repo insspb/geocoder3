@@ -11,10 +11,10 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.yandex('Moscow Russia')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.yandex('Moscow Russia')
+    g.json
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 
@@ -23,10 +23,10 @@ Reverse Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.yandex([55.95, 37.96], method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.yandex([55.95, 37.96], method='reverse')
+    g.json
 
 Command Line Interface
 ----------------------
