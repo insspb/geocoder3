@@ -2,19 +2,19 @@ import pytest
 
 import geocoder
 
-location = 'Ottawa'
+location = "Ottawa"
 
 
 def test_mapzen():
-    with pytest.raises(DeprecationWarning) as e:
-        g = geocoder.mapzen(location)
+    with pytest.raises(DeprecationWarning):
+        geocoder.mapzen(location)
 
 
 def test_mapzen_reverse():
-    with pytest.raises(DeprecationWarning) as e:
-        g = geocoder.mapzen("45.4049053 -75.7077965", method='reverse')
+    with pytest.raises(DeprecationWarning):
+        geocoder.mapzen("45.4049053 -75.7077965", method="reverse")
 
 
 def test_multi_results():
-    with pytest.raises(DeprecationWarning) as e:
-        g = geocoder.mapzen(location, maxRows=3)
+    with pytest.raises(DeprecationWarning):
+        geocoder.mapzen(location, maxRows=3)

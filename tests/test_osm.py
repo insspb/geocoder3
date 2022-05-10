@@ -1,8 +1,7 @@
-
 import geocoder
 
-location = 'Ottawa, Ontario'
-city = 'Ottawa'
+location = "Ottawa, Ontario"
+city = "Ottawa"
 ottawa = (45.4215296, -75.6971930)
 
 
@@ -15,16 +14,17 @@ def test_osm():
 
 
 def test_osm_reverse():
-    g = geocoder.osm(ottawa, method='reverse')
+    g = geocoder.osm(ottawa, method="reverse")
     assert g.ok
 
 
 def test_multi_results():
-    g = geocoder.osm(location, maxRows='5')
+    g = geocoder.osm(location, maxRows="5")
     assert len(g) == 5
 
+
 def test_detailed_query():
-    g = geocoder.osm("",postalcode="45326", street="Ellernstraße", method="details")
+    g = geocoder.osm("", postalcode="45326", street="Ellernstraße", method="details")
     assert g.postal == "45326"
     assert "ellern" in g.street.lower()
     assert g.ok

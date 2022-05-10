@@ -1,5 +1,3 @@
-
-
 import requests
 
 import geocoder
@@ -9,7 +7,7 @@ try:
 except ImportError:
     from unittest import mock
 
-address = 'Booth Street, Ottawa'
+address = "Booth Street, Ottawa"
 
 
 def test_session():
@@ -22,7 +20,7 @@ def test_session():
 
 
 def test_session_called():
-    with mock.patch('requests.Session.get'):
+    with mock.patch("requests.Session.get"):
         with requests.Session() as session:
             geocoder.google(address, session=session)
         session.get.assert_called_once()

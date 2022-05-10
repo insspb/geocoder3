@@ -1,8 +1,6 @@
-
-
 import geocoder
 
-location = 'Ottawa, Ontario'
+location = "Ottawa, Ontario"
 ottawa = (45.4215296, -75.6971930)
 
 
@@ -22,5 +20,5 @@ def test_komoot_multi_result():
 
 
 def test_komoot_reverse():
-    g = geocoder.komoot(ottawa, method='reverse', timeout=10)
+    g = geocoder.komoot(ottawa, method="reverse", timeout=10)
     assert g.ok

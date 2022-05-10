@@ -1,12 +1,10 @@
-
-
 import geocoder
 
-location = 'Ottawa, Ontario'
+location = "Ottawa, Ontario"
 ottawa = (45.4215296, -75.6971930)
 
-winnetka = 'Winnetka'
-winnetka_bbox = [-118.604794,34.172684,-118.500938,34.236144]
+winnetka = "Winnetka"
+winnetka_bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
 
 
 def test_here():
@@ -30,5 +28,5 @@ def test_here_with_bbox():
 
 
 def test_here_reverse():
-    g = geocoder.here(ottawa, method='reverse')
+    g = geocoder.here(ottawa, method="reverse")
     assert g.ok
