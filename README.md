@@ -233,6 +233,8 @@ $ geocode "Ottawa, ON" \
 | [What3Words][What3Words]       | World     | API key                         |                  | yes     |           |       |
 | [Yahoo][Yahoo]                 | World     |                                 |                  |         |           |       |
 | [Yandex][Yandex]               | Russia    |                                 | yes              | yes     |           |       |
+| [IPFinder][IPFinder]           | World     | Rate Limit, [Plans][IPFinder]   | yes              | yes     |           |       |
+
 
 ## Installation
 
@@ -344,3 +346,4 @@ See [CHANGELOG.md](./CHANGELOG.md)
 [Komoot]: http://photon.komoot.de
 [USCensus]: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
 [Gisgraphy]: https://premium.gisgraphy.com/
+[IPFinder]: https://ipfinder.io/

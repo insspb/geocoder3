@@ -33,6 +33,7 @@ from geocoder.uscensus import USCensusQuery
 from geocoder.yahoo import YahooQuery
 from geocoder.yandex import YandexQuery
 from geocoder.w3w import W3WQuery
+from geocoder.ipfinder import IpfinderQuery
 
 from geocoder.arcgis_reverse import ArcgisReverse
 from geocoder.baidu_reverse import BaiduReverse
@@ -174,6 +175,7 @@ options = {
         'geocode': GisgraphyQuery,
         'reverse': GisgraphyReverse,
     },
+    'ipfinder': {'geocode': IpfinderQuery},
 }
 
 
@@ -660,3 +662,14 @@ def gisgraphy(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='gisgraphy', **kwargs)
+
+
+def ipfinder(location='', **kwargs):
+    """IPFinder.io Provider
+
+    :param ``location``: Your search IP Address you want geocoded.
+    :param ``location``: (optional) if left blank will return your current IP address's location.
+    :param ``key``     :  API Key from IPFinder.
+    :param ``key``     : (optional)if left blank will use the `free` API KEY
+    """
+    return get(location, provider='ipfinder', **kwargs)
