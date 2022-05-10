@@ -59,5 +59,5 @@ Parameters
 References
 ----------
 
-- `OpenCage Geocoding Services <https://geocoder.opencagedata.com/api>`_
+- `OpenCage Geocoding Services <https://opencagedata.com/api>`_
 
