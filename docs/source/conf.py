@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # geocoder documentation build configuration file
 #

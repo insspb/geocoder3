@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# coding: utf8
 
 from codecs import open
 import re

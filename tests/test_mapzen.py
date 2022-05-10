@@ -1,4 +1,3 @@
-# coding: utf8
 import pytest
 
 import geocoder

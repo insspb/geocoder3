@@ -1,4 +1,3 @@
-# coding=utf-8
 import geocoder
 
 location = '兆维华灯大厦,北京'

@@ -1,4 +1,3 @@
-# coding: utf8
 import requests_mock
 
 import geocoder

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# coding: utf8
 
 from __future__ import absolute_import, print_function
 from geocoder.bing_batch import BingBatch, BingBatchResult
