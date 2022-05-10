@@ -1,43 +1,38 @@
-
-
-
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class OttawaParcelIdResult(OneResult):
-
     @property
     def ok(self):
         return bool(self.address_id)
 
     @property
     def address_id(self):
-        return self.raw.get('attributes', {}).get('PI Municipal Address ID')
+        return self.raw.get("attributes", {}).get("PI Municipal Address ID")
 
 
 class OttawaParcelIdQuery(MultipleResultsQuery):
     # XXX 8 sept 2017: Service still available ? not documented and returning 403
 
-    _URL = 'http://maps.ottawa.ca/arcgis/rest/services/Property_Parcels/MapServer/find'
+    _URL = "http://maps.ottawa.ca/arcgis/rest/services/Property_Parcels/MapServer/find"
     _RESULT_CLASS = OttawaParcelIdResult
     _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
-            'searchText': location,
-            'layers': 0,
-            'f': 'json',
-            'sr': 4326,
+            "searchText": location,
+            "layers": 0,
+            "f": "json",
+            "sr": 4326,
         }
 
     def _adapt_results(self, json_response):
-        return json_response.get('results', [])
+        return json_response.get("results", [])
 
 
 class OttawaParcelResult(OneResult):
-
     @property
     def ok(self):
         return bool(self.geometry)
@@ -45,14 +40,14 @@ class OttawaParcelResult(OneResult):
     @property
     def length(self):
         """Length in Feet (f)"""
-        length = self.parse['attributes'].get('Shape_Length')
+        length = self.parse["attributes"].get("Shape_Length")
         if length:
             return round(float(length))
 
     @property
     def area(self):
         """Square Foot Area (sqft)"""
-        area = self.parse['attributes'].get('Shape_Area')
+        area = self.parse["attributes"].get("Shape_Area")
         if area:
             return round(float(area) * 10.76391)
 
@@ -64,39 +59,39 @@ class OttawaParcelResult(OneResult):
 
     @property
     def municipality(self):
-        return self._clean(self.parse['attributes'].get('MUNICIPALITY_NAME'))
+        return self._clean(self.parse["attributes"].get("MUNICIPALITY_NAME"))
 
     @property
     def housenumber(self):
-        return self._clean(self.parse['attributes'].get('ADDRESS_NUMBER'))
+        return self._clean(self.parse["attributes"].get("ADDRESS_NUMBER"))
 
     @property
     def suffix(self):
-        return self._clean(self.parse['attributes'].get('SUFFIX'))
+        return self._clean(self.parse["attributes"].get("SUFFIX"))
 
     @property
     def public_land(self):
-        return self._clean(self.parse['attributes'].get('PUBLICLAND'))
+        return self._clean(self.parse["attributes"].get("PUBLICLAND"))
 
     @property
     def street(self):
-        return self._clean(self.parse['attributes'].get('ROAD_NAME'))
+        return self._clean(self.parse["attributes"].get("ROAD_NAME"))
 
     @property
     def legal_unit(self):
-        return self._clean(self.parse['attributes'].get('LEGAL_UNIT'))
+        return self._clean(self.parse["attributes"].get("LEGAL_UNIT"))
 
     @property
     def pin(self):
-        return self._clean(self.parse['attributes'].get('PIN_NUMBER'))
+        return self._clean(self.parse["attributes"].get("PIN_NUMBER"))
 
     @property
     def geometry(self):
-        return self.parse['geometry']
+        return self.parse["geometry"]
 
     @property
     def postal(self):
-        return self._clean(self.parse['attributes'].get('POSTAL_CODE'))
+        return self._clean(self.parse["attributes"].get("POSTAL_CODE"))
 
     def _clean(self, item):
         if item:
@@ -121,10 +116,11 @@ class OttawaParcelQuery(MultipleResultsQuery):
     http://maps.ottawa.ca/ArcGIS/rest/services/
            compositeLocator/GeocodeServer/findAddressCandidates
     """
-    provider = 'ottawa'
-    method = 'parcel'
 
-    _URL = 'http://maps.ottawa.ca/arcgis/rest/services/Property_Parcels/MapServer/find'
+    provider = "ottawa"
+    method = "parcel"
+
+    _URL = "http://maps.ottawa.ca/arcgis/rest/services/Property_Parcels/MapServer/find"
     _RESULT_CLASS = OttawaParcelResult
     _KEY_MANDATORY = False
 
@@ -134,23 +130,23 @@ class OttawaParcelQuery(MultipleResultsQuery):
             raise ValueError("Could not get any Id for given location")
 
         return {
-            'searchText': ids.address_id,
-            'layers': 2,
-            'f': 'json',
-            'sr': 4326,
+            "searchText": ids.address_id,
+            "layers": 2,
+            "f": "json",
+            "sr": 4326,
         }
 
     def _adapt_results(self, json_response):
-        return json_response.get('results', [])
+        return json_response.get("results", [])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     area = 2123
     length = 100
     frontage = 21
-    location = '169 Carillon'
+    location = "169 Carillon"
     g = OttawaParcelQuery(location, timeout=10.0)
-    print('%s: %i x %i = %i' % (location, g.frontage, g.length, g.area))
-    print('453 Booth: %i x %i = %i' % (frontage, length, area))
-    print('%i x %i = %i' % (g.frontage - frontage, g.length - length, g.area - area))
+    print("%s: %i x %i = %i" % (location, g.frontage, g.length, g.area))
+    print("453 Booth: %i x %i = %i" % (frontage, length, area))
+    print("%i x %i = %i" % (g.frontage - frontage, g.length - length, g.area - area))

@@ -11,39 +11,38 @@ from geocoder.keys import google_client, google_client_secret, google_key
 
 
 class GoogleResult(OneResult):
-
     def __init__(self, json_content):
         # flatten geometry
-        geometry = json_content.get('geometry', {})
-        self._location = geometry.get('location', {})
-        self._location_type = geometry.get('location_type', {})
-        self._viewport = geometry.get('viewport', {})
+        geometry = json_content.get("geometry", {})
+        self._location = geometry.get("location", {})
+        self._location_type = geometry.get("location_type", {})
+        self._viewport = geometry.get("viewport", {})
 
         # Parse address components with short & long names
-        for item in json_content['address_components']:
-            for category in item['types']:
+        for item in json_content["address_components"]:
+            for category in item["types"]:
                 json_content.setdefault(category, {})
-                json_content[category]['long_name'] = item['long_name']
-                json_content[category]['short_name'] = item['short_name']
+                json_content[category]["long_name"] = item["long_name"]
+                json_content[category]["short_name"] = item["short_name"]
 
         # proceed with super.__init__
         super(GoogleResult, self).__init__(json_content)
 
     @property
     def lat(self):
-        return self._location.get('lat')
+        return self._location.get("lat")
 
     @property
     def lng(self):
-        return self._location.get('lng')
+        return self._location.get("lng")
 
     @property
     def place(self):
-        return self.raw.get('place_id')
+        return self.raw.get("place_id")
 
     @property
     def quality(self):
-        quality = self.raw.get('types')
+        quality = self.raw.get("types")
         if quality:
             return quality[0]
 
@@ -53,35 +52,35 @@ class GoogleResult(OneResult):
 
     @property
     def bbox(self):
-        south = self._viewport.get('southwest', {}).get('lat')
-        west = self._viewport.get('southwest', {}).get('lng')
-        north = self._viewport.get('northeast', {}).get('lat')
-        east = self._viewport.get('northeast', {}).get('lng')
+        south = self._viewport.get("southwest", {}).get("lat")
+        west = self._viewport.get("southwest", {}).get("lng")
+        north = self._viewport.get("northeast", {}).get("lat")
+        east = self._viewport.get("northeast", {}).get("lng")
         return self._get_bbox(south, west, north, east)
 
     @property
     def address(self):
-        return self.raw.get('formatted_address')
+        return self.raw.get("formatted_address")
 
     @property
     def postal(self):
-        return self.raw.get('postal_code', {}).get('short_name')
+        return self.raw.get("postal_code", {}).get("short_name")
 
     @property
     def subpremise(self):
-        return self.raw.get('subpremise', {}).get('short_name')
+        return self.raw.get("subpremise", {}).get("short_name")
 
     @property
     def housenumber(self):
-        return self.raw.get('street_number', {}).get('short_name')
+        return self.raw.get("street_number", {}).get("short_name")
 
     @property
     def street(self):
-        return self.raw.get('route', {}).get('short_name')
+        return self.raw.get("route", {}).get("short_name")
 
     @property
     def street_long(self):
-        return self.raw.get('route', {}).get('long_name')
+        return self.raw.get("route", {}).get("long_name")
 
     @property
     def road_long(self):
@@ -89,39 +88,39 @@ class GoogleResult(OneResult):
 
     @property
     def neighborhood(self):
-        return self.raw.get('neighborhood', {}).get('short_name')
+        return self.raw.get("neighborhood", {}).get("short_name")
 
     @property
     def sublocality(self):
-        return self.raw.get('sublocality', {}).get('short_name')
+        return self.raw.get("sublocality", {}).get("short_name")
 
     @property
     def city(self):
-        return self.raw.get('locality', {}).get('short_name') or self.postal_town
+        return self.raw.get("locality", {}).get("short_name") or self.postal_town
 
     @property
     def city_long(self):
-        return self.raw.get('locality', {}).get('long_name') or self.postal_town_long
+        return self.raw.get("locality", {}).get("long_name") or self.postal_town_long
 
     @property
     def postal_town(self):
-        return self.raw.get('postal_town', {}).get('short_name')
+        return self.raw.get("postal_town", {}).get("short_name")
 
     @property
     def postal_town_long(self):
-        return self.raw.get('postal_town', {}).get('long_name')
+        return self.raw.get("postal_town", {}).get("long_name")
 
     @property
     def county(self):
-        return self.raw.get('administrative_area_level_2', {}).get('short_name')
+        return self.raw.get("administrative_area_level_2", {}).get("short_name")
 
     @property
     def state(self):
-        return self.raw.get('administrative_area_level_1', {}).get('short_name')
+        return self.raw.get("administrative_area_level_1", {}).get("short_name")
 
     @property
     def state_long(self):
-        return self.raw.get('administrative_area_level_1', {}).get('long_name')
+        return self.raw.get("administrative_area_level_1", {}).get("long_name")
 
     @property
     def province_long(self):
@@ -129,11 +128,11 @@ class GoogleResult(OneResult):
 
     @property
     def country(self):
-        return self.raw.get('country', {}).get('short_name')
+        return self.raw.get("country", {}).get("short_name")
 
     @property
     def country_long(self):
-        return self.raw.get('country', {}).get('long_name')
+        return self.raw.get("country", {}).get("long_name")
 
 
 class GoogleQuery(MultipleResultsQuery):
@@ -162,68 +161,72 @@ class GoogleQuery(MultipleResultsQuery):
         > elevation
     :param key: Your Google developers free key.
     :param language: 2-letter code of preferred language of returned address elements.
-    :param client: Google for Work client ID. Use with client_secret. Cannot use with key parameter
+    :param client: Google for Work client ID. Use with client_secret. Cannot use with
+                        key parameter
     :param client_secret: Google for Work client secret. Use with client.
     """
-    provider = 'google'
-    method = 'geocode'
 
-    _URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+    provider = "google"
+    method = "geocode"
+
+    _URL = "https://maps.googleapis.com/maps/api/geocode/json"
     _RESULT_CLASS = GoogleResult
     _KEY = google_key
     _KEY_MANDATORY = True
 
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
-        params['language'] = kwargs.get('language', '')
-        self.rate_limit = kwargs.get('rate_limit', True)
+        params["language"] = kwargs.get("language", "")
+        self.rate_limit = kwargs.get("rate_limit", True)
 
         # adapt params to authentication method
         # either with client / secret
-        self.client = kwargs.get('client', google_client)
-        self.client_secret = kwargs.get('client_secret', google_client_secret)
+        self.client = kwargs.get("client", google_client)
+        self.client_secret = kwargs.get("client_secret", google_client_secret)
 
         if self.client and self.client_secret:
-            params['client'] = self.client
+            params["client"] = self.client
             return self._encode_params(params)
         # or API key
         else:
             # provider_key is computed in base.py:
             # either cls._KEY (google_key) or kwargs['key'] if provided
-            params['key'] = provider_key
+            params["key"] = provider_key
             return params
 
     def _location_init(self, location, **kwargs):
         return {
-            'address': location,
-            'bounds': kwargs.get('bounds', ''),
-            'components': kwargs.get('components', ''),
-            'region': kwargs.get('region', ''),
+            "address": location,
+            "bounds": kwargs.get("bounds", ""),
+            "components": kwargs.get("components", ""),
+            "region": kwargs.get("region", ""),
         }
 
     def _encode_params(self, params):
-        # turn non-empty params into sorted list in order to maintain signature validity.
+        # turn non-empty params into sorted list in order to maintain signature validity
         # Requests will honor the order.
-        ordered_params = sorted([(k, v)
-                                 for (k, v) in params.items() if v])
+        ordered_params = sorted([(k, v) for (k, v) in params.items() if v])
         params = OrderedDict(ordered_params)
 
         # the signature parameter needs to come in the end of the url
-        params['signature'] = self._sign_url(
-            self.url, ordered_params, self.client_secret)
+        params["signature"] = self._sign_url(
+            self.url, ordered_params, self.client_secret
+        )
 
         return params
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
-        """ Sign a request URL with a Crypto Key.
+        """Sign a request URL with a Crypto Key.
         Usage:
         from urlsigner import sign_url
         signed_url = sign_url(base_url=my_url,
                               params=url_params,
                               client_secret=CLIENT_SECRET)
         Args:
-        base_url - The trunk of the URL to sign. E.g. https://maps.googleapis.com/maps/api/geocode/json
-        params - List of tuples of URL parameters INCLUDING YOUR CLIENT ID ('client','gme-...')
+        base_url - The trunk of the URL to sign. E.g.
+                https://maps.googleapis.com/maps/api/geocode/json
+        params - List of tuples of URL parameters INCLUDING YOUR CLIENT ID
+        ('client','gme-...')
         client_secret - Your Crypto Key from Google for Work
         Returns:
         The signature as a dictionary #signed request URL
@@ -236,7 +239,7 @@ class GoogleQuery(MultipleResultsQuery):
         url = urlparse(base_url + "?" + urlencode(params))
 
         # We only need to sign the path+query part of the string
-        url_to_sign = (url.path + "?" + url.query).encode('utf-8')
+        url_to_sign = (url.path + "?" + url.query).encode("utf-8")
 
         # Decode the private key into its binary format
         # We need to decode the URL-encoded private key
@@ -271,16 +274,16 @@ class GoogleQuery(MultipleResultsQuery):
         return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
 
     def _catch_errors(self, json_response):
-        status = json_response.get('status')
-        if not status == 'OK':
+        status = json_response.get("status")
+        if not status == "OK":
             self.error = status
 
         return self.error
 
     def _adapt_results(self, json_response):
-        return json_response.get('results', [])
+        return json_response.get("results", [])
 
 
-if __name__ == '__main__':
-    g = GoogleQuery('11 Wall Street, New York')
+if __name__ == "__main__":
+    g = GoogleQuery("11 Wall Street, New York")
     g.debug()

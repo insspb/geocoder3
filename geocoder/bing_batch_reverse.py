@@ -5,7 +5,6 @@ from geocoder.bing_batch import BingBatch, BingBatchResult
 
 
 class BingBatchReverseResult(BingBatchResult):
-
     @property
     def address(self):
         address = self._content
@@ -42,9 +41,9 @@ class BingBatchReverseResult(BingBatchResult):
 
     def debug(self, verbose=True):
         with io.StringIO() as output:
-            print('\n', file=output)
-            print('Bing Batch result\n', file=output)
-            print('-----------\n', file=output)
+            print("\n", file=output)
+            print("Bing Batch result\n", file=output)
+            print("-----------\n", file=output)
             print(self._content, file=output)
 
             if verbose:
@@ -55,47 +54,53 @@ class BingBatchReverseResult(BingBatchResult):
 
 class BingBatchReverse(BingBatch):
 
-    method = 'batch_reverse'
+    method = "batch_reverse"
     _RESULT_CLASS = BingBatchReverseResult
 
     def generate_batch(self, locations):
         out = io.StringIO()
         writer = csv.writer(out)
-        writer.writerow([
-            'Id',
-            'ReverseGeocodeRequest/Location/Latitude',
-            'ReverseGeocodeRequest/Location/Longitude',
-            'GeocodeResponse/Address/FormattedAddress',
-            'GeocodeResponse/Address/Locality',
-            'GeocodeResponse/Address/PostalCode',
-            'GeocodeResponse/Address/AdminDistrict',
-            'GeocodeResponse/Address/CountryRegion'
-        ])
+        writer.writerow(
+            [
+                "Id",
+                "ReverseGeocodeRequest/Location/Latitude",
+                "ReverseGeocodeRequest/Location/Longitude",
+                "GeocodeResponse/Address/FormattedAddress",
+                "GeocodeResponse/Address/Locality",
+                "GeocodeResponse/Address/PostalCode",
+                "GeocodeResponse/Address/AdminDistrict",
+                "GeocodeResponse/Address/CountryRegion",
+            ]
+        )
 
         for idx, location in enumerate(locations):
-            writer.writerow([idx, location[0], location[1], None, None, None, None, None])
+            writer.writerow(
+                [idx, location[0], location[1], None, None, None, None, None]
+            )
 
-        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode('utf-8')
+        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode(
+            "utf-8"
+        )
 
     def _adapt_results(self, response):
         # print(type(response))
-        result = io.StringIO(response.decode('utf-8'))
+        result = io.StringIO(response.decode("utf-8"))
         # Skipping first line with Bing header
         next(result)
 
         rows = {}
         for row in csv.DictReader(result):
-            rows[row['Id']] = [
-                row['GeocodeResponse/Address/FormattedAddress'],
-                row['GeocodeResponse/Address/Locality'],
-                row['GeocodeResponse/Address/PostalCode'],
-                row['GeocodeResponse/Address/AdminDistrict'],
-                row['GeocodeResponse/Address/CountryRegion']
+            rows[row["Id"]] = [
+                row["GeocodeResponse/Address/FormattedAddress"],
+                row["GeocodeResponse/Address/Locality"],
+                row["GeocodeResponse/Address/PostalCode"],
+                row["GeocodeResponse/Address/AdminDistrict"],
+                row["GeocodeResponse/Address/CountryRegion"],
             ]
 
         return rows
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     g = BingBatchReverse([(40.7943, -73.970859), (48.845580, 2.321807)], key=None)
     g.debug()

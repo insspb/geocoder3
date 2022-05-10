@@ -1,7 +1,3 @@
-
-
-
-
 import logging
 
 from geocoder.location import Location
@@ -9,7 +5,6 @@ from geocoder.yandex import YandexQuery, YandexResult
 
 
 class YandexReverseResult(YandexResult):
-
     @property
     def ok(self):
         return bool(self.address)
@@ -44,25 +39,26 @@ class YandexReverse(YandexQuery):
     API Reference: http://api.yandex.com/maps/doc/geocoder/
                    desc/concepts/input_params.xml
     """
-    provider = 'yandex'
-    method = 'reverse'
+
+    provider = "yandex"
+    method = "reverse"
 
     _RESULT_CLASS = YandexReverseResult
 
     def _build_params(self, location, provider_key, **kwargs):
         x, y = Location(location).xy
-        self.location = u'{}, {}'.format(x, y)
+        self.location = "{}, {}".format(x, y)
         return {
-            'geocode': self.location,
-            'lang': kwargs.get('lang', 'en-US'),
-            'kind': kwargs.get('kind', ''),
-            'format': 'json',
-            'apikey': provider_key,
-            'results': kwargs.get('maxRows', 1),
+            "geocode": self.location,
+            "lang": kwargs.get("lang", "en-US"),
+            "kind": kwargs.get("kind", ""),
+            "format": "json",
+            "apikey": provider_key,
+            "results": kwargs.get("maxRows", 1),
         }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = YandexReverse({'lat': 41.005407, 'lng': 28.978349})
+    g = YandexReverse({"lat": 41.005407, "lng": 28.978349})
     g.debug()

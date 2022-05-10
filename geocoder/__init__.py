@@ -1,7 +1,3 @@
-
-
-
-
 """
 Geocoder
 ~~~~~~~~
@@ -24,12 +20,12 @@ Consistant JSON responses from various providers.
 
 """
 
-__title__ = 'geocoder3'
-__author__ = 'Andrey Shpak'
-__author_email__ = 'ashpak@ashpak.ru'
-__version__ = '2.0.0'
-__license__ = 'MIT'
-__copyright__ = 'Copyright (c) 2022 Andrey Shpak'
+__title__ = "geocoder3"
+__author__ = "Andrey Shpak"
+__author_email__ = "ashpak@ashpak.ru"
+__version__ = "2.0.0"
+__license__ = "MIT"
+__copyright__ = "Copyright (c) 2022 Andrey Shpak"
 
 # EXTRAS
 # CORE

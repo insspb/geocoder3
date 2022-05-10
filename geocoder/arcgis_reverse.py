@@ -1,6 +1,3 @@
-
-
-
 import logging
 
 from geocoder.arcgis import ArcgisQuery
@@ -9,46 +6,45 @@ from geocoder.location import Location
 
 
 class ArcgisReverseResult(OneResult):
-
     @property
     def ok(self):
         return bool(self.address)
 
     @property
     def lat(self):
-        return self.raw['location'].get('y')
+        return self.raw["location"].get("y")
 
     @property
     def lng(self):
-        return self.raw['location'].get('x')
+        return self.raw["location"].get("x")
 
     @property
     def address(self):
-        return self.raw['address'].get('Match_addr')
+        return self.raw["address"].get("Match_addr")
 
     @property
     def city(self):
-        return self.raw['address'].get('City')
+        return self.raw["address"].get("City")
 
     @property
     def neighborhood(self):
-        return self.raw['address'].get('Neighbourhood')
+        return self.raw["address"].get("Neighbourhood")
 
     @property
     def region(self):
-        return self.raw['address'].get('Region')
+        return self.raw["address"].get("Region")
 
     @property
     def country(self):
-        return self.raw['address'].get('CountryCode')
+        return self.raw["address"].get("CountryCode")
 
     @property
     def postal(self):
-        return self.raw['address'].get('Postal')
+        return self.raw["address"].get("Postal")
 
     @property
     def state(self):
-        return self.raw['address'].get('Region')
+        return self.raw["address"].get("Region")
 
 
 class ArcgisReverse(ArcgisQuery):
@@ -65,33 +61,34 @@ class ArcgisReverse(ArcgisQuery):
     -------------
     https://developers.arcgis.com/rest/geocode/api-reference/geocoding-reverse-geocode.htm
     """
-    provider = 'arcgis'
-    method = 'reverse'
 
-    _URL = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
+    provider = "arcgis"
+    method = "reverse"
+
+    _URL = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode"  # noqa
     _RESULT_CLASS = ArcgisReverseResult
 
     def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
         return {
-            'location': u'{}, {}'.format(location.lng, location.lat),
-            'f': 'pjson',
-            'distance': kwargs.get('distance', 50000),
-            'outSR': kwargs.get('outSR', '')
+            "location": "{}, {}".format(location.lng, location.lat),
+            "f": "pjson",
+            "distance": kwargs.get("distance", 50000),
+            "outSR": kwargs.get("outSR", ""),
         }
 
     def _adapt_results(self, json_response):
         return [json_response]
 
     def _catch_errors(self, json_response):
-        error = json_response.get('error', None)
+        error = json_response.get("error", None)
         if error:
-            self.error = error['message']
+            self.error = error["message"]
 
         return self.error
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     g = ArcgisReverse("45.404702, -75.704150")
     g.debug()

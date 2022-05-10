@@ -1,6 +1,3 @@
-
-
-
 from geocoder.location import Location
 from geocoder.osm import OsmQuery
 
@@ -16,21 +13,22 @@ class OsmReverse(OsmQuery):
     -------------
     http://wiki.openstreetmap.org/wiki/Nominatim
     """
-    provider = 'osm'
-    method = 'reverse'
+
+    provider = "osm"
+    method = "reverse"
 
     def _build_params(self, location, provider_key, **kwargs):
         params = {
-            'q': str(Location(location)),
-            'format': 'jsonv2',
-            'addressdetails': 1,
-            'limit': kwargs.get('limit', 1)
+            "q": str(Location(location)),
+            "format": "jsonv2",
+            "addressdetails": 1,
+            "limit": kwargs.get("limit", 1),
         }
-        if('lang_code' in kwargs):
-            params['accept-language'] = kwargs.get('lang_code')
+        if "lang_code" in kwargs:
+            params["accept-language"] = kwargs.get("lang_code")
         return params
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     g = OsmReverse("45.3, -75.4")
     g.debug()

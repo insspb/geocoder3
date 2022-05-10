@@ -1,7 +1,3 @@
-
-
-
-
 import logging
 import re
 
@@ -9,19 +5,20 @@ from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class OttawaResult(OneResult):
-
     @property
     def lat(self):
-        return self.raw.get('location', {}).get('y')
+        return self.raw.get("location", {}).get("y")
 
     @property
     def lng(self):
-        return self.raw.get('location', {}).get('x')
+        return self.raw.get("location", {}).get("x")
 
     @property
     def postal(self):
         if self.address:
-            expression = r'([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}( *\d{1}[A-Z]{1}\d{1})?)'
+            expression = (
+                r"([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}( *\d{1}[A-Z]{1}\d{1})?)"
+            )
             pattern = re.compile(expression)
             match = pattern.search(self.address.upper())
             if match:
@@ -30,7 +27,7 @@ class OttawaResult(OneResult):
     @property
     def housenumber(self):
         if self.address:
-            expression = r'\d+'
+            expression = r"\d+"
             pattern = re.compile(expression)
             match = pattern.search(self.address)
             if match:
@@ -38,23 +35,23 @@ class OttawaResult(OneResult):
 
     @property
     def city(self):
-        return 'Ottawa'
+        return "Ottawa"
 
     @property
     def state(self):
-        return 'Ontario'
+        return "Ontario"
 
     @property
     def country(self):
-        return 'Canada'
+        return "Canada"
 
     @property
     def address(self):
-        return self.raw.get('address')
+        return self.raw.get("address")
 
     @property
     def accuracy(self):
-        return self.raw.get('score')
+        return self.raw.get("score")
 
 
 class OttawaQuery(MultipleResultsQuery):
@@ -74,25 +71,27 @@ class OttawaQuery(MultipleResultsQuery):
     -------------
     http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates
     """
-    provider = 'ottawa'
-    method = 'geocode'
 
-    _URL = 'http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates'
+    provider = "ottawa"
+    method = "geocode"
+
+    _URL = "http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates"  # noqa
     _RESULT_CLASS = OttawaResult
     _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
-            'SingleLine': location.replace(', Ottawa, ON', ''),
-            'f': 'json',
-            'outSR': 4326,
-            'maxLocations': kwargs.get('maxRows', 1)
+            "SingleLine": location.replace(", Ottawa, ON", ""),
+            "f": "json",
+            "outSR": 4326,
+            "maxLocations": kwargs.get("maxRows", 1),
         }
 
     def _adapt_results(self, json_response):
-        return json_response.get('candidates', [])
+        return json_response.get("candidates", [])
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = OttawaQuery('1552 Payette dr.')
+    g = OttawaQuery("1552 Payette dr.")
     g.debug()
