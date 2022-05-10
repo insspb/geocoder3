@@ -34,9 +34,9 @@ def test_entry_points():
     geocoder.canadapost
     geocoder.tamu
     geocoder.geocodefarm
+    geocoder.geocodexyz
     geocoder.uscensus
     geocoder.ipfinder
-
 
 def test_location():
     g = geocoder.location('45.4215296, -75.6971931')
