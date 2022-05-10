@@ -10,10 +10,10 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.osm('New York city')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.osm('New York city')
+    g.json
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 
@@ -24,11 +24,10 @@ Setting up your own offline Nominatim server is possible, using Ubuntu 14.04 as 
 
 .. code-block:: python
 
-    >>> url = 'http://localhost/nominatim/'
-    >>> url = 'localhost'
-    >>> g = geocoder.osm("New York City", url=url)
-    >>> g.json
-    ...
+    url = 'http://localhost/nominatim/'
+    url = 'localhost'
+    g = geocoder.osm("New York City", url=url)
+    g.json
 
 OSM Addresses
 ~~~~~~~~~~~~~
@@ -39,18 +38,18 @@ This format is meant to be saved as a CSV and imported into JOSM.
 
 .. code-block:: python
 
-    >>> g = geocoder.osm('11 Wall Street, New York')
-    >>> g.osm
-    {
-        "x": -74.010865,
-        "y": 40.7071407,
-        "addr:country": "United States of America",
-        "addr:state": "New York",
-        "addr:housenumber": "11",
-        "addr:postal": "10005",
-        "addr:city": "NYC",
-        "addr:street": "Wall Street"
-    }
+    g = geocoder.osm('11 Wall Street, New York')
+    g.osm
+    # {
+    #     "x": -74.010865,
+    #     "y": 40.7071407,
+    #     "addr:country": "United States of America",
+    #     "addr:state": "New York",
+    #     "addr:housenumber": "11",
+    #     "addr:postal": "10005",
+    #     "addr:city": "NYC",
+    #     "addr:street": "Wall Street"
+    # }
 
 
 Command Line Interface

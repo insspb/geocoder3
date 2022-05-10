@@ -1,5 +1,5 @@
 FreeGeoIP.live
-=============
+==============
 freegeoip.live provides a public HTTP API for software developers to
 search the geolocation of IP addresses. It uses a database of IP addresses
 that are associated to cities along with other relevant information like
@@ -14,10 +14,10 @@ Geocoding (IP Address)
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.freegeoip('99.240.181.199')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.freegeoip('99.240.181.199')
+    g.json
 
 Command Line Interface
 ----------------------

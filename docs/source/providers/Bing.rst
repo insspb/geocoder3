@@ -12,33 +12,29 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder # pip install geocoder
-    >>> g = geocoder.bing('Mountain View, CA', key='<API KEY>')
-    >>> g.json
-    ...
+    import geocoder # pip install geocoder
+    g = geocoder.bing('Mountain View, CA', key='<API KEY>')
+    g.json
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'. If you want to search using a structured address, use the detailed method.
 
 .. code-block:: python
 
-    >>> import geocoder # pip install geocoder
-    >>> g = geocoder.bing(None, locality='Ottawa', adminDistrict='Ontario', method='details', key='<API KEY>')
-    >>> g.json
-    ...
+    import geocoder # pip install geocoder
+    g = geocoder.bing(None, locality='Ottawa', adminDistrict='Ontario', method='details', key='<API KEY>')
+    g.json
 
 This provider gives access to batch geocoding services that allow you to geocode multiple addresses at the same time.
 The amount of addresses you can geocode at once depends on the kind of key you have. It is described on `Bing Geocode Limits`_.
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.bing(['Mountain View, CA', 'Boulder, Co'], method='batch')
-    >>> for result in g:
-    ...   print(result.latlng)
-    ...
-    [37.39008, -122.08139]
-    [40.015831, -105.27927]
-    ...
+    import geocoder
+    g = geocoder.bing(['Mountain View, CA', 'Boulder, Co'], method='batch')
+    for result in g:
+        print(result.latlng)
+    # [37.39008, -122.08139]
+    # [40.015831, -105.27927]
 
 
 Reverse Geocoding
@@ -46,24 +42,21 @@ Reverse Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.bing([45.15, -75.14], method='reverse')
-    >>> g.json
-    ...
-
+    import geocoder
+    g = geocoder.bing([45.15, -75.14], method='reverse')
+    g.json
 
 Batch reverse geocoding is also available through the `batch_reverse` method:
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.bing([[40.7943, -73.970859], [48.845580, 2.321807]], method='batch_reverse')
-    >>> for result in g:
-    ...   print(result.address, result.city, result.postal, result.state, result.country)
-    ...
-    ('208 W 96th St, New York, NY 10025', 'New York', '10025', 'NY', 'United States')
-    ('114B Rue de Vaugirard, 75006 Paris', 'Paris', '75006', 'Ile-de-France', 'France')
-    ...
+    import geocoder
+    g = geocoder.bing([[40.7943, -73.970859], [48.845580, 2.321807]], method='batch_reverse')
+    for result in g:
+        print(result.address, result.city, result.postal, result.state, result.country)
+
+    # ('208 W 96th St, New York, NY 10025', 'New York', '10025', 'NY', 'United States')
+    # ('114B Rue de Vaugirard, 75006 Paris', 'Paris', '75006', 'Ile-de-France', 'France')
 
 Command Line Interface
 ----------------------

@@ -1,23 +1,23 @@
-## Caching
+# Caching
 
 Caching feature in the Geocoder.
 
 The CLI would look something like this:
 
-**Simple Case**
+## Simple Case
 
 ```bash
-$ geocode "Ottawa ON" --cache
+geocode "Ottawa ON" --cache
 ```
 
 ```python
->>> import geocoder
->>> g = geocoder.google("Ottawa ON", cache="<database>")
->>> g.json
-{...}
+import geocoder
+
+g = geocoder.google("Ottawa ON", cache="<database>")
+g.json
 ```
 
-**Batch geocode**
+## Batch geocode
 
 ```bash
 # Linux
@@ -29,11 +29,10 @@ $ cat "foo.txt" | geocode --cache
 C:\> type "foo.txt" | geocode --cache
 ```
 
-
-**Extra parameters**
+## Extra parameters
 
 ```bash
-$ geocode "Ottawa ON" --cache "<database>" \
+geocode "Ottawa ON" --cache "<database>" \
                       --username "<user>" \
                       --password "<pass>" \
                       --host "<host>" \
@@ -41,15 +40,15 @@ $ geocode "Ottawa ON" --cache "<database>" \
 ```
 
 ```python
->>> g = geocoder.google("Ottawa ON",
-                        cache="<database>",
-                        username="<user>",
-                        password="<pass>",
-                        host="<host>",
-                        port=28015)
+g = geocoder.google("Ottawa ON",
+                    cache="<database>",
+                    username="<user>",
+                    password="<pass>",
+                    host="<host>",
+                    port=28015)
 ```
 
-### Parameters
+## Parameters
 
 |Params   |Description       |Default            |
 |:--------|:-----------------|:------------------|
@@ -59,7 +58,7 @@ $ geocode "Ottawa ON" --cache "<database>" \
 |method   |Geocoder Method   |geocode            |
 |output   |json/geojson/osm  |json               |
 
-### Using Cache.py
+## Using Cache.py
 
 ```python
 # User Variables

@@ -10,10 +10,10 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.locationiq('New York city', key='...')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.locationiq('New York city', key='...')
+    g.json
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 
@@ -22,10 +22,11 @@ Reverse Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.locationiq([45.15, -75.14], key='...', method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.locationiq([45.15, -75.14], key='...', method='reverse')
+    g.json
+
 
 Environment Variables
 ---------------------

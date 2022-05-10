@@ -15,10 +15,10 @@ Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.geocodefarm('Mountain View, CA')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.geocodefarm('Mountain View, CA')
+    g.json
 
 This provider may return multiple results. You can access those results as described in the page ':doc:`/results`'.
 
@@ -27,10 +27,10 @@ Reverse Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder
-    >>> g = geocoder.geocodefarm([45.15, -75.14], method='reverse')
-    >>> g.json
-    ...
+    import geocoder
+
+    g = geocoder.geocodefarm([45.15, -75.14], method='reverse')
+    g.json
 
 Command Line Interface
 ----------------------
