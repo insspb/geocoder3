@@ -35,8 +35,8 @@ def docs(session):
     session.run("rm", "-rf", "docs/build", external=True)
     session.install("-r", "docs/requirements.txt")
     session.install(".")
-    sphinx_args = ["-b", "html", "-W", "docs", "build/html"]
-    # sphinx_args = ["-b", "html", "-W", "source", "build/html"]
+    session.cd("docs")
+    sphinx_args = ["-b", "html", "-W", "source", "build/html"]
 
     if not session.interactive:
         sphinx_cmd = "sphinx-build"
