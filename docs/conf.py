@@ -32,8 +32,8 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx']
 
 
 # 'releases' (changelog) settings
-releases_issue_uri = "https://github.com/DenisCarriere/geocoder/issues/%s"
-releases_release_uri = "https://github.com/DenisCarriere/geocoder/tree/%s"
+releases_issue_uri = "https://github.com/insspb/geocoder3/issues/%s"
+releases_release_uri = "https://github.com/insspb/geocoder3/tree/%s"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -48,8 +48,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'geocoder'
-copyright = u'2013, Denis Carriere'
+project = u'geocoder3'
+copyright = u'2022, Andrey Shpak'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -228,8 +228,8 @@ latex_documents = [(
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'Geocoder', u'Geocoder Documentation',
-     [u'Denis Carriere'], 1)
+    ('index', 'Geocoder3', u'Geocoder3 Documentation',
+     [u'Andrey Shpak'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -243,9 +243,9 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [(
     'index',
-    'Geocoder',
-    u'Geocdoer Documentation',
-    u'Denis Carriere',
+    'Geocoder3',
+    u'Geocdoer3 Documentation',
+    u'Andrey Shpak',
     'Geocoder',
     'Geocoder is a simple and consistent geocoding library written in Python.',
     'Miscellaneous'),

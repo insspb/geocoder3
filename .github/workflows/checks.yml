@@ -29,7 +29,7 @@ jobs:
         python -m pip install nox
 
     - name: Run pytest tests with nox
-      run: nox -s "tests-${{ matrix.python }}(${{matrix.django}})"
+      run: nox -s "tests-${{ matrix.python }}"
 
     - name: Send coverage report to codecov
       uses: codecov/codecov-action@v3.1.0
