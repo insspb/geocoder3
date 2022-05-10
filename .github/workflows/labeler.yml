@@ -15,6 +15,6 @@ jobs:
       - name: Run Labeler
         uses: crazy-max/ghaction-github-labeler@v3.1.1
         with:
-          yaml_file: .github/labels.yml
+          yaml-file: .github/labels.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
