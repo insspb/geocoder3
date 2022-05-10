@@ -33,3 +33,7 @@ def test_multi_results():
         mocker.get(location_url, text=input.read())
         g = geocoder.yandex(location, maxRows=3, key='mock')
         assert len(g) == 3
+
+def test_yandex_full_russian_location():
+    g = geocoder.yandex('Химки, ул. Сенявинская д 11, кор 16')
+    assert g.ok
