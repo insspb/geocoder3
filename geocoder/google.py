@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 import six
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key, google_client, google_client_secret

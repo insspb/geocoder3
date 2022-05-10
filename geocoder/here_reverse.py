@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 
 from geocoder.location import Location
 from geocoder.here import HereResult, HereQuery

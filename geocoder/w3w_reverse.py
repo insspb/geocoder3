@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 
 from geocoder.w3w import W3WResult, W3WQuery
 

@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 
 from geocoder.distance import Distance
 from geocoder.location import Location

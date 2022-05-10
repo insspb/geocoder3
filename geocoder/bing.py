@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import bing_key
 import re

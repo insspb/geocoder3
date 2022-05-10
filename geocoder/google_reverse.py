@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 from geocoder.google import GoogleResult, GoogleQuery
 from geocoder.location import Location
 

@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 import time
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key

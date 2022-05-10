@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 from math import radians, cos, sin, asin, sqrt
 from geocoder.location import Location
 

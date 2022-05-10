@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 from geocoder.bing import BingResult, BingQuery
 from geocoder.location import Location
 

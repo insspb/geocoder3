@@ -1,6 +1,6 @@
 
 
-from __future__ import absolute_import
+
 from geocoder.mapbox import MapboxResult, MapboxQuery
 from geocoder.location import Location
 
