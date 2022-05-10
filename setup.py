@@ -1,4 +1,4 @@
-#!/usr/bin/python
+
 
 from codecs import open
 import re

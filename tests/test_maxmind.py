@@ -1,4 +1,4 @@
-#!/usr/bin/python
+
 import geocoder
 
 location = '8.8.8.8'

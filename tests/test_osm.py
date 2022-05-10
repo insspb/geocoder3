@@ -1,4 +1,4 @@
-#!/usr/bin/python
+
 import geocoder
 
 location = 'Ottawa, Ontario'
