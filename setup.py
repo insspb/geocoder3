@@ -17,7 +17,11 @@ if not version:
 with open("README.md", "r", "utf-8") as f:
     readme = f.read()
 
-requires = ["requests", "ratelim", "click"]
+requires = [
+    "requests",
+    "ratelim",
+    "click",
+]
 
 setup(
     name="geocoder3",
