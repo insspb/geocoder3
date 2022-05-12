@@ -33,13 +33,12 @@ jobs:
 
     - name: Send coverage report to codecov
       uses: codecov/codecov-action@v3.1.0
+      if: ${{ matrix.python == '3.9' && always() }}
       with:
         file: ./coverage.xml
 
     - name: Send coverage report to codeclimate
       uses: paambaati/codeclimate-action@v3.0.0
-      with:
-        coverageCommand: echo "Ignore rerun"
-        coverageLocations: ${{github.workspace}}/coverage.xml:coverage.py
+      if: ${{ matrix.python == '3.9' && always() }}
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
