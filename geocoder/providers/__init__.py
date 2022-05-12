@@ -21,3 +21,4 @@ from .reverse import (
     W3WReverse,
     YandexReverse,
 )
+from .timezone import GeonamesTimezone, GoogleTimezone

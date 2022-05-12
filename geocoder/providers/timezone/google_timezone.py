@@ -1,3 +1,5 @@
+__all__ = ["GoogleTimezone"]
+
 import time
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -5,7 +7,7 @@ from geocoder.keys import google_key
 from geocoder.location import Location
 
 
-class TimezoneResult(OneResult):
+class GoogleTimezoneResult(OneResult):
     def __repr__(self):
         return "<[{}] [{}]>".format(self.status, self.timeZoneName)
 
@@ -30,7 +32,7 @@ class TimezoneResult(OneResult):
         return self.raw.get("dstOffset")
 
 
-class TimezoneQuery(MultipleResultsQuery):
+class GoogleTimezone(MultipleResultsQuery):
     """
     Google Time Zone API
     ====================
@@ -49,7 +51,7 @@ class TimezoneQuery(MultipleResultsQuery):
     method = "timezone"
 
     _URL = "https://maps.googleapis.com/maps/api/timezone/json"
-    _RESULT_CLASS = TimezoneResult
+    _RESULT_CLASS = GoogleTimezoneResult
     _KEY = google_key
 
     def _build_params(self, location, provider_key, **kwargs):
@@ -67,5 +69,5 @@ class TimezoneQuery(MultipleResultsQuery):
 
 
 if __name__ == "__main__":
-    g = TimezoneQuery([45.5375801, -75.2465979])
+    g = GoogleTimezone([45.5375801, -75.2465979])
     g.debug()

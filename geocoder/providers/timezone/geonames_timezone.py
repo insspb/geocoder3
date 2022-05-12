@@ -1,3 +1,5 @@
+__all__ = ["GeonamesTimezone"]
+
 from geocoder.geonames import GeonamesQuery, GeonamesResult
 from geocoder.location import Location
 

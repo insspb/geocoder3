@@ -14,14 +14,12 @@ from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_hierarchy import GeonamesHierarchy
-from geocoder.geonames_timezone import GeonamesTimezone
 from geocoder.gisgraphy import GisgraphyQuery
 
 # Google Services
 from geocoder.google import GoogleQuery
 from geocoder.google_elevation import ElevationQuery
 from geocoder.google_places import PlacesQuery
-from geocoder.google_timezone import TimezoneQuery
 from geocoder.here import HereQuery
 from geocoder.komoot import KomootQuery
 from geocoder.location import Location
@@ -65,6 +63,7 @@ from .providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
+from .providers.timezone import GeonamesTimezone, GoogleTimezone
 
 options = {
     "osm": {
@@ -153,7 +152,7 @@ options = {
     "google": {
         "geocode": GoogleQuery,
         "reverse": GoogleReverse,
-        "timezone": TimezoneQuery,
+        "timezone": GoogleTimezone,
         "elevation": ElevationQuery,
         "places": PlacesQuery,
     },
