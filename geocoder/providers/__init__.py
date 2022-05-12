@@ -1,7 +1,7 @@
 # flake8: noqa
-from .addresses import ArcgisQuery
-from .ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
-from .reverse import (
+from geocoder.providers.addresses import ArcgisQuery
+from geocoder.providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
+from geocoder.providers.reverse import (
     ArcgisReverse,
     BaiduReverse,
     BingBatchReverse,
@@ -22,4 +22,4 @@ from .reverse import (
     W3WReverse,
     YandexReverse,
 )
-from .timezone import GeonamesTimezone, GoogleTimezone
+from geocoder.providers.timezone import GeonamesTimezone, GoogleTimezone

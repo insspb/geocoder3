@@ -1,3 +1,3 @@
 # flake8: noqa
-from .geonames_timezone import GeonamesTimezone
-from .google_timezone import GoogleTimezone
+from geocoder.providers.timezone.geonames_timezone import GeonamesTimezone
+from geocoder.providers.timezone.google_timezone import GoogleTimezone

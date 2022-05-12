@@ -1,4 +1,4 @@
 # flake8: noqa
-from .freegeoip import FreeGeoIPQuery
-from .ipfinder import IpfinderQuery
-from .ipinfo import IpinfoQuery
+from geocoder.providers.ip.freegeoip import FreeGeoIPQuery
+from geocoder.providers.ip.ipfinder import IpfinderQuery
+from geocoder.providers.ip.ipinfo import IpinfoQuery

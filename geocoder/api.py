@@ -53,6 +53,7 @@ from geocoder.providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
+from geocoder.providers.timezone import GeonamesTimezone, GoogleTimezone
 from geocoder.tamu import TamuQuery
 from geocoder.tgos import TgosQuery
 from geocoder.tomtom import TomtomQuery
@@ -61,8 +62,6 @@ from geocoder.uscensus_batch import USCensusBatch
 from geocoder.w3w import W3WQuery
 from geocoder.yahoo import YahooQuery
 from geocoder.yandex import YandexQuery
-
-from .providers.timezone import GeonamesTimezone, GoogleTimezone
 
 options = {
     "osm": {
