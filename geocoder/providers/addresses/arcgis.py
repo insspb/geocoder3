@@ -1,3 +1,5 @@
+__all__ = ["ArcgisQuery"]
+
 import json
 import logging
 

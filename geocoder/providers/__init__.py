@@ -1,4 +1,5 @@
 # flake8: noqa
+from .addresses import ArcgisQuery
 from .ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
 from .reverse import (
     ArcgisReverse,

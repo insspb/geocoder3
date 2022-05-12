@@ -1,4 +1,3 @@
-from geocoder.arcgis import ArcgisQuery
 from geocoder.baidu import BaiduQuery
 from geocoder.bing import BingQuery, BingQueryDetail
 from geocoder.bing_batch_forward import BingBatchForward
@@ -41,6 +40,7 @@ from geocoder.w3w import W3WQuery
 from geocoder.yahoo import YahooQuery
 from geocoder.yandex import YandexQuery
 
+from .providers.addresses import ArcgisQuery
 from .providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
 from .providers.reverse import (
     ArcgisReverse,

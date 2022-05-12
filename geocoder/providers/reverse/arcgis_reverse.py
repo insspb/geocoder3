@@ -2,9 +2,9 @@ __all__ = ["ArcgisReverse"]
 
 import logging
 
-from geocoder.arcgis import ArcgisQuery
 from geocoder.base import OneResult
 from geocoder.location import Location
+from geocoder.providers.addresses import ArcgisQuery
 
 
 class ArcgisReverseResult(OneResult):
