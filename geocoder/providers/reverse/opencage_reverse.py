@@ -1,3 +1,5 @@
+__all__ = ["OpenCageReverse"]
+
 import logging
 
 from geocoder.location import Location

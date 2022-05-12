@@ -1,3 +1,5 @@
+__all__ = ["KomootReverse"]
+
 import logging
 
 from geocoder.komoot import KomootQuery, KomootResult

@@ -1,17 +1,11 @@
 from geocoder.arcgis import ArcgisQuery
-from geocoder.arcgis_reverse import ArcgisReverse
 from geocoder.baidu import BaiduQuery
-from geocoder.baidu_reverse import BaiduReverse
 from geocoder.bing import BingQuery, BingQueryDetail
 from geocoder.bing_batch_forward import BingBatchForward
-from geocoder.bing_batch_reverse import BingBatchReverse
-from geocoder.bing_reverse import BingReverse
 from geocoder.canadapost import CanadapostQuery
 from geocoder.distance import Distance
 from geocoder.gaode import GaodeQuery
-from geocoder.gaode_reverse import GaodeReverse
 from geocoder.geocodefarm import GeocodeFarmQuery
-from geocoder.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.geocodexyz import GeocodeXYZQuery
 from geocoder.geolytica import GeolyticaQuery
 
@@ -22,47 +16,55 @@ from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.geonames_timezone import GeonamesTimezone
 from geocoder.gisgraphy import GisgraphyQuery
-from geocoder.gisgraphy_reverse import GisgraphyReverse
 
 # Google Services
 from geocoder.google import GoogleQuery
 from geocoder.google_elevation import ElevationQuery
 from geocoder.google_places import PlacesQuery
-from geocoder.google_reverse import GoogleReverse
 from geocoder.google_timezone import TimezoneQuery
 from geocoder.here import HereQuery
-from geocoder.here_reverse import HereReverse
 from geocoder.komoot import KomootQuery
-from geocoder.komoot_reverse import KomootReverse
 from geocoder.location import Location
 from geocoder.locationiq import LocationIQQuery
-from geocoder.locationiq_reverse import LocationIQReverse
 from geocoder.mapbox import MapboxQuery
-from geocoder.mapbox_reverse import MapboxReverse
 from geocoder.mapquest import MapquestQuery
 from geocoder.mapquest_batch import MapquestBatch
-from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.mapzen import MapzenQuery
-from geocoder.mapzen_reverse import MapzenReverse
 from geocoder.maxmind import MaxmindQuery
 from geocoder.opencage import OpenCageQuery
-from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.osm import OsmQuery, OsmQueryDetail
-from geocoder.osm_reverse import OsmReverse
 from geocoder.ottawa import OttawaQuery
 from geocoder.tamu import TamuQuery
 from geocoder.tgos import TgosQuery
 from geocoder.tomtom import TomtomQuery
 from geocoder.uscensus import USCensusQuery
 from geocoder.uscensus_batch import USCensusBatch
-from geocoder.uscensus_reverse import USCensusReverse
 from geocoder.w3w import W3WQuery
-from geocoder.w3w_reverse import W3WReverse
 from geocoder.yahoo import YahooQuery
 from geocoder.yandex import YandexQuery
-from geocoder.yandex_reverse import YandexReverse
 
 from .providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
+from .providers.reverse import (
+    ArcgisReverse,
+    BaiduReverse,
+    BingBatchReverse,
+    BingReverse,
+    GaodeReverse,
+    GeocodeFarmReverse,
+    GisgraphyReverse,
+    GoogleReverse,
+    HereReverse,
+    KomootReverse,
+    LocationIQReverse,
+    MapboxReverse,
+    MapquestReverse,
+    MapzenReverse,
+    OpenCageReverse,
+    OsmReverse,
+    USCensusReverse,
+    W3WReverse,
+    YandexReverse,
+)
 
 options = {
     "osm": {

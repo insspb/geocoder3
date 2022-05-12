@@ -1,3 +1,5 @@
+__all__ = ["GoogleReverse"]
+
 from geocoder.google import GoogleQuery, GoogleResult
 from geocoder.location import Location
 

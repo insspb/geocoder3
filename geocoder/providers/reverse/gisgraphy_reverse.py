@@ -1,3 +1,5 @@
+__all__ = ["GisgraphyReverse"]
+
 import logging
 
 from geocoder.gisgraphy import GisgraphyQuery, GisgraphyResult

@@ -1,3 +1,5 @@
+__all__ = ["W3WReverse"]
+
 from geocoder.w3w import W3WQuery, W3WResult
 
 

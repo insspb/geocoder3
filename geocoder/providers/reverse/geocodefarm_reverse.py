@@ -1,3 +1,5 @@
+__all__ = ["GeocodeFarmReverse"]
+
 import logging
 
 from geocoder.geocodefarm import GeocodeFarmQuery

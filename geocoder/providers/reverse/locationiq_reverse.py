@@ -1,3 +1,5 @@
+__all__ = ["LocationIQReverse"]
+
 from geocoder.location import Location
 from geocoder.locationiq import LocationIQQuery
 
