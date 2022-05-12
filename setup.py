@@ -44,7 +44,12 @@ setup(
     include_package_data=True,
     install_requires=requires,
     zip_safe=False,
-    keywords="geocoder arcgis tomtom opencage google bing here",
+    keywords=(
+        "geocoder arcgis baidu bing canadapost freegeoip gaode geolytica "
+        "geocodefarm geonames geoottawa gisgraphy google here ipinfo komoot "
+        "locationiq mapbox mapquest mapzen maxmind opencage osm openstreetmap "
+        "tamu tgos tomtom uscensus what3words yahoo yandex ipfinder"
+    ),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
