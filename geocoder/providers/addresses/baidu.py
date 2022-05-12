@@ -1,3 +1,5 @@
+__all__ = ["BaiduQuery"]
+
 import hashlib
 import logging
 import re

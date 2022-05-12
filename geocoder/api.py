@@ -1,4 +1,3 @@
-from geocoder.baidu import BaiduQuery
 from geocoder.bing import BingQuery, BingQueryDetail
 from geocoder.bing_batch_forward import BingBatchForward
 from geocoder.canadapost import CanadapostQuery
@@ -31,18 +30,9 @@ from geocoder.maxmind import MaxmindQuery
 from geocoder.opencage import OpenCageQuery
 from geocoder.osm import OsmQuery, OsmQueryDetail
 from geocoder.ottawa import OttawaQuery
-from geocoder.tamu import TamuQuery
-from geocoder.tgos import TgosQuery
-from geocoder.tomtom import TomtomQuery
-from geocoder.uscensus import USCensusQuery
-from geocoder.uscensus_batch import USCensusBatch
-from geocoder.w3w import W3WQuery
-from geocoder.yahoo import YahooQuery
-from geocoder.yandex import YandexQuery
-
-from .providers.addresses import ArcgisQuery
-from .providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
-from .providers.reverse import (
+from geocoder.providers.addresses import ArcgisQuery, BaiduQuery
+from geocoder.providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
+from geocoder.providers.reverse import (
     ArcgisReverse,
     BaiduReverse,
     BingBatchReverse,
@@ -63,6 +53,15 @@ from .providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
+from geocoder.tamu import TamuQuery
+from geocoder.tgos import TgosQuery
+from geocoder.tomtom import TomtomQuery
+from geocoder.uscensus import USCensusQuery
+from geocoder.uscensus_batch import USCensusBatch
+from geocoder.w3w import W3WQuery
+from geocoder.yahoo import YahooQuery
+from geocoder.yandex import YandexQuery
+
 from .providers.timezone import GeonamesTimezone, GoogleTimezone
 
 options = {

@@ -2,9 +2,9 @@ __all__ = ["BaiduReverse"]
 
 import logging
 
-from geocoder.baidu import BaiduQuery
 from geocoder.base import OneResult
 from geocoder.location import Location
+from geocoder.providers.addresses import BaiduQuery
 
 
 class BaiduReverseResult(OneResult):

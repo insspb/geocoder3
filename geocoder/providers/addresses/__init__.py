@@ -1,2 +1,3 @@
 # flake8: noqa
-from .arcgis import ArcgisQuery
+from geocoder.providers.addresses.arcgis import ArcgisQuery
+from geocoder.providers.addresses.baidu import BaiduQuery
