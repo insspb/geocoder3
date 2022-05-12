@@ -27,7 +27,11 @@ from geocoder import __version__  # noqa
 
 # Add any Sphinx extension module names here, as strings. They can be extension
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.intersphinx"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "myst_parser",
+]
 
 
 # 'releases' (changelog) settings
@@ -38,7 +42,10 @@ releases_release_uri = "https://github.com/insspb/geocoder3/tree/%s"
 templates_path = ["_templates"]
 
 # The suffix of source filenames.
-source_suffix = ".rst"
+source_suffix = {
+    ".rst": "restructuredtext",
+    ".md": "markdown",
+}
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
@@ -48,6 +55,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "geocoder3"
+author = "Andrey Shpak"
 copyright = "2022, Andrey Shpak"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -71,7 +79,7 @@ release = version
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ["_build"]
+exclude_patterns = []
 
 # The reST default role (used for this markup: `text`) to use for all documents
 # default_role = None
@@ -88,7 +96,7 @@ exclude_patterns = ["_build"]
 # show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "flask_theme_support.FlaskyStyle"
+# pygments_style = "flask_theme_support.FlaskyStyle"
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -98,7 +106,7 @@ pygments_style = "flask_theme_support.FlaskyStyle"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "default"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -136,12 +144,6 @@ html_static_path = ["_static"]
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
 # html_use_smartypants = True
-
-# Custom sidebar templates, maps document names to template names.
-html_sidebars = {
-    "index": ["side-primary.html", "searchbox.html"],
-    "**": ["side-secondary.html", "localtoc.html", "relations.html", "searchbox.html"],
-}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -191,7 +193,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual])
 latex_documents = [
-    ("index", "Geocoder.tex", "Geocoder Documentation", "Denis Carriere", "manual"),
+    ("index", "Geocoder.tex", "Geocoder Documentation", "Andrey Shpak", "manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -255,6 +257,6 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {"http://docs.python.org/": None}
 
-sys.path.append(os.path.abspath("_themes"))
-html_theme_path = ["_themes"]
-html_theme = "kr"
+myst_enable_extensions = [
+    "tasklist",
+]

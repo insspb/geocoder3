@@ -58,6 +58,15 @@ this part of the documentation is for you.
     results
     wip_guide
     examples/QGISFieldCalculator.rst
+    examples/using iPython.md
+    examples/using proxies.md
+    examples/write to csv.md
+    features/Caching.md
+    features/Command Line Interface.md
+    features/Confidence Score.md
+    features/Distance.md
+    features/GeoJSON.md
+    features/Well-Known Text.md
 
 
 Providers
@@ -95,6 +104,29 @@ Detailed information about each individual provider that are within Geocoder.
     providers/TGOS.rst
     providers/IPFinder.rst
 
+Examples
+--------
+
+.. toctree::
+    :maxdepth: 3
+
+    examples/QGISFieldCalculator.rst
+    examples/using iPython.md
+    examples/using proxies.md
+    examples/write to csv.md
+
+Features
+--------
+
+.. toctree::
+    :maxdepth: 3
+
+    features/Caching.md
+    features/Command Line Interface.md
+    features/Confidence Score.md
+    features/Distance.md
+    features/GeoJSON.md
+    features/Well-Known Text.md
 
 Contributor Guide
 -----------------
