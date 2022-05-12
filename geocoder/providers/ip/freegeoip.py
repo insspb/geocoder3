@@ -1,3 +1,5 @@
+__all__ = ["FreeGeoIPQuery"]
+
 import logging
 
 import ratelim

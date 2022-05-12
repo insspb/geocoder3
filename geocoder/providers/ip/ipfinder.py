@@ -1,3 +1,5 @@
+__all__ = ["IpfinderQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
