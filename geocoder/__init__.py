@@ -10,6 +10,7 @@ JSON responses between each other.
 
 Consistant JSON responses from various providers.
 
+    >>> import geocoder
     >>> g = geocoder.google('New York City')
     >>> g.latlng
     [40.7127837, -74.0059413]
