@@ -1,7 +1,7 @@
 __all__ = ["MapquestReverse"]
 
 from geocoder.location import Location
-from geocoder.mapquest import MapquestQuery, MapquestResult
+from geocoder.providers.addresses import MapquestQuery, MapquestResult
 
 
 class MapQuestReverseResult(MapquestResult):

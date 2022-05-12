@@ -2,8 +2,8 @@ __all__ = ["GisgraphyReverse"]
 
 import logging
 
-from geocoder.gisgraphy import GisgraphyQuery, GisgraphyResult
 from geocoder.location import Location
+from geocoder.providers.addresses import GisgraphyQuery, GisgraphyResult
 
 
 class GisgraphyReverseResult(GisgraphyResult):

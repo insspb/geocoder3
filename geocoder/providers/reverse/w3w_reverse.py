@@ -1,6 +1,6 @@
 __all__ = ["W3WReverse"]
 
-from geocoder.w3w import W3WQuery, W3WResult
+from geocoder.providers.addresses import W3WQuery, W3WResult
 
 
 class W3WReverseResult(W3WResult):

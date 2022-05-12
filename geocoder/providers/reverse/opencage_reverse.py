@@ -3,7 +3,7 @@ __all__ = ["OpenCageReverse"]
 import logging
 
 from geocoder.location import Location
-from geocoder.opencage import OpenCageQuery, OpenCageResult
+from geocoder.providers.addresses import OpenCageQuery, OpenCageResult
 
 
 class OpenCageReverseResult(OpenCageResult):

@@ -3,7 +3,7 @@ __all__ = ["BingBatchReverse"]
 import csv
 import io
 
-from geocoder.bing_batch import BingBatch, BingBatchResult
+from geocoder.providers.addresses import BingBatch, BingBatchResult
 
 
 class BingBatchReverseResult(BingBatchResult):

@@ -3,7 +3,7 @@ __all__ = ["YandexReverse"]
 import logging
 
 from geocoder.location import Location
-from geocoder.yandex import YandexQuery, YandexResult
+from geocoder.providers.addresses import YandexQuery, YandexResult
 
 
 class YandexReverseResult(YandexResult):

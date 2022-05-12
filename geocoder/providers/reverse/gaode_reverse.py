@@ -3,8 +3,8 @@ __all__ = ["GaodeReverse"]
 import logging
 
 from geocoder.base import OneResult
-from geocoder.gaode import GaodeQuery
 from geocoder.location import Location
+from geocoder.providers.addresses import GaodeQuery
 
 
 class GaodeReverseResult(OneResult):

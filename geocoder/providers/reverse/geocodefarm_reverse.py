@@ -2,8 +2,8 @@ __all__ = ["GeocodeFarmReverse"]
 
 import logging
 
-from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.location import Location
+from geocoder.providers.addresses import GeocodeFarmQuery
 
 
 class GeocodeFarmReverse(GeocodeFarmQuery):

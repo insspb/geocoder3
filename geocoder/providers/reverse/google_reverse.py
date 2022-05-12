@@ -1,7 +1,7 @@
 __all__ = ["GoogleReverse"]
 
-from geocoder.google import GoogleQuery, GoogleResult
 from geocoder.location import Location
+from geocoder.providers.addresses import GoogleQuery, GoogleResult
 
 
 class GoogleReverseResult(GoogleResult):

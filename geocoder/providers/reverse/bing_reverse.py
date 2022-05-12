@@ -1,7 +1,7 @@
 __all__ = ["BingReverse"]
 
-from geocoder.bing import BingQuery, BingResult
 from geocoder.location import Location
+from geocoder.providers.addresses import BingQuery, BingResult
 
 
 class BingReverseResult(BingResult):

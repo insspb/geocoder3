@@ -1,36 +1,45 @@
-from geocoder.bing import BingQuery, BingQueryDetail
-from geocoder.bing_batch_forward import BingBatchForward
-from geocoder.canadapost import CanadapostQuery
 from geocoder.distance import Distance
-from geocoder.gaode import GaodeQuery
-from geocoder.geocodefarm import GeocodeFarmQuery
-from geocoder.geocodexyz import GeocodeXYZQuery
-from geocoder.geolytica import GeolyticaQuery
-
-# Geonames Services
-from geocoder.geonames import GeonamesQuery
-from geocoder.geonames_children import GeonamesChildren
-from geocoder.geonames_details import GeonamesDetails
-from geocoder.geonames_hierarchy import GeonamesHierarchy
-from geocoder.gisgraphy import GisgraphyQuery
-
-# Google Services
-from geocoder.google import GoogleQuery
-from geocoder.google_elevation import ElevationQuery
-from geocoder.google_places import PlacesQuery
-from geocoder.here import HereQuery
-from geocoder.komoot import KomootQuery
 from geocoder.location import Location
-from geocoder.locationiq import LocationIQQuery
-from geocoder.mapbox import MapboxQuery
-from geocoder.mapquest import MapquestQuery
-from geocoder.mapquest_batch import MapquestBatch
-from geocoder.mapzen import MapzenQuery
-from geocoder.maxmind import MaxmindQuery
-from geocoder.opencage import OpenCageQuery
-from geocoder.osm import OsmQuery, OsmQueryDetail
-from geocoder.ottawa import OttawaQuery
-from geocoder.providers.addresses import ArcgisQuery, BaiduQuery
+from geocoder.providers.addresses import (
+    ArcgisQuery,
+    BaiduQuery,
+    BingBatchForward,
+    BingQuery,
+    BingQueryDetail,
+    CanadapostQuery,
+    ElevationQuery,
+    GaodeQuery,
+    GeocodeFarmQuery,
+    GeocodeXYZQuery,
+    GeolyticaQuery,
+    GeonamesChildren,
+    GeonamesDetails,
+    GeonamesHierarchy,
+    GeonamesQuery,
+    GisgraphyQuery,
+    GoogleQuery,
+    HereQuery,
+    KomootQuery,
+    LocationIQQuery,
+    MapboxQuery,
+    MapquestBatch,
+    MapquestQuery,
+    MapzenQuery,
+    MaxmindQuery,
+    OpenCageQuery,
+    OsmQuery,
+    OsmQueryDetail,
+    OttawaQuery,
+    PlacesQuery,
+    TamuQuery,
+    TgosQuery,
+    TomtomQuery,
+    USCensusBatch,
+    USCensusQuery,
+    W3WQuery,
+    YahooQuery,
+    YandexQuery,
+)
 from geocoder.providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
 from geocoder.providers.reverse import (
     ArcgisReverse,
@@ -54,14 +63,6 @@ from geocoder.providers.reverse import (
     YandexReverse,
 )
 from geocoder.providers.timezone import GeonamesTimezone, GoogleTimezone
-from geocoder.tamu import TamuQuery
-from geocoder.tgos import TgosQuery
-from geocoder.tomtom import TomtomQuery
-from geocoder.uscensus import USCensusQuery
-from geocoder.uscensus_batch import USCensusBatch
-from geocoder.w3w import W3WQuery
-from geocoder.yahoo import YahooQuery
-from geocoder.yandex import YandexQuery
 
 options = {
     "osm": {

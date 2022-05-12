@@ -3,7 +3,7 @@ __all__ = ["MapzenReverse"]
 import logging
 
 from geocoder.location import Location
-from geocoder.mapzen import MapzenQuery, MapzenResult
+from geocoder.providers.addresses import MapzenQuery, MapzenResult
 
 
 class MapzenReverseResult(MapzenResult):

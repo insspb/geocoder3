@@ -1,7 +1,7 @@
 __all__ = ["HereReverse"]
 
-from geocoder.here import HereQuery, HereResult
 from geocoder.location import Location
+from geocoder.providers.addresses import HereQuery, HereResult
 
 
 class HereReverseResult(HereResult):

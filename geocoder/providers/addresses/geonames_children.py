@@ -1,6 +1,6 @@
 __all__ = ["GeonamesChildren"]
 
-from geocoder.geonames import GeonamesQuery
+from geocoder.providers.addresses.geonames import GeonamesQuery
 
 
 class GeonamesChildren(GeonamesQuery):

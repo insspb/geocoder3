@@ -1,7 +1,7 @@
 __all__ = ["OsmReverse"]
 
 from geocoder.location import Location
-from geocoder.osm import OsmQuery
+from geocoder.providers.addresses import OsmQuery
 
 
 class OsmReverse(OsmQuery):

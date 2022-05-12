@@ -1,6 +1,6 @@
 __all__ = ["GeonamesDetails"]
 
-from geocoder.geonames import GeonamesQuery, GeonamesResult
+from geocoder.providers.addresses.geonames import GeonamesQuery, GeonamesResult
 
 
 class GeonamesFullResult(GeonamesResult):

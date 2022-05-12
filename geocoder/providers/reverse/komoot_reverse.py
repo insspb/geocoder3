@@ -2,8 +2,8 @@ __all__ = ["KomootReverse"]
 
 import logging
 
-from geocoder.komoot import KomootQuery, KomootResult
 from geocoder.location import Location
+from geocoder.providers.addresses import KomootQuery, KomootResult
 
 
 class KomootReverseResult(KomootResult):

@@ -3,7 +3,7 @@ __all__ = ["BingBatchForward"]
 import csv
 import io
 
-from geocoder.bing_batch import BingBatch, BingBatchResult
+from geocoder.providers.addresses.bing_batch import BingBatch, BingBatchResult
 
 
 class BingBatchForwardResult(BingBatchResult):
