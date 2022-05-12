@@ -1,3 +1,5 @@
+__all__ = ["GaodeQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

@@ -1,3 +1,5 @@
+__all__ = ["TgosQuery"]
+
 import logging
 import re
 

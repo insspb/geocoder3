@@ -1,3 +1,5 @@
+__all__ = ["MapquestBatch"]
+
 from geocoder.base import MultipleResultsQuery
 from geocoder.keys import mapquest_key
 from geocoder.mapquest import MapquestResult

@@ -1,3 +1,5 @@
+__all__ = ["KomootResult", "KomootQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

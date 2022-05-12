@@ -1,3 +1,5 @@
+__all__ = ["HereResult", "HereQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

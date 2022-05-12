@@ -1,3 +1,5 @@
+__all__ = ["W3WResult", "W3WQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

@@ -1,3 +1,5 @@
+__all__ = ["TomtomQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

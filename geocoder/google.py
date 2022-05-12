@@ -1,3 +1,5 @@
+__all__ = ["GoogleResult", "GoogleQuery"]
+
 import base64
 import hashlib
 import hmac

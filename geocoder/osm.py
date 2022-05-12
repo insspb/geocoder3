@@ -1,3 +1,5 @@
+__all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail"]
+
 import json
 import logging
 

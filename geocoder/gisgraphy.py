@@ -1,3 +1,5 @@
+__all__ = ["GisgraphyResult", "GisgraphyQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

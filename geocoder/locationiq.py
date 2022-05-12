@@ -1,3 +1,5 @@
+__all__ = ["LocationIQQuery"]
+
 import json
 import logging
 

@@ -1,3 +1,5 @@
+__all__ = ["GeonamesResult", "GeonamesQuery"]
+
 import json
 import logging
 

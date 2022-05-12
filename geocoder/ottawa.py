@@ -1,3 +1,5 @@
+__all__ = ["OttawaQuery"]
+
 import logging
 import re
 

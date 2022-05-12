@@ -1,3 +1,5 @@
+__all__ = ["MapzenResult", "MapzenQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

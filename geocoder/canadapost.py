@@ -1,3 +1,5 @@
+__all__ = ["CanadapostQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

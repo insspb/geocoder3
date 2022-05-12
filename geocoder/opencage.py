@@ -1,3 +1,5 @@
+__all__ = ["OpenCageResult", "OpenCageQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

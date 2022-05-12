@@ -1,3 +1,5 @@
+__all__ = ["YahooQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

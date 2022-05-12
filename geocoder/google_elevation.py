@@ -1,3 +1,5 @@
+__all__ = ["ElevationQuery"]
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import google_key
 from geocoder.location import Location

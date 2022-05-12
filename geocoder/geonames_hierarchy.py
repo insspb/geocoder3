@@ -1,3 +1,5 @@
+__all__ = ["GeonamesHierarchy"]
+
 from geocoder.geonames_children import GeonamesChildren
 
 

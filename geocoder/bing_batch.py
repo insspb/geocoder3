@@ -1,3 +1,5 @@
+__all__ = ["BingBatchResult", "BingBatch"]
+
 import io
 import logging
 import time

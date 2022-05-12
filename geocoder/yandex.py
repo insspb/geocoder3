@@ -1,3 +1,5 @@
+__all__ = ["YandexResult", "YandexQuery"]
+
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult

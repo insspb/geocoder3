@@ -1,3 +1,5 @@
+__all__ = ["GeonamesChildren"]
+
 from geocoder.geonames import GeonamesQuery
 
 

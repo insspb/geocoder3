@@ -1,3 +1,5 @@
+__all__ = ["BingResult", "BingQuery", "BingQueryDetail"]
+
 import re
 
 from geocoder.base import MultipleResultsQuery, OneResult

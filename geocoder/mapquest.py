@@ -1,3 +1,5 @@
+__all__ = ["MapquestResult", "MapquestQuery"]
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapquest_key
 from geocoder.location import BBox
