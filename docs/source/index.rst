@@ -55,6 +55,7 @@ this part of the documentation is for you.
     :maxdepth: 3
 
     api
+    api/index
     results
     wip_guide
     examples/QGISFieldCalculator.rst
