@@ -191,25 +191,26 @@ options = {
 }
 
 
-def get(location, **kwargs):
-    """Get Geocode
+def get_result(query, provider: str = "osm", method: str = "geocode", **kwargs):
+    """Return geocoding result for query request
 
-    :param location: Your search location you want geocoded.
+    :param query: Location, locations list, or ip you want to geocode.
     :param provider: The geocoding engine you want to use.
     :param method: Define the method (geocode, method).
     """
-    provider = kwargs.get("provider", "bing").lower().strip()
-    method = kwargs.get("method", "geocode").lower().strip()
-    if isinstance(location, (list, dict)) and method == "geocode":
+    provider = provider.lower().strip()
+    method = method.lower().strip()
+
+    if not isinstance(query, str) and method == "geocode":
         raise ValueError("Location should be a string")
 
     if provider not in options:
         raise ValueError("Invalid provider")
 
-    else:
-        if method not in options[provider]:
-            raise ValueError("Invalid method")
-    return options[provider][method](location, **kwargs)
+    if method not in options[provider]:
+        raise ValueError("Invalid method")
+
+    return options[provider][method](query, **kwargs)
 
 
 def distance(*args, **kwargs):
@@ -225,10 +226,10 @@ def distance(*args, **kwargs):
     return Distance(*args, **kwargs)
 
 
-def google(location, **kwargs):
+def google(query, method: str = "geocode", **kwargs):
     """Google Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param method: (default=geocode) Use the following:
         > geocode
         > places
@@ -237,26 +238,26 @@ def google(location, **kwargs):
         > timezone
         > elevation
     """
-    return get(location, provider="google", **kwargs)
+    return get_result(query, provider="google", method=method, **kwargs)
 
 
-def mapbox(location, **kwargs):
+def mapbox(query, method: str = "geocode", **kwargs):
     """Mapbox Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param proximity: Search nearby [lat, lng]
     :param method: (default=geocode) Use the following:
         > geocode
         > reverse
         > batch
     """
-    return get(location, provider="mapbox", **kwargs)
+    return get_result(query, provider="mapbox", method=method, **kwargs)
 
 
-def yandex(location, **kwargs):
+def yandex(query, method: str = "geocode", **kwargs):
     """Yandex Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param apikey: YANDEX API KEY
     :param maxRows: (default=1) Max number of results to fetch
     :param lang: Chose the following language:
@@ -273,151 +274,114 @@ def yandex(location, **kwargs):
         > district - city district
         > locality - locality (city, town, village, etc.)
     """
-    return get(location, provider="yandex", **kwargs)
+    return get_result(query, provider="yandex", method=method, **kwargs)
 
 
-def w3w(location, **kwargs):
+def w3w(query, method: str = "geocode", **kwargs):
     """what3words Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: W3W API key.
     :param method: Chose a method (geocode, method)
     """
-    return get(location, provider="w3w", **kwargs)
+    return get_result(query, provider="w3w", **kwargs)
 
 
-def baidu(location, **kwargs):
+def baidu(query, method: str = "geocode", **kwargs):
     """Baidu Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: Baidu API key.
     :param referer: Baidu API referer website.
     """
-    return get(location, provider="baidu", **kwargs)
+    return get_result(query, provider="baidu", method=method, **kwargs)
 
 
-def gaode(location, **kwargs):
+def gaode(query, method: str = "geocode", **kwargs):
     """Gaode Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: Gaode API key.
     :param referer: Gaode API referer website.
     """
-    return get(location, provider="gaode", **kwargs)
+    return get_result(query, provider="gaode", method=method, **kwargs)
 
 
-def komoot(location, **kwargs):
+def komoot(query, method: str = "geocode", **kwargs):
     """Ottawa Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     """
-    return get(location, provider="komoot", **kwargs)
+    return get_result(query, provider="komoot", method=method, **kwargs)
 
 
-def ottawa(location, **kwargs):
+def ottawa(query, method: str = "geocode", **kwargs):
     """Ottawa Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param maxRows: (default=1) Max number of results to fetch
     """
-    return get(location, provider="ottawa", **kwargs)
+    return get_result(query, provider="ottawa", method=method, **kwargs)
 
 
-def elevation(location, **kwargs):
-    """Elevation - Google Provider
-
-    :param location: Your search location you want to retrieve elevation data.
-    """
-    return get(location, method="elevation", provider="google", **kwargs)
-
-
-def places(location, **kwargs):
-    """Places - Google Provider
-
-    :param location: Your search location you want geocoded.
-    :param proximity: Search within given area (bbox, bounds, or around latlng)
-    """
-    return get(location, method="places", provider="google", **kwargs)
-
-
-def timezone(location, **kwargs):
-    """Timezone - Google Provider
-
-    :param location: Your search location you want to retrieve timezone data.
-    :param timestamp: Define your own specified time to calculate timezone.
-    """
-    return get(location, method="timezone", provider="google", **kwargs)
-
-
-def reverse(location, provider="google", **kwargs):
-    """Reverse Geocoding
-
-    :param location: Your search location you want to reverse geocode.
-    :param key: (optional) use your own API Key from Bing.
-    :param provider: (default=google) Use the following:
-        > google
-        > bing
-    """
-    return get(location, method="reverse", provider=provider, **kwargs)
-
-
-def bing(location, **kwargs):
+def bing(query, method: str = "geocode", **kwargs):
     """Bing Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: (optional) use your own API Key from Bing.
     :param maxRows: (default=1) Max number of results to fetch
     :param method: (default=geocode) Use the following:
         > geocode
         > reverse
     """
-    return get(location, provider="bing", **kwargs)
+    return get_result(query, provider="bing", method=method, **kwargs)
 
 
-def yahoo(location, **kwargs):
+def yahoo(query, method: str = "geocode", **kwargs):
     """Yahoo Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     """
-    return get(location, provider="yahoo", **kwargs)
+    return get_result(query, provider="yahoo", method=method, **kwargs)
 
 
-def geolytica(location, **kwargs):
+def geolytica(query, method: str = "geocode", **kwargs):
     """Geolytica (Geocoder.ca) Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     """
-    return get(location, provider="geolytica", **kwargs)
+    return get_result(query, provider="geolytica", method=method, **kwargs)
 
 
-def geocodexyz(location, **kwargs):
+def geocodexyz(query, method: str = "geocode", **kwargs):
     """Geocode.xyz Provider
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     """
-    return get(location, provider="geocodexyz", **kwargs)
+    return get_result(query, provider="geocodexyz", method=method, **kwargs)
 
 
-def opencage(location, **kwargs):
+def opencage(query, method: str = "geocode", **kwargs):
     """Opencage Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: (optional) use your own API Key from OpenCage.
     """
-    return get(location, provider="opencage", **kwargs)
+    return get_result(query, provider="opencage", method=method, **kwargs)
 
 
-def arcgis(location, **kwargs):
+def arcgis(query, method: str = "geocode", **kwargs):
     """ArcGIS Provider
 
-    :param location: Your search location you want geocoded.
+    :arg query: Your search location you want geocoded.
+    :param method: Some
     """
-    return get(location, provider="arcgis", **kwargs)
+    return get_result(query, provider="arcgis", method=method, **kwargs)
 
 
-def here(location, **kwargs):
+def here(query, method: str = "geocode", **kwargs):
     """HERE Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param app_code: (optional) use your own Application Code from HERE.
     :param app_id: (optional) use your own Application ID from HERE.
     :param maxRows: (default=1) Max number of results to fetch
@@ -425,121 +389,86 @@ def here(location, **kwargs):
         > geocode
         > reverse
     """
-    return get(location, provider="here", **kwargs)
+    return get_result(query, provider="here", method=method, **kwargs)
 
 
-def nokia(location, **kwargs):
-    """HERE Provider
-
-    :param location: Your search location you want geocoded.
-    :param app_code: (optional) use your own Application Code from HERE.
-    :param app_id: (optional) use your own Application ID from HERE.
-    :param method: (default=geocode) Use the following:
-        > geocode
-        > reverse
-    """
-    return get(location, provider="here", **kwargs)
-
-
-def tomtom(location, **kwargs):
+def tomtom(query, method: str = "geocode", **kwargs):
     """TomTom Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: (optional) use your own API Key from TomTom.
     :param maxRows: (default=1) Max number of results to fetch
     """
-    return get(location, provider="tomtom", **kwargs)
+    return get_result(query, provider="tomtom", method=method, **kwargs)
 
 
-def mapquest(location, **kwargs):
+def mapquest(query, method: str = "geocode", **kwargs):
     """MapQuest Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: (optional) use your own API Key from MapQuest.
     :param maxRows: (default=1) Max number of results to fetch
     :param method: (default=geocode) Use the following:
         > geocode
         > reverse
     """
-    return get(location, provider="mapquest", **kwargs)
+    return get_result(query, provider="mapquest", method=method, **kwargs)
 
 
-def osm(location, **kwargs):
+def osm(query, method: str = "geocode", **kwargs):
     """OSM Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param url: Custom OSM Server URL location
                (ex: http://nominatim.openstreetmap.org/search)
     """
-    return get(location, provider="osm", **kwargs)
+    return get_result(query, provider="osm", method=method, **kwargs)
 
 
-def maxmind(location="me", **kwargs):
+def maxmind(query="me", method: str = "geocode", **kwargs):
     """MaxMind Provider
 
-    :param location: Your search IP Address you want geocoded.
+    :param query: Your search IP Address you want geocoded.
     :param location: (optional) if left blank will return your
                                 current IP address's location.
     """
-    return get(location, provider="maxmind", **kwargs)
+    return get_result(query, provider="maxmind", method=method, **kwargs)
 
 
-def ipinfo(location="", **kwargs):
+def ipinfo(query="", method: str = "geocode", **kwargs):
     """IP Info.io Provider
 
-    :param location: Your search IP Address you want geocoded.
-    :param location: (optional) if left blank will return your
-                                current IP address's location.
+    :param query: Your search IP Address you want geocoded.
+                  If left blank will return your current IP address's location.
     """
-    return get(location, provider="ipinfo", **kwargs)
+    return get_result(query, provider="ipinfo", method=method, **kwargs)
 
 
-def freegeoip(location, **kwargs):
+def freegeoip(query, method: str = "geocode", **kwargs):
     """FreeGeoIP Provider
 
-    :param location: Your search IP Address you want geocoded.
-    :param location: (optional) if left blank will return your
-                                current IP address's location.
+    :param query: Your search IP Address you want geocoded.
+                  If left blank will return your current IP address's location.
     """
-    return get(location, provider="freegeoip", **kwargs)
+    return get_result(query, provider="freegeoip", method=method, **kwargs)
 
 
-def ip(location, **kwargs):
-    """IP Address lookup
-
-    :param location: Your search IP Address you want geocoded.
-    :param location: (optional) if left blank will return your
-                                current IP address's location.
-    """
-    return get(location, provider="ipinfo", **kwargs)
-
-
-def canadapost(location, **kwargs):
+def canadapost(query, method: str = "geocode", **kwargs):
     """CanadaPost Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param key: (optional) API Key from CanadaPost Address Complete.
     :param language: (default=en) Output language preference.
     :param country: (default=ca) Geofenced query by country.
     :param maxRows: (default=1) Max number of results to fetch
     """
-    return get(location, provider="canadapost", **kwargs)
+    return get_result(query, provider="canadapost", method=method, **kwargs)
 
 
-def postal(location, **kwargs):
-    """CanadaPost Provider
-
-    :param location: Your search location you want geocoded.
-    :param key: (optional) use your own API Key from
-                               CanadaPost Address Complete.
-    """
-    return get(location, provider="canadapost", **kwargs)
-
-
-def geonames(location, **kwargs):
+def geonames(query, method: str = "geocode", **kwargs):
     """GeoNames Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param geonameid: The place you want children / hierarchy for.
     :param key: (required) geonames *username*: needs to be passed with each request
     :param maxRows: (default=1) Max number of results to fetch
@@ -551,22 +480,22 @@ def geonames(location, **kwargs):
         > children
         > hierarchy
     """
-    return get(location, provider="geonames", **kwargs)
+    return get_result(query, provider="geonames", method=method, **kwargs)
 
 
-def mapzen(location, **kwargs):
+def mapzen(query, method: str = "geocode", **kwargs):
     """Mapzen Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param maxRows: (default=1) Max number of results to fetch
     """
-    return get(location, provider="mapzen", **kwargs)
+    return get_result(query, provider="mapzen", method=method, **kwargs)
 
 
-def tamu(location, **kwargs):
+def tamu(query, method: str = "geocode", **kwargs):
     """TAMU Provider
 
-    :param location: The street address of the location you want geocoded.
+    :param query: The street address of the location you want geocoded.
     :param city: The city of the location to geocode.
     :param state: The state of the location to geocode.
     :param zipcode: The zipcode of the location to geocode.
@@ -574,13 +503,13 @@ def tamu(location, **kwargs):
 
     API Reference: https://geoservices.tamu.edu/Services/Geocode/WebService
     """
-    return get(location, provider="tamu", **kwargs)
+    return get_result(query, provider="tamu", method=method, **kwargs)
 
 
-def geocodefarm(location, **kwargs):
+def geocodefarm(query, method: str = "geocode", **kwargs):
     """GeocodeFarm Provider
 
-    :param location: The string to search for. Usually a street address.
+    :param query: The string to search for. Usually a street address.
     :param key: (optional) API Key. Only Required for Paid Users.
     :param lang: (optional) 2 digit language code to return results in.
                 Currently only "en"(English) or "de"(German) supported.
@@ -590,13 +519,13 @@ def geocodefarm(location, **kwargs):
 
     API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
-    return get(location, provider="geocodefarm", **kwargs)
+    return get_result(query, provider="geocodefarm", method=method, **kwargs)
 
 
-def tgos(location, **kwargs):
+def tgos(query, method: str = "geocode", **kwargs):
     """TGOS Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param language: (default=taiwan) Use the following:
         > taiwan
         > english
@@ -606,13 +535,13 @@ def tgos(location, **kwargs):
 
     API Reference: http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     """
-    return get(location, provider="tgos", **kwargs)
+    return get_result(query, provider="tgos", method=method, **kwargs)
 
 
-def uscensus(location, **kwargs):
+def uscensus(query, method: str = "geocode", **kwargs):
     """US Census Provider
 
-    :param location: Your search location(s) you want geocoded.
+    :param query: Your search location(s) you want geocoded.
     :param benchmark: (default=4) Use the following:
         > Public_AR_Current or 4
         > Public_AR_ACSYYYY or 8
@@ -637,36 +566,36 @@ def uscensus(location, **kwargs):
 
     API Reference: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
     """
-    return get(location, provider="uscensus", **kwargs)
+    return get_result(query, provider="uscensus", method=method, **kwargs)
 
 
-def locationiq(location, **kwargs):
+def locationiq(query, method: str = "geocode", **kwargs):
     """LocationIQ Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     :param method: (default=geocode) Use the following:
         > geocode
         > reverse
 
     API Reference: https://locationiq.org/
     """
-    return get(location, provider="locationiq", **kwargs)
+    return get_result(query, provider="locationiq", method=method, **kwargs)
 
 
-def gisgraphy(location, **kwargs):
+def gisgraphy(query, method: str = "geocode", **kwargs):
     """Gisgraphy Provider
 
-    :param location: Your search location you want geocoded.
+    :param query: Your search location you want geocoded.
     """
-    return get(location, provider="gisgraphy", **kwargs)
+    return get_result(query, provider="gisgraphy", method=method, **kwargs)
 
 
-def ipfinder(location="", **kwargs):
+def ipfinder(query="", method: str = "geocode", **kwargs):
     """IPFinder.io Provider
 
-    :param location: Your search IP Address you want geocoded.
+    :param query: Your search IP Address you want geocoded.
                         (optional) if left blank will return your current IP address's
                         location.
     :param key: API Key from IPFinder (optional). Blank will use the free API KEY.
     """
-    return get(location, provider="ipfinder", **kwargs)
+    return get_result(query, provider="ipfinder", method=method, **kwargs)
