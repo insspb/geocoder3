@@ -40,7 +40,7 @@ from geocoder.api import (  # noqa
     geocodexyz,
     geolytica,
     geonames,
-    get_result,
+    get_results,
     gisgraphy,
     google,
     here,

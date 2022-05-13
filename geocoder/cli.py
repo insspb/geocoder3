@@ -58,7 +58,7 @@ def cli(location, **kwargs):
 
     # Geocode results from user input
     for location in locations:
-        g = geocoder.get_result(location.strip(), **kwargs)
+        g = geocoder.get_results(location.strip(), **kwargs)
         try:
             click.echo(json.dumps(getattr(g, kwargs["output"])))
         except IOError:
