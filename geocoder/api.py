@@ -1,5 +1,4 @@
 from geocoder.distance import Distance
-from geocoder.location import Location
 from geocoder.providers.addresses import (
     ArcgisQuery,
     BaiduQuery,
@@ -224,11 +223,6 @@ def distance(*args, **kwargs):
         > meters
     """
     return Distance(*args, **kwargs)
-
-
-def location(location, **kwargs):
-    """Parser for different location formats"""
-    return Location(location, **kwargs)
 
 
 def google(location, **kwargs):

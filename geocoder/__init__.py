@@ -51,7 +51,6 @@ from geocoder.api import (  # noqa
     ipfinder,
     ipinfo,
     komoot,
-    location,
     locationiq,
     mapbox,
     mapquest,
@@ -75,3 +74,4 @@ from geocoder.api import (  # noqa
 
 # CLI
 from geocoder.cli import cli  # noqa
+from geocoder.location import Location  # noqa
