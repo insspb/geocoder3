@@ -17,7 +17,7 @@ import sys
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.insert(0, os.path.abspath('.'))
 
-sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("../.."))
 from geocoder import __version__  # noqa
 
 # -- General configuration ----------------------------------------------------
@@ -29,9 +29,11 @@ from geocoder import __version__  # noqa
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",  # Create neat summary tables
     "sphinx.ext.intersphinx",
     "myst_parser",
 ]
+# autosummary_generate = True
 
 
 # 'releases' (changelog) settings

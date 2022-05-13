@@ -29,3 +29,5 @@ t.py
 t2.py
 dist
 .pypirc
+# Autobuild sphinx docs
+/docs/source/api/_autosummary/

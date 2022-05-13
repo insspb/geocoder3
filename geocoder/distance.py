@@ -1,3 +1,5 @@
+__all__ = ["Distance"]
+
 from math import asin, cos, radians, sin, sqrt
 
 from geocoder.location import Location
