@@ -1,7 +1,7 @@
 <!-- markdownlint-disable -->
 <h1 align="center" style="margin:1em">
-  <a href="https://geocoder.readthedocs.org/">
-    <img src="https://github.com/DenisCarriere/geocoder/raw/master/docs/_static/geocoder.png"
+  <a href="https://geocoder3.readthedocs.org/">
+    <img src="https://github.com/insspb/geocoder3/raw/master/docs/source/_static/geocoder.png"
          alt="Markdownify"
          width="200"></a>
   <br />
@@ -13,24 +13,17 @@
 </h4>
 
 <p align="center">
-  <a href="http://geocoder.readthedocs.io/?badge=master">
-    <img src="https://readthedocs.org/projects/geocoder/badge/?version=master"
+    <img src="https://github.com/insspb/geocoder3/actions/workflows/checks.yml/badge.svg?branch=master" alt="Tests" />
+  <a href="http://geocoder3.readthedocs.io/?badge=master">
+    <img src="https://readthedocs.org/projects/geocoder3/badge/?version=master"
          alt="RDT">
   </a>
-  <a href="https://pypi.python.org/pypi/geocoder">
-    <img src="https://img.shields.io/pypi/v/geocoder.svg"
+  <a href="https://pypi.python.org/pypi/geocoder3">
+    <img src="https://img.shields.io/pypi/v/geocoder3.svg"
          alt="PyPi">
   </a>
-  <a href="https://build.snapcraft.io/user/DenisCarriere/geocoder">
-    <img src="https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg"
-         alt="Snap">
-  </a>
-  <a href="https://travis-ci.org/DenisCarriere/geocoder">
-    <img src="https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master"
-         alt="Travis">
-  </a>
-  <a href="https://codecov.io/gh/DenisCarriere/geocoder">
-    <img src="https://codecov.io/gh/DenisCarriere/geocoder/branch/master/graph/badge.svg"
+  <a href="https://codecov.io/gh/insspb/geocoder3">
+    <img src="https://codecov.io/gh/insspb/geocoder3/branch/master/graph/badge.svg?token=HoUly1aQHN"
          alt="Codecov" />
   </a>
 </p>
@@ -78,23 +71,23 @@ Here is a typical example of retrieving a Lat & Lng from Google using Python,
 things shouldn't be this hard.
 
 ```python
->>> import requests
->>> url = 'https://maps.googleapis.com/maps/api/geocode/json'
->>> params = {'sensor': 'false', 'address': 'Mountain View, CA'}
->>> r = requests.get(url, params=params)
->>> results = r.json()['results']
->>> location = results[0]['geometry']['location']
->>> location['lat'], location['lng']
-(37.3860517, -122.0838511)
+import requests
+url = 'https://maps.googleapis.com/maps/api/geocode/json'
+params = {'sensor': 'false', 'address': 'Mountain View, CA'}
+r = requests.get(url, params=params)
+results = r.json()['results']
+location = results[0]['geometry']['location']
+location['lat'], location['lng']
+# (37.3860517, -122.0838511)
 ```
 
 Now lets use Geocoder to do the same task
 
 ```python
->>> import geocoder
->>> g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
->>> g.latlng
-(37.3860517, -122.0838511)
+import geocoder
+g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
+g.latlng
+# (37.3860517, -122.0838511)
 ```
 
 ## A glimpse at the API
@@ -104,74 +97,77 @@ Many properties are available once the geocoder object is created.
 ### Forward
 
 ```python
->>> import geocoder
->>> g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
->>> g.geojson
->>> g.json
->>> g.wkt
->>> g.osm
+import geocoder
+g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
+g.geojson
+g.json
+g.wkt
+g.osm
 ```
 
 ### Multiple queries ('batch' geocoding)
 
 ```python
->>> import geocoder
->>> g = geocoder.mapquest(['Mountain View, CA', 'Boulder, Co'], method='batch')
->>> for result in g:
-...   print(result.address, result.latlng)
-...
-('Mountain View', [37.39008, -122.08139])
-('Boulder', [40.015831, -105.27927])
+import geocoder
+g = geocoder.mapquest(['Mountain View, CA', 'Boulder, Co'], method='batch')
+for result in g:
+    print(result.address, result.latlng)
+# ('Mountain View', [37.39008, -122.08139])
+# ('Boulder', [40.015831, -105.27927])
 ```
 
 ### Multiple results
 
 ```python
->>> import geocoder
->>> g = geocoder.geonames('Mountain View, CA', maxRows=5)
->>> print(len(g))
-5
->>> for result in g:
-...   print(result.address, result.latlng)
-...
-Mountain View ['37.38605', '-122.08385']
-Mountain View Elementary School ['34.0271', '-117.59116']
-Best Western Plus Mountainview Inn and Suites ['51.79516', '-114.62793']
-Best Western Mountainview Inn ['49.3338', '-123.1446']
-Mountain View Post Office ['37.393', '-122.07774']
+import geocoder
+g = geocoder.geonames('Mountain View, CA', maxRows=5)
+print(len(g))
+# 5
+for result in g:
+    print(result.address, result.latlng)
+# Mountain View ['37.38605', '-122.08385']
+# Mountain View Elementary School ['34.0271', '-117.59116']
+# Best Western Plus Mountainview Inn and Suites ['51.79516', '-114.62793']
+# Best Western Mountainview Inn ['49.3338', '-123.1446']
+# Mountain View Post Office ['37.393', '-122.07774']
 ```
 
 
-> The providers currently supporting multiple results are listed in the table [below](#providers).
+> The providers currently supporting multiple results are listed in the table
+> [below](#providers).
 
 ### Reverse
 
 ```python
->>> g = geocoder.google([45.15, -75.14], method='reverse', key='YOUR_GOOGLE_API_KEY')
->>> g.city
->>> g.state
->>> g.state_long
->>> g.country
->>> g.country_long
+import geocoder
+g = geocoder.google([45.15, -75.14], method='reverse', key='YOUR_GOOGLE_API_KEY')
+g.city
+g.state
+g.state_long
+g.country
+g.country_long
 ```
 
 ### House Addresses
 
 ```python
->>> g = geocoder.google("453 Booth Street, Ottawa ON", key='YOUR_GOOGLE_API_KEY')
->>> g.housenumber
->>> g.postal
->>> g.street
->>> g.street_long
+import geocoder
+g = geocoder.google("453 Booth Street, Ottawa ON", key='YOUR_GOOGLE_API_KEY')
+g.housenumber
+g.postal
+g.street
+g.street_long
 ```
 
 ### IP Addresses
 
 ```python
->>> g = geocoder.ip('199.7.157.0')
->>> g = geocoder.ip('me')
->>> g.latlng
->>> g.city
+import geocoder
+g = geocoder.freegeoip('199.7.157.0')
+g.latlng
+# [43.7154, -79.3896]
+g.city
+# Toronto
 ```
 
 ### Bounding Box
@@ -179,72 +175,66 @@ Mountain View Post Office ['37.393', '-122.07774']
 Accessing the JSON & GeoJSON attributes will be different
 
 ```python
->>> g = geocoder.google("Ottawa", key='YOUR_GOOGLE_API_KEY')
->>> g.bbox
-{"northeast": [45.53453, -75.2465979], "southwest": [44.962733, -76.3539158]}
+import geocoder
+g = geocoder.osm("Ottawa")
+g.bbox
+# {'northeast': [45.5569506, -75.5251593], 'southwest': [45.2369506, -75.8451593]}
 
->>> g.geojson['bbox']
-[-76.3539158, 44.962733, -75.2465979, 45.53453]
-
->>> g.southwest
-[44.962733, -76.3539158]
+g.southwest
+# [45.2369506, -75.8451593]
 ```
 
 ## Command Line Interface
 
 ```bash
-$ geocode "Ottawa, ON"  >> ottawa.geojson
-$ geocode "Ottawa, ON" \
-    --provide google \
-    --out geojson \
-    --method geocode
+geocode "Ottawa, ON"  >> ottawa.geojson
+geocode "Ottawa, ON" --provider osm --output geojson --method geocode
 ```
 
 ## Providers
 
-| Provider                       | Optimal   | Usage Policy                    | Multiple results | Reverse | Proximity | Batch |
-|:-------------------------------|:----------|:--------------------------------|:-----------------|:--------|:----------|:------|
-| [ArcGIS][ArcGIS]               | World     |                                 | yes              | yes     |           |       |
-| [Baidu][Baidu]                 | China     | API key                         |                  | yes     |           |       |
-| [Bing][Bing]                   | World     | API key                         | yes              | yes     |           | yes   |
-| [CanadaPost][CanadaPost]       | Canada    | API key                         | yes              |         |           |       |
-| [FreeGeoIP][FreeGeoIP]         | World     | Rate Limit, [Policy][FreeGeoip-Policy]                |                  |         |           |       |
-| [Gaode][Gaode]                 | China     | API key                         |                  | yes     |           |       |
-| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                  |         |           |       |
-| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes              | yes     |           |       |
-| [GeoNames][GeoNames]           | World     | Username                        | yes              |         | yes       |       |
-| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes              |         |           |       |
-| [Gisgraphy][Gisgraphy]         | World     | API key                         | yes              | yes     | yes       |       |
-| [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes              | yes     | yes       |       |
-| [HERE][HERE]                   | World     | API key                         | yes              | yes     |           |       |
-| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                  |         |           |       |
-| [Komoot][Komoot] (OSM powered) | World     |                                 | yes              | yes     |           |       |
-| [LocationIQ][LocationIQ]       | World     | API Key                         | yes              | yes     |           |       |
-| [Mapbox][Mapbox]               | World     | API key                         | yes              | yes     | yes       |       |
-| [MapQuest][MapQuest]           | World     | API key                         | yes              | yes     |           | yes   |
-| [~~Mapzen~~][Mapzen]           | Shutdown  | API key                         | yes              | yes     |           |       |
-| [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
-| [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
-| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
-| [Tamu][Tamu]                   | US        | API key                         |                  |         |           |       |
-| [TGOS][TGOS]                   | Taiwan    |                                 |                  |         |           |       |
-| [TomTom][TomTom]               | World     | API key                         | yes              |         |           |       |
-| [USCensus][USCensus]           | US        |                                 |                  | yes     |           | yes   |
-| [What3Words][What3Words]       | World     | API key                         |                  | yes     |           |       |
-| [Yahoo][Yahoo]                 | World     |                                 |                  |         |           |       |
-| [Yandex][Yandex]               | Russia    |                                 | yes              | yes     |           |       |
-| [IPFinder][IPFinder]           | World     | Rate Limit, [Plans][IPFinder]   | yes              | yes     |           |       |
+| Geocoder3 ready | Provider                       | Optimal   | Usage Policy                    | Multiple results | Reverse | Proximity | Batch |
+|-----------------|:-------------------------------|:----------|:--------------------------------|:-----------------|:--------|:----------|:------|
+|                 | [ArcGIS][ArcGIS]               | World     |                                 | yes              | yes     |           |       |
+|                 | [Baidu][Baidu]                 | China     | API key                         |                  | yes     |           |       |
+|                 | [Bing][Bing]                   | World     | API key                         | yes              | yes     |           | yes   |
+|                 | [CanadaPost][CanadaPost]       | Canada    | API key                         | yes              |         |           |       |
+|                 | [FreeGeoIP][FreeGeoIP]         | World     | Rate Limit, [Policy][FreeGeoip-Policy]                |                  |         |           |       |
+|                 | [Gaode][Gaode]                 | China     | API key                         |                  | yes     |           |       |
+|                 | [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                  |         |           |       |
+|                 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes              | yes     |           |       |
+|                 | [GeoNames][GeoNames]           | World     | Username                        | yes              |         | yes       |       |
+|                 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes              |         |           |       |
+|                 | [Gisgraphy][Gisgraphy]         | World     | API key                         | yes              | yes     | yes       |       |
+|                 | [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes              | yes     | yes       |       |
+|                 | [HERE][HERE]                   | World     | API key                         | yes              | yes     |           |       |
+|                 | [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                  |         |           |       |
+|                 | [Komoot][Komoot] (OSM powered) | World     |                                 | yes              | yes     |           |       |
+|                 | [LocationIQ][LocationIQ]       | World     | API Key                         | yes              | yes     |           |       |
+|                 | [Mapbox][Mapbox]               | World     | API key                         | yes              | yes     | yes       |       |
+|                 | [MapQuest][MapQuest]           | World     | API key                         | yes              | yes     |           | yes   |
+|                 | [~~Mapzen~~][Mapzen]           | Shutdown  | API key                         | yes              | yes     |           |       |
+|                 | [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
+|                 | [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
+|                 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
+|                 | [Tamu][Tamu]                   | US        | API key                         |                  |         |           |       |
+|                 | [TGOS][TGOS]                   | Taiwan    |                                 |                  |         |           |       |
+|                 | [TomTom][TomTom]               | World     | API key                         | yes              |         |           |       |
+|                 | [USCensus][USCensus]           | US        |                                 |                  | yes     |           | yes   |
+|                 | [What3Words][What3Words]       | World     | API key                         |                  | yes     |           |       |
+|                 | [Yahoo][Yahoo]                 | World     |                                 |                  |         |           |       |
+|                 | [Yandex][Yandex]               | Russia    |                                 | yes              | yes     |           |       |
+|                 | [IPFinder][IPFinder]           | World     | Rate Limit, [Plans][IPFinder]   | yes              | yes     |           |       |
 
 
 ## Installation
 
 ### PyPi Install
 
-To install Geocoder, simply:
+To install Geocoder3, simply:
 
 ```bash
-$ pip install geocoder
-...
+pip install geocoder3
 ```
 
 ### GitHub Install
@@ -252,64 +242,51 @@ $ pip install geocoder
 Installing the latest version from Github:
 
 ```bash
-$ git clone https://github.com/DenisCarriere/geocoder
-...
-$ cd geocoder
-$ python setup.py install
-...
+git clone https://github.com/insspb/geocoder3
+cd geocoder3
+python setup.py install
 ```
-
-### Snap Install
-
-To install the stable geocoder [snap](https://snapcraft.io) in any of the [supported Linux distros](https://snapcraft.io/docs/core/install):
-
-```bash
-$ sudo snap install geocoder
-...
-```
-
-If you want to help testing the latest changes from the master branch, you can install it from the edge channel:
-
-```bash
-$ sudo snap install geocoder --edge
-...
-```
-
-The installed snap will be updated automatically every time a new version is pushed to the store.
-
 
 ## Feedback
 
-Please feel free to give any feedback on this module.
-
-Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
+Please feel free to give any feedback on this module. just create an
+[issue](https://github.com/insspb/geocoder3/issues) on GitHub
 
 ## Contribution
 
-If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
+If you find any bugs or any enhancements to recommend please send some of your
+comments/suggestions to the
+[Github Issues Page](https://github.com/insspb/geocoder3/issues).
 
 Some way to contribute, from the most generic to the most detailed:
 
 ### Documenting
 
-If you are not comfortable with development, you can still contribute with the documentation.
+If you are not comfortable with development, you can still contribute with the
+documentation.
 
-- review the documentation of a specific provider. Most of the time they are lacking details...
-- review the parameters for a specific method, compared to what is supported by the provider
-- review documentation for command line
+- Review the documentation of a specific provider. Most of the time it require more
+  details.
+- Review the parameters for a specific method, compared to what is supported by the
+  provider
+- Review documentation for command line
 
-If you miss any feature, just create an issue accordingly. Be sure to describe your use case clearly, and to provide links to the correct sources.
+If you miss any feature, just create an
+[issue](https://github.com/insspb/geocoder3/issues) accordingly.
+Be sure to describe your use case clearly, and to provide links to the correct sources.
 
 ### Coding
 
-- add support for a new provider. _Documentation TBD_, starting point possible with [wip_guide](https://geocoder.readthedocs.io/wip_guide.html).
-- extend methods for an existing support, i.e support an additionnal API). _Documentation TBD_
-- extend support of an existing API, i.e, support more (json) fields from the response, or more parameters. _Documentation TBD_
+- Add support for a new provider. _Documentation TBD_, starting point possible with
+- [wip_guide](https://geocoder3.readthedocs.io/wip_guide.html).
+- Extend methods for an existing support, i.e support an additional API).
+- Extend support of an existing API, i.e, support more (json) fields from the
+  response, or more parameters.
 
 
 ## ChangeLog
 
-See [CHANGELOG.md](./CHANGELOG.md)
+See [Releases](https://github.com/insspb/geocoder3/releases)
 
 
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
