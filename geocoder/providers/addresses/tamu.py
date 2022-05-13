@@ -119,19 +119,14 @@ class TamuResult(OneResult):
 class TamuQuery(MultipleResultsQuery):
     """
     TAMU Geocoding Services
-    =======================
 
-    Params
-    ------
     :param location: The street address of the location you want geocoded.
     :param city: The city of the location to geocode.
     :param state: The state of the location to geocode.
     :param zipcode: The zipcode of the location to geocode.
     :param key: The API key (use API key "demo" for testing).
 
-    API Reference
-    -------------
-    https://geoservices.tamu.edu/Services/Geocode/WebService
+    API Reference: https://geoservices.tamu.edu/Services/Geocode/WebService
     """
 
     provider = "tamu"

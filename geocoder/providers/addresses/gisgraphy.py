@@ -46,11 +46,8 @@ class GisgraphyResult(OneResult):
 class GisgraphyQuery(MultipleResultsQuery):
     """
     Gisgraphy REST API
-    =======================
 
-    API Reference
-    -------------
-    http://www.gisgraphy.com/documentation/user-guide.php
+    API Reference: http://www.gisgraphy.com/documentation/user-guide.php
     """
 
     provider = "gisgraphy"

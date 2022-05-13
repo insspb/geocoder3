@@ -62,7 +62,6 @@ class TgosResult(OneResult):
         return {"en": "Taiwan", "zh-tw": "中華民國"}[self.language]
 
     # TGOS specific attributes
-    # ========================
     @property
     def alley(self):
         return self.raw.get("ALLEY")
@@ -137,8 +136,7 @@ class TgosQuery(MultipleResultsQuery):
 
     TGOS Map is official map service of Taiwan.
 
-    API Reference
-    -------------
+    API Reference:
     http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     """
 

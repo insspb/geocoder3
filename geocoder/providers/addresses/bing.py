@@ -86,19 +86,14 @@ class BingResult(OneResult):
 class BingQuery(MultipleResultsQuery):
     """
     Bing Maps REST Services
-    =======================
+
     The Bing™ Maps REST Services Application Programming Interface (API)
     provides a Representational State Transfer (REST) interface to
     perform tasks such as creating a static map with pushpins, geocoding
     an address, retrieving imagery metadata, or creating a route.
 
-    API Reference
-    -------------
-    http://msdn.microsoft.com/en-us/library/ff701714.aspx
-
-    Get Bing key
-    ------------
-    https://www.bingmapsportal.com/
+    API Reference: http://msdn.microsoft.com/en-us/library/ff701714.aspx
+    Get Bing key: https://www.bingmapsportal.com/
     """
 
     provider = "bing"

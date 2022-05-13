@@ -71,14 +71,12 @@ class YahooResult(OneResult):
 class YahooQuery(MultipleResultsQuery):
     """
     Yahoo BOSS Geo Services
-    =======================
+
     Yahoo PlaceFinder is a geocoding Web service that helps developers make
     their applications location-aware by converting street addresses or
     place names into geographic coordinates (and vice versa).
 
-    API Reference
-    -------------
-    https://developer.yahoo.com/boss/geo/
+    API Reference: https://developer.yahoo.com/boss/geo/
     """
 
     provider = "yahoo"

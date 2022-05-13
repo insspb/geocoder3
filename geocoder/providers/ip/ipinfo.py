@@ -62,9 +62,7 @@ class IpinfoResult(OneResult):
 
 class IpinfoQuery(MultipleResultsQuery):
     """
-    API Reference
-    -------------
-    https://ipinfo.io
+    API Reference: https://ipinfo.io
     """
 
     provider = "ipinfo"

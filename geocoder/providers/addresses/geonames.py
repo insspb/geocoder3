@@ -67,15 +67,13 @@ class GeonamesResult(OneResult):
 class GeonamesQuery(MultipleResultsQuery):
     """
     GeoNames REST Web Services
-    ==========================
+
     GeoNames is mainly using REST webservices. Find nearby postal codes / reverse
     geocoding
     This service comes in two flavors.You can either pass the lat/long or a
     postalcode/place name.
 
-    API Reference
-    -------------
-    http://www.geonames.org/export/web-services.html
+    API Reference: http://www.geonames.org/export/web-services.html
     """
 
     provider = "geonames"

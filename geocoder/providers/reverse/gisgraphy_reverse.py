@@ -15,11 +15,8 @@ class GisgraphyReverseResult(GisgraphyResult):
 class GisgraphyReverse(GisgraphyQuery):
     """
     Gisgraphy REST API
-    =======================
 
-    API Reference
-    -------------
-    http://www.gisgraphy.com/documentation/user-guide.php
+    API Reference: http://www.gisgraphy.com/documentation/user-guide.php
     """
 
     provider = "gisgraphy"

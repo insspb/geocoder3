@@ -63,18 +63,14 @@ class GaodeReverseResult(OneResult):
 class GaodeReverse(GaodeQuery):
     """
     Gaode GeoReverse API
-    ===================
+
     Gaode Maps GeoReverse API is a free open the API, the default quota
     2000 times / day.
 
-    Params
-    ------
     :param location: Your search location you want geocoded.
     :param key: Gaode API key.
     :param referer: Gaode API referer website.
 
-    References
-    ----------
     API Documentation: http://lbs.amap.com/api/webservice/guide/api/georegeo
     Get Gaode AMap Key: http://lbs.amap.com/dev/
     """

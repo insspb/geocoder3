@@ -104,22 +104,18 @@ class CanadapostResult(OneResult):
 class CanadapostQuery(MultipleResultsQuery):
     """
     Addres Complete API
-    =======================
+
     The next generation of address finders, AddressComplete uses
     intelligent, fast searching to improve data accuracy and relevancy.
     Simply start typing a business name, address or Postal Code
     and AddressComplete will suggest results as you go.
 
-    Params
-    ------
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) API Key from CanadaPost Address Complete.
     :param ``language``: (default=en) Output language preference.
     :param ``country``: (default=ca) Geofenced query by country.
 
-    API Reference
-    -------------
-    https://www.canadapost.ca/pca/
+    API Reference: https://www.canadapost.ca/pca/
     """
 
     provider = "canadapost"

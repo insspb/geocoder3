@@ -59,17 +59,13 @@ class GaodeResult(OneResult):
 class GaodeQuery(MultipleResultsQuery):
     """
     Gaode AMap Geocoding API
-    ===================
+
     Gaode Maps Geocoding API is a free open the API, the default quota
     2000 times / day.
 
-    Params
-    ------
     :param location: Your search location you want geocoded.
     :param key: Gaode API key.
 
-    References
-    ----------
     API Documentation: http://lbs.amap.com/api/webservice/guide/api/georegeo
     Get AMap Key: http://lbs.amap.com/dev/
     """

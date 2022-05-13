@@ -76,7 +76,7 @@ class PlacesResult(OneResult):
 class PlacesQuery(MultipleResultsQuery):
     """
     Google Places API
-    ====================
+
     The Google Places API Web Service allows you to query for place information on a
     variety of categories, such as: establishments, prominent points of interest,
     geographic locations, and more.
@@ -95,8 +95,8 @@ class PlacesQuery(MultipleResultsQuery):
     Text Search than the Maps Geocoding API
     https://developers.google.com/maps/documentation/geocoding/best-practices
 
-    API Reference
-    -------------
+    API Reference:
+
     https://developers.google.com/places/web-service/intro
     https://developers.google.com/places/web-service/search
 
@@ -104,8 +104,6 @@ class PlacesQuery(MultipleResultsQuery):
     l = geocoder.google('food near white house', method='places')
     l = geocoder.google('1st and main', method='places')
 
-    Parameters
-    ----------
     :param location: Your search location or phrase you want geocoded.
     :param key: Your Google developers free key.
 

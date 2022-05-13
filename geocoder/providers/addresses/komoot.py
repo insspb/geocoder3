@@ -102,11 +102,8 @@ class KomootResult(OneResult):
 class KomootQuery(MultipleResultsQuery):
     """
     Komoot REST API
-    =======================
 
-    API Reference
-    -------------
-    http://photon.komoot.de
+    API Reference: http://photon.komoot.de
     """
 
     provider = "komoot"

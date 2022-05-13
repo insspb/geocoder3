@@ -35,16 +35,14 @@ class GoogleTimezoneResult(OneResult):
 class GoogleTimezone(MultipleResultsQuery):
     """
     Google Time Zone API
-    ====================
+
     The Time Zone API provides time offset data for locations on the surface of the
     earth.
     Requesting the time zone information for a specific Latitude/Longitude pair will
     return the name of that time zone, the time offset from UTC, and the Daylight
     Savings offset.
 
-    API Reference
-    -------------
-    https://developers.google.com/maps/documentation/timezone/
+    API Reference: https://developers.google.com/maps/documentation/timezone/
     """
 
     provider = "google"

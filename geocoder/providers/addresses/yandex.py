@@ -108,15 +108,13 @@ class YandexResult(OneResult):
 class YandexQuery(MultipleResultsQuery):
     """
     Yandex
-    ======
+
     Yandex (Russian: Яндекс) is a Russian Internet company
     which operates the largest search engine in Russia with
     about 60% market share in that country.
 
     The Yandex home page has been rated as the most popular website in Russia.
 
-    Params
-    ------
     :param location: Your search location you want geocoded.
     :param lang: Chose the following language:
         > ru-RU — Russian (by default)
@@ -132,10 +130,8 @@ class YandexQuery(MultipleResultsQuery):
         > district - city district
         > locality - locality (city, town, village, etc.)
 
-    References
-    ----------
-    API Reference:
-    http://api.yandex.com/maps/doc/geocoder/desc/concepts/input_params.xml
+    API Reference: http://api.yandex.com/maps/doc/geocoder/desc/concepts/
+    input_params.xml
     """
 
     provider = "yandex"

@@ -13,16 +13,13 @@ class BingReverseResult(BingResult):
 class BingReverse(BingQuery):
     """
     Bing Maps REST Services
-    =======================
+
     The Bing™ Maps REST Services Application Programming Interface (API)
     provides a Representational State Transfer (REST) interface to
     perform tasks such as creating a static map with pushpins, geocoding
     an address, retrieving imagery metadata, or creating a route.
 
-    API Reference
-    -------------
-    http://msdn.microsoft.com/en-us/library/ff701714.aspx
-
+    API Reference: http://msdn.microsoft.com/en-us/library/ff701714.aspx
     """
 
     provider = "bing"

@@ -9,7 +9,7 @@ from geocoder.providers.addresses import GeocodeFarmQuery
 class GeocodeFarmReverse(GeocodeFarmQuery):
     """
     Geocode.Farm
-    =======================
+
     Geocode.Farm is one of the few providers that provide this highly
     specialized service for free. We also have affordable paid plans, of
     course, but our free services are of the same quality and provide the same
@@ -19,8 +19,6 @@ class GeocodeFarmReverse(GeocodeFarmQuery):
     query requests per day (API calls). On our free API offering, you are
     limited to 250 query requests per day (API calls).
 
-    Params
-    ------
     :param lat: The numerical latitude value for which you wish to obtain the closest,
                     human-readable address.
     :param lon: The numerical longitude value for which you wish to obtain the closest,
@@ -31,9 +29,7 @@ class GeocodeFarmReverse(GeocodeFarmQuery):
     :param country: (optional) The country to return results in. Used for biasing
                     purposes and may not fully filter results to this specific country.
 
-    API Reference
-    -------------
-    https://geocode.farm/geocoding/free-api-documentation/
+    API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
 
     provider = "geocodefarm"

@@ -31,18 +31,16 @@ class BaiduResult(OneResult):
 class BaiduQuery(MultipleResultsQuery):
     """
     Baidu Geocoding API
-    ===================
+
     Baidu Maps Geocoding API is a free open the API, the default quota
     one million times / day.
 
-    Params
-    ------
     :param location: Your search location you want geocoded.
     :param key: Baidu API key.
     :param referer: Baidu API referer website.
 
     References
-    ----------
+
     API Documentation: http://developer.baidu.com/map
     Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
     """

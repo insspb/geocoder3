@@ -182,7 +182,7 @@ class IpfinderResult(OneResult):
 class IpfinderQuery(MultipleResultsQuery):
     """
     IPFinder REST Services
-    ===========================
+
     IP address details (city, region, country, postal code, latitude and more ..).
     ASN details (Organization name, registry,domain,comany_type, and more .. ).
     Firewall by supported formats details (apache_allow, nginx_deny, CIDR, and more ..)
@@ -193,14 +193,9 @@ class IpfinderQuery(MultipleResultsQuery):
     Get Domain IP history (total_ip, list_ip,organization,asn ....).
     Get list Domain By ASN, Country,Ranges (select_by , total_domain , list_domain ..).
 
-    Params
-    ------
     :param location : Your search location you want.
     :param key      : IPFinder API key.
     :param method   : Chose a method (geocode, method)
-
-    API Reference
-    -------------
 
     API Reference      : https://ipfinder.io/docs
     Get IPFinder key   : https://ipfinder.io/auth/signup

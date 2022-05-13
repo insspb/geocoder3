@@ -39,16 +39,14 @@ class ElevationResult(OneResult):
 class ElevationQuery(MultipleResultsQuery):
     """
     Google Elevation API
-    ====================
+
     The Elevation API provides elevation data for all locations on the surface of the
     earth, including depth locations on the ocean floor (which return negative values).
     In those cases where Google does not possess exact elevation measurements at the
     precise location you request, the service will interpolate and return an averaged
     value using the four nearest locations.
 
-    API Reference
-    -------------
-    https://developers.google.com/maps/documentation/elevation/
+    API Reference: https://developers.google.com/maps/documentation/elevation/
     """
 
     provider = "google"

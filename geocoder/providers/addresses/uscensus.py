@@ -86,17 +86,14 @@ class USCensusResult(OneResult):
 class USCensusQuery(MultipleResultsQuery):
     """
     US Census Geocoder REST Services
-    =======================
+
     The Census Geocoder is an address look-up tool that converts your address to an
     approximate coordinate (latitude/longitude) and returns information about the
     address range that includes the address and the census geography the address is
     within. The geocoder is available as a web interface and as an API
     (Representational State Transfer - REST - web-based service).
 
-    API Reference
-    -------------
-    https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
-
+    API Reference: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
     """
 
     provider = "uscensus"

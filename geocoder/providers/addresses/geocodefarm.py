@@ -93,7 +93,7 @@ class GeocodeFarmResult(OneResult):
 class GeocodeFarmQuery(MultipleResultsQuery):
     """
     Geocode.Farm
-    ============
+
     Geocode.Farm is one of the few providers that provide this highly
     specialized service for free. We also have affordable paid plans, of
     course, but our free services are of the same quality and provide the same
@@ -103,8 +103,6 @@ class GeocodeFarmQuery(MultipleResultsQuery):
     query requests per day (API calls). On our free API offering, you are
     limited to 250 query requests per day (API calls).
 
-    Params
-    ------
     :param location: The string to search for. Usually a street address.
     :param key: (optional) API Key. Only Required for Paid Users.
     :param lang: (optional) 2 digit lanuage code to return results in. Currently only
@@ -112,9 +110,7 @@ class GeocodeFarmQuery(MultipleResultsQuery):
     :param country: (optional) The country to return results in. Used for biasing
                 purposes and may not fully filter results to this specific country.
 
-    API Reference
-    -------------
-    https://geocode.farm/geocoding/free-api-documentation/
+    API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
 
     provider = "geocodefarm"

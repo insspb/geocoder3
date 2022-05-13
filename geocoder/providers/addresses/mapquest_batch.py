@@ -14,16 +14,13 @@ class MapQuestBatchResult(MapquestResult):
 class MapquestBatch(MultipleResultsQuery):
     """
     MapQuest
-    ========
+
     The geocoding service enables you to take an address and get the
     associated latitude and longitude. You can also use any latitude
     and longitude pair and get the associated address. Three types of
     geocoding are offered: address, reverse, and batch.
 
-    API Reference
-    -------------
-    http://www.mapquestapi.com/geocoding/
-
+    API Reference: http://www.mapquestapi.com/geocoding/
     """
 
     provider = "mapquest"

@@ -15,11 +15,8 @@ class KomootReverseResult(KomootResult):
 class KomootReverse(KomootQuery):
     """
     Komoot REST API
-    =======================
 
-    API Reference
-    -------------
-    http://photon.komoot.de
+    API Reference: http://photon.komoot.de
     """
 
     provider = "komoot"

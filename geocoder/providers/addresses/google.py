@@ -140,19 +140,16 @@ class GoogleResult(OneResult):
 class GoogleQuery(MultipleResultsQuery):
     """
     Google Geocoding API
-    ====================
+
     Geocoding is the process of converting addresses into geographic
     coordinates (like latitude 37.423021 and longitude -122.083739),
     which you can use to place markers or position the map.
-    API Reference
-    -------------
-    https://developers.google.com/maps/documentation/geocoding
+
+    API Reference: https://developers.google.com/maps/documentation/geocoding
 
     For ambiguous queries or 'nearby' type queries, use the Places Text Search instead.
     https://developers.google.com/maps/documentation/geocoding/best-practices#automated-system
 
-    Parameters
-    ----------
     :param location: Your search location you want geocoded.
     :param components: Component Filtering
     :param method: (default=geocode) Use the following:

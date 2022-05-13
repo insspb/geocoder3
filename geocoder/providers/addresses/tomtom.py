@@ -78,15 +78,13 @@ class TomtomResult(OneResult):
 class TomtomQuery(MultipleResultsQuery):
     """
     Geocoding API
-    =============
+
     The Geocoding API gives developers access to TomTom’s first class geocoding service.
     Developers may call this service through either a single or batch geocoding request.
     This service supports global coverage, with house number level matching in over 50
     countries, and address point matching where available.
 
-    API Reference
-    -------------
-    https://developer.tomtom.com/tomtom-maps-apis-developers
+    API Reference: https://developer.tomtom.com/tomtom-maps-apis-developers
     """
 
     provider = "tomtom"

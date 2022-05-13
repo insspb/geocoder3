@@ -13,18 +13,14 @@ class MapboxReverseResult(MapboxResult):
 class MapboxReverse(MapboxQuery):
     """
     Mapbox Reverse Geocoding
-    ========================
+
     Reverse geocoding lets you reverse this process, turning a
     pair of lat/lon coordinates into a meaningful place name
     (-77.036,38.897 → 1600 Pennsylvania Ave NW).
 
-    API Reference
-    -------------
-    https://www.mapbox.com/developers/api/geocoding/
+    API Reference: https://www.mapbox.com/developers/api/geocoding/
 
-    Get Mapbox Access Token
-    -----------------------
-    https://www.mapbox.com/account
+    Get Mapbox Access Token: https://www.mapbox.com/account
     """
 
     provider = "mapbox"

@@ -89,15 +89,13 @@ class MaxmindResults(OneResult):
 class MaxmindQuery(MultipleResultsQuery):
     """
     MaxMind's GeoIP2
-    =======================
+
     MaxMind's GeoIP2 products enable you to identify the location,
     organization, connection speed, and user type of your Internet
     visitors. The GeoIP2 databases are among the most popular and
     accurate IP geolocation databases available.
 
-    API Reference
-    -------------
-    https://www.maxmind.com/en/geolocation_landing
+    API Reference: https://www.maxmind.com/en/geolocation_landing
     """
 
     provider = "maxmind"

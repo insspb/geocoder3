@@ -59,7 +59,7 @@ class OttawaResult(OneResult):
 class OttawaQuery(MultipleResultsQuery):
     """
     Ottawa ArcGIS REST Services
-    ===========================
+
     Geocoding is the process of assigning a location, usually in the form of
     coordinate values (points), to an address by comparing the descriptive
     location elements in the address to those present in the reference
@@ -69,9 +69,8 @@ class OttawaQuery(MultipleResultsQuery):
     tract. An address includes any type of information that distinguishes
     a place.
 
-    API Reference
-    -------------
-    http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates
+    API Reference: http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/
+    GeocodeServer/findAddressCandidates
     """
 
     provider = "ottawa"

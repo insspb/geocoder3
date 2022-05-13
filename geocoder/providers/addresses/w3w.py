@@ -31,7 +31,7 @@ class W3WResult(OneResult):
 class W3WQuery(MultipleResultsQuery):
     """
     What3Words
-    ==========
+
     What3Words is a global grid of 57 trillion 3mx3m squares.
     Each square has a 3 word address that can be communicated quickly,
     easily and with no ambiguity.
@@ -40,14 +40,12 @@ class W3WQuery(MultipleResultsQuery):
 
     Everyone and everywhere now has an address
 
-    Params
-    ------
     :param location: Your search location you want geocoded.
     :param key: W3W API key.
     :param method: Chose a method (geocode, method)
 
     References
-    ----------
+
     API Reference: https://docs.what3words.com/api/v2/
     Get W3W key: https://map.what3words.com/register?dev=true
     """

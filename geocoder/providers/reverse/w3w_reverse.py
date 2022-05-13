@@ -12,7 +12,7 @@ class W3WReverseResult(W3WResult):
 class W3WReverse(W3WQuery):
     """
     what3words
-    ==========
+
     what3words is a global grid of 57 trillion 3mx3m squares.
     Each square has a 3 word address that can be communicated quickly,
     easily and with no ambiguity.
@@ -21,14 +21,10 @@ class W3WReverse(W3WQuery):
 
     Everyone and everywhere now has an address
 
-    Params
-    ------
     :param location: Your search location you want geocoded.
     :param key: W3W API key.
     :param method: Chose a method (geocode, method)
 
-    References
-    ----------
     API Reference: http://developer.what3words.com/
     Get W3W key: http://developer.what3words.com/api-register/
     """

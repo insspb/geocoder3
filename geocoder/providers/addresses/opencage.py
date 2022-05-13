@@ -372,7 +372,7 @@ class OpenCageResult(OneResult):
 class OpenCageQuery(MultipleResultsQuery):
     """
     OpenCage Geocoding Services
-    ===========================
+
     OpenCage Geocoder simple, easy, and open geocoding for the entire world
     Our API combines multiple geocoding systems in the background.
     Each is optimized for different parts of the world and types of requests.
@@ -380,9 +380,7 @@ class OpenCageQuery(MultipleResultsQuery):
     have to.
     Each is optimized for different parts of the world and types of requests.
 
-    API Reference
-    -------------
-    https://geocoder.opencagedata.com/api
+    API Reference: https://geocoder.opencagedata.com/api
     """
 
     provider = "opencage"

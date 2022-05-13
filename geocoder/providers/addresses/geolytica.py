@@ -66,12 +66,10 @@ class GeolyticaResult(OneResult):
 class GeolyticaQuery(MultipleResultsQuery):
     """
     Geocoder.ca
-    ===========
+
     A Canadian and US location geocoder.
 
-    API Reference
-    -------------
-    http://geocoder.ca/?api=1
+    API Reference: http://geocoder.ca/?api=1
     """
 
     provider = "geolytica"

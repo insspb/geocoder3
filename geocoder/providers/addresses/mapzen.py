@@ -72,11 +72,8 @@ class MapzenResult(OneResult):
 class MapzenQuery(MultipleResultsQuery):
     """
     Mapzen REST API
-    =======================
 
-    API Reference
-    -------------
-    https://mapzen.com/documentation/search/search/
+    API Reference: https://mapzen.com/documentation/search/search/
     """
 
     provider = "mapzen"

@@ -13,14 +13,12 @@ class HereReverseResult(HereResult):
 class HereReverse(HereQuery):
     """
     HERE Geocoding REST API
-    =======================
+
     Send a request to the geocode endpoint to find an address
     using a combination of country, state, county, city,
     postal code, district, street and house number.
 
-    API Reference
-    -------------
-    https://developer.here.com/rest-apis/documentation/geocoder
+    API Reference: https://developer.here.com/rest-apis/documentation/geocoder
     """
 
     provider = "here"

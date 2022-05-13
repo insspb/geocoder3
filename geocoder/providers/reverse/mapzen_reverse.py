@@ -15,11 +15,8 @@ class MapzenReverseResult(MapzenResult):
 class MapzenReverse(MapzenQuery):
     """
     Mapzen REST API
-    =======================
 
-    API Reference
-    -------------
-    https://mapzen.com/documentation/search/reverse/
+    API Reference: https://mapzen.com/documentation/search/reverse/
     """
 
     provider = "mapzen"

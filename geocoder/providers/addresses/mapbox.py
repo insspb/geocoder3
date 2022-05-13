@@ -84,17 +84,12 @@ class MapboxResult(OneResult):
 class MapboxQuery(MultipleResultsQuery):
     """
     Mapbox Geocoding
-    ================
+
     The Mapbox Geocoding API lets you convert location text into
     geographic coordinates (1600 Pennsylvania Ave NW → -77.0366,38.8971).
 
-    API Reference
-    -------------
-    https://www.mapbox.com/developers/api/geocoding/
-
-    Get Mapbox Access Token
-    -----------------------
-    https://www.mapbox.com/account
+    API Reference: https://www.mapbox.com/developers/api/geocoding/
+    Get Mapbox Access Token: https://www.mapbox.com/account
     """
 
     provider = "mapbox"
