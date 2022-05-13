@@ -3,41 +3,6 @@ import pytest
 import geocoder
 
 
-def test_entry_points():
-    geocoder.ip
-    geocoder.osm
-    geocoder.w3w
-    geocoder.bing
-    geocoder.here
-    geocoder.tgos
-    geocoder.baidu
-    geocoder.gaode
-    geocoder.yahoo
-    geocoder.mapbox
-    geocoder.google
-    geocoder.yandex
-    geocoder.tomtom
-    geocoder.arcgis
-    geocoder.ipinfo
-    geocoder.mapzen
-    geocoder.geonames
-    geocoder.mapquest
-    geocoder.timezone
-    geocoder.maxmind
-    geocoder.elevation
-    geocoder.freegeoip
-    geocoder.geolytica
-    geocoder.timezone
-    geocoder.opencage
-    geocoder.places
-    geocoder.canadapost
-    geocoder.tamu
-    geocoder.geocodefarm
-    geocoder.geocodexyz
-    geocoder.uscensus
-    geocoder.ipfinder
-
-
 @pytest.mark.parametrize(
     "location",
     (
