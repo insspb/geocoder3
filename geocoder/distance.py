@@ -61,35 +61,35 @@ def haversine(point1, point2, **kwargs):
         "ft": "feet",
     }
 
-    if point1.ok and point2.ok:
-        # convert all latitudes/longitudes from decimal degrees to radians
-        lat1, lng1, lat2, lng2 = list(map(radians, point1.latlng + point2.latlng))
-
-        # calculate haversine
-        lat = lat2 - lat1
-        lng = lng2 - lng1
-        d = sin(lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(lng / 2) ** 2
-        h = 2 * AVG_EARTH_RADIUS * asin(sqrt(d))
-
-        # Measurements
-        units = kwargs.get("units", "kilometers").lower()
-        units_calculation = {
-            "miles": h * 0.621371,
-            "feet": h * 0.621371 * 5280,
-            "meters": h * 1000,
-            "kilometers": h,
-        }
-
-        try:
-            return units_calculation[lookup_units[units]]
-        except KeyError:
-            raise ValueError("Unknown units of measurement")
-
-    else:
+    if not (point1.ok and point2.ok):
         print(
             "[WARNING] Error calculating the following two locations.\n"
             "Points: {0} to {1}".format(point1.location, point2.location)
         )
+        return
+
+    # convert all latitudes/longitudes from decimal degrees to radians
+    lat1, lng1, lat2, lng2 = list(map(radians, point1.latlng + point2.latlng))
+
+    # calculate haversine
+    lat = lat2 - lat1
+    lng = lng2 - lng1
+    d = sin(lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(lng / 2) ** 2
+    h = 2 * AVG_EARTH_RADIUS * asin(sqrt(d))
+
+    # Measurements
+    units = kwargs.get("units", "kilometers").lower()
+    units_calculation = {
+        "miles": h * 0.621371,
+        "feet": h * 0.621371 * 5280,
+        "meters": h * 1000,
+        "kilometers": h,
+    }
+
+    try:
+        return units_calculation[lookup_units[units]]
+    except KeyError as error:
+        raise ValueError("Unknown units of measurement") from error
 
 
 if __name__ == "__main__":
