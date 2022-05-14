@@ -80,9 +80,9 @@ def haversine(point1, point2, **kwargs):
             "kilometers": h,
         }
 
-        if units in lookup_units:
+        try:
             return units_calculation[lookup_units[units]]
-        else:
+        except KeyError:
             raise ValueError("Unknown units of measurement")
 
     else:
