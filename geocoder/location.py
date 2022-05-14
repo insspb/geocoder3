@@ -38,7 +38,7 @@ class Location(object):
             else:
                 # Check for string to Geocode using a provider
                 provider = self.kwargs.get("provider", "osm")
-                g = geocoder.get(location, provider=provider)
+                g = geocoder.get_results(location, provider=provider)
                 if g.ok:
                     self.lat, self.lng = g.lat, g.lng
 
