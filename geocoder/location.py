@@ -86,16 +86,16 @@ class Location(object):
                 raise ValueError("Coordinates must be numbers")
 
     def _check_for_dict(self, location):
-        # Standard LatLng list or tuple with 2 number values
         if "lat" in location and "lng" in location:
             lat = location["lat"]
             lng = location["lng"]
-            self._check_for_list([lat, lng])
-
-        if "y" in location and "x" in location:
+        elif "y" in location and "x" in location:
             lat = location["y"]
             lng = location["x"]
-            self._check_for_list([lat, lng])
+        else:
+            raise ValueError("Location container's dict does not contain coordinates.")
+
+        self._check_for_list([lat, lng])
 
     @property
     def latlng(self):
