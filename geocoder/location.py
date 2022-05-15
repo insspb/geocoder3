@@ -118,9 +118,7 @@ class Location(object):
         return []
 
     def __str__(self):
-        if self.ok:
-            return "{0}, {1}".format(self.lat, self.lng)
-        return ""
+        return f"{self.lat}, {self.lng}" if self.ok else ""
 
 
 class BBox(object):
