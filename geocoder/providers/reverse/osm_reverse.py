@@ -17,12 +17,18 @@ class OsmReverse(OsmQuery):
     provider = "osm"
     method = "reverse"
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key: str,
+        max_results: int = 1,
+        **kwargs,
+    ):
         params = {
             "q": str(Location(location)),
             "format": "jsonv2",
             "addressdetails": 1,
-            "limit": kwargs.get("limit", 1),
+            "limit": max_results,
         }
         if "lang_code" in kwargs:
             params["accept-language"] = kwargs.get("lang_code")

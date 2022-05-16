@@ -27,5 +27,5 @@ def test__osm__simple_query__return_correct_result():
 @requests_recorder_ro.use_cassette("osm_geocode.json")
 @pytest.mark.parametrize("max_results", [1, 5])
 def test__osm__simple_query__respect_max_results_setting(max_results):
-    g = geocoder.osm(location, maxRows=max_results)
+    g = geocoder.osm(location, max_results=max_results)
     assert len(g) == max_results

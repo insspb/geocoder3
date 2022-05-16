@@ -1,7 +1,5 @@
 __all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail"]
 
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 
 
@@ -316,19 +314,18 @@ class OsmQuery(MultipleResultsQuery):
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
-        # backward compatitibility for 'limit' (now maxRows)
-        if "limit" in kwargs:
-            logging.warning(
-                "argument 'limit' is deprecated and should be replaced with maxRows"
-            )
-            kwargs["maxRows"] = kwargs["limit"]
-        # build params
+    def _build_params(
+        self,
+        location,
+        provider_key: str,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "q": location,
             "format": "jsonv2",
             "addressdetails": 1,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
         }
 
     def _before_initialize(self, location, **kwargs):
@@ -358,18 +355,17 @@ class OsmQueryDetail(MultipleResultsQuery):
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
-        # backward compatitibility for 'limit' (now maxRows)
-        if "limit" in kwargs:
-            logging.warning(
-                "argument 'limit'is deprecated and should be replaced with maxRows"
-            )
-            kwargs["maxRows"] = kwargs["limit"]
-        # build params
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         query = {
             "format": "jsonv2",
             "addressdetails": 1,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
         }
         query.update(kwargs)
         return query
