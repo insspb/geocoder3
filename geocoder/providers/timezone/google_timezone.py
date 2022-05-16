@@ -17,19 +17,19 @@ class GoogleTimezoneResult(OneResult):
 
     @property
     def timeZoneId(self):
-        return self.raw.get("timeZoneId")
+        return self.raw_json.get("timeZoneId")
 
     @property
     def timeZoneName(self):
-        return self.raw.get("timeZoneName")
+        return self.raw_json.get("timeZoneName")
 
     @property
     def rawOffset(self):
-        return self.raw.get("rawOffset")
+        return self.raw_json.get("rawOffset")
 
     @property
     def dstOffset(self):
-        return self.raw.get("dstOffset")
+        return self.raw_json.get("dstOffset")
 
 
 class GoogleTimezone(MultipleResultsQuery):

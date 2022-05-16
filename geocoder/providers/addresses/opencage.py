@@ -28,7 +28,7 @@ class OpenCageResult(OneResult):
 
     @property
     def address(self):
-        return self.raw.get("formatted")
+        return self.raw_json.get("formatted")
 
     @property
     def housenumber(self):
@@ -329,7 +329,7 @@ class OpenCageResult(OneResult):
 
     @property
     def confidence(self):
-        return self.raw.get("confidence")
+        return self.raw_json.get("confidence")
 
     @property
     def w3w(self):

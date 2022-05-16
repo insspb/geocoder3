@@ -14,35 +14,35 @@ class BaiduReverseResult(OneResult):
 
     @property
     def address(self):
-        return self.raw["formatted_address"]
+        return self.raw_json["formatted_address"]
 
     @property
     def country(self):
-        return self.raw["addressComponent"]["country"]
+        return self.raw_json["addressComponent"]["country"]
 
     @property
     def province(self):
-        return self.raw["addressComponent"]["province"]
+        return self.raw_json["addressComponent"]["province"]
 
     @property
     def state(self):
-        return self.raw["addressComponent"]["province"]
+        return self.raw_json["addressComponent"]["province"]
 
     @property
     def city(self):
-        return self.raw["addressComponent"]["city"]
+        return self.raw_json["addressComponent"]["city"]
 
     @property
     def district(self):
-        return self.raw["addressComponent"]["district"]
+        return self.raw_json["addressComponent"]["district"]
 
     @property
     def street(self):
-        return self.raw["addressComponent"]["street"]
+        return self.raw_json["addressComponent"]["street"]
 
     @property
     def housenumber(self):
-        return self.raw["addressComponent"]["street_number"]
+        return self.raw_json["addressComponent"]["street_number"]
 
 
 class BaiduReverse(BaiduQuery):

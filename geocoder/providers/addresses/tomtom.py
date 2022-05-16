@@ -14,23 +14,23 @@ class TomtomResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw.get("position", {}).get("lat")
+        return self.raw_json.get("position", {}).get("lat")
 
     @property
     def lng(self):
-        return self.raw.get("position", {}).get("lon")
+        return self.raw_json.get("position", {}).get("lon")
 
     @property
     def geohash(self):
-        return self.raw.get("id")
+        return self.raw_json.get("id")
 
     @property
     def quality(self):
-        return self.raw.get("type")
+        return self.raw_json.get("type")
 
     @property
     def bbox(self):
-        viewport = self.raw.get("viewport", {})
+        viewport = self.raw_json.get("viewport", {})
         if viewport:
             bbox = {
                 "south": viewport.get("btmRightPoint")["lon"],

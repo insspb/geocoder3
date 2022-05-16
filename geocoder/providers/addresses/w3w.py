@@ -9,23 +9,23 @@ from geocoder.keys import w3w_key
 class W3WResult(OneResult):
     @property
     def lat(self):
-        position = self.raw.get("geometry")
+        position = self.raw_json.get("geometry")
         if position:
             return position["lat"]
 
     @property
     def lng(self):
-        position = self.raw.get("geometry")
+        position = self.raw_json.get("geometry")
         if position:
             return position["lng"]
 
     @property
     def language(self):
-        return self.raw.get("language")
+        return self.raw_json.get("language")
 
     @property
     def words(self):
-        return self.raw.get("words")
+        return self.raw_json.get("words")
 
 
 class W3WQuery(MultipleResultsQuery):

@@ -1,13 +1,10 @@
-Authors
-=======
+Geocoder authors
+================
+
+Honored crew of authors of original library.
 
 Lead Developer
 --------------
-
-- `Andrey Shpak`_ - Creator of Python's Geocoder3
-
-Honoured Developer
-------------------
 
 - `Denis Carriere`_ - Creator of Python's Geocoder
 
@@ -36,7 +33,6 @@ A big thanks to all the people that help contribute:
 - Sergei Grabalin (Сергей Грабалин) - Fixed Python2 Unicode Issues
 - `Matthieu Rigal`_ - Added session support
 
-.. _`Andrey Shpak`: https://github.com/insspb
 .. _`Virus Warnning`: https://github.com/virus-warnning
 .. _`Kevin Brolly`: https://twitter.com/KevinBrolly
 .. _`Michael R. Okun`: https://github.com/ac6y

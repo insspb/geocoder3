@@ -20,15 +20,15 @@ class TgosResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw("geometry", {}).get("y")
+        return self.raw_json("geometry", {}).get("y")
 
     @property
     def lng(self):
-        return self.raw("geometry", {}).get("x")
+        return self.raw_json("geometry", {}).get("x")
 
     @property
     def address(self):
-        return self.raw.get("FULL_ADDR")
+        return self.raw_json.get("FULL_ADDR")
 
     @property
     def housenumber(self):
@@ -64,27 +64,27 @@ class TgosResult(OneResult):
     # TGOS specific attributes
     @property
     def alley(self):
-        return self.raw.get("ALLEY")
+        return self.raw_json.get("ALLEY")
 
     @property
     def lane(self):
-        return self.raw.get("LANE")
+        return self.raw_json.get("LANE")
 
     @property
     def neighborhood(self):
-        return self.raw.get("NEIGHBORHOOD")
+        return self.raw_json.get("NEIGHBORHOOD")
 
     @property
     def number(self):
-        return self.raw.get("NUMBER")
+        return self.raw_json.get("NUMBER")
 
     @property
     def road(self):
-        return self.raw.get("ROAD")
+        return self.raw_json.get("ROAD")
 
     @property
     def section(self):
-        section = self.raw.get("SECTION")
+        section = self.raw_json.get("SECTION")
         if section:
             if self.language == "zh-tw":
                 return {
@@ -103,31 +103,31 @@ class TgosResult(OneResult):
 
     @property
     def sub_alley(self):
-        return self.raw.get("sub_alley")
+        return self.raw_json.get("sub_alley")
 
     @property
     def tong(self):
-        return self.raw.get("TONG")
+        return self.raw_json.get("TONG")
 
     @property
     def village(self):
-        return self.raw.get("VILLAGE")
+        return self.raw_json.get("VILLAGE")
 
     @property
     def county(self):
-        return self.raw.get("county")
+        return self.raw_json.get("county")
 
     @property
     def name(self):
-        return self.raw.get("name")
+        return self.raw_json.get("name")
 
     @property
     def town(self):
-        return self.raw.get("town")
+        return self.raw_json.get("town")
 
     @property
     def type(self):
-        return self.raw.get("type")
+        return self.raw_json.get("type")
 
 
 class TgosQuery(MultipleResultsQuery):

@@ -28,26 +28,22 @@ __version__ = "2.0.0"
 __license__ = "MIT"
 __copyright__ = "Copyright (c) 2022 Andrey Shpak"
 
-# EXTRAS
-# CORE
 from geocoder.api import (  # noqa
     arcgis,
     baidu,
     bing,
     canadapost,
     distance,
-    elevation,
     freegeoip,
     gaode,
     geocodefarm,
     geocodexyz,
     geolytica,
     geonames,
-    get,
+    get_results,
     gisgraphy,
     google,
     here,
-    ip,
     ipfinder,
     ipinfo,
     komoot,
@@ -56,22 +52,17 @@ from geocoder.api import (  # noqa
     mapquest,
     mapzen,
     maxmind,
-    nokia,
     opencage,
     osm,
     ottawa,
-    places,
-    reverse,
     tamu,
     tgos,
-    timezone,
     tomtom,
     uscensus,
     w3w,
     yahoo,
     yandex,
 )
-
-# CLI
 from geocoder.cli import cli  # noqa
+from geocoder.distance import Distance  # noqa
 from geocoder.location import Location  # noqa

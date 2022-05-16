@@ -13,11 +13,11 @@ class CanadapostIdResult(OneResult):
 
     @property
     def item_id(self):
-        return self.raw.get("Id")
+        return self.raw_json.get("Id")
 
     @property
     def next_action(self):
-        return self.raw.get("Next")
+        return self.raw_json.get("Next")
 
 
 class CanadapostIdQuery(MultipleResultsQuery):
@@ -54,51 +54,51 @@ class CanadapostResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw.get("Type")
+        return self.raw_json.get("Type")
 
     @property
     def accuracy(self):
-        return self.raw.get("DataLevel")
+        return self.raw_json.get("DataLevel")
 
     @property
     def address(self):
-        return self.raw.get("Line1")
+        return self.raw_json.get("Line1")
 
     @property
     def postal(self):
-        return self.raw.get("PostalCode")
+        return self.raw_json.get("PostalCode")
 
     @property
     def housenumber(self):
-        return self.raw.get("BuildingNumber")
+        return self.raw_json.get("BuildingNumber")
 
     @property
     def street(self):
-        return self.raw.get("Street")
+        return self.raw_json.get("Street")
 
     @property
     def city(self):
-        return self.raw.get("City")
+        return self.raw_json.get("City")
 
     @property
     def state(self):
-        return self.raw.get("ProvinceName")
+        return self.raw_json.get("ProvinceName")
 
     @property
     def country(self):
-        return self.raw.get("CountryName")
+        return self.raw_json.get("CountryName")
 
     @property
     def unit(self):
-        return self.raw.get("SubBuilding")
+        return self.raw_json.get("SubBuilding")
 
     @property
     def domesticId(self):
-        return self.raw.get("DomesticId")
+        return self.raw_json.get("DomesticId")
 
     @property
     def label(self):
-        return self.raw.get("Label")
+        return self.raw_json.get("Label")
 
 
 class CanadapostQuery(MultipleResultsQuery):

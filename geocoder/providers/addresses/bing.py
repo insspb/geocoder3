@@ -62,11 +62,11 @@ class BingResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw.get("entityType")
+        return self.raw_json.get("entityType")
 
     @property
     def accuracy(self):
-        return self.raw.get("calculationMethod")
+        return self.raw_json.get("calculationMethod")
 
     @property
     def postal(self):
@@ -74,7 +74,7 @@ class BingResult(OneResult):
 
     @property
     def bbox(self):
-        _bbox = self.raw.get("bbox")
+        _bbox = self.raw_json.get("bbox")
         if _bbox:
             south = _bbox[0]
             north = _bbox[2]

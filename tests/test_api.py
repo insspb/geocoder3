@@ -1,0 +1,50 @@
+import pytest
+
+import geocoder
+
+
+@pytest.mark.parametrize(
+    "query, provider, method, expected_error_text",
+    [
+        (2, "osm", "geocode", "Query should be a string"),
+        ("fake address", "no_provider", "geocode", "Invalid provider"),
+        ("fake address", "osm", "fake_method", "Invalid method"),
+    ],
+    ids=[
+        "Test for wrong query type",
+        "Test for wrong provider",
+        "Test for wrong method",
+    ],
+)
+def test__get_results__on_wrong_arguments__return_expected_value_error(
+    query,
+    provider,
+    method,
+    expected_error_text,
+):
+    with pytest.raises(ValueError) as error:
+        geocoder.get_results(query, provider, method)
+        assert error.value == expected_error_text
+
+
+def test__get_results__on_default_arguments__return_correct_value():
+    result = geocoder.get_results("New York")
+    assert result.ok
+    assert result.latlng == [40.7127281, -74.0060152]
+
+
+@pytest.mark.parametrize(
+    "provider, method",
+    [
+        ("Osm", "Geocode"),
+        (" osm ", " geocode "),
+        (" OsM ", " GeocodE "),
+    ],
+)
+def test__get_results__on_partly_correct_arguments__do_strip_and_lower(
+    provider,
+    method,
+):
+    result = geocoder.get_results("New York", provider=provider, method=method)
+    assert result.ok
+    assert result.latlng == [40.7127281, -74.0060152]

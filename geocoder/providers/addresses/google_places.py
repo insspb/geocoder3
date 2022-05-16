@@ -32,45 +32,45 @@ class PlacesResult(OneResult):
 
     @property
     def id(self):
-        return self.raw.get("id")
+        return self.raw_json.get("id")
 
     @property
     def reference(self):
-        return self.raw.get("reference")
+        return self.raw_json.get("reference")
 
     @property
     def place_id(self):
-        return self.raw.get("place_id")
+        return self.raw_json.get("place_id")
 
     @property
     def type(self):
-        type = self.raw.get("types")
+        type = self.raw_json.get("types")
         if type:
             return type[0]
 
     @property
     def address(self):
-        return self.raw.get("formatted_address")
+        return self.raw_json.get("formatted_address")
 
     @property
     def icon(self):
-        return self.raw.get("icon")
+        return self.raw_json.get("icon")
 
     @property
     def name(self):
-        return self.raw.get("name")
+        return self.raw_json.get("name")
 
     @property
     def vicinity(self):
-        return self.raw.get("vicinity")
+        return self.raw_json.get("vicinity")
 
     @property
     def price_level(self):
-        return self.raw.get("price_level")
+        return self.raw_json.get("price_level")
 
     @property
     def rating(self):
-        return self.raw.get("rating")
+        return self.raw_json.get("rating")
 
 
 class PlacesQuery(MultipleResultsQuery):

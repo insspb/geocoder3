@@ -8,15 +8,15 @@ from geocoder.location import BBox
 class MapquestResult(OneResult):
     @property
     def lat(self):
-        return self.raw.get("latLng", {}).get("lat")
+        return self.raw_json.get("latLng", {}).get("lat")
 
     @property
     def lng(self):
-        return self.raw.get("latLng", {}).get("lng")
+        return self.raw_json.get("latLng", {}).get("lng")
 
     @property
     def street(self):
-        return self.raw.get("street")
+        return self.raw_json.get("street")
 
     @property
     def address(self):
@@ -29,31 +29,31 @@ class MapquestResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw.get("geocodeQuality")
+        return self.raw_json.get("geocodeQuality")
 
     @property
     def postal(self):
-        return self.raw.get("postalCode")
+        return self.raw_json.get("postalCode")
 
     @property
     def neighborhood(self):
-        return self.raw.get("adminArea6")
+        return self.raw_json.get("adminArea6")
 
     @property
     def city(self):
-        return self.raw.get("adminArea5")
+        return self.raw_json.get("adminArea5")
 
     @property
     def county(self):
-        return self.raw.get("adminArea4")
+        return self.raw_json.get("adminArea4")
 
     @property
     def state(self):
-        return self.raw.get("adminArea3")
+        return self.raw_json.get("adminArea3")
 
     @property
     def country(self):
-        return self.raw.get("adminArea1")
+        return self.raw_json.get("adminArea1")
 
 
 class MapquestQuery(MultipleResultsQuery):

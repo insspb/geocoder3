@@ -10,58 +10,58 @@ from geocoder.providers.addresses import USCensusQuery
 class USCensusReverseResult(OneResult):
     @property
     def ok(self):
-        return bool(self.raw["States"])
+        return bool(self.raw_json["States"])
 
     @property
     def state(self):
-        if self.raw["States"]:
-            return self.raw["States"][0].get("NAME")
+        if self.raw_json["States"]:
+            return self.raw_json["States"][0].get("NAME")
 
     @property
     def statenumber(self):
-        if self.raw["States"]:
-            return self.raw["States"][0].get("STATE")
+        if self.raw_json["States"]:
+            return self.raw_json["States"][0].get("STATE")
 
     @property
     def county(self):
-        if self.raw["Counties"]:
-            return self.raw["Counties"][0].get("NAME")
+        if self.raw_json["Counties"]:
+            return self.raw_json["Counties"][0].get("NAME")
 
     @property
     def countynumber(self):
-        if self.raw["Counties"]:
-            return self.raw["Counties"][0].get("COUNTY")
+        if self.raw_json["Counties"]:
+            return self.raw_json["Counties"][0].get("COUNTY")
 
     @property
     def tract(self):
-        if self.raw["Census Tracts"]:
-            return self.raw["Census Tracts"][0].get("NAME")
+        if self.raw_json["Census Tracts"]:
+            return self.raw_json["Census Tracts"][0].get("NAME")
 
     @property
     def tractnumber(self):
-        if self.raw["Census Tracts"]:
-            return self.raw["Census Tracts"][0].get("TRACT")
+        if self.raw_json["Census Tracts"]:
+            return self.raw_json["Census Tracts"][0].get("TRACT")
 
     @property
     def block(self):
-        if self.raw["2010 Census Blocks"]:
-            return self.raw["2010 Census Blocks"][0].get("NAME")
-        elif self.raw["Census Blocks"]:
-            return self.raw["Census Blocks"][0].get("NAME")
+        if self.raw_json["2010 Census Blocks"]:
+            return self.raw_json["2010 Census Blocks"][0].get("NAME")
+        elif self.raw_json["Census Blocks"]:
+            return self.raw_json["Census Blocks"][0].get("NAME")
 
     @property
     def blocknumber(self):
-        if self.raw["2010 Census Blocks"]:
-            return self.raw["2010 Census Blocks"][0].get("BLOCK")
-        elif self.raw["Census Blocks"]:
-            return self.raw["Census Blocks"][0].get("BLOCK")
+        if self.raw_json["2010 Census Blocks"]:
+            return self.raw_json["2010 Census Blocks"][0].get("BLOCK")
+        elif self.raw_json["Census Blocks"]:
+            return self.raw_json["Census Blocks"][0].get("BLOCK")
 
     @property
     def geoid(self):
-        if self.raw["2010 Census Blocks"]:
-            return self.raw["2010 Census Blocks"][0].get("GEOID")
-        elif self.raw["Census Blocks"]:
-            return self.raw["Census Blocks"][0].get("GEOID")
+        if self.raw_json["2010 Census Blocks"]:
+            return self.raw_json["2010 Census Blocks"][0].get("GEOID")
+        elif self.raw_json["Census Blocks"]:
+            return self.raw_json["Census Blocks"][0].get("GEOID")
 
 
 class USCensusReverse(USCensusQuery):

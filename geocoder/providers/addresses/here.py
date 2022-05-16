@@ -68,11 +68,11 @@ class HereResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw.get("MatchLevel")
+        return self.raw_json.get("MatchLevel")
 
     @property
     def accuracy(self):
-        return self.raw.get("MatchType")
+        return self.raw_json.get("MatchType")
 
     @property
     def bbox(self):

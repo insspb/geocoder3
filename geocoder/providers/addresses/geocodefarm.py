@@ -31,7 +31,7 @@ class GeocodeFarmResult(OneResult):
 
     @property
     def accuracy(self):
-        return self.raw.get("accuracy")
+        return self.raw_json.get("accuracy")
 
     @property
     def bbox(self):
@@ -43,7 +43,7 @@ class GeocodeFarmResult(OneResult):
 
     @property
     def address(self):
-        return self.raw.get("formatted_address")
+        return self.raw_json.get("formatted_address")
 
     @property
     def housenumber(self):

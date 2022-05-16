@@ -10,13 +10,13 @@ from geocoder.location import Location
 class IpinfoResult(OneResult):
     @property
     def lat(self):
-        loc = self.raw.get("loc")
+        loc = self.raw_json.get("loc")
         if loc:
             return Location(loc).lat
 
     @property
     def lng(self):
-        loc = self.raw.get("loc")
+        loc = self.raw_json.get("loc")
         if loc:
             return Location(loc).lng
 
@@ -33,31 +33,31 @@ class IpinfoResult(OneResult):
 
     @property
     def postal(self):
-        return self.raw.get("postal")
+        return self.raw_json.get("postal")
 
     @property
     def city(self):
-        return self.raw.get("city")
+        return self.raw_json.get("city")
 
     @property
     def state(self):
-        return self.raw.get("region")
+        return self.raw_json.get("region")
 
     @property
     def country(self):
-        return self.raw.get("country")
+        return self.raw_json.get("country")
 
     @property
     def hostname(self):
-        return self.raw.get("hostname")
+        return self.raw_json.get("hostname")
 
     @property
     def ip(self):
-        return self.raw.get("ip")
+        return self.raw_json.get("ip")
 
     @property
     def org(self):
-        return self.raw.get("org")
+        return self.raw_json.get("org")
 
 
 class IpinfoQuery(MultipleResultsQuery):

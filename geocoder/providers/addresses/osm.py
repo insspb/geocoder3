@@ -20,19 +20,19 @@ class OsmResult(OneResult):
 
     @property
     def lat(self):
-        lat = self.raw.get("lat")
+        lat = self.raw_json.get("lat")
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = self.raw.get("lon")
+        lng = self.raw_json.get("lon")
         if lng:
             return float(lng)
 
     @property
     def bbox(self):
-        _boundingbox = self.raw.get("boundingbox")
+        _boundingbox = self.raw_json.get("boundingbox")
         if _boundingbox:
             south = float(_boundingbox[0])
             west = float(_boundingbox[2])
@@ -46,7 +46,7 @@ class OsmResult(OneResult):
 
     @property
     def address(self):
-        return self.raw.get("display_name")
+        return self.raw_json.get("display_name")
 
     @property
     def housenumber(self):
@@ -265,39 +265,39 @@ class OsmResult(OneResult):
 
     @property
     def population(self):
-        return self.raw.get("population")
+        return self.raw_json.get("population")
 
     @property
     def license(self):
-        return self.raw.get("license")
+        return self.raw_json.get("license")
 
     @property
     def type(self):
-        return self.raw.get("type")
+        return self.raw_json.get("type")
 
     @property
     def importance(self):
-        return self.raw.get("importance")
+        return self.raw_json.get("importance")
 
     @property
     def icon(self):
-        return self.raw.get("icon")
+        return self.raw_json.get("icon")
 
     @property
     def osm_type(self):
-        return self.raw.get("osm_type")
+        return self.raw_json.get("osm_type")
 
     @property
     def osm_id(self):
-        return self.raw.get("osm_id")
+        return self.raw_json.get("osm_id")
 
     @property
     def place_id(self):
-        return self.raw.get("place_id")
+        return self.raw_json.get("place_id")
 
     @property
     def place_rank(self):
-        return self.raw.get("place_rank")
+        return self.raw_json.get("place_rank")
 
 
 class OsmQuery(MultipleResultsQuery):

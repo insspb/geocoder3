@@ -14,39 +14,39 @@ class ArcgisReverseResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw["location"].get("y")
+        return self.raw_json["location"].get("y")
 
     @property
     def lng(self):
-        return self.raw["location"].get("x")
+        return self.raw_json["location"].get("x")
 
     @property
     def address(self):
-        return self.raw["address"].get("Match_addr")
+        return self.raw_json["address"].get("Match_addr")
 
     @property
     def city(self):
-        return self.raw["address"].get("City")
+        return self.raw_json["address"].get("City")
 
     @property
     def neighborhood(self):
-        return self.raw["address"].get("Neighbourhood")
+        return self.raw_json["address"].get("Neighbourhood")
 
     @property
     def region(self):
-        return self.raw["address"].get("Region")
+        return self.raw_json["address"].get("Region")
 
     @property
     def country(self):
-        return self.raw["address"].get("CountryCode")
+        return self.raw_json["address"].get("CountryCode")
 
     @property
     def postal(self):
-        return self.raw["address"].get("Postal")
+        return self.raw_json["address"].get("Postal")
 
     @property
     def state(self):
-        return self.raw["address"].get("Region")
+        return self.raw_json["address"].get("Region")
 
 
 class ArcgisReverse(ArcgisQuery):
