@@ -31,13 +31,19 @@ class MapquestBatch(MultipleResultsQuery):
     _TIMEOUT = 30
     _KEY = mapquest_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         self._TIMEOUT = kwargs.get("timeout", 30)
 
         return {
             "key": provider_key,
             "location": location,
-            "maxResults": 1,
+            "maxResults": max_results,
             "outFormat": "json",
         }
 
