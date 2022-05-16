@@ -7,7 +7,7 @@ from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geonames_username
 from geocoder.location import BBox
 
-LOGGER = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class GeonamesResult(OneResult):
@@ -137,7 +137,7 @@ class GeonamesQuery(MultipleResultsQuery):
             )
         )
         found_kwargs = supported_kwargs & set(kwargs.keys())
-        LOGGER.debug("Adding extra kwargs %s", found_kwargs)
+        logger.debug("Adding extra kwargs %s", found_kwargs)
 
         # update base kwargs with extra ones
         base_kwargs.update(dict([(extra, kwargs[extra]) for extra in found_kwargs]))
@@ -157,7 +157,7 @@ class GeonamesQuery(MultipleResultsQuery):
                 18: "Do not use the demo account for your application",
             }
             self.error = custom_messages.get(value, message)
-            LOGGER.error("Error %s from JSON %s", self.error, json_response)
+            logger.error("Error %s from JSON %s", self.error, json_response)
 
         return self.error
 
