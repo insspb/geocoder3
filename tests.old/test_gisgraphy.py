@@ -17,7 +17,7 @@ def test_gisgraphy_multi_result():
     print(geocoder.komoot)
     print(geocoder.gisgraphy)
 
-    g = geocoder.gisgraphy(location, maxRows=3, timeout=10)
+    g = geocoder.gisgraphy(location, max_results=3, timeout=10)
     assert g.ok
     assert len(g) == 3
 

@@ -80,12 +80,18 @@ class OttawaQuery(MultipleResultsQuery):
     _RESULT_CLASS = OttawaResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "SingleLine": location.replace(", Ottawa, ON", ""),
             "f": "json",
             "outSR": 4326,
-            "maxLocations": kwargs.get("maxRows", 1),
+            "maxLocations": max_results,
         }
 
     def _adapt_results(self, json_response):

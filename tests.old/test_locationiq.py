@@ -28,7 +28,7 @@ def test_locationiq_single_result():
         mock_result = json.loads(ip.read())
         single_mock_result = json.dumps(mock_result[0:1])
         mocker.get(url, text=single_mock_result)
-        g = geocoder.locationiq(location, key="TEST_KEY", maxRows=1)
+        g = geocoder.locationiq(location, key="TEST_KEY", max_results=1)
         assert g.ok
         assert len(g) == 1
 

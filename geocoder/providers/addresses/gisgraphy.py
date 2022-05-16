@@ -63,10 +63,16 @@ class GisgraphyQuery(MultipleResultsQuery):
             "User-agent": "geocoder-converter",
         }
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "address": location,
-            "limitnbresult": kwargs.get("maxRows", 1),
+            "limitnbresult": max_results,
             "format": "json",
         }
 
@@ -76,5 +82,5 @@ class GisgraphyQuery(MultipleResultsQuery):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = GisgraphyQuery("Ottawa Ontario", maxRows=3)
+    g = GisgraphyQuery("Ottawa Ontario", max_results=3)
     g.debug()

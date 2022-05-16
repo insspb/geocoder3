@@ -12,5 +12,5 @@ def test_tomtom():
 
 
 def test_multi_results():
-    g = geocoder.tomtom(location, maxRows=3)
+    g = geocoder.tomtom(location, max_results=3)
     assert len(g) == 3

@@ -390,11 +390,17 @@ class OpenCageQuery(MultipleResultsQuery):
     _RESULT_CLASS = OpenCageResult
     _KEY = opencage_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         base_params = {
             "query": location,
             "key": provider_key,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
         }
         language = kwargs.get("language", None)
         if language:

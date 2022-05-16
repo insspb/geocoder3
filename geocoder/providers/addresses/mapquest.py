@@ -81,11 +81,11 @@ class MapquestQuery(MultipleResultsQuery):
             "host": "www.mapquestapi.com",
         }
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(self, location, provider_key, max_results: int = 1, **kwargs):
         params = {
             "key": provider_key,
             "location": location,
-            "maxResults": kwargs.get("maxRows", 1),
+            "maxResults": max_results,
             "outFormat": "json",
         }
 
@@ -113,5 +113,5 @@ class MapquestQuery(MultipleResultsQuery):
 
 
 if __name__ == "__main__":
-    g = MapquestQuery("Ottawa", maxRows=3)
+    g = MapquestQuery("Ottawa", max_results=3)
     g.debug()

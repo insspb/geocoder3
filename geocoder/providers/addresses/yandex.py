@@ -141,14 +141,20 @@ class YandexQuery(MultipleResultsQuery):
     _RESULT_CLASS = YandexResult
     _KEY = yandex_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "geocode": location,
             "lang": kwargs.get("lang", "en-US"),
             "kind": kwargs.get("kind", ""),
             "format": "json",
             "apikey": provider_key,
-            "results": kwargs.get("maxRows", 1),
+            "results": max_results,
         }
 
     def _adapt_results(self, json_response):
@@ -162,5 +168,5 @@ class YandexQuery(MultipleResultsQuery):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = YandexQuery("1552 Payette dr., Ottawa", maxRows=3)
+    g = YandexQuery("1552 Payette dr., Ottawa", max_results=3)
     g.debug()

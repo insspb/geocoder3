@@ -125,7 +125,13 @@ class CanadapostQuery(MultipleResultsQuery):
     _RESULT_CLASS = CanadapostResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         if not provider_key:
             provider_key = canadapost_key_getter(**kwargs)
 
@@ -147,7 +153,7 @@ class CanadapostQuery(MultipleResultsQuery):
             "Key": provider_key,
             "Id": ids.item_id,
             "Source": "",
-            "MaxResults": kwargs.get("maxRows", 1),
+            "MaxResults": max_results,
             "cache": "true",
         }
 

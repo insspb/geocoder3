@@ -94,10 +94,16 @@ class TomtomQuery(MultipleResultsQuery):
     _RESULT_CLASS = TomtomResult
     _KEY = tomtom_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "key": provider_key,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
             "countrySet": kwargs.get("countrySet"),
             "lon": kwargs.get("lon"),
             "lat": kwargs.get("lat"),

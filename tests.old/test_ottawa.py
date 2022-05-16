@@ -12,5 +12,5 @@ def test_ottawa():
 
 
 def test_multi_results():
-    g = geocoder.ottawa(location, maxRows=3)
+    g = geocoder.ottawa(location, max_results=3)
     assert len(g) == 3

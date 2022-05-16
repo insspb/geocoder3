@@ -88,11 +88,17 @@ class MapzenQuery(MultipleResultsQuery):
             "MapZen shut down as of January 2018: https://mapzen.com/blog/shutdown"
         )
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "text": location,
             "api_key": provider_key,
-            "size": kwargs.get("maxRows", 1),
+            "size": max_results,
         }
 
     def _adapt_results(self, json_response):

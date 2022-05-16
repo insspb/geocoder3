@@ -174,7 +174,13 @@ class TgosQuery(MultipleResultsQuery):
         else:
             raise ValueError("Cannot find TGOS.tgHash")
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "format": "json",
             "input": location,
@@ -182,7 +188,7 @@ class TgosQuery(MultipleResultsQuery):
             "srs": "EPSG:4326",
             "ignoreGeometry": False,
             "keystr": provider_key,
-            "pnum": kwargs.get("maxRows", 5),
+            "pnum": max_results,
         }
 
     def _before_initialize(self, location, **kwargs):

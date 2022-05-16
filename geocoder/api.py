@@ -269,7 +269,7 @@ def yandex(query, method: str = "geocode", **kwargs):
     :param query: Your search location you want geocoded.
     :param method: One of provider's supported methods, defaults to ``geocode``.
     :param apikey: YANDEX API KEY
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     :param lang: Chose the following language:
         * ru-RU — Russian (by default)
         * uk-UA — Ukrainian
@@ -352,7 +352,7 @@ def ottawa(query, method: str = "geocode", **kwargs):
 
     :param query: Your search location you want geocoded.
     :param method: One of provider's supported methods, defaults to ``geocode``.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="ottawa", method=method, **kwargs)
 
@@ -370,7 +370,7 @@ def bing(query, method: str = "geocode", **kwargs):
     :param query: Your search location you want geocoded.
     :param method: One of provider's supported methods, defaults to ``geocode``.
     :param key: (optional) use your own API Key from Bing.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="bing", method=method, **kwargs)
 
@@ -449,7 +449,7 @@ def here(query, method: str = "geocode", **kwargs):
     :param method: One of provider's supported methods, defaults to ``geocode``.
     :param app_code: (optional) use your own Application Code from HERE.
     :param app_id: (optional) use your own Application ID from HERE.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="here", method=method, **kwargs)
 
@@ -463,7 +463,7 @@ def tomtom(query, method: str = "geocode", **kwargs):
     :param query: Your search location you want geocoded.
     :param method: One of provider's supported methods, defaults to ``geocode``.
     :param key: (optional) use your own API Key from TomTom.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="tomtom", method=method, **kwargs)
 
@@ -479,7 +479,7 @@ def mapquest(query, method: str = "geocode", **kwargs):
     :param query: Your search location you want geocoded.
     :param method: One of provider's supported methods, defaults to ``geocode``.
     :param key: (optional) use your own API Key from MapQuest.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="mapquest", method=method, **kwargs)
 
@@ -550,7 +550,7 @@ def canadapost(query, method: str = "geocode", **kwargs):
     :param key: (optional) API Key from CanadaPost Address Complete.
     :param language: (default=en) Output language preference.
     :param country: (default=ca) Geofenced query by country.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="canadapost", method=method, **kwargs)
 
@@ -569,7 +569,7 @@ def geonames(query, method: str = "geocode", **kwargs):
     :param method: One of provider's supported methods, defaults to ``geocode``.
     :param geonameid: The place you want children / hierarchy for.
     :param key: (required) geonames *username*: needs to be passed with each request
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     :param proximity: Search within given area (bbox, bounds, or around latlng)
     """
     return get_results(query, provider="geonames", method=method, **kwargs)
@@ -584,7 +584,7 @@ def mapzen(query, method: str = "geocode", **kwargs):
 
     :param query: Your search location you want geocoded.
     :param method: One of provider's supported methods, defaults to ``geocode``.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
     """
     return get_results(query, provider="mapzen", method=method, **kwargs)
 
@@ -621,7 +621,7 @@ def geocodefarm(query, method: str = "geocode", **kwargs):
                 Currently only "en"(English) or "de"(German) supported.
     :param country: (optional) The country to return results in. Used for biasing
                 purposes and may not fully filter results to this specific country.
-    :param maxRows: (default=1) Max number of results to fetch
+    :param max_results: (default=1) Max number of results to fetch
 
     API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """

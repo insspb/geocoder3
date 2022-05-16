@@ -91,7 +91,7 @@ def test_bing_batch_reverse():
 
 
 def test_multi_results():
-    g = geocoder.bing(location, maxRows=3)
+    g = geocoder.bing(location, max_results=3)
 
     assert len(g) == 2
     assert g.city == city

@@ -83,13 +83,19 @@ class GeonamesQuery(MultipleResultsQuery):
     _RESULT_CLASS = GeonamesResult
     _KEY = geonames_username
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         """Will be overridden according to the targetted web service"""
         base_kwargs = {
             "q": location,
             "fuzzy": kwargs.get("fuzzy", 1.0),
             "username": provider_key,
-            "maxRows": kwargs.get("maxRows", 1),
+            "maxRows": max_results,
         }
         # check out for bbox in kwargs
         bbox = kwargs.pop("proximity", None)
@@ -167,6 +173,6 @@ class GeonamesQuery(MultipleResultsQuery):
 
 
 if __name__ == "__main__":
-    g = GeonamesQuery("Ottawa, Ontario", maxRows=1)
+    g = GeonamesQuery("Ottawa, Ontario", max_results=1)
     print(json.dumps(g.geojson, indent=4))
     g.debug()

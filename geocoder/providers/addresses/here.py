@@ -106,7 +106,13 @@ class HereQuery(MultipleResultsQuery):
         # API key is split between app_id and app_code -> managed in _build_params
         pass
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         # HERE Credentials
         app_id = kwargs.get("app_id", here_app_id)
         app_code = kwargs.get("app_code", here_app_code)
@@ -119,7 +125,7 @@ class HereQuery(MultipleResultsQuery):
             "app_id": app_id,
             "app_code": app_code,
             "gen": 9,
-            "maxresults": kwargs.get("maxRows", 1),
+            "maxresults": max_results,
             "language": kwargs.get("language", "en"),
         }
 

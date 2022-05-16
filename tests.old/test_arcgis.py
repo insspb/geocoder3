@@ -18,7 +18,7 @@ def test_arcgis_reverse():
 
 
 def test_multi_results():
-    g = geocoder.arcgis(location, maxRows="5")
+    g = geocoder.arcgis(location, max_results="5")
     assert len(g) == 5
 
     expected_results = ["Ottawa, Ontario", "Ottawa, Ontario", "Ontario, Oklahoma"]

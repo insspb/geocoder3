@@ -113,10 +113,16 @@ class KomootQuery(MultipleResultsQuery):
     _RESULT_CLASS = KomootResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "q": location,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
             "lang": "en",
         }
 
@@ -126,5 +132,5 @@ class KomootQuery(MultipleResultsQuery):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = KomootQuery("Ottawa Ontario", maxRows=3)
+    g = KomootQuery("Ottawa Ontario", max_results=3)
     g.debug()

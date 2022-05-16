@@ -14,7 +14,7 @@ def test_komoot():
 
 
 def test_komoot_multi_result():
-    g = geocoder.komoot(location, maxRows=3, timeout=10)
+    g = geocoder.komoot(location, max_results=3, timeout=10)
     assert g.ok
     assert len(g) == 3
 

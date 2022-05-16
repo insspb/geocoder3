@@ -45,7 +45,13 @@ class YandexReverse(YandexQuery):
 
     _RESULT_CLASS = YandexReverseResult
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         x, y = Location(location).xy
         self.location = "{}, {}".format(x, y)
         return {
@@ -54,7 +60,7 @@ class YandexReverse(YandexQuery):
             "kind": kwargs.get("kind", ""),
             "format": "json",
             "apikey": provider_key,
-            "results": kwargs.get("maxRows", 1),
+            "results": max_results,
         }
 
 

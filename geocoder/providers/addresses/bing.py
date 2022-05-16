@@ -106,13 +106,19 @@ class BingQuery(MultipleResultsQuery):
     def _build_headers(self, provider_key, **kwargs):
         return {"Referer": "http://addxy.com/", "User-agent": "Mozilla/5.0"}
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "q": location,
             "o": "json",
             "inclnb": 1,
             "key": provider_key,
-            "maxResults": kwargs.get("maxRows", 1),
+            "maxResults": max_results,
         }
 
     def _catch_errors(self, json_response):
@@ -138,7 +144,13 @@ class BingQueryDetail(MultipleResultsQuery):
     _RESULT_CLASS = BingResult
     _KEY = bing_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "adminDistrict": kwargs.get("adminDistrict"),
             "countryRegion": kwargs.get("countryRegion"),
@@ -148,7 +160,7 @@ class BingQueryDetail(MultipleResultsQuery):
             "o": "json",
             "inclnb": 1,
             "key": provider_key,
-            "maxResults": kwargs.get("maxRows", 1),
+            "maxResults": max_results,
         }
 
     def _catch_errors(self, json_response):

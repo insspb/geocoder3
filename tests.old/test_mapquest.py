@@ -49,5 +49,5 @@ def test_mapquest_batch():
 
 
 def test_multi_results():
-    g = geocoder.mapquest(location, maxRows=3, timeout=10)
+    g = geocoder.mapquest(location, max_results=3, timeout=10)
     assert len(g) == 3

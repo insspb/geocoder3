@@ -127,13 +127,19 @@ class GeocodeFarmQuery(MultipleResultsQuery):
         self.api_status = {}
         self.api_account = {}
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "addr": location,
             "key": provider_key,
             "lang": kwargs.get("lang", ""),
             "country": kwargs.get("country", ""),
-            "count": kwargs.get("maxRows", 1),
+            "count": max_results,
         }
 
     def _catch_errors(self, json_response):

@@ -66,18 +66,17 @@ class ArcgisQuery(MultipleResultsQuery):
     _RESULT_CLASS = ArcgisResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
-        # backward compatitibility for 'limit' (now maxRows)
-        if "limit" in kwargs:
-            logging.warning(
-                "argument 'limit' in OSM is deprecated, should be replaced with maxRows"
-            )
-            kwargs["maxRows"] = kwargs["limit"]
-        # build params
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "f": "json",
             "text": location,
-            "maxLocations": kwargs.get("maxRows", 1),
+            "maxLocations": max_results,
         }
 
     def _adapt_results(self, json_response):
@@ -97,6 +96,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     g = ArcgisQuery("Toronto")
     g.debug()
-    g = ArcgisQuery("Ottawa, Ontario", maxRows=5)
+    g = ArcgisQuery("Ottawa, Ontario", max_results=5)
     print(json.dumps(g.geojson, indent=4))
     print([result.address for result in g][:3])

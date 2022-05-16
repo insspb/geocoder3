@@ -31,7 +31,7 @@ def test_multi_results():
     data_file = "tests/results/yandex_batch.json"
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(location_url, text=input.read())
-        g = geocoder.yandex(location, maxRows=3, key="mock")
+        g = geocoder.yandex(location, max_results=3, key="mock")
         assert len(g) == 3
 
 

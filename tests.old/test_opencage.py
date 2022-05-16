@@ -62,7 +62,7 @@ def test_opencage_countrycode_param():
 
 
 def test_opencage_multi_result():
-    g = geocoder.opencage(location, maxRows=5)
+    g = geocoder.opencage(location, max_results=5)
     assert len(g) > 1
 
 
