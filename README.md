@@ -26,6 +26,10 @@
     <img src="https://codecov.io/gh/insspb/geocoder3/branch/master/graph/badge.svg?token=HoUly1aQHN"
          alt="Codecov" />
   </a>
+  <a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg"
+         alt="Code Style" />
+  </a>
 </p>
 <br>
 
