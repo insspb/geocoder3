@@ -220,7 +220,7 @@ geocode "Ottawa, ON" --provider osm --output geojson --method geocode
 |                 | [~~Mapzen~~][Mapzen]           | Shutdown  | API key                         | yes              | yes     |           |       |
 |                 | [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
 |                 | [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
-|                 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
+| YES             | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
 |                 | [Tamu][Tamu]                   | US        | API key                         |                  |         |           |       |
 |                 | [TGOS][TGOS]                   | Taiwan    |                                 |                  |         |           |       |
 |                 | [TomTom][TomTom]               | World     | API key                         | yes              |         |           |       |
