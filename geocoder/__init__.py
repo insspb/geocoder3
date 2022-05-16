@@ -28,6 +28,8 @@ __version__ = "2.0.0"
 __license__ = "MIT"
 __copyright__ = "Copyright (c) 2022 Andrey Shpak"
 
+import logging
+
 from geocoder.api import (  # noqa
     arcgis,
     baidu,
@@ -66,3 +68,5 @@ from geocoder.api import (  # noqa
 from geocoder.cli import cli  # noqa
 from geocoder.distance import Distance  # noqa
 from geocoder.location import Location  # noqa
+
+logging.basicConfig(level=logging.DEBUG)
