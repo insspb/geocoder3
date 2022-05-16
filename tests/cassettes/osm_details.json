@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "interactions": [
+    {
+      "request": {
+        "method": "GET",
+        "uri": "https://nominatim.openstreetmap.org/search?addressdetails=1&format=jsonv2&limit=1&postalcode=45326&street=Ellernstra%C3%9Fe",
+        "body": null,
+        "headers": {
+          "User-Agent": [
+            "python-requests/2.27.1"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Connection": [
+            "keep-alive"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "Keep-Alive": [
+            "timeout=20"
+          ],
+          "Access-Control-Allow-Methods": [
+            "OPTIONS,GET"
+          ],
+          "Date": [
+            "Mon, 16 May 2022 21:45:55 GMT"
+          ]
+        },
+        "body": {
+          "string": "[{\"place_id\":110158830,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"way\",\"osm_id\":32674820,\"boundingbox\":[\"51.4744679\",\"51.4765117\",\"7.010975\",\"7.0138198\"],\"lat\":\"51.4752902\",\"lon\":\"7.0122123\",\"display_name\":\"Ellernstra\u00dfe, Altenessen-S\u00fcd, Stadtbezirk V, Essen, Nordrhein-Westfalen, 45326, Deutschland\",\"place_rank\":26,\"category\":\"highway\",\"type\":\"residential\",\"importance\":0.32,\"address\":{\"road\":\"Ellernstra\u00dfe\",\"neighbourhood\":\"Altenessen-S\u00fcd\",\"city_district\":\"Stadtbezirk V\",\"city\":\"Essen\",\"state\":\"Nordrhein-Westfalen\",\"ISO3166-2-lvl4\":\"DE-NW\",\"postcode\":\"45326\",\"country\":\"Deutschland\",\"country_code\":\"de\"}}]"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "interactions": [
+    {
+      "request": {
+        "method": "GET",
+        "uri": "https://nominatim.openstreetmap.org/search?addressdetails=1&format=jsonv2&limit=1&q=Ottawa%2C+Ontario",
+        "body": null,
+        "headers": {
+          "User-Agent": [
+            "python-requests/2.27.1"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Mon, 16 May 2022 21:44:28 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Access-Control-Allow-Methods": [
+            "OPTIONS,GET"
+          ],
+          "Keep-Alive": [
+            "timeout=20"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "string": "[{\"place_id\":286007684,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":18886011,\"boundingbox\":[\"45.2369506\",\"45.5569506\",\"-75.8451593\",\"-75.5251593\"],\"lat\":\"45.3969506\",\"lon\":\"-75.6851593\",\"display_name\":\"Ottawa, (Old) Ottawa, Ottawa, Eastern Ontario, Ontario, K1S 3W7, Canada\",\"place_rank\":15,\"category\":\"place\",\"type\":\"city\",\"importance\":0.991919973272384,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//poi_place_city.p.20.png\",\"address\":{\"city\":\"Ottawa\",\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"postcode\":\"K1S 3W7\",\"country\":\"Canada\",\"country_code\":\"ca\"}}]"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "uri": "https://nominatim.openstreetmap.org/search?addressdetails=1&format=jsonv2&limit=1&q=Ottawa%2C+Ontario",
+        "body": null,
+        "headers": {
+          "User-Agent": [
+            "python-requests/2.27.1"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Mon, 16 May 2022 21:44:29 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Access-Control-Allow-Methods": [
+            "OPTIONS,GET"
+          ],
+          "Keep-Alive": [
+            "timeout=20"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "string": "[{\"place_id\":286007684,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":18886011,\"boundingbox\":[\"45.2369506\",\"45.5569506\",\"-75.8451593\",\"-75.5251593\"],\"lat\":\"45.3969506\",\"lon\":\"-75.6851593\",\"display_name\":\"Ottawa, (Old) Ottawa, Ottawa, Eastern Ontario, Ontario, K1S 3W7, Canada\",\"place_rank\":15,\"category\":\"place\",\"type\":\"city\",\"importance\":0.991919973272384,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//poi_place_city.p.20.png\",\"address\":{\"city\":\"Ottawa\",\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"postcode\":\"K1S 3W7\",\"country\":\"Canada\",\"country_code\":\"ca\"}}]"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "uri": "https://nominatim.openstreetmap.org/search?addressdetails=1&format=jsonv2&limit=5&q=Ottawa%2C+Ontario",
+        "body": null,
+        "headers": {
+          "User-Agent": [
+            "python-requests/2.27.1"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Date": [
+            "Mon, 16 May 2022 21:44:29 GMT"
+          ],
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Access-Control-Allow-Methods": [
+            "OPTIONS,GET"
+          ],
+          "Keep-Alive": [
+            "timeout=20"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ]
+        },
+        "body": {
+          "string": "[{\"place_id\":286007684,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":18886011,\"boundingbox\":[\"45.2369506\",\"45.5569506\",\"-75.8451593\",\"-75.5251593\"],\"lat\":\"45.3969506\",\"lon\":\"-75.6851593\",\"display_name\":\"Ottawa, (Old) Ottawa, Ottawa, Eastern Ontario, Ontario, K1S 3W7, Canada\",\"place_rank\":15,\"category\":\"place\",\"type\":\"city\",\"importance\":0.991919973272384,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//poi_place_city.p.20.png\",\"address\":{\"city\":\"Ottawa\",\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"postcode\":\"K1S 3W7\",\"country\":\"Canada\",\"country_code\":\"ca\"}},{\"place_id\":285303844,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"relation\",\"osm_id\":4136816,\"boundingbox\":[\"44.9617738\",\"45.5376502\",\"-76.3555857\",\"-75.2465783\"],\"lat\":\"45.2603984\",\"lon\":\"-75.8082383\",\"display_name\":\"Ottawa, Eastern Ontario, Ontario, Canada\",\"place_rank\":11,\"category\":\"boundary\",\"type\":\"administrative\",\"importance\":0.991919973272384,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//poi_boundary_administrative.p.20.png\",\"address\":{\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"country\":\"Canada\",\"country_code\":\"ca\"}},{\"place_id\":67851361,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":6341945787,\"boundingbox\":[\"45.4114666\",\"45.4214666\",\"-75.6567255\",\"-75.6467255\"],\"lat\":\"45.4164666\",\"lon\":\"-75.6517255\",\"display_name\":\"Ottawa, Tremblay Road, Alta Vista, (Old) Ottawa, Ottawa, Eastern Ontario, Ontario, K1G 3H5, Canada\",\"place_rank\":30,\"category\":\"railway\",\"type\":\"station\",\"importance\":0.5605469222584372,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//transport_train_station2.p.20.png\",\"address\":{\"railway\":\"Ottawa\",\"road\":\"Tremblay Road\",\"city_district\":\"Alta Vista\",\"city\":\"(Old) Ottawa\",\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"postcode\":\"K1G 3H5\",\"country\":\"Canada\",\"country_code\":\"ca\"}},{\"place_id\":165140054,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"way\",\"osm_id\":255302241,\"boundingbox\":[\"45.428046\",\"45.4288072\",\"-75.677063\",\"-75.675817\"],\"lat\":\"45.428475\",\"lon\":\"-75.67643970587142\",\"display_name\":\"High Commission of Brunei, Ottawa, 395, Laurier Avenue East, Sandy Hill, Rideau-Vanier, (Old) Ottawa, Ottawa, Eastern Ontario, Ontario, K1N 7Z2, Canada\",\"place_rank\":30,\"category\":\"office\",\"type\":\"diplomatic\",\"importance\":0.47535133411097136,\"address\":{\"office\":\"High Commission of Brunei, Ottawa\",\"house_number\":\"395\",\"road\":\"Laurier Avenue East\",\"suburb\":\"Sandy Hill\",\"city_district\":\"Rideau-Vanier\",\"city\":\"(Old) Ottawa\",\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"postcode\":\"K1N 7Z2\",\"country\":\"Canada\",\"country_code\":\"ca\"}},{\"place_id\":164914,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"node\",\"osm_id\":151609708,\"boundingbox\":[\"36.9675663\",\"37.0075663\",\"-94.7830041\",\"-94.7430041\"],\"lat\":\"36.9875663\",\"lon\":\"-94.7630041\",\"display_name\":\"Ontario, Ottawa County, Oklahoma, 66713, United States\",\"place_rank\":20,\"category\":\"place\",\"type\":\"hamlet\",\"importance\":0.46,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//poi_place_village.p.20.png\",\"address\":{\"hamlet\":\"Ontario\",\"county\":\"Ottawa County\",\"state\":\"Oklahoma\",\"ISO3166-2-lvl4\":\"US-OK\",\"postcode\":\"66713\",\"country\":\"United States\",\"country_code\":\"us\"}}]"
+        }
+      }
+    }
+  ]
+}
