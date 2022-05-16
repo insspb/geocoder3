@@ -64,4 +64,5 @@ from geocoder.api import (  # noqa
     yandex,
 )
 from geocoder.cli import cli  # noqa
+from geocoder.distance import Distance  # noqa
 from geocoder.location import Location  # noqa

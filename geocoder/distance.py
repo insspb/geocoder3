@@ -5,6 +5,25 @@ from math import asin, cos, radians, sin, sqrt
 from geocoder.location import Location
 
 AVG_EARTH_RADIUS = 6371  # in km
+LOOKUP_UNITS = {
+    "miles": "miles",
+    "mile": "miles",
+    "mi": "miles",
+    "ml": "miles",
+    "kilometers": "kilometers",
+    "kilometres": "kilometers",
+    "kilometer": "kilometers",
+    "kilometre": "kilometers",
+    "km": "kilometers",
+    "meters": "meters",
+    "metres": "meters",
+    "meter": "meters",
+    "metre": "meters",
+    "m": "meters",
+    "feet": "feet",
+    "f": "feet",
+    "ft": "feet",
+}
 
 
 def Distance(*args, **kwargs):
@@ -27,7 +46,7 @@ def Distance(*args, **kwargs):
     return total
 
 
-def haversine(point1, point2, **kwargs):
+def haversine(point1, point2, units="kilometers"):
     """Calculate the great-circle distance bewteen two points on the Earth surface.
 
     :input: two 2-tuples, containing the latitude and longitude of each point
@@ -38,33 +57,11 @@ def haversine(point1, point2, **kwargs):
     :output: Returns the distance bewteen the two points.
     The default unit is kilometers. Miles can be returned
     if the ``miles`` parameter is set to True.
-
     """
-
-    lookup_units = {
-        "miles": "miles",
-        "mile": "miles",
-        "mi": "miles",
-        "ml": "miles",
-        "kilometers": "kilometers",
-        "kilometres": "kilometers",
-        "kilometer": "kilometers",
-        "kilometre": "kilometers",
-        "km": "kilometers",
-        "meters": "meters",
-        "metres": "meters",
-        "meter": "meters",
-        "metre": "meters",
-        "m": "meters",
-        "feet": "feet",
-        "f": "feet",
-        "ft": "feet",
-    }
-
     if not (point1.ok and point2.ok):
         print(
-            "[WARNING] Error calculating the following two locations.\n"
-            "Points: {0} to {1}".format(point1.location, point2.location)
+            f"[WARNING] Error calculating the following two locations.\n"
+            f"Points: {point1.location} to {point2.location}"
         )
         return
 
@@ -78,7 +75,6 @@ def haversine(point1, point2, **kwargs):
     h = 2 * AVG_EARTH_RADIUS * asin(sqrt(d))
 
     # Measurements
-    units = kwargs.get("units", "kilometers").lower()
     units_calculation = {
         "miles": h * 0.621371,
         "feet": h * 0.621371 * 5280,
@@ -87,7 +83,7 @@ def haversine(point1, point2, **kwargs):
     }
 
     try:
-        return units_calculation[lookup_units[units]]
+        return units_calculation[LOOKUP_UNITS[units]]
     except KeyError as error:
         raise ValueError("Unknown units of measurement") from error
 

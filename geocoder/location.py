@@ -16,15 +16,15 @@ class Location(object):
         self._check_input(location)
 
     @property
-    def ok(self):
+    def ok(self) -> bool:
         return bool(self.latlng)
 
     @staticmethod
-    def _convert_float(number):
+    def _convert_float(number) -> float:
         try:
             return float(number)
-        except ValueError:
-            return None
+        except ValueError as error:
+            raise ValueError("Coordinates must be numbers or None") from error
 
     def _check_input(self, location):
         # Checking for a LatLng String
@@ -61,29 +61,21 @@ class Location(object):
 
     def _check_for_list(self, location):
         # Standard LatLng list or tuple with 2 number values
-        if len(location) == 2:
-            lat = self._convert_float(location[0])
-            lng = self._convert_float(location[1])
-            condition_1 = isinstance(lat, float)
-            condition_2 = isinstance(lng, float)
+        if len(location) != 2:
+            return
 
-            # Check if input are Floats
-            if condition_1 and condition_2:
-                condition_3 = -90 <= lat <= 90
-                condition_4 = -180 <= lng <= 180
+        lat = self._convert_float(location[0])
+        lng = self._convert_float(location[1])
 
-                # Check if inputs are within the World Geographical
-                # boundary (90,180,-90,-180)
-                if condition_3 and condition_4:
-                    self.lat = lat
-                    self.lng = lng
-                    return self.lat, self.lng
-                else:
-                    raise ValueError(
-                        "Coords are not within the world's geographical boundary"
-                    )
-            else:
-                raise ValueError("Coordinates must be numbers")
+        # Check if inputs are within the World Geographical
+        # boundary (90,180,-90,-180)
+        if not (-90 <= lat <= 90 and -180 <= lng <= 180):
+            raise ValueError("Coords are not within the world's geographical boundary")
+
+        self.lat = lat
+        self.lng = lng
+
+        return self.lat, self.lng
 
     def _check_for_dict(self, location):
         if "lat" in location and "lng" in location:
