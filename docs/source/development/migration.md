@@ -39,6 +39,22 @@ use direct helper's functions from `geocoder` module - no changes needed.
 - Property `self.raw` renamed to `self.raw_json` to be more explainable in inside
   content. This change affects all subclesses (all providers).
 
+## All print statements replaced with logging module
+
+List of affected files, functions and classes:
+
+- `base.py`
+  - `OneResult.debug()`
+  - `MultipleResultsQuery.debug()`
+- `distance.py`
+  - `haversine()` - warnings
+- `bing_batch.py`
+  - `BingBatchResult.debug()`
+- `bing_batch_forward.py`
+  - `BingBatchForwardResult.debug()`
+- `bing_batch_reverse.py`
+  - `BingBatchReverse.debug()`
+
 [geocoder]: https://github.com/DenisCarriere/geocoder
 [geocoder3]: https://github.com/insspb/geocoder3
 [releases]: https://github.com/insspb/geocoder3/releases

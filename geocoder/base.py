@@ -2,14 +2,13 @@ import json
 import logging
 from collections import OrderedDict
 from collections.abc import MutableSequence
-from io import StringIO
 from urllib.parse import urlparse
 
 import requests
 
 from geocoder.distance import Distance
 
-LOGGER = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class OneResult(object):
@@ -164,42 +163,37 @@ class OneResult(object):
             return "ERROR - No results found"
         return "ERROR - No Geometry"
 
-    def debug(self, verbose=True):
-        with StringIO() as output:
-            print("From provider", file=output)
-            print("-------------", file=output)
-            print(json.dumps(self.raw_json, indent=4), file=output)
-            print("Cleaned json", file=output)
-            print("------------", file=output)
-            print(json.dumps(self.json, indent=4), file=output)
-            print("OSM Quality", file=output)
-            print("-----------", file=output)
-            osm_count = 0
-            for key in self.osm:
-                if "addr:" in key:
-                    if self.json.get(key.replace("addr:", "")):
-                        print(f"- [x] {key}", file=output)
-                        osm_count += 1
-                    else:
-                        print(f"- [ ] {key}", file=output)
-            print(f"({osm_count}/{len(self.osm) - 2})", file=output)
-            print("Fieldnames", file=output)
-            print("----------", file=output)
-            fields_count = 0
-            for fieldname in self.fieldnames:
-                if self.json.get(fieldname):
-                    print(f"- [x] {fieldname}", file=output)
-                    fields_count += 1
+    def debug(self):
+        logger.debug("From provider")
+        logger.debug("-------------")
+        logger.debug(json.dumps(self.raw_json, indent=4))
+        logger.debug("Cleaned json")
+        logger.debug("------------")
+        logger.debug(json.dumps(self.json, indent=4))
+        logger.debug("OSM Quality")
+        logger.debug("-----------")
+        osm_count = 0
+        for key in self.osm:
+            if "addr:" in key:
+                if self.json.get(key.replace("addr:", "")):
+                    logger.debug(f"- [x] {key}")
+                    osm_count += 1
                 else:
-                    print(f"- [ ] {fieldname}", file=output)
-            print(f"({fields_count}/{len(self.fieldnames)})", file=output)
+                    logger.debug(f"- [ ] {key}")
+        logger.debug(f"({osm_count}/{len(self.osm) - 2})")
+        logger.debug("Fieldnames")
+        logger.debug("----------")
+        fields_count = 0
+        for fieldname in self.fieldnames:
+            if self.json.get(fieldname):
+                logger.debug(f"- [x] {fieldname}")
+                fields_count += 1
+            else:
+                logger.debug(f"- [ ] {fieldname}")
+        logger.debug(f"({fields_count}/{len(self.fieldnames)})")
 
-            # print in verbose mode
-            if verbose:
-                print(output.getvalue())
-
-            # return stats
-            return [osm_count, fields_count]
+        # return stats
+        return [osm_count, fields_count]
 
     def _get_bbox(self, south, west, north, east):
         if not all([south, east, north, west]):
@@ -507,12 +501,12 @@ class MultipleResultsQuery(MutableSequence):
             # rely on json method to get non-empty well formatted JSON
             json_response = response.json()
             self.url = response.url
-            LOGGER.info("Requested %s", self.url)
+            logger.info("Requested %s", self.url)
 
         except requests.exceptions.RequestException as err:
             # store real status code and error
             self.error = f"ERROR - {str(err)}"
-            LOGGER.error(
+            logger.error(
                 "Status code %s from %s: %s", self.status_code, self.url, self.error
             )
             return False
@@ -566,31 +560,25 @@ class MultipleResultsQuery(MutableSequence):
         geojson_results = [result.geojson for result in self]
         return {"type": "FeatureCollection", "features": geojson_results}
 
-    def debug(self, verbose=True):
-        with StringIO() as output:
-            print("===", file=output)
-            print(repr(self), file=output)
-            print("===", file=output)
-            print("\n", file=output)
-            print(f"#res: {len(self)}", file=output)
-            print(f"code: {self.status_code}", file=output)
-            print(f"url:  {self.url}", file=output)
+    def debug(self):
+        logger.debug("===")
+        logger.debug(repr(self))
+        logger.debug("===")
+        logger.debug(f"#res: {len(self)}")
+        logger.debug(f"code: {self.status_code}")
+        logger.debug(f"url:  {self.url}")
 
-            stats = []
+        stats = []
 
-            if self.ok:
-                for index, result in enumerate(self):
-                    print("\n", file=output)
-                    print(f"Details for result #{index + 1}", file=output)
-                    print("---", file=output)
-                    stats.append(result.debug())
-            else:
-                print(self.status, file=output)
+        if self.ok:
+            for index, result in enumerate(self):
+                logger.debug(f"Details for result #{index + 1}")
+                logger.debug("---")
+                stats.append(result.debug())
+        else:
+            logger.debug(self.status)
 
-            if verbose:
-                print(output.getvalue())
-
-            return stats
+        return stats
 
     # Delegation to current result
     def set_default_result(self, index):

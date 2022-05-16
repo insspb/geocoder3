@@ -8,7 +8,7 @@ import requests
 
 from geocoder.base import MultipleResultsQuery, OneResult
 
-LOGGER = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class USCensusBatchResult(OneResult):
@@ -101,7 +101,7 @@ class USCensusBatch(MultipleResultsQuery):
         except (requests.exceptions.RequestException, LookupError) as err:
             # store real status code and error
             self.error = "ERROR - {}".format(str(err))
-            LOGGER.error(
+            logger.error(
                 "Status code %s from %s: %s", self.status_code, self.url, self.error
             )
 

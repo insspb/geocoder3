@@ -1,6 +1,5 @@
 __all__ = ["BingBatchResult", "BingBatch"]
 
-import io
 import logging
 import time
 
@@ -9,7 +8,7 @@ import requests
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import bing_key
 
-LOGGER = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class BingBatchResult(OneResult):
@@ -28,17 +27,12 @@ class BingBatchResult(OneResult):
         if coord:
             return coord[1]
 
-    def debug(self, verbose=True):
-        with io.StringIO() as output:
-            print("\n", file=output)
-            print("{} result\n".format(self.__class__.__name__), file=output)
-            print("-----------\n", file=output)
-            print(self._content, file=output)
+    def debug(self):
+        logger.debug("%s result", self.__class__.__name__)
+        logger.debug("-----------")
+        logger.debug(self._content)
 
-            if verbose:
-                print(output.getvalue())
-
-            return [None, None]
+        return [None, None]
 
 
 class BingBatch(MultipleResultsQuery):
@@ -137,7 +131,7 @@ class BingBatch(MultipleResultsQuery):
             # rely on json method to get non-empty well formatted JSON
             json_response = response.json()
             self.url = response.url
-            LOGGER.info("Requested %s", self.url)
+            logger.info("Requested %s", self.url)
 
             # get the resource/job id
             resource_id = self.extract_resource_id(json_response)
@@ -151,12 +145,12 @@ class BingBatch(MultipleResultsQuery):
                 elapsed = elapsed + self._BATCH_WAIT
                 time.sleep(self._BATCH_WAIT)
 
-            LOGGER.error("Job was not finished in time.")
+            logger.error("Job was not finished in time.")
 
         except (requests.exceptions.RequestException, LookupError) as err:
             # store real status code and error
             self.error = "ERROR - {}".format(str(err))
-            LOGGER.error(
+            logger.error(
                 "Status code %s from %s: %s", self.status_code, self.url, self.error
             )
 
