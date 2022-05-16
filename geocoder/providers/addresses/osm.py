@@ -1,6 +1,5 @@
 __all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail"]
 
-import json
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -383,11 +382,3 @@ class OsmQueryDetail(MultipleResultsQuery):
         elif url:
             self.url = url
         # else:  do not change self.url, which is cls._URL
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = OsmQuery("Ottawa, Ontario")
-    g.debug()
-    g = OsmQuery("Ottawa, Ontario", maxRows=5)
-    print(json.dumps(g.geojson, indent=4))

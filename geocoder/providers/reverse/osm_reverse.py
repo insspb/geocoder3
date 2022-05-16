@@ -27,8 +27,3 @@ class OsmReverse(OsmQuery):
         if "lang_code" in kwargs:
             params["accept-language"] = kwargs.get("lang_code")
         return params
-
-
-if __name__ == "__main__":
-    g = OsmReverse("45.3, -75.4")
-    g.debug()
