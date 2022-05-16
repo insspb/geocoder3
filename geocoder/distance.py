@@ -1,8 +1,11 @@
 __all__ = ["Distance"]
 
+import logging
 from math import asin, cos, radians, sin, sqrt
 
 from geocoder.location import Location
+
+logger = logging.getLogger(__name__)
 
 AVG_EARTH_RADIUS = 6371  # in km
 LOOKUP_UNITS = {
@@ -59,9 +62,10 @@ def haversine(point1, point2, units="kilometers"):
     if the ``miles`` parameter is set to True.
     """
     if not (point1.ok and point2.ok):
-        print(
-            f"[WARNING] Error calculating the following two locations.\n"
-            f"Points: {point1.location} to {point2.location}"
+        logger.warning(
+            "Error calculating the following two locations. Points: %s to %s",
+            point1.location,
+            point2.location,
         )
         return
 

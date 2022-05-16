@@ -2,8 +2,11 @@ __all__ = ["BingBatchForward"]
 
 import csv
 import io
+import logging
 
 from geocoder.providers.addresses.bing_batch import BingBatch, BingBatchResult
+
+logger = logging.getLogger(__name__)
 
 
 class BingBatchForwardResult(BingBatchResult):
@@ -23,17 +26,12 @@ class BingBatchForwardResult(BingBatchResult):
     def ok(self):
         return bool(self._content)
 
-    def debug(self, verbose=True):
-        with io.StringIO() as output:
-            print("\n", file=output)
-            print("Bing Batch result\n", file=output)
-            print("-----------\n", file=output)
-            print(self._content, file=output)
+    def debug(self):
+        logger.debug("Bing Batch result")
+        logger.debug("-----------")
+        logger.debug(self._content)
 
-            if verbose:
-                print(output.getvalue())
-
-            return [None, None]
+        return [None, None]
 
 
 class BingBatchForward(BingBatch):
