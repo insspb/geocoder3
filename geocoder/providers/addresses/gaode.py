@@ -9,19 +9,23 @@ from geocoder.keys import gaode_key
 class GaodeResult(OneResult):
     @property
     def lat(self):
-        return float(self.raw.get("location", "0,0").replace("'", "").split(",")[1])
+        return float(
+            self.raw_json.get("location", "0,0").replace("'", "").split(",")[1]
+        )
 
     @property
     def lng(self):
-        return float(self.raw.get("location", "0,0").replace("'", "").split(",")[0])
+        return float(
+            self.raw_json.get("location", "0,0").replace("'", "").split(",")[0]
+        )
 
     @property
     def quality(self):
-        return self.raw.get("level")
+        return self.raw_json.get("level")
 
     @property
     def address(self):
-        return self.raw.get("formatted_address")
+        return self.raw_json.get("formatted_address")
 
     @property
     def country(self):
@@ -29,31 +33,31 @@ class GaodeResult(OneResult):
 
     @property
     def province(self):
-        return self.raw.get("province")
+        return self.raw_json.get("province")
 
     @property
     def state(self):
-        return self.raw.get("province")
+        return self.raw_json.get("province")
 
     @property
     def city(self):
-        return self.raw.get("city")
+        return self.raw_json.get("city")
 
     @property
     def district(self):
-        return self.raw.get("district")
+        return self.raw_json.get("district")
 
     @property
     def street(self):
-        return self.raw.get("street")
+        return self.raw_json.get("street")
 
     @property
     def adcode(self):
-        return self.raw.get("adcode")
+        return self.raw_json.get("adcode")
 
     @property
     def housenumber(self):
-        return self.raw.get("number")
+        return self.raw_json.get("number")
 
 
 class GaodeQuery(MultipleResultsQuery):

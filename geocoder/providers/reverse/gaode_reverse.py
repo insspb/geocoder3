@@ -14,50 +14,50 @@ class GaodeReverseResult(OneResult):
 
     @property
     def address(self):
-        return self.raw["formatted_address"]
+        return self.raw_json["formatted_address"]
 
     @property
     def country(self):
-        return self.raw["addressComponent"]["country"]
+        return self.raw_json["addressComponent"]["country"]
 
     @property
     def province(self):
-        return self.raw["addressComponent"]["province"]
+        return self.raw_json["addressComponent"]["province"]
 
     @property
     def state(self):
-        return self.raw["addressComponent"]["province"]
+        return self.raw_json["addressComponent"]["province"]
 
     @property
     def city(self):
-        if len(self.raw["addressComponent"]["city"]) == 0:
-            return self.raw["addressComponent"]["province"]
+        if len(self.raw_json["addressComponent"]["city"]) == 0:
+            return self.raw_json["addressComponent"]["province"]
         else:
-            return self.raw["addressComponent"]["city"]
+            return self.raw_json["addressComponent"]["city"]
 
     @property
     def district(self):
-        return self.raw["addressComponent"]["district"]
+        return self.raw_json["addressComponent"]["district"]
 
     @property
     def street(self):
-        return self.raw["addressComponent"]["streetNumber"]["street"]
+        return self.raw_json["addressComponent"]["streetNumber"]["street"]
 
     @property
     def adcode(self):
-        return self.raw["addressComponent"]["adcode"]
+        return self.raw_json["addressComponent"]["adcode"]
 
     @property
     def township(self):
-        return self.raw["addressComponent"]["township"]
+        return self.raw_json["addressComponent"]["township"]
 
     @property
     def towncode(self):
-        return self.raw["addressComponent"]["towncode"]
+        return self.raw_json["addressComponent"]["towncode"]
 
     @property
     def housenumber(self):
-        return self.raw["addressComponent"]["streetNumber"]["number"]
+        return self.raw_json["addressComponent"]["streetNumber"]["number"]
 
 
 class GaodeReverse(GaodeQuery):

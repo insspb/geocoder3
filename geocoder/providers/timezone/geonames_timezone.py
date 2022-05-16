@@ -9,31 +9,31 @@ class GeonamesTimezoneResult(GeonamesResult):
 
     @property
     def sunrise(self):
-        return self.raw.get("sunrise")
+        return self.raw_json.get("sunrise")
 
     @property
     def gmt_offset(self):
-        return self.raw.get("gmtOffset")
+        return self.raw_json.get("gmtOffset")
 
     @property
     def raw_offset(self):
-        return self.raw.get("rawOffset")
+        return self.raw_json.get("rawOffset")
 
     @property
     def dst_offest(self):
-        return self.raw.get("dstOffset")
+        return self.raw_json.get("dstOffset")
 
     @property
     def sunset(self):
-        return self.raw.get("sunset")
+        return self.raw_json.get("sunset")
 
     @property
     def timezone_id(self):
-        return self.raw.get("timezoneId")
+        return self.raw_json.get("timezoneId")
 
     @property
     def time(self):
-        return self.raw.get("time")
+        return self.raw_json.get("time")
 
 
 class GeonamesTimezone(GeonamesQuery):

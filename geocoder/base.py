@@ -69,7 +69,7 @@ class OneResult(object):
 
     def __init__(self, json_content):
 
-        self.raw = json_content
+        self.raw_json = json_content
 
         # attributes required to compute bbox
         self.northeast = []
@@ -168,7 +168,7 @@ class OneResult(object):
         with StringIO() as output:
             print("From provider", file=output)
             print("-------------", file=output)
-            print(json.dumps(self.raw, indent=4), file=output)
+            print(json.dumps(self.raw_json, indent=4), file=output)
             print("Cleaned json", file=output)
             print("------------", file=output)
             print(json.dumps(self.json, indent=4), file=output)

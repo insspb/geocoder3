@@ -24,15 +24,15 @@ class GeocodeXYZResult(OneResult):
 
     @property
     def lat(self):
-        return self._get_value(self.raw, "latt", float)
+        return self._get_value(self.raw_json, "latt", float)
 
     @property
     def lng(self):
-        return self._get_value(self.raw, "longt", float)
+        return self._get_value(self.raw_json, "longt", float)
 
     @property
     def remaining_credits(self):
-        return self._get_value(self.raw, "remaining_credits", int)
+        return self._get_value(self.raw_json, "remaining_credits", int)
 
     @property
     def confidence(self):

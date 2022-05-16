@@ -13,55 +13,55 @@ LOGGER = logging.getLogger(__name__)
 class GeonamesResult(OneResult):
     @property
     def lat(self):
-        return self.raw.get("lat")
+        return self.raw_json.get("lat")
 
     @property
     def lng(self):
-        return self.raw.get("lng")
+        return self.raw_json.get("lng")
 
     @property
     def geonames_id(self):
-        return self.raw.get("geonameId")
+        return self.raw_json.get("geonameId")
 
     @property
     def address(self):
-        return self.raw.get("name")
+        return self.raw_json.get("name")
 
     @property
     def feature_class(self):
-        return self.raw.get("fcl")
+        return self.raw_json.get("fcl")
 
     @property
     def class_description(self):
-        return self.raw.get("fclName")
+        return self.raw_json.get("fclName")
 
     @property
     def code(self):
-        return self.raw.get("fcode")
+        return self.raw_json.get("fcode")
 
     @property
     def description(self):
-        return self.raw.get("fcodeName")
+        return self.raw_json.get("fcodeName")
 
     @property
     def state(self):
-        return self.raw.get("adminName1")
+        return self.raw_json.get("adminName1")
 
     @property
     def state_code(self):
-        return self.raw.get("adminCode1")
+        return self.raw_json.get("adminCode1")
 
     @property
     def country(self):
-        return self.raw.get("countryName")
+        return self.raw_json.get("countryName")
 
     @property
     def country_code(self):
-        return self.raw.get("countryCode")
+        return self.raw_json.get("countryCode")
 
     @property
     def population(self):
-        return self.raw.get("population")
+        return self.raw_json.get("population")
 
 
 class GeonamesQuery(MultipleResultsQuery):

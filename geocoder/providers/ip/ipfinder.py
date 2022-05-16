@@ -8,175 +8,175 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class IpfinderResult(OneResult):
     @property
     def status(self):
-        return self.raw.get("status")
+        return self.raw_json.get("status")
 
     @property
     def status_message(self):
-        return self.raw.get("status_message")
+        return self.raw_json.get("status_message")
 
     @property
     def ip(self):
-        return self.raw.get("ip")
+        return self.raw_json.get("ip")
 
     @property
     def type(self):
-        return self.raw.get("type")
+        return self.raw_json.get("type")
 
     @property
     def continent_code(self):
-        return self.raw.get("continent_code")
+        return self.raw_json.get("continent_code")
 
     @property
     def continent_name(self):
-        return self.raw.get("continent_name")
+        return self.raw_json.get("continent_name")
 
     @property
     def country_code(self):
-        return self.raw.get("country_code")
+        return self.raw_json.get("country_code")
 
     @property
     def country_name(self):
-        return self.raw.get("country_name")
+        return self.raw_json.get("country_name")
 
     @property
     def country_native_name(self):
-        return self.raw.get("country_native_name")
+        return self.raw_json.get("country_native_name")
 
     @property
     def region_name(self):
-        return self.raw.get("region_name")
+        return self.raw_json.get("region_name")
 
     @property
     def city(self):
-        return self.raw.get("city")
+        return self.raw_json.get("city")
 
     @property
     def latitude(self):
-        return self.raw.get("latitude")
+        return self.raw_json.get("latitude")
 
     @property
     def longitude(self):
-        return self.raw.get("longitude")
+        return self.raw_json.get("longitude")
 
     @property
     def capital(self):
-        return self.raw.get("location", {}).get("capital")
+        return self.raw_json.get("location", {}).get("capital")
 
     @property
     def country_flag(self):
-        return self.raw.get("location", {}).get("country_flag")
+        return self.raw_json.get("location", {}).get("country_flag")
 
     @property
     def flag_png(self):
-        return self.raw.get("location", {}).get("flag_png")
+        return self.raw_json.get("location", {}).get("flag_png")
 
     @property
     def country_flag_emoji(self):
-        return self.raw.get("location", {}).get("country_flag_emoji")
+        return self.raw_json.get("location", {}).get("country_flag_emoji")
 
     @property
     def country_flag_emoji_unicode(self):
-        return self.raw.get("location", {}).get("country_flag_emoji_unicode")
+        return self.raw_json.get("location", {}).get("country_flag_emoji_unicode")
 
     @property
     def calling_code(self):
-        return self.raw.get("location", {}).get("calling_code")
+        return self.raw_json.get("location", {}).get("calling_code")
 
     @property
     def toplevel_domain(self):
-        return self.raw.get("location", {}).get("toplevel_domain")
+        return self.raw_json.get("location", {}).get("toplevel_domain")
 
     @property
     def alpha3_code(self):
-        return self.raw.get("location", {}).get("alpha3_code")
+        return self.raw_json.get("location", {}).get("alpha3_code")
 
     @property
     def population(self):
-        return self.raw.get("location", {}).get("population")
+        return self.raw_json.get("location", {}).get("population")
 
     @property
     def is_eu(self):
-        return self.raw.get("location", {}).get("is_eu")
+        return self.raw_json.get("location", {}).get("is_eu")
 
     @property
     def is_ar(self):
-        return self.raw.get("location", {}).get("is_ar")
+        return self.raw_json.get("location", {}).get("is_ar")
 
     @property
     def time_zone_id(self):
-        return self.raw.get("time_zone", {}).get("id")
+        return self.raw_json.get("time_zone", {}).get("id")
 
     @property
     def time_zone_utc(self):
-        return self.raw.get("time_zone", {}).get("UTC")
+        return self.raw_json.get("time_zone", {}).get("UTC")
 
     @property
     def time_zone_gmt_offset(self):
-        return self.raw.get("time_zone", {}).get("gmt_offset")
+        return self.raw_json.get("time_zone", {}).get("gmt_offset")
 
     @property
     def time_zone_current_time(self):
-        return self.raw.get("time_zone", {}).get("current_time")
+        return self.raw_json.get("time_zone", {}).get("current_time")
 
     @property
     def currency_name(self):
-        return self.raw.get("currency", {}).get("name")
+        return self.raw_json.get("currency", {}).get("name")
 
     @property
     def currency_symbol(self):
-        return self.raw.get("currency", {}).get("symbol")
+        return self.raw_json.get("currency", {}).get("symbol")
 
     @property
     def currency_symbol_native(self):
-        return self.raw.get("currency", {}).get("symbol_native")
+        return self.raw_json.get("currency", {}).get("symbol_native")
 
     @property
     def languages_code(self):
-        return self.raw.get("languages", {}).get("code")
+        return self.raw_json.get("languages", {}).get("code")
 
     @property
     def languages_name(self):
-        return self.raw.get("languages", {}).get("name")
+        return self.raw_json.get("languages", {}).get("name")
 
     @property
     def languages_name_native(self):
-        return self.raw.get("languages", {}).get("name_native")
+        return self.raw_json.get("languages", {}).get("name_native")
 
     @property
     def connection_asn(self):
-        return self.raw.get("connection", {}).get("asn")
+        return self.raw_json.get("connection", {}).get("asn")
 
     @property
     def connection_organization(self):
-        return self.raw.get("connection", {}).get("organization")
+        return self.raw_json.get("connection", {}).get("organization")
 
     @property
     def connection_domain(self):
-        return self.raw.get("connection", {}).get("domain")
+        return self.raw_json.get("connection", {}).get("domain")
 
     @property
     def connection_type(self):
-        return self.raw.get("connection", {}).get("type")
+        return self.raw_json.get("connection", {}).get("type")
 
     @property
     def is_proxy(self):
-        return self.raw.get("security", {}).get("is_proxy")
+        return self.raw_json.get("security", {}).get("is_proxy")
 
     @property
     def proxy_type(self):
-        return self.raw.get("security", {}).get("proxy_type")
+        return self.raw_json.get("security", {}).get("proxy_type")
 
     @property
     def is_tor(self):
-        return self.raw.get("security", {}).get("is_tor")
+        return self.raw_json.get("security", {}).get("is_tor")
 
     @property
     def is_spam(self):
-        return self.raw.get("security", {}).get("is_spam")
+        return self.raw_json.get("security", {}).get("is_spam")
 
     @property
     def threat_level(self):
-        return self.raw.get("security", {}).get("threat_level")
+        return self.raw_json.get("security", {}).get("threat_level")
 
 
 class IpfinderQuery(MultipleResultsQuery):

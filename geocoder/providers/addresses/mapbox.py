@@ -31,11 +31,11 @@ class MapboxResult(OneResult):
 
     @property
     def address(self):
-        return self.raw.get("place_name")
+        return self.raw_json.get("place_name")
 
     @property
     def housenumber(self):
-        return self.raw.get("address")
+        return self.raw_json.get("address")
 
     @property
     def street(self):
@@ -43,19 +43,19 @@ class MapboxResult(OneResult):
 
     @property
     def city(self):
-        return self.raw.get("place")
+        return self.raw_json.get("place")
 
     @property
     def state(self):
-        return self.raw.get("region")
+        return self.raw_json.get("region")
 
     @property
     def country(self):
-        return self.raw.get("country")
+        return self.raw_json.get("country")
 
     @property
     def postal(self):
-        return self.raw.get("postcode")
+        return self.raw_json.get("postcode")
 
     @property
     def accuracy(self):
@@ -64,7 +64,7 @@ class MapboxResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw.get("relevance")
+        return self.raw_json.get("relevance")
 
     @property
     def interpolated(self):
@@ -72,7 +72,7 @@ class MapboxResult(OneResult):
 
     @property
     def bbox(self):
-        _bbox = self.raw.get("bbox")
+        _bbox = self.raw_json.get("bbox")
         if _bbox:
             west = _bbox[0]
             south = _bbox[1]

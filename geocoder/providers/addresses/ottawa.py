@@ -9,11 +9,11 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class OttawaResult(OneResult):
     @property
     def lat(self):
-        return self.raw.get("location", {}).get("y")
+        return self.raw_json.get("location", {}).get("y")
 
     @property
     def lng(self):
-        return self.raw.get("location", {}).get("x")
+        return self.raw_json.get("location", {}).get("x")
 
     @property
     def postal(self):
@@ -49,11 +49,11 @@ class OttawaResult(OneResult):
 
     @property
     def address(self):
-        return self.raw.get("address")
+        return self.raw_json.get("address")
 
     @property
     def accuracy(self):
-        return self.raw.get("score")
+        return self.raw_json.get("score")
 
 
 class OttawaQuery(MultipleResultsQuery):

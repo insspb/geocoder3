@@ -8,16 +8,16 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class YahooResult(OneResult):
     @property
     def lat(self):
-        return self.raw.get("latitude")
+        return self.raw_json.get("latitude")
 
     @property
     def lng(self):
-        return self.raw.get("longitude")
+        return self.raw_json.get("longitude")
 
     @property
     def address(self):
-        line1 = self.raw.get("line1")
-        line2 = self.raw.get("line2")
+        line1 = self.raw_json.get("line1")
+        line2 = self.raw_json.get("line2")
         if line1:
             return ", ".join([line1, line2])
         else:
@@ -25,47 +25,47 @@ class YahooResult(OneResult):
 
     @property
     def housenumber(self):
-        return self.raw.get("house")
+        return self.raw_json.get("house")
 
     @property
     def street(self):
-        return self.raw.get("street")
+        return self.raw_json.get("street")
 
     @property
     def neighborhood(self):
-        return self.raw.get("neighborhood")
+        return self.raw_json.get("neighborhood")
 
     @property
     def city(self):
-        return self.raw.get("city")
+        return self.raw_json.get("city")
 
     @property
     def county(self):
-        return self.raw.get("county")
+        return self.raw_json.get("county")
 
     @property
     def state(self):
-        return self.raw.get("state")
+        return self.raw_json.get("state")
 
     @property
     def country(self):
-        return self.raw.get("country")
+        return self.raw_json.get("country")
 
     @property
     def hash(self):
-        return self.raw.get("hash")
+        return self.raw_json.get("hash")
 
     @property
     def quality(self):
-        return self.raw.get("addressMatchType")
+        return self.raw_json.get("addressMatchType")
 
     @property
     def postal(self):
-        postal = self.raw.get("postal")
+        postal = self.raw_json.get("postal")
         if postal:
             return postal
         else:
-            return self.raw.get("uzip")
+            return self.raw_json.get("uzip")
 
 
 class YahooQuery(MultipleResultsQuery):

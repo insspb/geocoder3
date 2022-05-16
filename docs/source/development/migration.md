@@ -34,6 +34,11 @@ implementation function.
 If you use direct provider classes imports, please update import statements. If you
 use direct helper's functions from `geocoder` module - no changes needed.
 
+## base.py `OneResult` changes
+
+- Property `self.raw` renamed to `self.raw_json` to be more explainable in inside
+  content. This change affects all subclesses (all providers).
+
 [geocoder]: https://github.com/DenisCarriere/geocoder
 [geocoder3]: https://github.com/insspb/geocoder3
 [releases]: https://github.com/insspb/geocoder3/releases
