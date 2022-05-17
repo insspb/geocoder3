@@ -2,6 +2,7 @@ import json
 import logging
 from collections import OrderedDict
 from collections.abc import MutableSequence
+from typing import Optional
 from urllib.parse import urlparse
 
 import requests
@@ -83,56 +84,58 @@ class OneResult(object):
 
     # Essential attributes for Quality Control
     @property
-    def lat(self):
-        return ""
+    def lat(self) -> Optional[float]:
+        """Latitude of the centroid of the object"""
+        return None
 
     @property
-    def lng(self):
-        return ""
+    def lng(self) -> Optional[float]:
+        """Longitude of the centroid of the object"""
+        return None
 
     @property
-    def accuracy(self):
-        return ""
+    def accuracy(self) -> Optional[str]:
+        return None
 
     @property
-    def quality(self):
-        return ""
+    def quality(self) -> Optional[str]:
+        return None
 
     # Bounding Box attributes
     @property
-    def bbox(self):
+    def bbox(self) -> dict:
         return {}
 
     # Essential attributes for Street Address
     @property
-    def address(self):
-        return ""
+    def address(self) -> Optional[str]:
+        return None
 
     @property
-    def house_number(self):
-        return ""
+    def house_number(self) -> Optional[str]:
+        return None
 
     @property
-    def street(self):
-        return ""
+    def street(self) -> Optional[str]:
+        return None
 
     @property
-    def city(self):
-        return ""
+    def city(self) -> Optional[str]:
+        return None
 
     @property
-    def state(self):
-        return ""
+    def state(self) -> Optional[str]:
+        return None
 
     @property
-    def country(self):
-        return ""
+    def country(self) -> Optional[str]:
+        return None
 
     @property
-    def postal(self):
-        return ""
+    def postal(self) -> Optional[str]:
+        return None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Display [address] if available; [lat,lng] otherwise"""
         return f"[{self.address}]" if self.address else f"[{self.lat}, {self.lng}]"
 
@@ -152,11 +155,11 @@ class OneResult(object):
         self.json["ok"] = self.ok
 
     @property
-    def ok(self):
+    def ok(self) -> bool:
         return bool(self.lng and self.lat)
 
     @property
-    def status(self):
+    def status(self) -> str:
         if self.ok:
             return "OK"
         if not self.address:
@@ -195,7 +198,7 @@ class OneResult(object):
         # return stats
         return [osm_count, fields_count]
 
-    def _get_bbox(self, south, west, north, east):
+    def _get_bbox(self, south, west, north, east) -> dict:
         if not all([south, east, north, west]):
             return {}
 
@@ -218,34 +221,35 @@ class OneResult(object):
         return dict(northeast=self.northeast, southwest=self.southwest)
 
     @property
-    def confidence(self):
-        if self.bbox:
-            # Units are measured in Kilometers
-            distance = Distance(self.northeast, self.southwest, units="km")
-            for score, maximum in [
-                (10, 0.25),
-                (9, 0.5),
-                (8, 1),
-                (7, 5),
-                (6, 7.5),
-                (5, 10),
-                (4, 15),
-                (3, 20),
-                (2, 25),
-            ]:
-                if distance < maximum:
-                    return score
-                if distance >= 25:
-                    return 1
-        # Cannot determine score
-        return 0
+    def confidence(self) -> int:
+        if not self.bbox:
+            # Cannot determine score
+            return 0
+
+        # Units are measured in Kilometers
+        distance = Distance(self.northeast, self.southwest, units="km")
+        for score, maximum in [
+            (10, 0.25),
+            (9, 0.5),
+            (8, 1),
+            (7, 5),
+            (6, 7.5),
+            (5, 10),
+            (4, 15),
+            (3, 20),
+            (2, 25),
+        ]:
+            if distance < maximum:
+                return score
+            if distance >= 25:
+                return 1
 
     @property
-    def geometry(self):
+    def geometry(self) -> dict:
         return {"type": "Point", "coordinates": [self.x, self.y]} if self.ok else {}
 
     @property
-    def osm(self):
+    def osm(self) -> dict:
         osm = {}
         if self.ok:
             osm["x"] = self.x
@@ -267,7 +271,7 @@ class OneResult(object):
         return osm
 
     @property
-    def geojson(self):
+    def geojson(self) -> dict:
         feature = {
             "type": "Feature",
             "properties": self.json,
@@ -280,43 +284,43 @@ class OneResult(object):
         return feature
 
     @property
-    def wkt(self):
-        return f"POINT({self.x} {self.y})" if self.ok else ""
+    def wkt(self) -> Optional[str]:
+        return f"POINT({self.x} {self.y})" if self.ok else None
 
     @property
-    def xy(self):
-        return [self.lng, self.lat] if self.ok else []
+    def xy(self) -> Optional[list]:
+        return [self.lng, self.lat] if self.ok else None
 
     @property
-    def latlng(self):
-        return [self.lat, self.lng] if self.ok else []
+    def latlng(self) -> Optional[list]:
+        return [self.lat, self.lng] if self.ok else None
 
     @property
-    def y(self):
+    def y(self) -> Optional[float]:
         return self.lat
 
     @property
-    def x(self):
+    def x(self) -> Optional[float]:
         return self.lng
 
     @property
-    def locality(self):
+    def locality(self) -> Optional[str]:
         return self.city
 
     @property
-    def province(self):
+    def province(self) -> Optional[str]:
         return self.state
 
     @property
-    def street_number(self):
+    def street_number(self) -> Optional[str]:
         return self.house_number
 
     @property
-    def road(self):
+    def road(self) -> Optional[str]:
         return self.street
 
     @property
-    def route(self):
+    def route(self) -> Optional[str]:
         return self.street
 
 
@@ -341,7 +345,7 @@ class MultipleResultsQuery(MutableSequence):
     _TIMEOUT = 5.0
 
     @staticmethod
-    def _is_valid_url(url):
+    def _is_valid_url(url) -> bool:
         """Helper function to validate that URLs are well formed, i.e that it contains
         a valid protocol and a valid domain. It does not actually check if the URL
         exists
@@ -354,11 +358,11 @@ class MultipleResultsQuery(MutableSequence):
             return False
 
     @classmethod
-    def _is_valid_result_class(cls):
+    def _is_valid_result_class(cls) -> bool:
         return issubclass(cls._RESULT_CLASS, OneResult)
 
     @classmethod
-    def _get_api_key(cls, key=None):
+    def _get_api_key(cls, key=None) -> Optional[str]:
         # Retrieves API Key from method argument first, then from Environment variables
         key = key or cls._KEY
 
@@ -440,7 +444,7 @@ class MultipleResultsQuery(MutableSequence):
     def add(self, value):
         self._list.append(value)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         base_repr = "<[{0}] {1} - {2} {{0}}>".format(
             self.status, self.provider.title(), self.method.title()
         )
@@ -451,11 +455,11 @@ class MultipleResultsQuery(MutableSequence):
         else:
             return base_repr.format(f"#{len(self)} results")
 
-    def _build_headers(self, provider_key, **kwargs):
+    def _build_headers(self, provider_key, **kwargs) -> dict:
         """Will be overridden according to the targetted web service"""
         return {}
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs) -> dict:
         """Will be overridden according to the targetted web service"""
         return {}
 
@@ -541,11 +545,11 @@ class MultipleResultsQuery(MutableSequence):
         return self.error
 
     @property
-    def ok(self):
+    def ok(self) -> bool:
         return len(self) > 0
 
     @property
-    def status(self):
+    def status(self) -> str:
         if self.ok:
             return "OK"
         elif self.error:
@@ -556,11 +560,11 @@ class MultipleResultsQuery(MutableSequence):
             return "ERROR - Unhandled Exception"
 
     @property
-    def geojson(self):
+    def geojson(self) -> dict:
         geojson_results = [result.geojson for result in self]
         return {"type": "FeatureCollection", "features": geojson_results}
 
-    def debug(self):
+    def debug(self) -> list:
         logger.debug("===")
         logger.debug(repr(self))
         logger.debug("===")

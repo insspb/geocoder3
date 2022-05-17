@@ -1,5 +1,7 @@
 __all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail", "OsmReverse"]
 
+from typing import Optional
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import Location
 
@@ -17,19 +19,17 @@ class OsmResult(OneResult):
     # ============================ #
 
     @property
-    def lat(self):
+    def lat(self) -> Optional[float]:
         lat = self.raw_json.get("lat")
-        if lat:
-            return float(lat)
+        return float(lat) if lat else None
 
     @property
-    def lng(self):
+    def lng(self) -> Optional[float]:
         lng = self.raw_json.get("lon")
-        if lng:
-            return float(lng)
+        return float(lng) if lng else None
 
     @property
-    def bbox(self):
+    def bbox(self) -> dict:
         _boundingbox = self.raw_json.get("boundingbox")
         if _boundingbox:
             south = float(_boundingbox[0])
@@ -43,19 +43,20 @@ class OsmResult(OneResult):
     # ========================== #
 
     @property
-    def address(self):
+    def address(self) -> Optional[str]:
+        """Full comma-separated address"""
         return self.raw_json.get("display_name")
 
     @property
-    def housenumber(self):
+    def house_number(self) -> Optional[str]:
         return self._address.get("house_number")
 
     @property
-    def street(self):
+    def street(self) -> Optional[str]:
         return self._address.get("road")
 
     @property
-    def postal(self):
+    def postal(self) -> Optional[str]:
         return self._address.get("postcode")
 
     # ============================ #
@@ -63,7 +64,7 @@ class OsmResult(OneResult):
     # ============================ #
 
     @property
-    def neighborhood(self):
+    def neighborhood(self) -> Optional[str]:
         """place=neighborhood
 
         A named part of a place=village, a place=town or a place=city. Smaller
@@ -80,7 +81,7 @@ class OsmResult(OneResult):
         return self._address.get("neighbourhood")
 
     @property
-    def suburb(self):
+    def suburb(self) -> Optional[str]:
         """place=suburb
 
         A distinct section of an urban settlement (city, town, etc.) with its
@@ -96,7 +97,7 @@ class OsmResult(OneResult):
         return self._address.get("suburb")
 
     @property
-    def quarter(self):
+    def quarter(self) -> Optional[str]:
         """place=quarter
 
         A named part of a bigger settlement where this part is smaller than
@@ -112,7 +113,7 @@ class OsmResult(OneResult):
     # ====================================== #
 
     @property
-    def allotments(self):
+    def allotments(self) -> Optional[str]:
         """place=allotments
 
         Dacha or cottage settlement, which is located outside other
@@ -123,7 +124,7 @@ class OsmResult(OneResult):
         return self._address.get("hamlet")
 
     @property
-    def farm(self):
+    def farm(self) -> Optional[str]:
         """place=farm
 
         A farm that has its own name. If the farm is not a part of bigger
@@ -132,7 +133,7 @@ class OsmResult(OneResult):
         return self._address.get("hamlet")
 
     @property
-    def locality(self):
+    def locality(self) -> Optional[str]:
         """place=isolated_dwelling
 
         For an unpopulated named place.
@@ -140,7 +141,7 @@ class OsmResult(OneResult):
         return self._address.get("locality")
 
     @property
-    def isolated_dwelling(self):
+    def isolated_dwelling(self) -> Optional[str]:
         """place=isolated_dwelling
 
         Smallest kind of human settlement. No more than 2 households.
@@ -148,7 +149,7 @@ class OsmResult(OneResult):
         return self._address.get("hamlet")
 
     @property
-    def hamlet(self):
+    def hamlet(self) -> Optional[str]:
         """place=hamlet
 
         A smaller rural community typically with less than 100-200 inhabitants,
@@ -157,7 +158,7 @@ class OsmResult(OneResult):
         return self._address.get("hamlet")
 
     @property
-    def village(self):
+    def village(self) -> Optional[str]:
         """place=village
 
         A smaller distinct settlement, smaller than a town with few facilities
@@ -170,7 +171,7 @@ class OsmResult(OneResult):
         return self._address.get("village")
 
     @property
-    def town(self):
+    def town(self) -> Optional[str]:
         """place=town
 
         A second tier urban settlement of local importance, often with a
@@ -185,7 +186,7 @@ class OsmResult(OneResult):
         return self._address.get("town")
 
     @property
-    def island(self):
+    def island(self) -> Optional[str]:
         """place=island
 
         Identifies the coastline of an island (> 1 km2), also consider
@@ -195,7 +196,7 @@ class OsmResult(OneResult):
         return self._address.get("island")
 
     @property
-    def city(self):
+    def city(self) -> Optional[str]:
         """place=city
 
         The largest urban settlements in the territory, normally including the
@@ -215,37 +216,37 @@ class OsmResult(OneResult):
     # ================================ #
 
     @property
-    def municipality(self):
+    def municipality(self) -> Optional[str]:
         """admin_level=8"""
         return self._address.get("municipality")
 
     @property
-    def county(self):
+    def county(self) -> Optional[str]:
         """admin_level=6"""
         return self._address.get("county")
 
     @property
-    def district(self):
+    def district(self) -> Optional[str]:
         """admin_level=5/6"""
         return self._address.get("city_district")
 
     @property
-    def state(self):
+    def state(self) -> Optional[str]:
         """admin_level=4"""
         return self._address.get("state")
 
     @property
-    def region(self):
+    def region(self) -> Optional[str]:
         """admin_level=3"""
         return self._address.get("state")
 
     @property
-    def country(self):
+    def country(self) -> Optional[str]:
         """admin_level=2"""
         return self._address.get("country")
 
     @property
-    def country_code(self):
+    def country_code(self) -> Optional[str]:
         """admin_level=2"""
         return self._address.get("country_code")
 
@@ -254,47 +255,47 @@ class OsmResult(OneResult):
     # ======================== #
 
     @property
-    def accuracy(self):
+    def accuracy(self) -> Optional[str]:
         return self.importance
 
     @property
-    def quality(self):
+    def quality(self) -> Optional[str]:
         return self.type
 
     @property
-    def population(self):
+    def population(self) -> Optional[str]:
         return self.raw_json.get("population")
 
     @property
-    def license(self):
+    def license(self) -> Optional[str]:
         return self.raw_json.get("license")
 
     @property
-    def type(self):
+    def type(self) -> Optional[str]:
         return self.raw_json.get("type")
 
     @property
-    def importance(self):
+    def importance(self) -> Optional[str]:
         return self.raw_json.get("importance")
 
     @property
-    def icon(self):
+    def icon(self) -> Optional[str]:
         return self.raw_json.get("icon")
 
     @property
-    def osm_type(self):
+    def osm_type(self) -> Optional[str]:
         return self.raw_json.get("osm_type")
 
     @property
-    def osm_id(self):
+    def osm_id(self) -> Optional[str]:
         return self.raw_json.get("osm_id")
 
     @property
-    def place_id(self):
+    def place_id(self) -> Optional[str]:
         return self.raw_json.get("place_id")
 
     @property
-    def place_rank(self):
+    def place_rank(self) -> Optional[str]:
         return self.raw_json.get("place_rank")
 
 
@@ -316,7 +317,7 @@ class OsmQuery(MultipleResultsQuery):
         provider_key: str,
         max_results: int = 1,
         **kwargs,
-    ):
+    ) -> dict:
         return {
             "q": location,
             "format": "jsonv2",
@@ -335,7 +336,7 @@ class OsmQueryDetail(OsmQuery):
         provider_key,
         max_results: int = 1,
         **kwargs,
-    ):
+    ) -> dict:
         query = {
             "format": "jsonv2",
             "addressdetails": 1,
@@ -355,7 +356,7 @@ class OsmReverse(OsmQuery):
         provider_key: str,
         max_results: int = 1,
         **kwargs,
-    ):
+    ) -> dict:
         params = {
             "q": str(Location(location)),
             "format": "jsonv2",
