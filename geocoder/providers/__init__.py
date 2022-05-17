@@ -38,9 +38,6 @@ from geocoder.providers.addresses import (
     MaxmindQuery,
     OpenCageQuery,
     OpenCageResult,
-    OsmQuery,
-    OsmQueryDetail,
-    OsmResult,
     OttawaQuery,
     PlacesQuery,
     TamuQuery,
@@ -55,6 +52,7 @@ from geocoder.providers.addresses import (
     YandexResult,
 )
 from geocoder.providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
+from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
     ArcgisReverse,
     BaiduReverse,
@@ -71,7 +69,6 @@ from geocoder.providers.reverse import (
     MapquestReverse,
     MapzenReverse,
     OpenCageReverse,
-    OsmReverse,
     USCensusReverse,
     W3WReverse,
     YandexReverse,

@@ -1,4 +1,5 @@
 from geocoder.distance import Distance
+from geocoder.providers import OsmQuery, OsmQueryDetail, OsmReverse
 from geocoder.providers.addresses import (
     ArcgisQuery,
     BaiduQuery,
@@ -26,8 +27,6 @@ from geocoder.providers.addresses import (
     MapzenQuery,
     MaxmindQuery,
     OpenCageQuery,
-    OsmQuery,
-    OsmQueryDetail,
     OttawaQuery,
     PlacesQuery,
     TamuQuery,
@@ -56,7 +55,6 @@ from geocoder.providers.reverse import (
     MapquestReverse,
     MapzenReverse,
     OpenCageReverse,
-    OsmReverse,
     USCensusReverse,
     W3WReverse,
     YandexReverse,

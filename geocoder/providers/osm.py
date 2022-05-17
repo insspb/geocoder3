@@ -1,6 +1,7 @@
-__all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail"]
+__all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail", "OsmReverse"]
 
 from geocoder.base import MultipleResultsQuery, OneResult
+from geocoder.location import Location
 
 
 class OsmResult(OneResult):
@@ -355,3 +356,33 @@ class OsmQueryDetail(OsmQuery):
         }
         query.update(kwargs)
         return query
+
+
+class OsmReverse(OsmQuery):
+    """
+    Nominatim
+
+    Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
+    and address and to generate synthetic addresses of OSM points (reverse geocoding).
+
+    API Reference: http://wiki.openstreetmap.org/wiki/Nominatim
+    """
+
+    method = "reverse"
+
+    def _build_params(
+        self,
+        location,
+        provider_key: str,
+        max_results: int = 1,
+        **kwargs,
+    ):
+        params = {
+            "q": str(Location(location)),
+            "format": "jsonv2",
+            "addressdetails": 1,
+            "limit": max_results,
+        }
+        if "lang_code" in kwargs:
+            params["accept-language"] = kwargs.get("lang_code")
+        return params
