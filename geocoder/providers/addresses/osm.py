@@ -328,17 +328,8 @@ class OsmQuery(MultipleResultsQuery):
             "limit": max_results,
         }
 
-    def _before_initialize(self, location, **kwargs):
-        """Check if specific URL has not been provided, otherwise, use cls._URL"""
-        url = kwargs.get("url", "")
-        if url.lower() == "localhost":
-            self.url = "http://localhost/nominatim/search"
-        elif url:
-            self.url = url
-        # else:  do not change self.url, which is cls._URL
 
-
-class OsmQueryDetail(MultipleResultsQuery):
+class OsmQueryDetail(OsmQuery):
     """
     Nominatim
 
@@ -348,12 +339,7 @@ class OsmQueryDetail(MultipleResultsQuery):
     API Reference: http://wiki.openstreetmap.org/wiki/Nominatim
     """
 
-    provider = "osm"
     method = "details"
-
-    _URL = "https://nominatim.openstreetmap.org/search"
-    _RESULT_CLASS = OsmResult
-    _KEY_MANDATORY = False
 
     def _build_params(
         self,
@@ -369,12 +355,3 @@ class OsmQueryDetail(MultipleResultsQuery):
         }
         query.update(kwargs)
         return query
-
-    def _before_initialize(self, location, **kwargs):
-        """Check if specific URL has not been provided, otherwise, use cls._URL"""
-        url = kwargs.get("url", "")
-        if url.lower() == "localhost":
-            self.url = "http://localhost/nominatim/search"
-        elif url:
-            self.url = url
-        # else:  do not change self.url, which is cls._URL
