@@ -33,7 +33,7 @@ class MapzenResult(OneResult):
         return self._properties.get("label")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._properties.get("housenumber")
 
     @property

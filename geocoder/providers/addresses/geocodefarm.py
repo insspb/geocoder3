@@ -46,7 +46,7 @@ class GeocodeFarmResult(OneResult):
         return self.raw_json.get("formatted_address")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._address.get("street_number")
 
     @property

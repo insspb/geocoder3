@@ -109,7 +109,7 @@ class OneResult(object):
         return ""
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return ""
 
     @property
@@ -250,8 +250,8 @@ class OneResult(object):
         if self.ok:
             osm["x"] = self.x
             osm["y"] = self.y
-            if self.housenumber:
-                osm["addr:housenumber"] = self.housenumber
+            if self.house_number:
+                osm["addr:housenumber"] = self.house_number
             if self.road:
                 osm["addr:street"] = self.road
             if self.city:
@@ -309,7 +309,7 @@ class OneResult(object):
 
     @property
     def street_number(self):
-        return self.housenumber
+        return self.house_number
 
     @property
     def road(self):

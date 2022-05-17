@@ -77,7 +77,7 @@ def test_opencage_address():
     assert g.state_code == "ON"
     assert g.city == "Ottawa"
     assert g.street == "Wilbrod Street"
-    assert g.housenumber == "317"
+    assert g.house_number == "317"
     assert g.postal.startswith("K1N")
     assert g.remaining_api_calls > 0 and g.remaining_api_calls != 999999
     assert g.limit_api_calls > 0 and g.remaining_api_calls != 999999

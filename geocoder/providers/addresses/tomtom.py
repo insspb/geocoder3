@@ -45,7 +45,7 @@ class TomtomResult(OneResult):
         return self._address.get("freeformAddress")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._address.get("streetNumber")
 
     @property

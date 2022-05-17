@@ -27,7 +27,7 @@ class OttawaResult(OneResult):
                 return match.group(0)
 
     @property
-    def housenumber(self):
+    def house_number(self):
         if self.address:
             expression = r"\d+"
             pattern = re.compile(expression)

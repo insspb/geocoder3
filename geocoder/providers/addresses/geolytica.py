@@ -38,7 +38,7 @@ class GeolyticaResult(OneResult):
         return _correct_empty_dict(self.raw_json, "postal")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return _correct_empty_dict(self._standard, "stnumber")
 
     @property

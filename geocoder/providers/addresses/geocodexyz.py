@@ -63,7 +63,7 @@ class GeocodeXYZResult(OneResult):
         return self._get_value(self._standard, "postal")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._get_value(self._standard, "stnumber")
 
     @property

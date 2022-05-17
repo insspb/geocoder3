@@ -69,7 +69,7 @@ class CanadapostResult(OneResult):
         return self.raw_json.get("PostalCode")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self.raw_json.get("BuildingNumber")
 
     @property

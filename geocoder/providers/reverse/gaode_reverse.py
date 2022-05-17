@@ -56,7 +56,7 @@ class GaodeReverseResult(OneResult):
         return self.raw_json["addressComponent"]["towncode"]
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self.raw_json["addressComponent"]["streetNumber"]["number"]
 
 

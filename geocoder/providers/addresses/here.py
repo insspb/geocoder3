@@ -35,7 +35,7 @@ class HereResult(OneResult):
         return self._address.get("PostalCode")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._address.get("HouseNumber")
 
     @property

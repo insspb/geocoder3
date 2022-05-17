@@ -73,7 +73,7 @@ class GoogleResult(OneResult):
         return self.raw_json.get("subpremise", {}).get("short_name")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self.raw_json.get("street_number", {}).get("short_name")
 
     @property

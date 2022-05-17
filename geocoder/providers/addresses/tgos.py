@@ -31,7 +31,7 @@ class TgosResult(OneResult):
         return self.raw_json.get("FULL_ADDR")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         number = self.number
         if number:
             match = re.match(r"\d+", number)

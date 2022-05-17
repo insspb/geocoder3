@@ -32,7 +32,7 @@ class BingResult(OneResult):
         return self._address.get("formattedAddress")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         if self.street:
             expression = r"\d+"
             pattern = re.compile(expression)

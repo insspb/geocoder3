@@ -41,7 +41,7 @@ class BaiduReverseResult(OneResult):
         return self.raw_json["addressComponent"]["street"]
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self.raw_json["addressComponent"]["street_number"]
 
 

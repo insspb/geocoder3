@@ -62,7 +62,7 @@ class OttawaParcelResult(OneResult):
         return self._clean(self.parse["attributes"].get("MUNICIPALITY_NAME"))
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._clean(self.parse["attributes"].get("ADDRESS_NUMBER"))
 
     @property

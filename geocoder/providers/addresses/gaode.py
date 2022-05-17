@@ -56,7 +56,7 @@ class GaodeResult(OneResult):
         return self.raw_json.get("adcode")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self.raw_json.get("number")
 
 

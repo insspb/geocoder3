@@ -156,8 +156,9 @@ g.country_long
 
 ```python
 import geocoder
+
 g = geocoder.google("453 Booth Street, Ottawa ON", key='YOUR_GOOGLE_API_KEY')
-g.housenumber
+g.house_number
 g.postal
 g.street
 g.street_long

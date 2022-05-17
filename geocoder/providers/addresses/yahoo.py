@@ -24,7 +24,7 @@ class YahooResult(OneResult):
             return line2
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self.raw_json.get("house")
 
     @property

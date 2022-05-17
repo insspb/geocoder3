@@ -101,7 +101,7 @@ class YandexResult(OneResult):
         return self._thoroughfare.get("Premise", {})
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._premise.get("PremiseNumber")
 
 

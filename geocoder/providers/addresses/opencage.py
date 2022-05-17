@@ -31,7 +31,7 @@ class OpenCageResult(OneResult):
         return self.raw_json.get("formatted")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._components.get("house_number")
 
     @property

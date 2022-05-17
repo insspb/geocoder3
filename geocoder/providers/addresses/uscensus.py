@@ -28,7 +28,7 @@ class USCensusResult(OneResult):
         return self.raw_json.get("matchedAddress")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         if self.address:
             match = re.search(r"^\d+", self.address, re.UNICODE)
             if match:

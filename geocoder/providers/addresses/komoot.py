@@ -39,9 +39,9 @@ class KomootResult(OneResult):
         address = ", ".join([self.state, self.country])
 
         # 453 Booth street, Ottawa ON, Canada
-        if self.housenumber:
+        if self.house_number:
             middle = ", ".join([self.street, self.city])
-            address = " ".join([self.housenumber, middle, address])
+            address = " ".join([self.house_number, middle, address])
 
         # 453 Booth street, Ottawa ON, Canada
         elif self.street:
@@ -75,7 +75,7 @@ class KomootResult(OneResult):
         return self._properties.get("street", "")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._properties.get("housenumber", "")
 
     @property
