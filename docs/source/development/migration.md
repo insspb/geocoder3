@@ -41,6 +41,10 @@ use direct helper's functions from `geocoder` module - no changes needed.
 
 - Property `self.raw` renamed to `self.raw_json` to be more explainable in inside
   content. This change affects all subclesses (all providers).
+- Property `self.housenumber` renamed to `self.house_number`. Affect all nested
+  provider's files.
+- All default properties values replaced from empty string `""` to `None`. Empty
+  dicts in some cases left untouched. Please verify properties signatures.
 
 ## All print statements replaced with logging module
 
