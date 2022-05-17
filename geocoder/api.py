@@ -28,7 +28,6 @@ from geocoder.providers.addresses import (
     OpenCageQuery,
     OsmQuery,
     OsmQueryDetail,
-    OsmResult,
     OttawaQuery,
     PlacesQuery,
     TamuQuery,
@@ -485,7 +484,7 @@ def mapquest(query, method: str = "geocode", **kwargs):
     return get_results(query, provider="mapquest", method=method, **kwargs)
 
 
-def osm(query, method: str = "geocode", **kwargs) -> OsmResult:
+def osm(query, method: str = "geocode", **kwargs) -> OsmQuery:
     """OSM Provider
 
     Provider supported methods:
