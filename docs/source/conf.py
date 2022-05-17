@@ -31,6 +31,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",  # Create neat summary tables
     "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
     "myst_parser",
 ]
 # autosummary_generate = True
@@ -262,3 +263,8 @@ intersphinx_mapping = {"http://docs.python.org/": None}
 myst_enable_extensions = [
     "tasklist",
 ]
+
+# Autodic settings
+
+autodoc_member_order = "alphabetical"
+autodoc_typehints = "signature"
