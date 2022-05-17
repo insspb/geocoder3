@@ -300,12 +300,7 @@ class OsmResult(OneResult):
 
 class OsmQuery(MultipleResultsQuery):
     """
-    Nominatim
-
-    Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
-    and address and to generate synthetic addresses of OSM points (reverse geocoding).
-
-    API Reference: http://wiki.openstreetmap.org/wiki/Nominatim
+    Nominatim API Reference: https://nominatim.org/release-docs/develop/api/Overview/
     """
 
     provider = "osm"
@@ -331,14 +326,6 @@ class OsmQuery(MultipleResultsQuery):
 
 
 class OsmQueryDetail(OsmQuery):
-    """
-    Nominatim
-
-    Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
-    and address and to generate synthetic addresses of OSM points (reverse geocoding).
-
-    API Reference: http://wiki.openstreetmap.org/wiki/Nominatim
-    """
 
     method = "details"
 
@@ -359,14 +346,6 @@ class OsmQueryDetail(OsmQuery):
 
 
 class OsmReverse(OsmQuery):
-    """
-    Nominatim
-
-    Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
-    and address and to generate synthetic addresses of OSM points (reverse geocoding).
-
-    API Reference: http://wiki.openstreetmap.org/wiki/Nominatim
-    """
 
     method = "reverse"
 
