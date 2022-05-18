@@ -218,7 +218,7 @@ class TgosQuery(MultipleResultsQuery):
     def _parse_results(self, json_response):
         # overriding method to pass language to every result
         for json_dict in self._adapt_results(json_response):
-            self.add(self.one_result(json_dict, self.language))
+            self.add(self._RESULT_CLASS(json_dict, self.language))
 
         # set default result to use for delegation
         self.current_result = len(self) > 0 and self[0]

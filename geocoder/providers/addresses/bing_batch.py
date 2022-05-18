@@ -161,6 +161,6 @@ class BingBatch(MultipleResultsQuery):
 
         # re looping through the results to give them back in their original order
         for idx in range(0, self.locations_length):
-            self.add(self.one_result(rows.get(str(idx), None)))
+            self.add(self._RESULT_CLASS(rows.get(str(idx), None)))
 
         self.current_result = len(self) > 0 and self[0]

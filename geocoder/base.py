@@ -348,8 +348,6 @@ class MultipleResultsQuery(MutableSequence):
         if not self._is_valid_url(self.url):
             raise ValueError("url not valid. Got %s", self.url)
 
-        self.one_result = self._RESULT_CLASS
-
         # check validity of provider key
         provider_key = self._get_api_key(kwargs.pop("key", ""))
 
@@ -491,7 +489,7 @@ class MultipleResultsQuery(MutableSequence):
         params: array of objects (dictionaries)
         """
         for json_dict in self._adapt_results(json_response):
-            self.add(self.one_result(json_dict))
+            self.add(self._RESULT_CLASS(json_dict))
 
         # set default result to use for delegation
         self.current_result = len(self) > 0 and self[0]
