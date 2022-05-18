@@ -13,11 +13,11 @@ class CanadapostIdResult(OneResult):
 
     @property
     def item_id(self):
-        return self.raw_json.get("Id")
+        return self.object_raw_json.get("Id")
 
     @property
     def next_action(self):
-        return self.raw_json.get("Next")
+        return self.object_raw_json.get("Next")
 
 
 class CanadapostIdQuery(MultipleResultsQuery):
@@ -53,51 +53,51 @@ class CanadapostResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw_json.get("Type")
+        return self.object_raw_json.get("Type")
 
     @property
     def accuracy(self):
-        return self.raw_json.get("DataLevel")
+        return self.object_raw_json.get("DataLevel")
 
     @property
     def address(self):
-        return self.raw_json.get("Line1")
+        return self.object_raw_json.get("Line1")
 
     @property
     def postal(self):
-        return self.raw_json.get("PostalCode")
+        return self.object_raw_json.get("PostalCode")
 
     @property
     def house_number(self):
-        return self.raw_json.get("BuildingNumber")
+        return self.object_raw_json.get("BuildingNumber")
 
     @property
     def street(self):
-        return self.raw_json.get("Street")
+        return self.object_raw_json.get("Street")
 
     @property
     def city(self):
-        return self.raw_json.get("City")
+        return self.object_raw_json.get("City")
 
     @property
     def state(self):
-        return self.raw_json.get("ProvinceName")
+        return self.object_raw_json.get("ProvinceName")
 
     @property
     def country(self):
-        return self.raw_json.get("CountryName")
+        return self.object_raw_json.get("CountryName")
 
     @property
     def unit(self):
-        return self.raw_json.get("SubBuilding")
+        return self.object_raw_json.get("SubBuilding")
 
     @property
     def domesticId(self):
-        return self.raw_json.get("DomesticId")
+        return self.object_raw_json.get("DomesticId")
 
     @property
     def label(self):
-        return self.raw_json.get("Label")
+        return self.object_raw_json.get("Label")
 
 
 class CanadapostQuery(MultipleResultsQuery):

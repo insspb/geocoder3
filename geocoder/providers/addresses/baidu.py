@@ -13,19 +13,19 @@ from geocoder.keys import baidu_key, baidu_security_key
 class BaiduResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("location", {}).get("lat")
+        return self.object_raw_json.get("location", {}).get("lat")
 
     @property
     def lng(self):
-        return self.raw_json.get("location", {}).get("lng")
+        return self.object_raw_json.get("location", {}).get("lng")
 
     @property
     def quality(self):
-        return self.raw_json.get("level")
+        return self.object_raw_json.get("level")
 
     @property
     def confidence(self):
-        return self.raw_json.get("confidence")
+        return self.object_raw_json.get("confidence")
 
 
 class BaiduQuery(MultipleResultsQuery):

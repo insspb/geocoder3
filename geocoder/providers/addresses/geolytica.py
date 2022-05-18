@@ -24,19 +24,19 @@ class GeolyticaResult(OneResult):
 
     @property
     def lat(self):
-        lat = _correct_empty_dict(self.raw_json, "latt")
+        lat = _correct_empty_dict(self.object_raw_json, "latt")
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = _correct_empty_dict(self.raw_json, "longt")
+        lng = _correct_empty_dict(self.object_raw_json, "longt")
         if lng:
             return float(lng)
 
     @property
     def postal(self):
-        return _correct_empty_dict(self.raw_json, "postal")
+        return _correct_empty_dict(self.object_raw_json, "postal")
 
     @property
     def house_number(self):

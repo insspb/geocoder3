@@ -8,39 +8,39 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class GisgraphyResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("lat")
+        return self.object_raw_json.get("lat")
 
     @property
     def lng(self):
-        return self.raw_json.get("lng")
+        return self.object_raw_json.get("lng")
 
     @property
     def address(self):
-        return self.raw_json.get("formatedFull", "")
+        return self.object_raw_json.get("formatedFull", "")
 
     @property
     def country(self):
-        return self.raw_json.get("countryCode", "")
+        return self.object_raw_json.get("countryCode", "")
 
     @property
     def state(self):
-        return self.raw_json.get("state", "")
+        return self.object_raw_json.get("state", "")
 
     @property
     def city(self):
-        return self.raw_json.get("city", "")
+        return self.object_raw_json.get("city", "")
 
     @property
     def street(self):
-        return self.raw_json.get("streetName", "")
+        return self.object_raw_json.get("streetName", "")
 
     @property
     def house_number(self):
-        return self.raw_json.get("houseNumber", "")
+        return self.object_raw_json.get("houseNumber", "")
 
     @property
     def postal(self):
-        return self.raw_json.get("zipCode", "")
+        return self.object_raw_json.get("zipCode", "")
 
 
 class GisgraphyQuery(MultipleResultsQuery):

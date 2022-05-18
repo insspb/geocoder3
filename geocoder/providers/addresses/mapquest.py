@@ -8,15 +8,15 @@ from geocoder.location import BBox
 class MapquestResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("latLng", {}).get("lat")
+        return self.object_raw_json.get("latLng", {}).get("lat")
 
     @property
     def lng(self):
-        return self.raw_json.get("latLng", {}).get("lng")
+        return self.object_raw_json.get("latLng", {}).get("lng")
 
     @property
     def street(self):
-        return self.raw_json.get("street")
+        return self.object_raw_json.get("street")
 
     @property
     def address(self):
@@ -29,31 +29,31 @@ class MapquestResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw_json.get("geocodeQuality")
+        return self.object_raw_json.get("geocodeQuality")
 
     @property
     def postal(self):
-        return self.raw_json.get("postalCode")
+        return self.object_raw_json.get("postalCode")
 
     @property
     def neighborhood(self):
-        return self.raw_json.get("adminArea6")
+        return self.object_raw_json.get("adminArea6")
 
     @property
     def city(self):
-        return self.raw_json.get("adminArea5")
+        return self.object_raw_json.get("adminArea5")
 
     @property
     def county(self):
-        return self.raw_json.get("adminArea4")
+        return self.object_raw_json.get("adminArea4")
 
     @property
     def state(self):
-        return self.raw_json.get("adminArea3")
+        return self.object_raw_json.get("adminArea3")
 
     @property
     def country(self):
-        return self.raw_json.get("adminArea1")
+        return self.object_raw_json.get("adminArea1")
 
 
 class MapquestQuery(MultipleResultsQuery):

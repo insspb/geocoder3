@@ -16,7 +16,7 @@ class ArcgisResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("name", "")
+        return self.object_raw_json.get("name", "")
 
     @property
     def lat(self):
@@ -36,7 +36,7 @@ class ArcgisResult(OneResult):
 
     @property
     def bbox(self):
-        _extent = self.raw_json.get("extent")
+        _extent = self.object_raw_json.get("extent")
         if _extent:
             south = _extent.get("ymin")
             west = _extent.get("xmin")

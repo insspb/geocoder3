@@ -20,17 +20,17 @@ class OsmResult(OneResult):
 
     @property
     def lat(self) -> Optional[float]:
-        lat = self.raw_json.get("lat")
+        lat = self.object_raw_json.get("lat")
         return float(lat) if lat else None
 
     @property
     def lng(self) -> Optional[float]:
-        lng = self.raw_json.get("lon")
+        lng = self.object_raw_json.get("lon")
         return float(lng) if lng else None
 
     @property
     def bbox(self) -> dict:
-        _boundingbox = self.raw_json.get("boundingbox")
+        _boundingbox = self.object_raw_json.get("boundingbox")
         if _boundingbox:
             south = float(_boundingbox[0])
             west = float(_boundingbox[2])
@@ -45,7 +45,7 @@ class OsmResult(OneResult):
     @property
     def address(self) -> Optional[str]:
         """Full comma-separated address"""
-        return self.raw_json.get("display_name")
+        return self.object_raw_json.get("display_name")
 
     @property
     def house_number(self) -> Optional[str]:
@@ -264,39 +264,39 @@ class OsmResult(OneResult):
 
     @property
     def population(self) -> Optional[str]:
-        return self.raw_json.get("population")
+        return self.object_raw_json.get("population")
 
     @property
     def license(self) -> Optional[str]:
-        return self.raw_json.get("license")
+        return self.object_raw_json.get("license")
 
     @property
     def type(self) -> Optional[str]:
-        return self.raw_json.get("type")
+        return self.object_raw_json.get("type")
 
     @property
     def importance(self) -> Optional[str]:
-        return self.raw_json.get("importance")
+        return self.object_raw_json.get("importance")
 
     @property
     def icon(self) -> Optional[str]:
-        return self.raw_json.get("icon")
+        return self.object_raw_json.get("icon")
 
     @property
     def osm_type(self) -> Optional[str]:
-        return self.raw_json.get("osm_type")
+        return self.object_raw_json.get("osm_type")
 
     @property
     def osm_id(self) -> Optional[str]:
-        return self.raw_json.get("osm_id")
+        return self.object_raw_json.get("osm_id")
 
     @property
     def place_id(self) -> Optional[str]:
-        return self.raw_json.get("place_id")
+        return self.object_raw_json.get("place_id")
 
     @property
     def place_rank(self) -> Optional[str]:
-        return self.raw_json.get("place_rank")
+        return self.object_raw_json.get("place_rank")
 
 
 class OsmQuery(MultipleResultsQuery):

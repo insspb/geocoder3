@@ -26,11 +26,11 @@ class ElevationResult(OneResult):
 
     @property
     def elevation(self):
-        return self.raw_json.get("elevation")
+        return self.object_raw_json.get("elevation")
 
     @property
     def resolution(self):
-        return self.raw_json.get("resolution")
+        return self.object_raw_json.get("resolution")
 
 
 class ElevationQuery(MultipleResultsQuery):

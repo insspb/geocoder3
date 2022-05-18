@@ -10,83 +10,83 @@ class GeonamesFullResult(GeonamesResult):
 
     @property
     def continent(self):
-        return self.raw_json.get("continentCode", "")
+        return self.object_raw_json.get("continentCode", "")
 
     @property
     def country_geonames_id(self):
-        return self.raw_json.get("countryId", 0)
+        return self.object_raw_json.get("countryId", 0)
 
     @property
     def state_geonames_id(self):
-        return self.raw_json.get("adminId1", 0)
+        return self.object_raw_json.get("adminId1", 0)
 
     @property
     def admin2(self):
-        return self.raw_json.get("adminName2", "")
+        return self.object_raw_json.get("adminName2", "")
 
     @property
     def admin2_geonames_id(self):
-        return self.raw_json.get("adminId2", "")
+        return self.object_raw_json.get("adminId2", "")
 
     @property
     def admin3(self):
-        return self.raw_json.get("adminName3", "")
+        return self.object_raw_json.get("adminName3", "")
 
     @property
     def admin3_geonames_id(self):
-        return self.raw_json.get("adminId3", "")
+        return self.object_raw_json.get("adminId3", "")
 
     @property
     def admin4(self):
-        return self.raw_json.get("adminName4", "")
+        return self.object_raw_json.get("adminName4", "")
 
     @property
     def admin4_geonames_id(self):
-        return self.raw_json.get("adminId4", "")
+        return self.object_raw_json.get("adminId4", "")
 
     @property
     def admin5(self):
-        return self.raw_json.get("adminName5", "")
+        return self.object_raw_json.get("adminName5", "")
 
     @property
     def admin5_geonames_id(self):
-        return self.raw_json.get("adminId5", "")
+        return self.object_raw_json.get("adminId5", "")
 
     @property
     def srtm3(self):
-        return self.raw_json.get("srtm3", 0)
+        return self.object_raw_json.get("srtm3", 0)
 
     @property
     def wikipedia(self):
-        return self.raw_json.get("wikipediaURL", "")
+        return self.object_raw_json.get("wikipediaURL", "")
 
     @property
     def timeZoneId(self):
-        timezone = self.raw_json.get("timezone")
+        timezone = self.object_raw_json.get("timezone")
         if timezone:
             return timezone.get("timeZoneId")
 
     @property
     def timeZoneName(self):
-        timezone = self.raw_json.get("timezone")
+        timezone = self.object_raw_json.get("timezone")
         if timezone:
             return timezone.get("timeZoneId")
 
     @property
     def rawOffset(self):
-        timezone = self.raw_json.get("timezone")
+        timezone = self.object_raw_json.get("timezone")
         if timezone:
             return timezone.get("gmtOffset")
 
     @property
     def dstOffset(self):
-        timezone = self.raw_json.get("timezone")
+        timezone = self.object_raw_json.get("timezone")
         if timezone:
             return timezone.get("dstOffset")
 
     @property
     def bbox(self):
-        bbox = self.raw_json.get("bbox", {})
+        bbox = self.object_raw_json.get("bbox", {})
         south = bbox.get("south")
         west = bbox.get("west")
         north = bbox.get("north")

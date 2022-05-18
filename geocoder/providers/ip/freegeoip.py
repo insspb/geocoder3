@@ -11,11 +11,11 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class FreeGeoIPResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("latitude")
+        return self.object_raw_json.get("latitude")
 
     @property
     def lng(self):
-        return self.raw_json.get("longitude")
+        return self.object_raw_json.get("longitude")
 
     @property
     def address(self):
@@ -29,8 +29,8 @@ class FreeGeoIPResult(OneResult):
 
     @property
     def postal(self):
-        zip_code = self.raw_json.get("zip_code")
-        postal_code = self.raw_json.get("postal_code")
+        zip_code = self.object_raw_json.get("zip_code")
+        postal_code = self.object_raw_json.get("postal_code")
         if zip_code:
             return zip_code
         if postal_code:
@@ -38,55 +38,55 @@ class FreeGeoIPResult(OneResult):
 
     @property
     def city(self):
-        return self.raw_json.get("city")
+        return self.object_raw_json.get("city")
 
     @property
     def state(self):
-        return self.raw_json.get("region")
+        return self.object_raw_json.get("region")
 
     @property
     def region_code(self):
-        return self.raw_json.get("region_code")
+        return self.object_raw_json.get("region_code")
 
     @property
     def country(self):
-        return self.raw_json.get("country_name")
+        return self.object_raw_json.get("country_name")
 
     @property
     def country_code3(self):
-        return self.raw_json.get("country_code3")
+        return self.object_raw_json.get("country_code3")
 
     @property
     def continent(self):
-        return self.raw_json.get("continent")
+        return self.object_raw_json.get("continent")
 
     @property
     def timezone(self):
-        return self.raw_json.get("timezone")
+        return self.object_raw_json.get("timezone")
 
     @property
     def area_code(self):
-        return self.raw_json.get("area_code")
+        return self.object_raw_json.get("area_code")
 
     @property
     def dma_code(self):
-        return self.raw_json.get("dma_code")
+        return self.object_raw_json.get("dma_code")
 
     @property
     def offset(self):
-        return self.raw_json.get("offset")
+        return self.object_raw_json.get("offset")
 
     @property
     def organization(self):
-        return self.raw_json.get("organization")
+        return self.object_raw_json.get("organization")
 
     @property
     def ip(self):
-        return self.raw_json.get("ip")
+        return self.object_raw_json.get("ip")
 
     @property
     def time_zone(self):
-        return self.raw_json.get("time_zone")
+        return self.object_raw_json.get("time_zone")
 
 
 class FreeGeoIPQuery(MultipleResultsQuery):

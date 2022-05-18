@@ -25,7 +25,7 @@ class USCensusResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("matchedAddress")
+        return self.object_raw_json.get("matchedAddress")
 
     @property
     def house_number(self):
