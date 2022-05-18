@@ -1,11 +1,11 @@
-# Confidence Score
+# Confidence Score Calculation
 
 Confidence score based on [OpenCage API](https://opencagedata.com/api#confidence)
 implementation, but available in any supported geocoder. For geocoders without default
 confidence score support this property calculated by same definition in `geocoder3`
 internal process.
 
-## What is this
+## What is Confidence Score
 
 The OpenCage Geocoder will always attempt to find a match for as many parts of a query
 as it can, but this isn't always possible to do. Where a partial match is made, for
