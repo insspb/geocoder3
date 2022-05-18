@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class OneResult(object):
-    """Container for one (JSON) object returned by the various web services"""
+    """Container for one (JSON) object returned by provider"""
 
     _TO_EXCLUDE = [
         "parse",
@@ -96,11 +96,13 @@ class OneResult(object):
     # Bounding Box attributes
     @property
     def bbox(self) -> dict:
+        """Object bounding box when can be calculated/retrieved."""
         return {}
 
     # Essential attributes for Street Address
     @property
     def address(self) -> Optional[str]:
+        """Object simple string address."""
         return None
 
     def __repr__(self) -> str:
@@ -124,6 +126,11 @@ class OneResult(object):
 
     @property
     def ok(self) -> bool:
+        """
+        Status of retrieving location/IP coordinates or reverse geocoding.
+
+        Usually should be replaced in reverse results class.
+        """
         return bool(self.lng and self.lat)
 
     @property
@@ -166,6 +173,10 @@ class OneResult(object):
 
     @property
     def confidence(self) -> int:
+        """
+        Is as a measure of how confident we are that centre point coordinates returned
+        for the result precisely reflect the result.
+        """
         if not self.bbox:
             # Cannot determine score
             return 0
@@ -233,16 +244,7 @@ class OneResult(object):
 
 class MultipleResultsQuery(MutableSequence):
     """
-    Replace the Base class to support multiple results, with the following differences:
-
-    - split class into 2 parts :
-        - OneResult to actually store a (JSON) object from provider
-        - MultipleResultsQuery to manage the query
-
-    - class variables moved into instance
-    - remaining class variables are names with convention: _CAPITALS
-    - self.url derived from class var cls.URL, which must be a valid URL
-    - self.timeout has default value from class var cls.TIMEOUT
+    Query manager container
     """
 
     _URL = None
