@@ -85,12 +85,12 @@ class OneResult(object):
     # Essential attributes for Quality Control
     @property
     def lat(self) -> Optional[float]:
-        """Latitude of the centroid of the object"""
+        """Latitude of the object"""
         return None
 
     @property
     def lng(self) -> Optional[float]:
-        """Longitude of the centroid of the object"""
+        """Longitude of the object"""
         return None
 
     @property
@@ -285,22 +285,27 @@ class OneResult(object):
 
     @property
     def wkt(self) -> Optional[str]:
+        """Output coordinates in well-known text format, no SRID data."""
         return f"POINT({self.x} {self.y})" if self.ok else None
 
     @property
     def xy(self) -> Optional[list]:
+        """Optional list of longitude and latitude values."""
         return [self.lng, self.lat] if self.ok else None
 
     @property
     def latlng(self) -> Optional[list]:
+        """Optional list of latitude and longitude values."""
         return [self.lat, self.lng] if self.ok else None
 
     @property
     def y(self) -> Optional[float]:
+        """Latitude of the object"""
         return self.lat
 
     @property
     def x(self) -> Optional[float]:
+        """Longitude of the object"""
         return self.lng
 
     @property
