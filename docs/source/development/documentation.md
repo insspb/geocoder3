@@ -1,10 +1,10 @@
 # Documentation guide
 
-## New documentation strandards
+## New documentation standards
 
 1. All new documentation should be in `Markdown` format. Except index files and
    special cases.
-2. Usage of RST blocks is not restricted.
+2. However, usage of RST blocks is not restricted.
 
 ## Update of old documentation guide
 
