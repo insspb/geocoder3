@@ -90,9 +90,8 @@ class GeocodeXYZQuery(MultipleResultsQuery):
 
     """
 
-    provider = "geocodexyz"
-    method = "geocode"
-
+    _PROVIDER = "geocodexyz"
+    _METHOD = "geocode"
     _URL = "https://geocode.xyz/"
     _RESULT_CLASS = GeocodeXYZResult
     _KEY = geocodexyz_key

@@ -50,9 +50,8 @@ class GisgraphyQuery(MultipleResultsQuery):
     API Reference: http://www.gisgraphy.com/documentation/user-guide.php
     """
 
-    provider = "gisgraphy"
-    method = "geocode"
-
+    _PROVIDER = "gisgraphy"
+    _METHOD = "geocode"
     _URL = "https://services.gisgraphy.com/geocoding/"
     _RESULT_CLASS = GisgraphyResult
     _KEY_MANDATORY = False

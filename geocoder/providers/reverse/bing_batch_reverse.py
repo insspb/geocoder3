@@ -54,7 +54,7 @@ class BingBatchReverseResult(BingBatchResult):
 
 class BingBatchReverse(BingBatch):
 
-    method = "batch_reverse"
+    _METHOD = "batch_reverse"
     _RESULT_CLASS = BingBatchReverseResult
 
     def generate_batch(self, locations):

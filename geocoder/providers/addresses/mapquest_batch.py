@@ -23,9 +23,8 @@ class MapquestBatch(MultipleResultsQuery):
     API Reference: http://www.mapquestapi.com/geocoding/
     """
 
-    provider = "mapquest"
-    method = "batch"
-
+    _PROVIDER = "mapquest"
+    _METHOD = "batch"
     _RESULT_CLASS = MapQuestBatchResult
     _URL = "http://www.mapquestapi.com/geocoding/v1/batch"
     _TIMEOUT = 30

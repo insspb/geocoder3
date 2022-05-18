@@ -76,9 +76,8 @@ class MapzenQuery(MultipleResultsQuery):
     API Reference: https://mapzen.com/documentation/search/search/
     """
 
-    provider = "mapzen"
-    method = "geocode"
-
+    _PROVIDER = "mapzen"
+    _METHOD = "geocode"
     _URL = "https://search.mapzen.com/v1/search"
     _RESULT_CLASS = MapzenResult
     _KEY = mapzen_key

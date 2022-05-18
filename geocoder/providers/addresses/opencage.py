@@ -383,9 +383,8 @@ class OpenCageQuery(MultipleResultsQuery):
     API Reference: https://geocoder.opencagedata.com/api
     """
 
-    provider = "opencage"
-    method = "geocode"
-
+    _PROVIDER = "opencage"
+    _METHOD = "geocode"
     _URL = "http://api.opencagedata.com/geocode/v1/json"
     _RESULT_CLASS = OpenCageResult
     _KEY = opencage_key

@@ -50,9 +50,8 @@ class W3WQuery(MultipleResultsQuery):
     Get W3W key: https://map.what3words.com/register?dev=true
     """
 
-    provider = "w3w"
-    method = "geocode"
-
+    _PROVIDER = "w3w"
+    _METHOD = "geocode"
     _URL = "https://api.what3words.com/v2/forward"
     _RESULT_CLASS = W3WResult
     _KEY = w3w_key

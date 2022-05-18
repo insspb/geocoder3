@@ -106,9 +106,8 @@ class KomootQuery(MultipleResultsQuery):
     API Reference: http://photon.komoot.de
     """
 
-    provider = "komoot"
-    method = "geocode"
-
+    _PROVIDER = "komoot"
+    _METHOD = "geocode"
     _URL = "http://photon.komoot.de/api"
     _RESULT_CLASS = KomootResult
     _KEY_MANDATORY = False

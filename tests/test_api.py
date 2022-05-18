@@ -2,6 +2,7 @@ import pytest
 import vcr
 
 import geocoder
+from geocoder.api import options
 
 requests_recorder_ro = vcr.VCR(
     serializer="json",
@@ -62,3 +63,14 @@ def test__get_results__on_partly_correct_arguments__do_strip_and_lower(
     result = geocoder.get_results("New York", provider=provider, method=method)
     assert result.ok
     assert result.latlng == [40.7127281, -74.0060152]
+
+
+@pytest.mark.parametrize(
+    "method_name, method_class",
+    [y for x in options.values() for y in list(x.items())],
+)
+def test__options__correctly_configured(method_name, method_class):
+    """This test responsible for checking correctness of options dict setup."""
+
+    assert method_name == method_class._METHOD
+    assert options[method_class._PROVIDER][method_class._METHOD] == method_class

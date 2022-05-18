@@ -121,9 +121,8 @@ class PlacesQuery(MultipleResultsQuery):
     :param type: (optional) restrict results to one type of place
     """
 
-    provider = "google"
-    method = "places"
-
+    _PROVIDER = "google"
+    _METHOD = "places"
     _URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
     _RESULT_CLASS = PlacesResult
     _KEY = google_key

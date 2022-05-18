@@ -23,9 +23,8 @@ class MapboxReverse(MapboxQuery):
     Get Mapbox Access Token: https://www.mapbox.com/account
     """
 
-    provider = "mapbox"
-    method = "reverse"
-
+    _PROVIDER = "mapbox"
+    _METHOD = "reverse"
     _URL = "https://api.mapbox.com/geocoding/v5/mapbox.places/{lng},{lat}.json"
 
     def _build_params(self, location, provider_key, **kwargs):

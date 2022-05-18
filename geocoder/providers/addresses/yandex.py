@@ -134,9 +134,8 @@ class YandexQuery(MultipleResultsQuery):
     input_params.xml
     """
 
-    provider = "yandex"
-    method = "geocode"
-
+    _PROVIDER = "yandex"
+    _METHOD = "geocode"
     _URL = "https://geocode-maps.yandex.ru/1.x/"
     _RESULT_CLASS = YandexResult
     _KEY = yandex_key

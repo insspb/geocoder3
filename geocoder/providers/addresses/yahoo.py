@@ -79,9 +79,8 @@ class YahooQuery(MultipleResultsQuery):
     API Reference: https://developer.yahoo.com/boss/geo/
     """
 
-    provider = "yahoo"
-    method = "geocode"
-
+    _PROVIDER = "yahoo"
+    _METHOD = "geocode"
     _URL = "https://sgws2.maps.yahoo.com/FindLocation"
     _RESULT_CLASS = YahooResult
     _KEY_MANDATORY = False

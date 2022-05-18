@@ -77,9 +77,8 @@ class GeolyticaQuery(MultipleResultsQuery):
     API Reference: http://geocoder.ca/?api=1
     """
 
-    provider = "geolytica"
-    method = "geocode"
-
+    _PROVIDER = "geolytica"
+    _METHOD = "geocode"
     _URL = "http://geocoder.ca"
     _RESULT_CLASS = GeolyticaResult
     _KEY_MANDATORY = False

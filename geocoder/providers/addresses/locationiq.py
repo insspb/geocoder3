@@ -12,9 +12,9 @@ class LocationIQResult(OsmResult):
 
 
 class LocationIQQuery(OsmQuery):
-    provider = "locationiq"
-    method = "geocode"
 
+    _PROVIDER = "locationiq"
+    _METHOD = "geocode"
     _URL = "https://locationiq.org/v1/search.php"
     _RESULT_CLASS = LocationIQResult
     _KEY = locationiq_key

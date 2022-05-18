@@ -63,9 +63,8 @@ class ArcgisReverse(ArcgisQuery):
     geocoding-reverse-geocode.htm
     """
 
-    provider = "arcgis"
-    method = "reverse"
-
+    _PROVIDER = "arcgis"
+    _METHOD = "reverse"
     _URL = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode"  # noqa
     _RESULT_CLASS = ArcgisReverseResult
 

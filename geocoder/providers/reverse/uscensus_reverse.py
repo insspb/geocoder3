@@ -78,9 +78,8 @@ class USCensusReverse(USCensusQuery):
 
     """
 
-    provider = "uscensus"
-    method = "reverse"
-
+    _PROVIDER = "uscensus"
+    _METHOD = "reverse"
     _URL = "https://geocoding.geo.census.gov/geocoder/geographies/coordinates"
     _RESULT_CLASS = USCensusReverseResult
 

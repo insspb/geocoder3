@@ -140,9 +140,8 @@ class TgosQuery(MultipleResultsQuery):
     http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     """
 
-    provider = "tgos"
-    method = "geocode"
-
+    _PROVIDER = "tgos"
+    _METHOD = "geocode"
     _URL = "http://gis.tgos.nat.gov.tw/TGLocator/TGLocator.ashx"
     _RESULT_CLASS = TgosResult
     _KEY = tgos_key

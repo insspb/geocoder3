@@ -32,9 +32,8 @@ class GeocodeFarmReverse(GeocodeFarmQuery):
     API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
 
-    provider = "geocodefarm"
-    method = "reverse"
-
+    _PROVIDER = "geocodefarm"
+    _METHOD = "reverse"
     _URL = "https://www.geocode.farm/v3/json/reverse/"
 
     def _build_params(self, location, provider_key, **kwargs):

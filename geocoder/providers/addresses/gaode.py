@@ -74,9 +74,8 @@ class GaodeQuery(MultipleResultsQuery):
     Get AMap Key: http://lbs.amap.com/dev/
     """
 
-    provider = "gaode"
-    method = "geocode"
-
+    _PROVIDER = "gaode"
+    _METHOD = "geocode"
     _URL = "http://restapi.amap.com/v3/geocode/geo"
     _RESULT_CLASS = GaodeResult
     _KEY = gaode_key

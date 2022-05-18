@@ -21,9 +21,8 @@ class HereReverse(HereQuery):
     API Reference: https://developer.here.com/rest-apis/documentation/geocoder
     """
 
-    provider = "here"
-    method = "reverse"
-
+    _PROVIDER = "here"
+    _METHOD = "reverse"
     _RESULT_CLASS = HereReverseResult
     _URL = "http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json"
 

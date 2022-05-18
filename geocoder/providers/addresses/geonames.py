@@ -76,9 +76,8 @@ class GeonamesQuery(MultipleResultsQuery):
     API Reference: http://www.geonames.org/export/web-services.html
     """
 
-    provider = "geonames"
-    method = "geocode"
-
+    _PROVIDER = "geonames"
+    _METHOD = "geocode"
     _URL = "http://api.geonames.org/searchJSON"
     _RESULT_CLASS = GeonamesResult
     _KEY = geonames_username

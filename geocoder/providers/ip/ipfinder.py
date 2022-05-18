@@ -201,9 +201,8 @@ class IpfinderQuery(MultipleResultsQuery):
     Get IPFinder key   : https://ipfinder.io/auth/signup
     """
 
-    provider = "ipfinder"
-    method = "geocode"
-
+    _PROVIDER = "ipfinder"
+    _METHOD = "geocode"
     _URL = "http://api.ipfinder.io/v1/"
     _RESULT_CLASS = IpfinderResult
     _KEY_MANDATORY = False

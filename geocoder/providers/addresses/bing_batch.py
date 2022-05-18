@@ -50,8 +50,8 @@ class BingBatch(MultipleResultsQuery):
 
     """
 
-    provider = "bing"
-
+    _PROVIDER = "bing"
+    _METHOD = "batch"
     _URL = "http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode"
     _BATCH_TIMEOUT = 60
     _BATCH_WAIT = 5

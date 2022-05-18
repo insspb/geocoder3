@@ -65,9 +65,8 @@ class IpinfoQuery(MultipleResultsQuery):
     API Reference: https://ipinfo.io
     """
 
-    provider = "ipinfo"
-    method = "geocode"
-
+    _PROVIDER = "ipinfo"
+    _METHOD = "geocode"
     _URL = "http://ipinfo.io/json"
     _RESULT_CLASS = IpinfoResult
     _KEY = ipinfo_key

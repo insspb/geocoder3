@@ -105,9 +105,8 @@ class FreeGeoIPQuery(MultipleResultsQuery):
     API Reference: https://freegeoip.live/
     """
 
-    provider = "freegeoip"
-    method = "geocode"
-
+    _PROVIDER = "freegeoip"
+    _METHOD = "geocode"
     _URL = "https://freegeoip.live/json/"
     _RESULT_CLASS = FreeGeoIPResult
     _KEY_MANDATORY = False

@@ -98,9 +98,8 @@ class MaxmindQuery(MultipleResultsQuery):
     API Reference: https://www.maxmind.com/en/geolocation_landing
     """
 
-    provider = "maxmind"
-    method = "geocode"
-
+    _PROVIDER = "maxmind"
+    _METHOD = "geocode"
     _URL = "https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}"
     _RESULT_CLASS = MaxmindResults
     _KEY_MANDATORY = False

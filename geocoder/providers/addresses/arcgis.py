@@ -59,9 +59,8 @@ class ArcgisQuery(MultipleResultsQuery):
     api-reference/geocoding-find.htm
     """
 
-    provider = "arcgis"
-    method = "geocode"
-
+    _PROVIDER = "arcgis"
+    _METHOD = "geocode"
     _URL = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find"
     _RESULT_CLASS = ArcgisResult
     _KEY_MANDATORY = False

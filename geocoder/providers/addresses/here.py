@@ -94,10 +94,10 @@ class HereQuery(MultipleResultsQuery):
     API Reference: https://developer.here.com/rest-apis/documentation/geocoder
     """
 
-    provider = "here"
-    method = "geocode"
     qualified_address = ["city", "district", "postal", "state", "country"]
 
+    _PROVIDER = "here"
+    _METHOD = "geocode"
     _URL = "http://geocoder.cit.api.here.com/6.2/geocode.json"
     _RESULT_CLASS = HereResult
 

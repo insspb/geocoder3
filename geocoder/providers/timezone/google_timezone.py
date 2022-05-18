@@ -45,9 +45,8 @@ class GoogleTimezone(MultipleResultsQuery):
     API Reference: https://developers.google.com/maps/documentation/timezone/
     """
 
-    provider = "google"
-    method = "timezone"
-
+    _PROVIDER = "google"
+    _METHOD = "timezone"
     _URL = "https://maps.googleapis.com/maps/api/timezone/json"
     _RESULT_CLASS = GoogleTimezoneResult
     _KEY = google_key

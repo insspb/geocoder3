@@ -99,9 +99,8 @@ class GeonamesDetails(GeonamesQuery):
     http://api.geonames.org/getJSON?geonameId=6094817&style=full
     """
 
-    provider = "geonames"
-    method = "details"
-
+    _PROVIDER = "geonames"
+    _METHOD = "details"
     _URL = "http://api.geonames.org/getJSON"
     _RESULT_CLASS = GeonamesFullResult
 

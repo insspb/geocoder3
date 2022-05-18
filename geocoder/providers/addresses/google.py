@@ -167,9 +167,8 @@ class GoogleQuery(MultipleResultsQuery):
     :param client_secret: Google for Work client secret. Use with client.
     """
 
-    provider = "google"
-    method = "geocode"
-
+    _PROVIDER = "google"
+    _METHOD = "geocode"
     _URL = "https://maps.googleapis.com/maps/api/geocode/json"
     _RESULT_CLASS = GoogleResult
     _KEY = google_key

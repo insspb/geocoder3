@@ -22,9 +22,8 @@ class CanadapostIdResult(OneResult):
 
 class CanadapostIdQuery(MultipleResultsQuery):
 
-    provider = "canadapost"
-    method = "id"
-
+    _PROVIDER = "canadapost"
+    _METHOD = "id"
     _URL = "https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/json3ex.ws"  # noqa
     _RESULT_CLASS = CanadapostIdResult
     _KEY_MANDATORY = False
@@ -118,8 +117,8 @@ class CanadapostQuery(MultipleResultsQuery):
     API Reference: https://www.canadapost.ca/pca/
     """
 
-    provider = "canadapost"
-    method = "geocode"
+    _PROVIDER = "canadapost"
+    _METHOD = "geocode"
 
     _URL = "https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveFormatted/v2.10/json3ex.ws"  # noqa
     _RESULT_CLASS = CanadapostResult

@@ -19,9 +19,8 @@ class KomootReverse(KomootQuery):
     API Reference: http://photon.komoot.de
     """
 
-    provider = "komoot"
-    method = "reverse"
-
+    _PROVIDER = "komoot"
+    _METHOD = "reverse"
     _URL = "https://photon.komoot.de/reverse"
     _RESULT_CLASS = KomootReverseResult
 

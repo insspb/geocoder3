@@ -73,9 +73,8 @@ class OttawaQuery(MultipleResultsQuery):
     GeocodeServer/findAddressCandidates
     """
 
-    provider = "ottawa"
-    method = "geocode"
-
+    _PROVIDER = "ottawa"
+    _METHOD = "geocode"
     _URL = "http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates"  # noqa
     _RESULT_CLASS = OttawaResult
     _KEY_MANDATORY = False

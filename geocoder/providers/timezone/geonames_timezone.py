@@ -41,9 +41,8 @@ class GeonamesTimezone(GeonamesQuery):
     http://api.geonames.org/timezoneJSON?lat=47.01&lng=10.2
     """
 
-    provider = "geonames"
-    method = "timezone"
-
+    _PROVIDER = "geonames"
+    _METHOD = "timezone"
     _URL = "http://api.geonames.org/timezoneJSON"
     _RESULT_CLASS = GeonamesTimezoneResult
 

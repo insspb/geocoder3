@@ -19,9 +19,8 @@ class MapzenReverse(MapzenQuery):
     API Reference: https://mapzen.com/documentation/search/reverse/
     """
 
-    provider = "mapzen"
-    method = "reverse"
-
+    _PROVIDER = "mapzen"
+    _METHOD = "reverse"
     _URL = "https://search.mapzen.com/v1/reverse"
     _RESULT_CLASS = MapzenReverseResult
 

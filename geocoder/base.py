@@ -251,6 +251,8 @@ class MultipleResultsQuery(MutableSequence):
     _RESULT_CLASS = None
     _KEY = None
     _KEY_MANDATORY = True
+    _METHOD = None
+    _PROVIDER = None
     _TIMEOUT = 5.0
 
     @staticmethod
@@ -268,7 +270,11 @@ class MultipleResultsQuery(MutableSequence):
 
     @classmethod
     def _is_valid_result_class(cls) -> bool:
-        return issubclass(cls._RESULT_CLASS, OneResult)
+        try:
+            return issubclass(cls._RESULT_CLASS, OneResult)
+        except TypeError:
+            # TypeError raised by issubclass if cls._RESULT_CLASS is None
+            return False
 
     @classmethod
     def _get_api_key(cls, key=None) -> Optional[str]:
@@ -281,25 +287,51 @@ class MultipleResultsQuery(MutableSequence):
 
         return key
 
+    def __init_subclass__(cls, **kwargs):
+        """Responsible for default setup check for new provider's Query subclasses."""
+        super().__init_subclass__(**kwargs)
+
+        # check validity of class._URL
+        if not cls._is_valid_url(cls._URL):
+            raise ValueError(f"Subclass must define a valid URL. Got {cls._URL}")
+
+        # check validity of Result class
+        if not cls._is_valid_result_class():
+            raise ValueError(
+                f"Subclass must define _RESULT_CLASS from 'OneResult'. "
+                f"Got {cls._RESULT_CLASS}",
+            )
+
+        # check for valid method specification
+        if not cls._METHOD or cls._METHOD not in [
+            "id",
+            "geocode",
+            "details",
+            "reverse",
+            "timezone",
+            "elevation",
+            "places",
+            "batch",
+            "batch_reverse",
+            "children",
+            "hierarchy",
+            "parcel",
+        ]:
+            raise ValueError(
+                f"Subclass must define correct _METHOD attribute, not equal to None. "
+                f"Got {cls._METHOD}"
+            )
+
     def __init__(self, location, **kwargs):
         super(MultipleResultsQuery, self).__init__()
         self._list = []
 
-        # check validity of _URL
-        if not self._is_valid_url(self._URL):
-            raise ValueError("Subclass must define a valid URL. Got %s", self._URL)
         # override with kwargs IF given AND not empty string
         self.url = kwargs.get("url", self._URL) or self._URL
         # double check url, just in case it has been overwritten by kwargs
         if not self._is_valid_url(self.url):
             raise ValueError("url not valid. Got %s", self.url)
 
-        # check validity of Result class
-        if not self._is_valid_result_class():
-            raise ValueError(
-                "Subclass must define _RESULT_CLASS from 'OneResult'. Got %s",
-                self._RESULT_CLASS,
-            )
         self.one_result = self._RESULT_CLASS
 
         # check validity of provider key
@@ -355,7 +387,7 @@ class MultipleResultsQuery(MutableSequence):
 
     def __repr__(self) -> str:
         base_repr = "<[{0}] {1} - {2} {{0}}>".format(
-            self.status, self.provider.title(), self.method.title()
+            self.status, self._PROVIDER.title(), self._METHOD.title()
         )
         if len(self) == 0:
             return base_repr.format("[empty]")

@@ -40,9 +40,8 @@ class YandexReverse(YandexQuery):
     input_params.xml
     """
 
-    provider = "yandex"
-    method = "reverse"
-
+    _PROVIDER = "yandex"
+    _METHOD = "reverse"
     _RESULT_CLASS = YandexReverseResult
 
     def _build_params(

@@ -92,9 +92,8 @@ class MapboxQuery(MultipleResultsQuery):
     Get Mapbox Access Token: https://www.mapbox.com/account
     """
 
-    provider = "mapbox"
-    method = "geocode"
-
+    _PROVIDER = "mapbox"
+    _METHOD = "geocode"
     _URL = "https://api.mapbox.com/geocoding/v5/mapbox.places/{0}.json"
     _RESULT_CLASS = MapboxResult
     _KEY = mapbox_access_token

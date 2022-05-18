@@ -22,8 +22,8 @@ class BingReverse(BingQuery):
     API Reference: http://msdn.microsoft.com/en-us/library/ff701714.aspx
     """
 
-    provider = "bing"
-    method = "reverse"
+    _PROVIDER = "bing"
+    _METHOD = "reverse"
 
     _URL = "http://dev.virtualearth.net/REST/v1/Locations/{0}"
 

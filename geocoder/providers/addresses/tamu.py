@@ -129,8 +129,8 @@ class TamuQuery(MultipleResultsQuery):
     API Reference: https://geoservices.tamu.edu/Services/Geocode/WebService
     """
 
-    provider = "tamu"
-    method = "geocode"
+    _PROVIDER = "tamu"
+    _METHOD = "geocode"
     CENSUSYEARS = ["1990", "2000", "2010"]
 
     _URL = (

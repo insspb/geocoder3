@@ -60,9 +60,8 @@ class BaiduReverse(BaiduQuery):
     Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
     """
 
-    provider = "baidu"
-    method = "reverse"
-
+    _PROVIDER = "baidu"
+    _METHOD = "reverse"
     _URL = "http://api.map.baidu.com/geocoder/v2/"
     _RESULT_CLASS = BaiduReverseResult
 

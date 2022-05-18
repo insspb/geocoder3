@@ -46,9 +46,8 @@ class ElevationQuery(MultipleResultsQuery):
     API Reference: https://developers.google.com/maps/documentation/elevation/
     """
 
-    provider = "google"
-    method = "elevation"
-
+    _PROVIDER = "google"
+    _METHOD = "elevation"
     _URL = "https://maps.googleapis.com/maps/api/elevation/json"
     _RESULT_CLASS = ElevationResult
     _KEY = google_key

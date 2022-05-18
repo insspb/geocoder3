@@ -51,9 +51,8 @@ class USCensusBatch(MultipleResultsQuery):
 
     """
 
-    provider = "uscensus"
-    method = "geocode"
-
+    _PROVIDER = "uscensus"
+    _METHOD = "batch"
     _URL = "https://geocoding.geo.census.gov/geocoder/locations/addressbatch"
     _RESULT_CLASS = USCensusBatchResult
     _KEY_MANDATORY = False

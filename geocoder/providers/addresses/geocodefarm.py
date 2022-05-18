@@ -113,9 +113,8 @@ class GeocodeFarmQuery(MultipleResultsQuery):
     API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
 
-    provider = "geocodefarm"
-    method = "geocode"
-
+    _PROVIDER = "geocodefarm"
+    _METHOD = "geocode"
     _URL = "https://www.geocode.farm/v3/json/forward/"
     _RESULT_CLASS = GeocodeFarmResult
     _KEY = geocodefarm_key

@@ -5,9 +5,9 @@ from geocoder.providers.addresses import LocationIQQuery
 
 
 class LocationIQReverse(LocationIQQuery):
-    provider = "locationiq"
-    method = "reverse"
 
+    _PROVIDER = "locationiq"
+    _METHOD = "reverse"
     _URL = "https://locationiq.org/v1/reverse.php"
 
     def _build_params(self, location, provider_key, **kwargs):

@@ -75,9 +75,8 @@ class GaodeReverse(GaodeQuery):
     Get Gaode AMap Key: http://lbs.amap.com/dev/
     """
 
-    provider = "gaode"
-    method = "reverse"
-
+    _PROVIDER = "gaode"
+    _METHOD = "reverse"
     _URL = "http://restapi.amap.com/v3/geocode/regeo"
     _RESULT_CLASS = GaodeReverseResult
 

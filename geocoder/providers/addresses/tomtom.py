@@ -87,9 +87,8 @@ class TomtomQuery(MultipleResultsQuery):
     API Reference: https://developer.tomtom.com/tomtom-maps-apis-developers
     """
 
-    provider = "tomtom"
-    method = "geocode"
-
+    _PROVIDER = "tomtom"
+    _METHOD = "geocode"
     _URL = "https://api.tomtom.com/search/2/geocode/{0}.json"
     _RESULT_CLASS = TomtomResult
     _KEY = tomtom_key

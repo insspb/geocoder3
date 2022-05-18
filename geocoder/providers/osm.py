@@ -304,9 +304,8 @@ class OsmQuery(MultipleResultsQuery):
     Nominatim API Reference: https://nominatim.org/release-docs/develop/api/Overview/
     """
 
-    provider = "osm"
-    method = "geocode"
-
+    _PROVIDER = "osm"
+    _METHOD = "geocode"
     _URL = "https://nominatim.openstreetmap.org/search"
     _RESULT_CLASS = OsmResult
     _KEY_MANDATORY = False
@@ -328,7 +327,7 @@ class OsmQuery(MultipleResultsQuery):
 
 class OsmQueryDetail(OsmQuery):
 
-    method = "details"
+    _METHOD = "details"
 
     def _build_params(
         self,
@@ -348,7 +347,7 @@ class OsmQueryDetail(OsmQuery):
 
 class OsmReverse(OsmQuery):
 
-    method = "reverse"
+    _METHOD = "reverse"
 
     def _build_params(
         self,

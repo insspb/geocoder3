@@ -96,9 +96,8 @@ class BingQuery(MultipleResultsQuery):
     Get Bing key: https://www.bingmapsportal.com/
     """
 
-    provider = "bing"
-    method = "geocode"
-
+    _PROVIDER = "bing"
+    _METHOD = "geocode"
     _URL = "http://dev.virtualearth.net/REST/v1/Locations"
     _RESULT_CLASS = BingResult
     _KEY = bing_key
@@ -137,8 +136,8 @@ class BingQuery(MultipleResultsQuery):
 
 
 class BingQueryDetail(MultipleResultsQuery):
-    provider = "bing"
-    method = "details"
+    _PROVIDER = "bing"
+    _METHOD = "details"
 
     _URL = "http://dev.virtualearth.net/REST/v1/Locations"
     _RESULT_CLASS = BingResult

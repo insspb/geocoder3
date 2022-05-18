@@ -45,9 +45,8 @@ class BaiduQuery(MultipleResultsQuery):
     Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
     """
 
-    provider = "baidu"
-    method = "geocode"
-
+    _PROVIDER = "baidu"
+    _METHOD = "geocode"
     _URL = "http://api.map.baidu.com/geocoder/v2/"
     _RESULT_CLASS = BaiduResult
     _KEY = baidu_key

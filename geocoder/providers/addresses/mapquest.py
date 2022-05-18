@@ -68,9 +68,8 @@ class MapquestQuery(MultipleResultsQuery):
     API Reference: http://www.mapquestapi.com/geocoding/
     """
 
-    provider = "mapquest"
-    method = "geocode"
-
+    _PROVIDER = "mapquest"
+    _METHOD = "geocode"
     _URL = "http://www.mapquestapi.com/geocoding/v1/address"
     _RESULT_CLASS = MapquestResult
     _KEY = mapquest_key
