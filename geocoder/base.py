@@ -165,10 +165,6 @@ class OneResult(object):
         self.southwest = [self.south, self.west]
         self.southeast = [self.south, self.east]
 
-        # GeoJSON bbox
-        self.westsouth = [self.west, self.south]
-        self.eastnorth = [self.east, self.north]
-
         return dict(northeast=self.northeast, southwest=self.southwest)
 
     @property
@@ -292,14 +288,14 @@ class MultipleResultsQuery(MutableSequence):
         if not cls._is_valid_url(cls._URL):
             raise ValueError(f"Subclass must define a valid URL. Got {cls._URL}")
 
-        # check validity of Result class
+        # check validity of cls._RESULT_CLASS
         if not cls._is_valid_result_class():
             raise ValueError(
                 f"Subclass must define _RESULT_CLASS from 'OneResult'. "
                 f"Got {cls._RESULT_CLASS}",
             )
 
-        # check for valid method specification
+        # check validity of cls._METHOD
         if not cls._METHOD or cls._METHOD not in [
             "id",
             "geocode",
@@ -353,7 +349,7 @@ class MultipleResultsQuery(MutableSequence):
         # results of query (set by _connect)
         self.status_code = None
         self.response = None
-        self.error = False
+        self.error = None
 
         # pointer to result where to delegate calls
         self.current_result = None
@@ -394,11 +390,11 @@ class MultipleResultsQuery(MutableSequence):
             return base_repr.format(f"#{len(self)} results")
 
     def _build_headers(self, provider_key, **kwargs) -> dict:
-        """Will be overridden according to the targetted web service"""
+        """Will be overridden according to the targeted web service"""
         return {}
 
     def _build_params(self, location, provider_key, **kwargs) -> dict:
-        """Will be overridden according to the targetted web service"""
+        """Will be overridden according to the targeted web service"""
         return {}
 
     def _before_initialize(self, location, **kwargs):
@@ -412,13 +408,13 @@ class MultipleResultsQuery(MutableSequence):
         # catch errors
         has_error = self._catch_errors(json_response) if json_response else True
 
-        # creates instances for results
+        # creates instance for results
         if not has_error:
             self._parse_results(json_response)
 
     def _connect(self):
         """- Query self.url (validated cls._URL)
-        - Analyse reponse and set status, errors accordingly
+        - Analyse response and set status, errors accordingly
         - On success:
 
              returns the content of the response as a JSON object
@@ -461,16 +457,14 @@ class MultipleResultsQuery(MutableSequence):
         return self.session.get(url, **kwargs)
 
     def _adapt_results(self, json_response):
-        """Allow children classes to format json_response into an array of objects
-        OVERRIDE TO FETCH the correct array of objects when necessary
-        """
+        """Allow children classes to format json_response into an array of objects"""
         return json_response
 
     def _parse_results(self, json_response):
         """Creates instances of self.one_result (validated cls._RESULT_CLASS)
         from JSON results retrieved by self._connect
 
-        params: array of objects (dictionnaries)
+        params: array of objects (dictionaries)
         """
         for json_dict in self._adapt_results(json_response):
             self.add(self.one_result(json_dict))
