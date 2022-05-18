@@ -268,5 +268,5 @@ myst_enable_extensions = [
 
 # Autodic settings
 
-autodoc_member_order = "alphabetical"
-autodoc_typehints = "signature"
+autodoc_member_order = "groupwise"
+autodoc_typehints = "both"
