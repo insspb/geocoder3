@@ -10,3 +10,4 @@ in provider results definition.
     :maxdepth: 1
 
     confidence_score
+    wkt_output
