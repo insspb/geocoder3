@@ -257,15 +257,12 @@ class MultipleResultsQuery(MutableSequence):
 
     @staticmethod
     def _is_valid_url(url) -> bool:
-        """Helper function to validate that URLs are well formed, i.e that it contains
-        a valid protocol and a valid domain. It does not actually check if the URL
-        exists
-        """
+        """Validate that URL contains a valid protocol and a valid domain"""
         try:
             parsed = urlparse(url)
             mandatory_parts = [parsed.scheme, parsed.netloc]
             return all(mandatory_parts)
-        except Exception:
+        except AttributeError:
             return False
 
     @classmethod
