@@ -29,12 +29,10 @@ from geocoder import __version__  # noqa
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",  # Create neat summary tables
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
     "myst_parser",
 ]
-# autosummary_generate = True
 
 
 # 'releases' (changelog) settings

@@ -46,7 +46,6 @@ this part of the documentation is for you.
 
     features/index
     providers/index
-    api/index
 
 Contributor Guide
 -----------------
