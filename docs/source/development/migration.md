@@ -45,6 +45,14 @@ use direct helper's functions from `geocoder` module - no changes needed.
   provider's files.
 - All default properties values replaced from empty string `""` to `None`. Empty
   dicts in some cases left untouched. Please verify properties signatures.
+- List of default properties become much smaller, some secondary properties, not
+  required to internal `OneResult` work was removed. This will allow new providers
+  faster implementation.
+
+## base.py `MultipleResultsQuery` changes
+
+- Class will enforce correct setting of `_URL`, `_RESULT_CLASS`. `_METHOD`,
+  `_PROVIDER` in nested classes on project initialization stage.
 
 ## All print statements replaced with logging module
 
@@ -61,6 +69,10 @@ List of affected files, functions and classes:
   - `BingBatchForwardResult.debug()`
 - `bing_batch_reverse.py`
   - `BingBatchReverse.debug()`
+
+## Removed project features
+
+- OSM type CLI/Debug output removed as non-well documented
 
 ## kwargs approach and naming changes
 
