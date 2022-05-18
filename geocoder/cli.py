@@ -9,7 +9,7 @@ from geocoder.api import options
 
 providers = sorted(options.keys())
 methods = ["geocode", "reverse", "elevation", "timezone", "places"]
-outputs = ["json", "osm", "geojson", "wkt"]
+outputs = ["json", "geojson", "wkt"]
 units = ["kilometers", "miles", "feet", "meters"]
 
 

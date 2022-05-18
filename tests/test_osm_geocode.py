@@ -19,9 +19,6 @@ location = "Ottawa, Ontario"
 def test__osm__simple_query__return_correct_result():
     g = geocoder.osm(location)
     assert g.ok
-    osm_count, fields_count = g.debug()[0]
-    assert osm_count == 4
-    assert fields_count == 24
 
 
 @requests_recorder_ro.use_cassette("osm_geocode.json")

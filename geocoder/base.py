@@ -141,30 +141,6 @@ class OneResult(object):
         logger.debug("Cleaned json")
         logger.debug("------------")
         logger.debug(json.dumps(self.json, indent=4))
-        logger.debug("OSM Quality")
-        logger.debug("-----------")
-        osm_count = 0
-        for key in self.osm:
-            if "addr:" in key:
-                if self.json.get(key.replace("addr:", "")):
-                    logger.debug(f"- [x] {key}")
-                    osm_count += 1
-                else:
-                    logger.debug(f"- [ ] {key}")
-        logger.debug(f"({osm_count}/{len(self.osm) - 2})")
-        logger.debug("Fieldnames")
-        logger.debug("----------")
-        fields_count = 0
-        for fieldname in self.fieldnames:
-            if self.json.get(fieldname):
-                logger.debug(f"- [x] {fieldname}")
-                fields_count += 1
-            else:
-                logger.debug(f"- [ ] {fieldname}")
-        logger.debug(f"({fields_count}/{len(self.fieldnames)})")
-
-        # return stats
-        return [osm_count, fields_count]
 
     def _get_bbox(self, south, west, north, east) -> dict:
         if not all([south, east, north, west]):
@@ -215,28 +191,6 @@ class OneResult(object):
     @property
     def geometry(self) -> dict:
         return {"type": "Point", "coordinates": [self.x, self.y]} if self.ok else {}
-
-    @property
-    def osm(self) -> dict:
-        osm = {}
-        if self.ok:
-            osm["x"] = self.x
-            osm["y"] = self.y
-            if self.house_number:
-                osm["addr:housenumber"] = self.house_number
-            if self.road:
-                osm["addr:street"] = self.road
-            if self.city:
-                osm["addr:city"] = self.city
-            if self.state:
-                osm["addr:state"] = self.state
-            if self.country:
-                osm["addr:country"] = self.country
-            if self.postal:
-                osm["addr:postal"] = self.postal
-            if hasattr(self, "population") and self.population:
-                osm["population"] = self.population
-        return osm
 
     @property
     def geojson(self) -> dict:
