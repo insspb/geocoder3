@@ -1,3 +1,7 @@
+"""
+Base classes of provider definition responsible for minimum set of methods and
+properties, that should be implemented or overridden in all nested providers.
+"""
 import json
 import logging
 from collections import OrderedDict
@@ -240,7 +244,25 @@ class OneResult(object):
 
 class MultipleResultsQuery(MutableSequence):
     """
-    Query manager container
+    Base results and query manager container
+
+    This class responsible for checking correct new provider files creation before it
+    will be implemented in project. Such checks done in :func:`__init_subclass__` method
+    and will not allow to initialize project without fix.
+
+    Class variables:
+
+    Some class variables are mandatory for all nested subclasses.
+
+    :cvar str _URL:
+    :cvar OneResult _RESULT_CLASS:
+    :cvar str _KEY:
+    :cvar bool _KEY_MANDATORY:
+    :cvar str _METHOD:
+    :cvar str _PROVIDER:
+    :cvar float _TIMEOUT:
+
+    Instance variables:
     """
 
     _URL = None
@@ -263,6 +285,7 @@ class MultipleResultsQuery(MutableSequence):
 
     @classmethod
     def _is_valid_result_class(cls) -> bool:
+        """Validate cls._RESULT_CLASS has correct subclass nesting"""
         try:
             return issubclass(cls._RESULT_CLASS, OneResult)
         except TypeError:
@@ -281,7 +304,7 @@ class MultipleResultsQuery(MutableSequence):
         return key
 
     def __init_subclass__(cls, **kwargs):
-        """Responsible for default setup check for new provider's Query subclasses."""
+        """Responsible for setup check for :class:`MultipleResultsQuery` subclasses."""
         super().__init_subclass__(**kwargs)
 
         # check validity of class._URL
@@ -354,7 +377,6 @@ class MultipleResultsQuery(MutableSequence):
         # pointer to result where to delegate calls
         self.current_result = None
 
-        # hook for children class to finalize their setup before the query
         self._before_initialize(location, **kwargs)
 
         # query and parse results
@@ -398,10 +420,10 @@ class MultipleResultsQuery(MutableSequence):
         return {}
 
     def _before_initialize(self, location, **kwargs):
-        """Can be overridden to finalize setup before the query"""
+        """Hook for children class to finalize their setup before the query"""
         pass
 
-    def _initialize(self):
+        """Query remote server and parse results"""
         # query URL and get valid JSON (also stored in self.json)
         json_response = self._connect()
 
@@ -523,14 +545,20 @@ class MultipleResultsQuery(MutableSequence):
         """
         self.current_result = self[index]
 
-    def __getattr__(self, name):
-        """Called when an attribute lookup has not found the attribute in the usual
+    def __getattr__(self, name: str):
+        """Allow direct access to :attr:`MultipleResultsQuery.current_result`
+        attributes from direct calling of :class:`MultipleResultsQuery`
+
+        Called when an attribute lookup has not found the attribute in the usual
         places (i.e. it is not an instance attribute nor is it found in the class tree
-        for self). name is the attribute name. This method should return the (computed)
-        attribute value or raise an AttributeError exception.
+        for self).
 
         Note that if the attribute is found through the normal mechanism,
-          __getattr__() is not called.
+        :func:`__getattr__` is not called.
+
+        :param name: Attribute name for lookup
+        :raises AttributeError: If provider query was not made and
+            :attr:`current_result` is still empty.
         """
         if not self.ok:
             return None
