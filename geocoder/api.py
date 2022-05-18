@@ -209,7 +209,8 @@ def get_results(query, provider: str = "osm", method: str = "geocode", **kwargs)
     if method not in options[provider]:
         raise ValueError("Invalid method")
 
-    return options[provider][method](query, **kwargs)
+    provider_instance = options[provider][method](query, **kwargs)
+    return provider_instance()
 
 
 def distance(*locations, units: str = "kilometers", **kwargs):

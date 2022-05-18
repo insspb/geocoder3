@@ -369,18 +369,15 @@ class MultipleResultsQuery(MutableSequence):
         self.params = OrderedDict(self._build_params(location, provider_key, **kwargs))
         self.params.update(kwargs.get("params", {}))
 
-        # results of query (set by _connect)
+        # results of query (set by __call__ and _connect)
         self.status_code = None
         self.response = None
         self.error = None
+        self.is_called = False
 
         # pointer to result where to delegate calls
         self.current_result = None
-
         self._before_initialize(location, **kwargs)
-
-        # query and parse results
-        self._initialize()
 
     def __getitem__(self, key):
         return self._list[key]
@@ -423,7 +420,10 @@ class MultipleResultsQuery(MutableSequence):
         """Hook for children class to finalize their setup before the query"""
         pass
 
+    def __call__(self):
         """Query remote server and parse results"""
+        self.is_called = True
+
         # query URL and get valid JSON (also stored in self.json)
         json_response = self._connect()
 
@@ -433,6 +433,8 @@ class MultipleResultsQuery(MutableSequence):
         # creates instance for results
         if not has_error:
             self._parse_results(json_response)
+
+        return self
 
     def _connect(self):
         """- Query self.url (validated cls._URL)
