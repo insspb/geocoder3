@@ -44,6 +44,7 @@ this part of the documentation is for you.
 .. toctree::
     :maxdepth: 3
 
+    features/index
     providers/index
     api/index
 
