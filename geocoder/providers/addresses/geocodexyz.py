@@ -1,6 +1,6 @@
 __all__ = ["GeocodeXYZQuery"]
-
 import logging
+from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geocodexyz_key
@@ -64,16 +64,20 @@ class GeocodeXYZResult(OneResult):
 
     @property
     def house_number(self):
+        return self.street_number
+
+    @property
+    def street_number(self) -> Optional[str]:
         return self._get_value(self._standard, "stnumber")
 
     @property
     def address(self):
         if self.street_number:
-            return "{0} {1}, {2}".format(self.street_number, self.route, self.locality)
-        elif self.route and self.route != "un-known":
-            return "{0}, {1}".format(self.route, self.locality)
+            return "{0} {1}, {2}".format(self.street_number, self.street, self.city)
+        elif self.street and self.street != "un-known":
+            return "{0}, {1}".format(self.street, self.city)
         else:
-            return self.locality
+            return self.city
 
 
 class GeocodeXYZQuery(MultipleResultsQuery):

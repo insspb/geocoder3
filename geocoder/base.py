@@ -93,14 +93,6 @@ class OneResult(object):
         """Longitude of the object"""
         return None
 
-    @property
-    def accuracy(self) -> Optional[str]:
-        return None
-
-    @property
-    def quality(self) -> Optional[str]:
-        return None
-
     # Bounding Box attributes
     @property
     def bbox(self) -> dict:
@@ -109,30 +101,6 @@ class OneResult(object):
     # Essential attributes for Street Address
     @property
     def address(self) -> Optional[str]:
-        return None
-
-    @property
-    def house_number(self) -> Optional[str]:
-        return None
-
-    @property
-    def street(self) -> Optional[str]:
-        return None
-
-    @property
-    def city(self) -> Optional[str]:
-        return None
-
-    @property
-    def state(self) -> Optional[str]:
-        return None
-
-    @property
-    def country(self) -> Optional[str]:
-        return None
-
-    @property
-    def postal(self) -> Optional[str]:
         return None
 
     def __repr__(self) -> str:
@@ -307,26 +275,6 @@ class OneResult(object):
     def x(self) -> Optional[float]:
         """Longitude of the object"""
         return self.lng
-
-    @property
-    def locality(self) -> Optional[str]:
-        return self.city
-
-    @property
-    def province(self) -> Optional[str]:
-        return self.state
-
-    @property
-    def street_number(self) -> Optional[str]:
-        return self.house_number
-
-    @property
-    def road(self) -> Optional[str]:
-        return self.street
-
-    @property
-    def route(self) -> Optional[str]:
-        return self.street
 
 
 class MultipleResultsQuery(MutableSequence):
