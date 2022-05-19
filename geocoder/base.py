@@ -342,6 +342,7 @@ class MultipleResultsQuery(MutableSequence):
         self,
         location,
         url: Optional[str] = None,
+        key: Optional[str] = None,
         timeout: Union[None, float, Tuple[float, float], Tuple[float, None]] = None,
         proxies: Optional[MutableMapping[str, str]] = None,
         session: Optional[requests.Session] = None,
@@ -358,7 +359,7 @@ class MultipleResultsQuery(MutableSequence):
         self.url = url or self._URL
 
         # check validity of provider key
-        provider_key = self._get_api_key(kwargs.pop("key", ""))
+        provider_key = self._get_api_key(key=key)
 
         # point to geocode, as a string or coordinates
         self.location = location
