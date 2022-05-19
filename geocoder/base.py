@@ -340,7 +340,7 @@ class MultipleResultsQuery(MutableSequence):
 
     def __init__(self, location, **kwargs):
         super(MultipleResultsQuery, self).__init__()
-        self._list = []
+        self.results_list = []
 
         # override with kwargs IF given AND not empty string
         self.url = kwargs.get("url", self._URL) or self._URL
@@ -378,22 +378,22 @@ class MultipleResultsQuery(MutableSequence):
         self._before_initialize(location, **kwargs)
 
     def __getitem__(self, key):
-        return self._list[key]
+        return self.results_list[key]
 
     def __setitem__(self, key, value):
-        self._list[key] = value
+        self.results_list[key] = value
 
     def __delitem__(self, key):
-        del self._list[key]
+        del self.results_list[key]
 
     def __len__(self):
-        return len(self._list)
+        return len(self.results_list)
 
     def insert(self, index, value):
-        self._list.insert(index, value)
+        self.results_list.insert(index, value)
 
     def add(self, value):
-        self._list.append(value)
+        self.results_list.append(value)
 
     def __repr__(self) -> str:
         base_repr = "<[{0}] {1} - {2} {{0}}>".format(
