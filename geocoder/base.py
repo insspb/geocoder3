@@ -6,7 +6,7 @@ import json
 import logging
 from collections import OrderedDict
 from collections.abc import MutableSequence
-from typing import Optional
+from typing import MutableMapping, Optional, Tuple, Union
 from urllib.parse import urlparse
 
 import requests
@@ -342,6 +342,11 @@ class MultipleResultsQuery(MutableSequence):
         self,
         location,
         url: Optional[str] = None,
+        timeout: Union[None, float, Tuple[float, float], Tuple[float, None]] = None,
+        proxies: Optional[MutableMapping[str, str]] = None,
+        session: Optional[requests.Session] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+        params: Optional[dict] = None,
         **kwargs,
     ):
         super(MultipleResultsQuery, self).__init__()
@@ -358,18 +363,17 @@ class MultipleResultsQuery(MutableSequence):
         # point to geocode, as a string or coordinates
         self.location = location
 
-        # set attributes to manage query
-        self.encoding = kwargs.get("encoding", "utf-8")
-        self.timeout = kwargs.get("timeout", self._TIMEOUT)
-        self.proxies = kwargs.get("proxies", "")
-        self.session = kwargs.get("session", requests.Session())
+        # set attributes to manage query. Can be overwritten in __call__
+        self.timeout = timeout or self._TIMEOUT
+        self.proxies = proxies
+        self.session = session
         # headers can be overwritten in _build_headers
         self.headers = self._build_headers(provider_key, **kwargs).copy()
-        self.headers.update(kwargs.get("headers", {}))
+        self.headers.update(headers or {})
         # params can be overwritten in _build_params
         # OrderedDict in order to preserve the order of the url query parameters
         self.params = OrderedDict(self._build_params(location, provider_key, **kwargs))
-        self.params.update(kwargs.get("params", {}))
+        self.params.update(params or {})
 
         # results of query (set by __call__ and _connect)
         self.status_code = None
@@ -422,9 +426,19 @@ class MultipleResultsQuery(MutableSequence):
         """Hook for children class to finalize their setup before the query"""
         pass
 
-    def __call__(self):
+    def __call__(
+        self,
+        timeout: Union[None, float, Tuple[float, float], Tuple[float, None]] = None,
+        proxies: Optional[MutableMapping[str, str]] = None,
+        session: Optional[requests.Session] = None,
+    ):
         """Query remote server and parse results"""
         self.is_called = True
+
+        # Allow in call overwrite of connection settings
+        self.timeout = timeout or self.timeout
+        self.proxies = proxies or self.proxies
+        self.session = session or self.session or requests.Session()
 
         # query URL and get valid JSON (also stored in self.json)
         json_response = self._connect()
