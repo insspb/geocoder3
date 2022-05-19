@@ -338,15 +338,19 @@ class MultipleResultsQuery(MutableSequence):
                 f"Got {cls._METHOD}"
             )
 
-    def __init__(self, location, **kwargs):
+    def __init__(
+        self,
+        location,
+        url: Optional[str] = None,
+        **kwargs,
+    ):
         super(MultipleResultsQuery, self).__init__()
         self.results_list = []
 
-        # override with kwargs IF given AND not empty string
-        self.url = kwargs.get("url", self._URL) or self._URL
-        # double check url, just in case it has been overwritten by kwargs
-        if not self._is_valid_url(self.url):
-            raise ValueError("url not valid. Got %s", self.url)
+        # Check url if it was changed on instance creation
+        if url and not self._is_valid_url(url):
+            raise ValueError("url not valid. Got %s", url)
+        self.url = url or self._URL
 
         # check validity of provider key
         provider_key = self._get_api_key(kwargs.pop("key", ""))
