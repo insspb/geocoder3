@@ -644,7 +644,7 @@ class MultipleResultsQuery(MutableSequence):
 
         return stats
 
-    def __getattr__(self, name: str):
+    def __getattr__(self, name: str):  # sourcery skip: swap-if-expression
         """Allow direct access to :attr:`MultipleResultsQuery.current_result`
         attributes from direct calling of :class:`MultipleResultsQuery`
 
@@ -656,15 +656,7 @@ class MultipleResultsQuery(MutableSequence):
             :func:`__getattr__` is not called.
 
         :param name: Attribute name for lookup
-        :raises AttributeError: If provider query was not made and
-            :attr:`current_result` is still empty.
+        :raises RuntimeError: If provider query was not made and
+            :attr:`current_result` is still empty. (From :func:`has_data`)
         """
-        if not self.has_data:
-            return None
-
-        if self.current_result is None:
-            raise AttributeError(
-                f"{name} not found on {self.__class__.__name__}, and current_result "
-                f"is None"
-            )
-        return getattr(self.current_result, name)
+        return None if not self.has_data else getattr(self.current_result, name)
