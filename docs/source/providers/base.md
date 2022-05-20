@@ -10,22 +10,26 @@ Each provider itself can extend supported and extracted properties, available in
 direct instance access. For list of such extracted properties please read
 documentation for exact provider.
 
-## Base result class
-
-```{eval-rst}
-.. autoclass:: geocoder.base.OneResult
-   :noindex:
-   :members:
-   :undoc-members:
-   :inherited-members:
-```
-
-## Base query class
+## Base Multiple Results Query class
 
 ```{eval-rst}
 .. autoclass:: geocoder.base.MultipleResultsQuery
-   :noindex:
+   :members:  
+   :exclude-members: insert, add
+   :undoc-members:
+   :special-members: __init__, __init_subclass__, __getattr__, __call__
+   :private-members: _get_api_key, _build_headers, _build_params, _before_initialize,
+        _initialize, _connect, _adapt_results, _parse_results, _catch_errors
+```
+
+## Base One Result class
+
+```{eval-rst}
+.. autoclass:: geocoder.base.OneResult
    :members:
    :undoc-members:
-   :inherited-members:
+   :special-members: __init__
+   :private-members:
 ```
+
+[features]: ../features/index.rst
