@@ -6,7 +6,7 @@ import json
 import logging
 from collections import OrderedDict
 from collections.abc import MutableSequence
-from typing import MutableMapping, Optional, Tuple, Union
+from typing import List, MutableMapping, Optional, Tuple, Union
 from urllib.parse import urlparse
 
 import requests
@@ -243,26 +243,64 @@ class OneResult(object):
 
 
 class MultipleResultsQuery(MutableSequence):
-    """
-    Base results and query manager container
+    """Base results and query manager container
 
     This class responsible for checking correct new provider files creation before it
     will be implemented in project. Such checks done in :func:`__init_subclass__` method
     and will not allow to initialize project without fix.
 
-    Class variables:
+    **Class variables:**
 
     Some class variables are mandatory for all nested subclasses.
 
-    :cvar str _URL:
-    :cvar OneResult _RESULT_CLASS:
-    :cvar str _KEY:
-    :cvar bool _KEY_MANDATORY:
-    :cvar str _METHOD:
-    :cvar str _PROVIDER:
-    :cvar float _TIMEOUT:
+    :cvar str cls._URL: Default URL for provider, can be overwritten with `url` input
+        parameter
+    :cvar OneResult cls._RESULT_CLASS: Provider's individual result class.
+    :cvar str cls._KEY: Provider's default api_key. Usually map to ENV variable
+        responsible for key parsing. Can be overwritten with **key** parameter on
+        instance creation
+    :cvar bool cls._KEY_MANDATORY: Special mark for check of mandatory presence of api
+        key, for providers with mandatory key requirement
+    :cvar str cls._METHOD: Provider's internal method, that should match with api.py
+        :attr:`options` definition.
+    :cvar str cls._PROVIDER: Provider's internal name, that should match with api.py
+        :attr:`options` definition.
+    :cvar float cls._TIMEOUT: Default timeout for :func:`requests.request`
+        configuration, can be overwritten on instance creation or instance calling
 
-    Instance variables:
+    **Instance variables:**
+
+    After creation each instance of :class:`MultipleResultsQuery` has the following
+    mandatory variables. For some providers this list can be extended by provider
+    implementation.
+
+    :ivar list[OneResult] self.results_list: Hold all answers from provider in parsed
+        state
+    :ivar str self.url: Final request url that will be/was used during request
+    :ivar str self.location: Object to geocode/reverse geocode
+    :ivar float self.timeout: Final request timeout that was used during request
+    :ivar Optional[dict] self.proxies: Final request proxies that was used during
+        request
+    :ivar requests.Session self.session: :class:`requests.Session` object, that was used
+    :ivar dict self.headers: Final request headers that was used during request
+    :ivar dict self.params: Final request query params that was used during request
+    :ivar Optional[int] self.status_code: :class:`requests.Response` final HTTP answer
+        code or `None` if request is not made yet, or :mod:`requests` failed during
+        request
+    :ivar requests.Response self.raw_response: Contain raw :class:`requests.Response`
+        from provider
+    :ivar Union[dict, list] self.raw_json: Contain raw :func:`requests.Response.json`
+        from provider
+    :ivar str self.error: :mod:`requests` detailed error, if was raised during request
+    :ivar bool self.is_called: `False` on instance initialization, become `True` after
+        calling of :func:`__call__` method(i.e. instance call)
+    :ivar OneResult self.current_result: Mapping to result, that are used for direct
+        attributes retrieval in :func:`__getattr__`
+
+    **Init parameters:**
+
+    For initialization parameters, please check :func:`MultipleResultsQuery.__init__`
+    method documentation.
     """
 
     _URL = None
@@ -274,8 +312,12 @@ class MultipleResultsQuery(MutableSequence):
     _TIMEOUT = 5.0
 
     @staticmethod
-    def _is_valid_url(url) -> bool:
-        """Validate that URL contains a valid protocol and a valid domain"""
+    def _is_valid_url(url: Optional[str]) -> bool:
+        """Validate that URL contains a valid protocol and a valid domain
+
+        :param Optional[str] url: Any string to be checked for format validity.
+            Does not check for endpoint existence.
+        """
         try:
             parsed = urlparse(url)
             mandatory_parts = [parsed.scheme, parsed.netloc]
@@ -293,19 +335,22 @@ class MultipleResultsQuery(MutableSequence):
             return False
 
     @classmethod
-    def _get_api_key(cls, key=None) -> Optional[str]:
-        # Retrieves API Key from method argument first, then from Environment variables
+    def _get_api_key(cls, key: Optional[str] = None) -> Optional[str]:
+        """Retrieves API Key from method argument first, then from Environment variables
+
+        :param Optional[str] key: Custom API Key data for provider usage, if required.
+            Passed from :func:`__init__` method.
+        :raises ValueError: If api key was not provided, but mandatory for provider use
+        """
         key = key or cls._KEY
 
-        # raise exception if not valid key found
         if not key and cls._KEY_MANDATORY:
             raise ValueError("Provide API Key")
 
         return key
 
     def __init_subclass__(cls, **kwargs):
-        """
-        Responsible for setup check for :class:`MultipleResultsQuery` subclasses.
+        """Responsible for setup check for :class:`MultipleResultsQuery` subclasses.
 
         :raises ValueError: When subclass not define :attr:`cls._URL` value.
         :raises ValueError: When subclass incorrectly define :attr:`cls._RESULT_CLASS`
@@ -357,8 +402,7 @@ class MultipleResultsQuery(MutableSequence):
         params: Optional[dict] = None,
         **kwargs,
     ):
-        """
-        Initialize a :class:`MultipleResultsQuery` object.
+        """Initialize a :class:`MultipleResultsQuery` object.
 
         For class and instance variables description please refer to class docstrings.
 
@@ -402,10 +446,13 @@ class MultipleResultsQuery(MutableSequence):
         self.timeout = timeout or self._TIMEOUT
         self.proxies = proxies
         self.session = session
-        # headers can be overwritten in _build_headers
+
+        # headers can be overwritten in _build_headers,
+        # headers can be extended with headers keyword argument
         self.headers = self._build_headers(provider_key, **kwargs).copy()
         self.headers.update(headers or {})
         # params can be overwritten in _build_params
+        # params can be extended with params keyword argument
         # OrderedDict in order to preserve the order of the url query parameters
         self.params = OrderedDict(self._build_params(location, provider_key, **kwargs))
         self.params.update(params or {})
@@ -476,15 +523,28 @@ class MultipleResultsQuery(MutableSequence):
             return base_repr.format(f"#{len(self)} results")
 
     def _build_headers(self, provider_key, **kwargs) -> dict:
-        """Will be overridden according to the targeted web service"""
+        """Generate default query headers for provider
+
+        :param provider_key: Finalized api_key, from :func:`_get_api_key` method
+        :param kwargs: All kwargs from :func:`__init__` method
+        """
         return {}
 
     def _build_params(self, location, provider_key, **kwargs) -> dict:
-        """Will be overridden according to the targeted web service"""
+        """Generate default query parameters mapping for provider
+
+        :param location: Query content for geocode or reverse geocoding
+        :param provider_key: Finalized api_key, from :func:`_get_api_key` method
+        :param kwargs: All kwargs from :func:`__init__` method
+        """
         return {}
 
     def _before_initialize(self, location, **kwargs):
-        """Hook for children class to finalize their setup before the query"""
+        """Hook for children class to finalize their setup before the query
+
+        :param location: Query content for geocode or reverse geocoding
+        :param kwargs: All kwargs from :func:`__init__` method
+        """
         pass
 
     def __call__(
@@ -533,16 +593,8 @@ class MultipleResultsQuery(MutableSequence):
 
         return self
 
-    def _connect(self):
-        """- Query self.url (validated cls._URL)
-        - Analyse response and set status, errors accordingly
-        - On success:
-
-             returns the content of the response as a JSON object
-             This object will be passed to self._parse_json_response
-        """
-        self.status_code = "Unknown"
-
+    def _connect(self) -> Union[list, dict, None]:
+        """Responsible for handling external request and connection errors"""
         try:
             # make request and get response
             self.raw_response = self.rate_limited_get(
@@ -572,18 +624,22 @@ class MultipleResultsQuery(MutableSequence):
         return self.raw_json
 
     def rate_limited_get(self, url, **kwargs):
-        """By default, simply wraps a session.get request"""
+        """By default, simply wraps a :func:`requests.get` request"""
         return self.session.get(url, **kwargs)
 
-    def _adapt_results(self, json_response):
-        """Allow children classes to format json_response into an array of objects"""
+    def _adapt_results(self, json_response) -> List[dict]:
+        """Allow children classes to format json_response into an array of objects
+
+        This required for correct iteration in :func:`_parse_results`
+
+        :param json_response: Raw json from provider, usually same as in
+            :attr:`raw_json`, by default invoked inside :func:`_parse_results`
+        """
         return json_response
 
-    def _parse_results(self, json_response):
-        """Creates instances of self.one_result (validated cls._RESULT_CLASS)
-        from JSON results retrieved by self._connect
-
-        params: array of objects (dictionaries)
+    def _parse_results(self, json_response: List[dict]):
+        """Responsible for parsing original json and separating it to
+        :class:`OneResult` objects
         """
         for json_dict in self._adapt_results(json_response):
             self.add(self._RESULT_CLASS(json_dict))
@@ -610,7 +666,19 @@ class MultipleResultsQuery(MutableSequence):
 
     @property
     def status(self) -> str:
-        if self.has_data:
+        """Specify current summary status of instance
+
+        **Possible statuses:**
+
+        - "External request was not made"
+        - "OK" - when request was made, and any result retrieved
+        - :mod:`requests` error text representation, if request faced error
+        - "ERROR - No results found"
+        - "ERROR - Unhandled Exception"
+        """
+        if not self.is_called:
+            return "External request was not made"
+        elif self.has_data:
             return "OK"
         elif self.error:
             return self.error
@@ -621,14 +689,14 @@ class MultipleResultsQuery(MutableSequence):
 
     @property
     def geojson(self) -> dict:
+        """Output all answers as GeoJSON FeatureCollection"""
         geojson_results = [result.geojson for result in self]
         return {"type": "FeatureCollection", "features": geojson_results}
 
     def debug(self) -> list:
-        logger.debug("===")
+        """Display debug information for instance of :class:`MultipleResultsQuery`"""
         logger.debug(repr(self))
-        logger.debug("===")
-        logger.debug(f"#res: {len(self)}")
+        logger.debug(f"results: {len(self)}")
         logger.debug(f"code: {self.status_code}")
         logger.debug(f"url:  {self.url}")
 
