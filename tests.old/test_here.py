@@ -9,7 +9,7 @@ winnetka_bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
 
 def test_here():
     g = geocoder.here(location)
-    assert g.ok
+    assert g.has_data
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 4
     assert fields_count >= 13
@@ -17,7 +17,7 @@ def test_here():
 
 def test_here_with_bbox():
     g = geocoder.here(winnetka, bbox=winnetka_bbox)
-    assert g.ok
+    assert g.has_data
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 2
     assert fields_count >= 11
@@ -29,4 +29,4 @@ def test_here_with_bbox():
 
 def test_here_reverse():
     g = geocoder.here(ottawa, method="reverse")
-    assert g.ok
+    assert g.has_data

@@ -15,7 +15,7 @@ def test_opencage():
     https://api.opencagedata.com/geocode/v1/json?q=Ottawa,Ontario&key=YOUR-API-KEY
     """
     g = geocoder.opencage(location)
-    assert g.ok
+    assert g.has_data
     assert len(g) == 1
     assert g.country_code == "ca"
     assert g.state == "Ontario"
@@ -34,7 +34,7 @@ def test_issue_292():
         language="de",
         no_annotations=1,
     )
-    assert g.ok
+    assert g.has_data
 
 
 def test_opencage_no_language_param():
@@ -71,7 +71,7 @@ def test_opencage_address():
     https://api.opencagedata.com/geocode/v1/json?q=The+Happy+Goat,+Ottawa&key=YOUR-API-KEY
     """
     g = geocoder.opencage(address)
-    assert g.ok
+    assert g.has_data
     assert g.country == "Canada"
     assert g.state == "Ontario"
     assert g.state_code == "ON"
@@ -94,7 +94,7 @@ def test_opencage_paid():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         result = geocoder.opencage(address)
-        assert result.ok
+        assert result.has_data
         osm_count, fields_count = result.debug()[0]
         assert osm_count >= 3
         assert fields_count >= 15
@@ -107,4 +107,4 @@ def test_opencage_reverse():
     https://api.opencagedata.com/geocode/v1/json?q=45.4215296,-75.6971930&key=YOUR-API-KEY
     """
     g = geocoder.opencage(ottawa, method="reverse")
-    assert g.ok
+    assert g.has_data

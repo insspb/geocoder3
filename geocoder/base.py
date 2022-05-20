@@ -524,12 +524,21 @@ class MultipleResultsQuery(MutableSequence):
         return self.error
 
     @property
-    def ok(self) -> bool:
+    def has_data(self) -> bool:
+        """Status of geocoding if request was made
+
+        :raises RuntimeError: When external request was not made before property call
+        """
+        if not self.is_called:
+            raise RuntimeError(
+                "Cannot detect data presence. External request was not made."
+                "Use instance __call__() method to retrieve data."
+            )
         return len(self) > 0
 
     @property
     def status(self) -> str:
-        if self.ok:
+        if self.has_data:
             return "OK"
         elif self.error:
             return self.error
@@ -553,7 +562,7 @@ class MultipleResultsQuery(MutableSequence):
 
         stats = []
 
-        if self.ok:
+        if self.has_data:
             for index, result in enumerate(self):
                 logger.debug(f"Details for result #{index + 1}")
                 logger.debug("---")
@@ -585,7 +594,7 @@ class MultipleResultsQuery(MutableSequence):
         :raises AttributeError: If provider query was not made and
             :attr:`current_result` is still empty.
         """
-        if not self.ok:
+        if not self.has_data:
             return None
 
         if self.current_result is None:

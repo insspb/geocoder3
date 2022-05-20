@@ -20,7 +20,7 @@ def test_uscensus():
         g = geocoder.uscensus(
             " ".join([us_address, us_city, us_state, us_zipcode]), timeout=10
         )
-        assert g.ok
+        assert g.has_data
 
 
 def test_uscensus_reverse():
@@ -29,7 +29,7 @@ def test_uscensus_reverse():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.uscensus((38.904722, -77.016389), method="reverse", timeout=10)
-        assert g.ok
+        assert g.has_data
 
 
 def test_uscensus_reverse2():
@@ -38,7 +38,7 @@ def test_uscensus_reverse2():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.post(url, text=input.read())
         g = geocoder.uscensus(us_locations, benchmark=9, method="batch")
-        assert g.ok
+        assert g.has_data
         expected_results = [[38.846638, -76.92681], [41.30435, -72.89422]]
 
         assert [result.latlng for result in g] == expected_results

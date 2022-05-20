@@ -43,7 +43,7 @@ def test__get_results__on_wrong_arguments__return_expected_value_error(
 @requests_recorder_ro.use_cassette("api_py.json")
 def test__get_results__on_default_arguments__return_correct_value():
     result = geocoder.get_results("New York")
-    assert result.ok
+    assert result.has_data
     assert result.latlng == [40.7127281, -74.0060152]
 
 
@@ -61,7 +61,7 @@ def test__get_results__on_partly_correct_arguments__do_strip_and_lower(
     method,
 ):
     result = geocoder.get_results("New York", provider=provider, method=method)
-    assert result.ok
+    assert result.has_data
     assert result.latlng == [40.7127281, -74.0060152]
 
 

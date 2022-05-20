@@ -13,7 +13,7 @@ locations_reverse = [[40.7943, -73.970859], [48.845580, 2.321807]]
 
 def test_bing():
     g = geocoder.bing(location)
-    assert g.ok
+    assert g.has_data
     assert g.city == city
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 3
@@ -24,7 +24,7 @@ def test_bing_details():
     details = {"adminDistrict": "Ontario", "locality": "Ottawa"}
 
     g = geocoder.bing(None, method="details", **details)
-    assert g.ok
+    assert g.has_data
     assert g.city == city
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 3
@@ -38,7 +38,7 @@ def test_bing_details():
     }
 
     g = geocoder.bing(None, method="details", **details)
-    assert g.ok
+    assert g.has_data
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 3
     assert fields_count >= 12
@@ -46,7 +46,7 @@ def test_bing_details():
 
 def test_bing_reverse():
     g = geocoder.bing(ottawa, method="reverse")
-    assert g.ok
+    assert g.has_data
     assert g.city == city
 
 
@@ -74,7 +74,7 @@ def test_bing_batch_forward():
         mocker.get(url_check, text=str(confirmation_result.read(), "utf8"))
         mocker.get(url_result, text=str(batch_result.read(), "utf8"))
         g = geocoder.bing(locations_forward, key="test", method="batch")
-        assert g.ok
+        assert g.has_data
         assert len(g) == 2
         expected_results = [
             [39.7400093078613, -104.99201965332],
@@ -85,7 +85,7 @@ def test_bing_batch_forward():
 
 def test_bing_batch_reverse():
     g = geocoder.bing(locations_reverse, method="batch_reverse")
-    assert g.ok
+    assert g.has_data
     assert len(g) == 2
     assert [result.city for result in g] == ["New York", "Paris"]
 

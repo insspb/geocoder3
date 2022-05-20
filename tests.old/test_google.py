@@ -20,7 +20,7 @@ def test_google():
         for url in urls:
             mocker.get(url, text=input.read())
         g = geocoder.google(location, client=None, key="mock")
-        assert g.ok
+        assert g.has_data
         assert g.accuracy == "APPROXIMATE"
         assert str(g.city) == city
         osm_count, fields_count = g.debug()[0]
@@ -30,18 +30,18 @@ def test_google():
 
 def test_issue_294():
     g = geocoder.google("Cerro Torre Mountain")
-    assert g.ok
+    assert g.has_data
 
 
 def test_google_reverse():
     g = geocoder.google(ottawa, method="reverse")
-    assert g.ok
+    assert g.has_data
     assert len(g) >= 10
 
 
 def test_google_places():
     g = geocoder.google(place, method="places")
-    assert g.ok
+    assert g.has_data
     assert g.address == "200 Tremblay Rd, Ottawa, ON K1G 3H5, Canada"
 
 
@@ -51,7 +51,7 @@ def test_google_timezone():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.google(ottawa, method="timezone", timestamp=1500000000)
-        assert g.ok
+        assert g.has_data
 
 
 def test_google_elevation():
@@ -60,4 +60,4 @@ def test_google_elevation():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.google(ottawa, method="elevation")
-        assert g.ok
+        assert g.has_data

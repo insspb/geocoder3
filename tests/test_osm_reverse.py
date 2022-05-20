@@ -17,4 +17,4 @@ ottawa = (45.4215296, -75.6971930)
 @requests_recorder_ro.use_cassette("osm_reverse.json")
 def test_osm_reverse():
     g = geocoder.osm(ottawa, method="reverse")
-    assert g.ok
+    assert g.has_data

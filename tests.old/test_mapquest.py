@@ -13,7 +13,7 @@ winnetka_bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
 
 def test_mapquest():
     g = geocoder.mapquest(location, timeout=10)
-    assert g.ok
+    assert g.has_data
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 3
     assert fields_count >= 10
@@ -21,7 +21,7 @@ def test_mapquest():
 
 def test_mapquest_with_bbox():
     g = geocoder.mapquest(winnetka, bbox=winnetka_bbox)
-    assert g.ok
+    assert g.has_data
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 2
     assert fields_count >= 11
@@ -33,7 +33,7 @@ def test_mapquest_with_bbox():
 
 def test_mapquest_reverse():
     g = geocoder.mapquest(ottawa, method="reverse", timeout=10)
-    assert g.ok
+    assert g.has_data
 
 
 def test_mapquest_batch():
@@ -42,7 +42,7 @@ def test_mapquest_batch():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.mapquest(locations, method="batch", timeout=10)
-        assert g.ok
+        assert g.has_data
         expected_results = [[39.738453, -104.984853], [40.015831, -105.27927]]
 
         assert [result.latlng for result in g] == expected_results

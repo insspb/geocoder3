@@ -12,7 +12,7 @@ def test_geocodefarm():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         result = geocoder.geocodefarm(location)
-        assert result.ok
+        assert result.has_data
         osm_count, fields_count = result.debug()[0]
         assert osm_count >= 3
         assert fields_count >= 15
@@ -24,4 +24,4 @@ def test_geocodefarm_reverse():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         result = geocoder.geocodefarm(coordinates, method="reverse")
-        assert result.ok
+        assert result.has_data
