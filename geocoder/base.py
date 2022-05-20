@@ -642,13 +642,6 @@ class MultipleResultsQuery(MutableSequence):
 
         return stats
 
-    # Delegation to current result
-    def set_default_result(self, index):
-        """change the result used to delegate the calls to. The provided index should
-        be in the range of results, otherwise it will raise an exception
-        """
-        self.current_result = self[index]
-
     def __getattr__(self, name: str):
         """Allow direct access to :attr:`MultipleResultsQuery.current_result`
         attributes from direct calling of :class:`MultipleResultsQuery`
