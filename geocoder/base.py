@@ -304,7 +304,14 @@ class MultipleResultsQuery(MutableSequence):
         return key
 
     def __init_subclass__(cls, **kwargs):
-        """Responsible for setup check for :class:`MultipleResultsQuery` subclasses."""
+        """
+        Responsible for setup check for :class:`MultipleResultsQuery` subclasses.
+
+        :raises ValueError: When subclass not define :attr:`cls._URL` value.
+        :raises ValueError: When subclass incorrectly define :attr:`cls._RESULT_CLASS`
+            value.
+        :raises ValueError: When subclass incorrectly define :attr:`cls._METHOD` value.
+        """
         super().__init_subclass__(**kwargs)
 
         # check validity of class._URL
@@ -350,6 +357,33 @@ class MultipleResultsQuery(MutableSequence):
         params: Optional[dict] = None,
         **kwargs,
     ):
+        """
+        Initialize a :class:`MultipleResultsQuery` object.
+
+        For class and instance variables description please refer to class docstrings.
+
+        :param location: Query content for geocode or reverse geocoding
+        :param Optional[str] url: Overwrite for default provider service url
+        :param Optional[str] key: API Key data for provider usage, if required. Passed
+            to :func:`_get_api_key`, which result passed to :func:`_build_headers` and
+            :func:`_build_params`, and may be passed to other custom provider's
+            implementation methods. Check exact provider docs.
+        :param Union[None, float, Tuple[float, float], Tuple[float, None]] timeout:
+            Max request answer wait time
+        :param Optional[MutableMapping[str, str]] proxies:
+            Proxies for :func:`requests.request`
+        :param Optional[requests.Session] session: Custom :class:`requests.Session` for
+            request
+        :param Optional[MutableMapping[str, str]] headers: Additional headers for
+            :func:`requests.request`
+        :param Optional[dict] params: Additional query parameters
+        :param kwargs: Any other keyword arguments, that will be passed to internal
+            :func:`_build_headers`, :func:`_build_params`, :func:`_before_initialize` or
+            other custom provider's implementation methods. Check exact provider docs
+
+        :raises ValueError: When provided custom :attr:`url` is not well-formatted
+        :raises ValueError: If api key was not provided, but mandatory for provider use
+        """
         super(MultipleResultsQuery, self).__init__()
         self.results_list = []
 
@@ -388,24 +422,49 @@ class MultipleResultsQuery(MutableSequence):
         self._before_initialize(location, **kwargs)
 
     def __getitem__(self, key):
+        """Special method implementation for custom :class:`MutableSequence` subclass
+
+        Not expected to be nested or changed in subclasses.
+        """
         return self.results_list[key]
 
     def __setitem__(self, key, value):
+        """Special method implementation for custom :class:`MutableSequence` subclass
+
+        Not expected to be nested or changed in subclasses.
+        """
         self.results_list[key] = value
 
     def __delitem__(self, key):
+        """Special method implementation for custom :class:`MutableSequence` subclass
+
+        Not expected to be nested or changed in subclasses.
+        """
         del self.results_list[key]
 
     def __len__(self):
+        """Special method implementation for custom :class:`MutableSequence` subclass
+
+        Not expected to be nested or changed in subclasses.
+        """
         return len(self.results_list)
 
     def insert(self, index, value):
+        """Special method implementation for custom :class:`MutableSequence` subclass
+
+        Not expected to be nested or changed in subclasses.
+        """
         self.results_list.insert(index, value)
 
     def add(self, value):
+        """Special method implementation for custom :class:`MutableSequence` subclass
+
+        Not expected to be nested or changed in subclasses.
+        """
         self.results_list.append(value)
 
     def __repr__(self) -> str:
+        """Display :class:`MultipleResultsQuery` debug console representation"""
         base_repr = "<[{0}] {1} - {2} {{0}}>".format(
             self.status, self._PROVIDER.title(), self._METHOD.title()
         )
@@ -434,7 +493,18 @@ class MultipleResultsQuery(MutableSequence):
         proxies: Optional[MutableMapping[str, str]] = None,
         session: Optional[requests.Session] = None,
     ):
-        """Query remote server and parse results"""
+        """Query remote server and parse results
+
+        Any keyword argument of :func:`__call__` will have precedence over same argument
+        in :func:`__init__` method.
+
+        :param Union[None, float, Tuple[float, float], Tuple[float, None]] timeout:
+            Max request answer wait time
+        :param Optional[MutableMapping[str, str]] proxies:
+            Proxies for :func:`requests.request`
+        :param Optional[requests.Session] session: Custom :class:`requests.Session` for
+            request
+        """
         self.is_called = True
 
         # Allow in call overwrite of connection settings
@@ -587,8 +657,8 @@ class MultipleResultsQuery(MutableSequence):
         places (i.e. it is not an instance attribute nor is it found in the class tree
         for self).
 
-        Note that if the attribute is found through the normal mechanism,
-        :func:`__getattr__` is not called.
+        .. note:: If the attribute is found through the normal mechanism,
+            :func:`__getattr__` is not called.
 
         :param name: Attribute name for lookup
         :raises AttributeError: If provider query was not made and
