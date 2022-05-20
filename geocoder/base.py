@@ -72,7 +72,11 @@ class OneResult(object):
     ]
 
     def __init__(self, json_content):
+        """Initialize :class:`OneResult` object and parse input json
 
+        :param dict json_content: Dictionary, passed by
+            :func:`MultipleResultsQuery.__call__`
+        """
         self.object_raw_json = json_content
 
         # attributes required to compute bbox
@@ -86,7 +90,6 @@ class OneResult(object):
         self.json = {}
         self._parse_json_with_fieldnames()
 
-    # Essential attributes for Quality Control
     @property
     def lat(self) -> Optional[float]:
         """Latitude of the object"""
@@ -97,13 +100,11 @@ class OneResult(object):
         """Longitude of the object"""
         return None
 
-    # Bounding Box attributes
     @property
     def bbox(self) -> dict:
-        """Object bounding box when can be calculated/retrieved."""
+        """Output answer as GeoJSON bbox if can be calculated/retrieved."""
         return {}
 
-    # Essential attributes for Street Address
     @property
     def address(self) -> Optional[str]:
         """Object simple string address."""
@@ -130,8 +131,7 @@ class OneResult(object):
 
     @property
     def ok(self) -> bool:
-        """
-        Status of retrieving location/IP coordinates or reverse geocoding.
+        """Status of retrieving location/IP coordinates or reverse geocoding.
 
         Usually should be replaced in reverse results class.
         """
@@ -139,6 +139,7 @@ class OneResult(object):
 
     @property
     def status(self) -> str:
+        """Specify current summary status of instance"""
         if self.ok:
             return "OK"
         if not self.address:
@@ -146,6 +147,7 @@ class OneResult(object):
         return "ERROR - No Geometry"
 
     def debug(self):
+        """Display debug information for instance of :class:`OneResult`"""
         logger.debug("From provider")
         logger.debug("-------------")
         logger.debug(json.dumps(self.object_raw_json, indent=4))
@@ -173,9 +175,8 @@ class OneResult(object):
 
     @property
     def confidence(self) -> int:
-        """
-        Is as a measure of how confident we are that centre point coordinates returned
-        for the result precisely reflect the result.
+        """Is as a measure of how confident we are that centre point coordinates
+        returned for the result precisely reflect the result.
         """
         if not self.bbox:
             # Cannot determine score
@@ -201,10 +202,12 @@ class OneResult(object):
 
     @property
     def geometry(self) -> dict:
+        """Output answer as GeoJSON Point"""
         return {"type": "Point", "coordinates": [self.x, self.y]} if self.ok else {}
 
     @property
     def geojson(self) -> dict:
+        """Output answer as GeoJSON Feature"""
         feature = {
             "type": "Feature",
             "properties": self.json,
