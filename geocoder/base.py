@@ -516,7 +516,9 @@ class MultipleResultsQuery(MutableSequence):
         json_response = self._connect()
 
         # catch errors and debug warnings
-        has_error = self._catch_errors(json_response) if json_response else True
+        has_error = (
+            self._catch_errors(json_response) if json_response is not None else True
+        )
         if self.url != self.raw_response.url:
             logger.warning(
                 "Expected request url (%s) and final request url (%s) do not match. "
@@ -564,7 +566,7 @@ class MultipleResultsQuery(MutableSequence):
             logger.error(
                 "Status code %s from %s: %s", self.status_code, self.url, self.error
             )
-            return False
+            return None
 
         # return response within its JSON format
         return self.raw_json
