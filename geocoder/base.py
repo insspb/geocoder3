@@ -378,7 +378,8 @@ class MultipleResultsQuery(MutableSequence):
 
         # results of query (set by __call__ and _connect)
         self.status_code = None
-        self.response = None
+        self.raw_response = None
+        self.raw_json = None
         self.error = None
         self.is_called = False
 
@@ -444,8 +445,15 @@ class MultipleResultsQuery(MutableSequence):
         # query URL and get valid JSON (also stored in self.json)
         json_response = self._connect()
 
-        # catch errors
+        # catch errors and debug warnings
         has_error = self._catch_errors(json_response) if json_response else True
+        if self.url != self.raw_response.url:
+            logger.warning(
+                "Expected request url (%s) and final request url (%s) do not match. "
+                "Probably redirects was made.",
+                self.url,
+                self.raw_response.url,
+            )
 
         # creates instance for results
         if not has_error:
@@ -465,23 +473,21 @@ class MultipleResultsQuery(MutableSequence):
 
         try:
             # make request and get response
-            self.response = response = self.rate_limited_get(
+            self.raw_response = self.rate_limited_get(
                 self.url,
                 params=self.params,
                 headers=self.headers,
                 timeout=self.timeout,
                 proxies=self.proxies,
             )
-
-            # check that response is ok
-            self.status_code = response.status_code
-            response.raise_for_status()
-
-            # rely on json method to get non-empty well formatted JSON
-            json_response = response.json()
-            self.url = response.url
             logger.info("Requested %s", self.url)
 
+            # check that response is ok
+            self.status_code = self.raw_response.status_code
+            self.raw_response.raise_for_status()
+
+            # rely on json method to get non-empty well formatted JSON
+            self.raw_json = self.raw_response.json()
         except requests.exceptions.RequestException as err:
             # store real status code and error
             self.error = f"ERROR - {str(err)}"
@@ -491,7 +497,7 @@ class MultipleResultsQuery(MutableSequence):
             return False
 
         # return response within its JSON format
-        return json_response
+        return self.raw_json
 
     def rate_limited_get(self, url, **kwargs):
         """By default, simply wraps a session.get request"""
