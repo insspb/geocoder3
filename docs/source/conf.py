@@ -260,7 +260,10 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"http://docs.python.org/": None}
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "requests": ("https://docs.python-requests.org/en/latest", None),
+}
 
 myst_enable_extensions = [
     "tasklist",
@@ -269,4 +272,4 @@ myst_enable_extensions = [
 # Autodic settings
 
 autodoc_member_order = "groupwise"
-autodoc_typehints = "both"
+autodoc_typehints = "none"
