@@ -120,12 +120,6 @@ class TamuQuery(MultipleResultsQuery):
     """
     TAMU Geocoding Services
 
-    :param location: The street address of the location you want geocoded.
-    :param city: The city of the location to geocode.
-    :param state: The state of the location to geocode.
-    :param zipcode: The zipcode of the location to geocode.
-    :param key: The API key (use API key "demo" for testing).
-
     API Reference: https://geoservices.tamu.edu/Services/Geocode/WebService
     """
 
@@ -167,9 +161,10 @@ class TamuQuery(MultipleResultsQuery):
         if exception_occured == "True" or status_code != "200" or exception:
             self.error = exception
 
-        if status_code == "401" or status_code == "470":
-            self.error = "Tamu returned status_code {0}.  Is API key {1} valid?".format(
-                status_code, self.key
+        if status_code in ["401", "470"]:
+            self.error = (
+                f"Tamu returned status_code {status_code}. "
+                f"Is API key {self.key} valid?"
             )
 
         return self.error

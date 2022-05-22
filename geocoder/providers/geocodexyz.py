@@ -7,12 +7,12 @@ from geocoder.keys import geocodexyz_key
 
 
 class GeocodeXYZResult(OneResult):
-    def _get_value(self, json_obj, key, type=None):
+    def _get_value(self, json_obj, key, type_class=None):
         value = json_obj.get(key, {})
         if value:
             value = value.strip()
-        if type and value:
-            return type(value)
+        if type_class and value:
+            return type_class(value)
         return value
 
     def __init__(self, json_content):
@@ -105,15 +105,12 @@ class GeocodeXYZQuery(MultipleResultsQuery):
         if "region" in kwargs:
             region = kwargs.pop("region")
             if region:
-                params.update({"region": region})
+                params["region"] = region
         if "strictmode" in kwargs:
-            params.update({"strictmode": kwargs.pop("strictmode")})
+            params["strictmode"] = kwargs.pop("strictmode")
         if "strict" in kwargs:
-            params.update({"strict": kwargs.pop("strict")})
-        if "auth" in kwargs:
-            params.update({"auth": kwargs.pop("auth")})
-        else:
-            params.update({"auth": provider_key})
+            params["strict"] = kwargs.pop("strict")
+        params["auth"] = kwargs.pop("auth") if "auth" in kwargs else provider_key
         return params
 
     def _adapt_results(self, json_response):
