@@ -86,11 +86,11 @@ class GeolyticaQuery(MultipleResultsQuery):
     def _build_params(self, location, provider_key, **kwargs):
         params = {"json": 1, "locate": location, "geoit": "xml"}
         if "strictmode" in kwargs:
-            params.update({"strictmode": kwargs.pop("strictmode")})
+            params["strictmode"] = kwargs.pop("strictmode")
         if "strict" in kwargs:
-            params.update({"strict": kwargs.pop("strict")})
+            params["strict"] = kwargs.pop("strict")
         if "auth" in kwargs:
-            params.update({"auth": kwargs.pop("auth")})
+            params["auth"] = kwargs.pop("auth")
         return params
 
     def _adapt_results(self, json_response):
