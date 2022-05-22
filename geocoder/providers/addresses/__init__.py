@@ -1,6 +1,5 @@
 # flake8: noqa
 from geocoder.providers.addresses.canadapost import CanadapostQuery
-from geocoder.providers.addresses.gaode import GaodeQuery
 from geocoder.providers.addresses.geocodefarm import GeocodeFarmQuery
 from geocoder.providers.addresses.geocodexyz import GeocodeXYZQuery
 from geocoder.providers.addresses.geolytica import GeolyticaQuery
