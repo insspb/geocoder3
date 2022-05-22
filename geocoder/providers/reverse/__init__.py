@@ -1,5 +1,4 @@
 # flake8: noqa
-from geocoder.providers.reverse.arcgis_reverse import ArcgisReverse
 from geocoder.providers.reverse.baidu_reverse import BaiduReverse
 from geocoder.providers.reverse.bing_batch_reverse import BingBatchReverse
 from geocoder.providers.reverse.bing_reverse import BingReverse
