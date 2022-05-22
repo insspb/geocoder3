@@ -1,4 +1,4 @@
-__all__ = ["MapboxResult", "MapboxQuery"]
+__all__ = ["MapboxResult", "MapboxQuery", "MapboxReverseResult", "MapboxReverse"]
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapbox_access_token
@@ -129,6 +129,42 @@ class MapboxQuery(MultipleResultsQuery):
     def _adapt_results(self, json_response):
         # extract the array of JSON objects
         return json_response.get("features", [])
+
+
+class MapboxReverseResult(MapboxResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class MapboxReverse(MapboxQuery):
+    """
+    Mapbox Reverse Geocoding
+
+    Reverse geocoding lets you reverse this process, turning a
+    pair of lat/lon coordinates into a meaningful place name
+    (-77.036,38.897 → 1600 Pennsylvania Ave NW).
+
+    API Reference: https://www.mapbox.com/developers/api/geocoding/
+
+    Get Mapbox Access Token: https://www.mapbox.com/account
+    """
+
+    _PROVIDER = "mapbox"
+    _METHOD = "reverse"
+    _URL = "https://api.mapbox.com/geocoding/v5/mapbox.places/{lng},{lat}.json"
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            "access_token": provider_key,
+            "country": kwargs.get("country"),
+            "types": kwargs.get("types"),
+        }
+
+    def _before_initialize(self, location, **kwargs):
+        self.location = str(Location(location))
+        lat, lng = Location(location).latlng
+        self.url = self.url.format(lng=lng, lat=lat)
 
 
 if __name__ == "__main__":
