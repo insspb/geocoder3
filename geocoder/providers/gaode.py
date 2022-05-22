@@ -68,9 +68,6 @@ class GaodeQuery(MultipleResultsQuery):
     Gaode Maps Geocoding API is a free open the API, the default quota
     2000 times / day.
 
-    :param location: Your search location you want geocoded.
-    :param key: Gaode API key.
-
     API Documentation: http://lbs.amap.com/api/webservice/guide/api/georegeo
     Get AMap Key: http://lbs.amap.com/dev/
     """
@@ -155,10 +152,6 @@ class GaodeReverse(GaodeQuery):
     Gaode Maps GeoReverse API is a free open the API, the default quota
     2000 times / day.
 
-    :param location: Your search location you want geocoded.
-    :param key: Gaode API key.
-    :param referer: Gaode API referer website.
-
     API Documentation: http://lbs.amap.com/api/webservice/guide/api/georegeo
     Get Gaode AMap Key: http://lbs.amap.com/dev/
     """
@@ -171,7 +164,7 @@ class GaodeReverse(GaodeQuery):
     def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
         return {
-            "location": str(location.lng) + "," + str(location.lat),
+            "location": f"{str(location.lng)},{str(location.lat)}",
             "output": "json",
             "key": provider_key,
         }
