@@ -16,7 +16,7 @@ Consistant JSON responses from various providers.
     [40.7127837, -74.0059413]
     >>> g.state
     'New York'
-    >>> g.json
+    >>> g.object_json
     ...
 
 """

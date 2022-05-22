@@ -87,7 +87,7 @@ class OneResult(object):
 
         # attributes returned in JSON format
         self.fieldnames = []
-        self.json = {}
+        self.object_json = {}
         self._parse_json_with_fieldnames()
 
     @property
@@ -125,9 +125,9 @@ class OneResult(object):
                 self.fieldnames.append(key)
                 value = getattr(self, key)
                 if value:
-                    self.json[key] = value
+                    self.object_json[key] = value
         # Add OK attribute even if value is "False"
-        self.json["ok"] = self.ok
+        self.object_json["ok"] = self.ok
 
     @property
     def ok(self) -> bool:
@@ -153,7 +153,7 @@ class OneResult(object):
         logger.debug(json.dumps(self.object_raw_json, indent=4))
         logger.debug("Cleaned json")
         logger.debug("------------")
-        logger.debug(json.dumps(self.json, indent=4))
+        logger.debug(json.dumps(self.object_json, indent=4))
 
     def _get_bbox(self, south, west, north, east) -> dict:
         if not all([south, east, north, west]):
@@ -210,7 +210,7 @@ class OneResult(object):
         """Output answer as GeoJSON Feature"""
         feature = {
             "type": "Feature",
-            "properties": self.json,
+            "properties": self.object_json,
         }
         if self.bbox:
             feature["bbox"] = [self.west, self.south, self.east, self.north]
@@ -575,7 +575,7 @@ class MultipleResultsQuery(MutableSequence):
         self.proxies = proxies or self.proxies
         self.session = session or self.session or requests.Session()
 
-        # query URL and get valid JSON (also stored in self.json)
+        # query URL and get valid JSON (also stored in self.raw_json)
         json_response = self._connect()
 
         # catch errors and debug warnings
