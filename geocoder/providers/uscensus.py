@@ -46,7 +46,7 @@ class USCensusResult(OneResult):
         if self.address:
             match = re.search(r"^\d+", self.address, re.UNICODE)
             if match:
-                return match.group(0)
+                return match[0]
 
     @property
     def fromhousenumber(self):
@@ -214,8 +214,7 @@ class USCensusBatch(MultipleResultsQuery):
             return response.content
 
         except (requests.exceptions.RequestException, LookupError) as err:
-            # store real status code and error
-            self.error = "ERROR - {}".format(str(err))
+            self.error = f"ERROR - {str(err)}"
             logger.error(
                 "Status code %s from %s: %s", self.status_code, self.url, self.error
             )
@@ -225,18 +224,15 @@ class USCensusBatch(MultipleResultsQuery):
     def _adapt_results(self, response):
         result = io.StringIO(response.decode("utf-8"))
 
-        rows = {}
-        for row in csv.reader(result):
-            if row[2] == "Match":
-                rows[row[0]] = [row[4], row[5]]
-
-        return rows
+        return {
+            row[0]: [row[4], row[5]] for row in csv.reader(result) if row[2] == "Match"
+        }
 
     def _parse_results(self, response):
         rows = self._adapt_results(response)
 
         # re looping through the results to give them back in their original order
-        for idx in range(0, self.locations_length):
+        for idx in range(self.locations_length):
             self.add(self._RESULT_CLASS(rows.get(str(idx), None)))
 
         self.current_result = len(self) > 0 and self[0]
