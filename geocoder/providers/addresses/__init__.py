@@ -6,7 +6,6 @@ from geocoder.providers.addresses.geolytica import GeolyticaQuery
 from geocoder.providers.addresses.gisgraphy import GisgraphyQuery, GisgraphyResult
 from geocoder.providers.addresses.here import HereQuery, HereResult
 from geocoder.providers.addresses.komoot import KomootQuery, KomootResult
-from geocoder.providers.addresses.locationiq import LocationIQQuery
 from geocoder.providers.addresses.mapbox import MapboxQuery, MapboxResult
 from geocoder.providers.addresses.mapquest import MapquestQuery, MapquestResult
 from geocoder.providers.addresses.mapquest_batch import MapquestBatch

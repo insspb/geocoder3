@@ -3,7 +3,6 @@ from geocoder.providers.reverse.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.providers.reverse.gisgraphy_reverse import GisgraphyReverse
 from geocoder.providers.reverse.here_reverse import HereReverse
 from geocoder.providers.reverse.komoot_reverse import KomootReverse
-from geocoder.providers.reverse.locationiq_reverse import LocationIQReverse
 from geocoder.providers.reverse.mapbox_reverse import MapboxReverse
 from geocoder.providers.reverse.mapquest_reverse import MapquestReverse
 from geocoder.providers.reverse.mapzen_reverse import MapzenReverse
