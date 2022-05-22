@@ -1,10 +1,10 @@
-__all__ = ["MapzenResult", "MapzenQuery"]
+__all__ = ["MapzenResult", "MapzenQuery", "MapzenReverseResult", "MapzenReverse"]
 
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapzen_key
-from geocoder.location import BBox
+from geocoder.location import BBox, Location
 
 
 class MapzenResult(OneResult):
@@ -102,6 +102,43 @@ class MapzenQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return json_response["features"]
+
+
+class MapzenReverseResult(MapzenResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class MapzenReverse(MapzenQuery):
+    """
+    Mapzen REST API
+
+    API Reference: https://mapzen.com/documentation/search/reverse/
+    """
+
+    _PROVIDER = "mapzen"
+    _METHOD = "reverse"
+    _URL = "https://search.mapzen.com/v1/reverse"
+    _RESULT_CLASS = MapzenReverseResult
+
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
+        location = Location(location)
+        return {
+            "point.lat": location.lat,
+            "point.lon": location.lng,
+            "size": max_results,
+            "layers": kwargs.get("layers"),
+            "source": kwargs.get("sources"),
+            "boundary.country": kwargs.get("country"),
+            "api_key": provider_key,
+        }
 
 
 if __name__ == "__main__":

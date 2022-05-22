@@ -1,10 +1,5 @@
 # flake8: noqa
-from geocoder.providers.addresses import (
-    MapzenQuery,
-    MapzenResult,
-    OpenCageQuery,
-    OpenCageResult,
-)
+from geocoder.providers.addresses import OpenCageQuery, OpenCageResult
 from geocoder.providers.arcgis import ArcgisQuery, ArcgisReverse
 from geocoder.providers.baidu import BaiduQuery, BaiduReverse
 from geocoder.providers.bing import (
@@ -73,9 +68,15 @@ from geocoder.providers.mapquest import (
     MapquestReverse,
     MapQuestReverseResult,
 )
+from geocoder.providers.mapzen import (
+    MapzenQuery,
+    MapzenResult,
+    MapzenReverse,
+    MapzenReverseResult,
+)
 from geocoder.providers.maxmind import MaxmindQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
-from geocoder.providers.reverse import MapzenReverse, OpenCageReverse
+from geocoder.providers.reverse import OpenCageReverse
 from geocoder.providers.tamu import TamuQuery
 from geocoder.providers.tgos import TgosQuery
 from geocoder.providers.tomtom import TomtomQuery
