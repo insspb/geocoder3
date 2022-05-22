@@ -73,9 +73,7 @@ class IpinfoQuery(MultipleResultsQuery):
     _KEY_MANDATORY = False
 
     def _build_headers(self, provider_key, **kwargs):
-        return {
-            "Authorization": "Bearer {}".format(provider_key),
-        }
+        return {"Authorization": f"Bearer {provider_key}"}
 
     def _build_params(self, location, provider_key, **kwargs):
         return {}
