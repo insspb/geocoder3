@@ -13,6 +13,8 @@ from geocoder.providers import (
     FreeGeoIPQuery,
     GaodeQuery,
     GaodeReverse,
+    GeocodeFarmQuery,
+    GeocodeFarmReverse,
     GeocodeXYZQuery,
     GeolyticaQuery,
     GeonamesChildren,
@@ -53,14 +55,12 @@ from geocoder.providers import (
     YandexReverse,
 )
 from geocoder.providers.addresses import (
-    GeocodeFarmQuery,
     GisgraphyQuery,
     MapboxQuery,
     MapzenQuery,
     OpenCageQuery,
 )
 from geocoder.providers.reverse import (
-    GeocodeFarmReverse,
     GisgraphyReverse,
     MapboxReverse,
     MapzenReverse,

@@ -1,9 +1,10 @@
-__all__ = ["GeocodeFarmQuery"]
+__all__ = ["GeocodeFarmResult", "GeocodeFarmQuery", "GeocodeFarmReverse"]
 
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geocodefarm_key
+from geocoder.location import Location
 
 
 class GeocodeFarmResult(OneResult):
@@ -105,7 +106,7 @@ class GeocodeFarmQuery(MultipleResultsQuery):
 
     :param location: The string to search for. Usually a street address.
     :param key: (optional) API Key. Only Required for Paid Users.
-    :param lang: (optional) 2 digit lanuage code to return results in. Currently only
+    :param lang: (optional) 2 digit language code to return results in. Currently only
                         "en"(English) or "de"(German) supported.
     :param country: (optional) The country to return results in. Used for biasing
                 purposes and may not fully filter results to this specific country.
@@ -143,7 +144,7 @@ class GeocodeFarmQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response["geocoding_results"]["STATUS"].get("status")
-        if not status == "SUCCESS":
+        if status != "SUCCESS":
             self.error = status
 
         return self.error
@@ -195,6 +196,37 @@ class GeocodeFarmQuery(MultipleResultsQuery):
     @property
     def first_used(self):
         return self.api_account.get("first_used")
+
+
+class GeocodeFarmReverse(GeocodeFarmQuery):
+    """
+    Geocode.Farm
+
+    Geocode.Farm is one of the few providers that provide this highly
+    specialized service for free. We also have affordable paid plans, of
+    course, but our free services are of the same quality and provide the same
+    results. The major difference between our affordable paid plans and our
+    free API service is the limitations. On one of our affordable paid plans
+    your limit is set based on the plan you signed up for, starting at 25,000
+    query requests per day (API calls). On our free API offering, you are
+    limited to 250 query requests per day (API calls).
+
+    API Reference: https://geocode.farm/geocoding/free-api-documentation/
+    """
+
+    _PROVIDER = "geocodefarm"
+    _METHOD = "reverse"
+    _URL = "https://www.geocode.farm/v3/json/reverse/"
+
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        return {
+            "lat": location.latitude,
+            "lon": location.longitude,
+            "key": provider_key,
+            "lang": kwargs.get("lang", ""),
+            "country": kwargs.get("country", ""),
+        }
 
 
 if __name__ == "__main__":
