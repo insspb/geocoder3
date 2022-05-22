@@ -1,7 +1,4 @@
 # flake8: noqa
-from geocoder.providers.addresses.bing import BingQuery, BingQueryDetail, BingResult
-from geocoder.providers.addresses.bing_batch import BingBatch, BingBatchResult
-from geocoder.providers.addresses.bing_batch_forward import BingBatchForward
 from geocoder.providers.addresses.canadapost import CanadapostQuery
 from geocoder.providers.addresses.gaode import GaodeQuery
 from geocoder.providers.addresses.geocodefarm import GeocodeFarmQuery

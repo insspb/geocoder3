@@ -660,8 +660,9 @@ class MultipleResultsQuery(MutableSequence):
         """By default, simply wraps a :func:`requests.get` request"""
         return self.session.get(url, **kwargs)
 
-    def _adapt_results(self, json_response) -> List[dict]:
-        """Allow children classes to format json_response into an array of objects
+    def _adapt_results(self, json_response) -> Union[dict, List[dict]]:
+        """Allow children classes to format json_response into
+        :func:`_parse_results` expected format
 
         This required for correct iteration in :func:`_parse_results`
 

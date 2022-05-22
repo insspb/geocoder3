@@ -1,6 +1,4 @@
 # flake8: noqa
-from geocoder.providers.reverse.bing_batch_reverse import BingBatchReverse
-from geocoder.providers.reverse.bing_reverse import BingReverse
 from geocoder.providers.reverse.gaode_reverse import GaodeReverse
 from geocoder.providers.reverse.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.providers.reverse.gisgraphy_reverse import GisgraphyReverse

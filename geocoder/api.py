@@ -4,6 +4,11 @@ from geocoder.providers import (
     ArcgisReverse,
     BaiduQuery,
     BaiduReverse,
+    BingBatchForward,
+    BingBatchReverse,
+    BingQuery,
+    BingQueryDetail,
+    BingReverse,
     FreeGeoIPQuery,
     IpfinderQuery,
     IpinfoQuery,
@@ -12,9 +17,6 @@ from geocoder.providers import (
     OsmReverse,
 )
 from geocoder.providers.addresses import (
-    BingBatchForward,
-    BingQuery,
-    BingQueryDetail,
     CanadapostQuery,
     ElevationQuery,
     GaodeQuery,
@@ -48,8 +50,6 @@ from geocoder.providers.addresses import (
     YandexQuery,
 )
 from geocoder.providers.reverse import (
-    BingBatchReverse,
-    BingReverse,
     GaodeReverse,
     GeocodeFarmReverse,
     GisgraphyReverse,

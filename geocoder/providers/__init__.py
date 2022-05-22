@@ -1,11 +1,5 @@
 # flake8: noqa
 from geocoder.providers.addresses import (
-    BingBatch,
-    BingBatchForward,
-    BingBatchResult,
-    BingQuery,
-    BingQueryDetail,
-    BingResult,
     CanadapostQuery,
     ElevationQuery,
     GaodeQuery,
@@ -51,13 +45,21 @@ from geocoder.providers.addresses import (
 )
 from geocoder.providers.arcgis import ArcgisQuery, ArcgisReverse
 from geocoder.providers.baidu import BaiduQuery, BaiduReverse
+from geocoder.providers.bing import (
+    BingBatch,
+    BingBatchForward,
+    BingBatchResult,
+    BingBatchReverse,
+    BingQuery,
+    BingQueryDetail,
+    BingResult,
+    BingReverse,
+)
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
-    BingBatchReverse,
-    BingReverse,
     GaodeReverse,
     GeocodeFarmReverse,
     GisgraphyReverse,
