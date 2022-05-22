@@ -18,10 +18,7 @@ class YahooResult(OneResult):
     def address(self):
         line1 = self.object_raw_json.get("line1")
         line2 = self.object_raw_json.get("line2")
-        if line1:
-            return ", ".join([line1, line2])
-        else:
-            return line2
+        return ", ".join([line1, line2]) if line1 else line2
 
     @property
     def house_number(self):
@@ -62,10 +59,7 @@ class YahooResult(OneResult):
     @property
     def postal(self):
         postal = self.object_raw_json.get("postal")
-        if postal:
-            return postal
-        else:
-            return self.object_raw_json.get("uzip")
+        return postal or self.object_raw_json.get("uzip")
 
 
 class YahooQuery(MultipleResultsQuery):
@@ -94,9 +88,8 @@ class YahooQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response["statusDescription"]
-        if status:
-            if not status == "OK":
-                self.error = status
+        if status and status != "OK":
+            self.error = status
 
         return self.error
 
