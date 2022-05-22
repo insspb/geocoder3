@@ -106,7 +106,7 @@ class GeocodeFarmQuery(MultipleResultsQuery):
 
     :param location: The string to search for. Usually a street address.
     :param key: (optional) API Key. Only Required for Paid Users.
-    :param lang: (optional) 2 digit lanuage code to return results in. Currently only
+    :param lang: (optional) 2 digit language code to return results in. Currently only
                         "en"(English) or "de"(German) supported.
     :param country: (optional) The country to return results in. Used for biasing
                 purposes and may not fully filter results to this specific country.
@@ -144,7 +144,7 @@ class GeocodeFarmQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response["geocoding_results"]["STATUS"].get("status")
-        if not status == "SUCCESS":
+        if status != "SUCCESS":
             self.error = status
 
         return self.error
@@ -210,16 +210,6 @@ class GeocodeFarmReverse(GeocodeFarmQuery):
     your limit is set based on the plan you signed up for, starting at 25,000
     query requests per day (API calls). On our free API offering, you are
     limited to 250 query requests per day (API calls).
-
-    :param lat: The numerical latitude value for which you wish to obtain the closest,
-                    human-readable address.
-    :param lon: The numerical longitude value for which you wish to obtain the closest,
-                    human-readable address.
-    :param key: (optional) API Key. Only Required for Paid Users.
-    :param lang: (optional) 2 digit lanuage code to return results in. Currently only
-                    "en"(English) or "de"(German) supported.
-    :param country: (optional) The country to return results in. Used for biasing
-                    purposes and may not fully filter results to this specific country.
 
     API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
