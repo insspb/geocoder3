@@ -32,6 +32,8 @@ from geocoder.providers import (
     USCensusBatch,
     USCensusQuery,
     USCensusReverse,
+    W3WQuery,
+    W3WReverse,
     YandexQuery,
     YandexReverse,
 )
@@ -52,7 +54,6 @@ from geocoder.providers.addresses import (
     TamuQuery,
     TgosQuery,
     TomtomQuery,
-    W3WQuery,
     YahooQuery,
 )
 from geocoder.providers.reverse import (
@@ -64,7 +65,6 @@ from geocoder.providers.reverse import (
     MapquestReverse,
     MapzenReverse,
     OpenCageReverse,
-    W3WReverse,
 )
 
 options = {
