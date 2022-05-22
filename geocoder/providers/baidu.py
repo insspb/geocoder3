@@ -8,6 +8,7 @@ from urllib.parse import quote, quote_plus, urlencode
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import baidu_key, baidu_security_key
+from geocoder.location import Location
 
 
 class BaiduResult(OneResult):
@@ -35,10 +36,6 @@ class BaiduQuery(MultipleResultsQuery):
     Baidu Maps Geocoding API is a free open the API, the default quota
     one million times / day.
 
-    :param location: Your search location you want geocoded.
-    :param key: Baidu API key.
-    :param referer: Baidu API referer website.
-
     References
 
     API Documentation: http://developer.baidu.com/map
@@ -62,10 +59,8 @@ class BaiduQuery(MultipleResultsQuery):
 
         # adapt params to authentication method
         self.security_key = kwargs.get("sk", baidu_security_key)
-        if self.security_key:
-            return self._encode_params(params)
-        else:
-            return params
+
+        return self._encode_params(params) if self.security_key else params
 
     def _encode_params(self, params):
         # maintain the order of the parameters during signature creation when
@@ -84,19 +79,18 @@ class BaiduQuery(MultipleResultsQuery):
         """
         Signs a request url with a security key.
         """
-        if not base_url or not self.security_key:
+        if not base_url or not security_key:
             return None
 
         params = params.copy()
         address = params.pop("address")
 
-        url = base_url + "?address=" + address + "&" + urlencode(params)
+        url = f"{base_url}?address={address}&{urlencode(params)}"
         encoded_url = quote(url, safe="/:=&?#+!$,;'@()*[]")
 
         signature = quote_plus(encoded_url + self.security_key).encode("utf-8")
-        encoded_signature = hashlib.md5(signature).hexdigest()
 
-        return encoded_signature
+        return hashlib.md5(signature).hexdigest()
 
     def _build_headers(self, provider_key, **kwargs):
         return {"Referer": kwargs.get("referer", "http://developer.baidu.com")}
@@ -111,6 +105,74 @@ class BaiduQuery(MultipleResultsQuery):
             self.error = json_response.get("message")
 
         return self.error
+
+
+class BaiduReverseResult(OneResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+    @property
+    def address(self):
+        return self.object_raw_json["formatted_address"]
+
+    @property
+    def country(self):
+        return self.object_raw_json["addressComponent"]["country"]
+
+    @property
+    def province(self):
+        return self.object_raw_json["addressComponent"]["province"]
+
+    @property
+    def state(self):
+        return self.object_raw_json["addressComponent"]["province"]
+
+    @property
+    def city(self):
+        return self.object_raw_json["addressComponent"]["city"]
+
+    @property
+    def district(self):
+        return self.object_raw_json["addressComponent"]["district"]
+
+    @property
+    def street(self):
+        return self.object_raw_json["addressComponent"]["street"]
+
+    @property
+    def house_number(self):
+        return self.object_raw_json["addressComponent"]["street_number"]
+
+
+class BaiduReverse(BaiduQuery):
+    """
+    Baidu Geocoding API
+
+    Baidu Maps Geocoding API is a free open the API, the default quota
+    one million times / day.
+
+    API Documentation: http://developer.baidu.com/map
+    Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
+    """
+
+    _PROVIDER = "baidu"
+    _METHOD = "reverse"
+    _URL = "http://api.map.baidu.com/geocoder/v2/"
+    _RESULT_CLASS = BaiduReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        params = {
+            "location": str(location),
+            "ret_coordtype": kwargs.get("coordtype", "wgs84ll"),
+            "output": "json",
+            "ak": provider_key,
+        }
+        if "lang_code" in kwargs:
+            params["accept-language"] = kwargs["lang_code"]
+
+        return params
 
 
 if __name__ == "__main__":

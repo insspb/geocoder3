@@ -1,5 +1,4 @@
 # flake8: noqa
-from geocoder.providers.addresses.baidu import BaiduQuery
 from geocoder.providers.addresses.bing import BingQuery, BingQueryDetail, BingResult
 from geocoder.providers.addresses.bing_batch import BingBatch, BingBatchResult
 from geocoder.providers.addresses.bing_batch_forward import BingBatchForward
