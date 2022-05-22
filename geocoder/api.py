@@ -29,6 +29,9 @@ from geocoder.providers import (
     OsmQuery,
     OsmQueryDetail,
     OsmReverse,
+    USCensusBatch,
+    USCensusQuery,
+    USCensusReverse,
     YandexQuery,
     YandexReverse,
 )
@@ -49,8 +52,6 @@ from geocoder.providers.addresses import (
     TamuQuery,
     TgosQuery,
     TomtomQuery,
-    USCensusBatch,
-    USCensusQuery,
     W3WQuery,
     YahooQuery,
 )
@@ -63,7 +64,6 @@ from geocoder.providers.reverse import (
     MapquestReverse,
     MapzenReverse,
     OpenCageReverse,
-    USCensusReverse,
     W3WReverse,
 )
 

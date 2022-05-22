@@ -23,8 +23,6 @@ from geocoder.providers.addresses import (
     TamuQuery,
     TgosQuery,
     TomtomQuery,
-    USCensusBatch,
-    USCensusQuery,
     W3WQuery,
     W3WResult,
     YahooQuery,
@@ -72,7 +70,14 @@ from geocoder.providers.reverse import (
     MapquestReverse,
     MapzenReverse,
     OpenCageReverse,
-    USCensusReverse,
     W3WReverse,
+)
+from geocoder.providers.uscensus import (
+    USCensusBatch,
+    USCensusBatchResult,
+    USCensusQuery,
+    USCensusResult,
+    USCensusReverse,
+    USCensusReverseResult,
 )
 from geocoder.providers.yandex import YandexQuery, YandexResult, YandexReverse
