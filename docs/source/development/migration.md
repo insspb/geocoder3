@@ -130,6 +130,17 @@ List of affected files, functions and classes:
   function settings, usually with expected input type and defaults, if defaults
   available.
 
+## {mod}`geocoder.providers.google` classes renamed
+
+- {class}`geocoder.providers.ElevationQuery` to
+  {class}`geocoder.providers.GoogleElevationQuery`
+- {class}`geocoder.providers.PlacesQuery` to
+  {class}`geocoder.providers.GooglevPlacesQuery`
+- {class}`geocoder.providers.ElevationResult` to
+  {class}`geocoder.providers.GoogleElevationResult`
+- {class}`geocoder.providers.PlacesResult` to
+  {class}`geocoder.providers.GooglevPlacesResult`
+
 [geocoder]: https://github.com/DenisCarriere/geocoder
 [geocoder3]: https://github.com/insspb/geocoder3
 [releases]: https://github.com/insspb/geocoder3/releases

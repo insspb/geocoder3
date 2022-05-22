@@ -671,7 +671,7 @@ class MultipleResultsQuery(MutableSequence):
         """
         return json_response
 
-    def _parse_results(self, json_response: List[dict]):
+    def _parse_results(self, json_response: Union[dict, List[dict]]):
         """Responsible for parsing original json and separating it to
         :class:`OneResult` objects
         """

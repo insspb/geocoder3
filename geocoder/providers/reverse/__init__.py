@@ -1,7 +1,6 @@
 # flake8: noqa
 from geocoder.providers.reverse.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.providers.reverse.gisgraphy_reverse import GisgraphyReverse
-from geocoder.providers.reverse.google_reverse import GoogleReverse
 from geocoder.providers.reverse.here_reverse import HereReverse
 from geocoder.providers.reverse.komoot_reverse import KomootReverse
 from geocoder.providers.reverse.locationiq_reverse import LocationIQReverse

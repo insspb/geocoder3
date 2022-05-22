@@ -12,6 +12,11 @@ from geocoder.providers import (
     FreeGeoIPQuery,
     GaodeQuery,
     GaodeReverse,
+    GoogleElevationQuery,
+    GooglePlacesQuery,
+    GoogleQuery,
+    GoogleReverse,
+    GoogleTimezone,
     IpfinderQuery,
     IpinfoQuery,
     OsmQuery,
@@ -20,7 +25,6 @@ from geocoder.providers import (
 )
 from geocoder.providers.addresses import (
     CanadapostQuery,
-    ElevationQuery,
     GeocodeFarmQuery,
     GeocodeXYZQuery,
     GeolyticaQuery,
@@ -29,7 +33,6 @@ from geocoder.providers.addresses import (
     GeonamesHierarchy,
     GeonamesQuery,
     GisgraphyQuery,
-    GoogleQuery,
     HereQuery,
     KomootQuery,
     LocationIQQuery,
@@ -40,7 +43,6 @@ from geocoder.providers.addresses import (
     MaxmindQuery,
     OpenCageQuery,
     OttawaQuery,
-    PlacesQuery,
     TamuQuery,
     TgosQuery,
     TomtomQuery,
@@ -53,7 +55,6 @@ from geocoder.providers.addresses import (
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
     GisgraphyReverse,
-    GoogleReverse,
     HereReverse,
     KomootReverse,
     LocationIQReverse,
@@ -65,7 +66,7 @@ from geocoder.providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
-from geocoder.providers.timezone import GeonamesTimezone, GoogleTimezone
+from geocoder.providers.timezone import GeonamesTimezone
 
 options = {
     "osm": {
@@ -155,8 +156,8 @@ options = {
         "geocode": GoogleQuery,
         "reverse": GoogleReverse,
         "timezone": GoogleTimezone,
-        "elevation": ElevationQuery,
-        "places": PlacesQuery,
+        "elevation": GoogleElevationQuery,
+        "places": GooglePlacesQuery,
     },
     "mapzen": {
         "geocode": MapzenQuery,
