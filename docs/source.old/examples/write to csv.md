@@ -11,7 +11,7 @@ g = geocoder.bing('Avenida da Republica, Lisboa')
 with open('test.csv', 'wb') as f:
     writer = csv.DictWriter(f, fieldnames=g.fieldnames)
     writer.writeheader()
-    writer.writerow(g.json)
+    writer.writerow(g.object_json)
 ```
 
 **Note**: The `fieldnames` is new in 1.1.3, `attributes` in the earlier versions.
@@ -41,7 +41,7 @@ with open('locations.csv') as f:
         g = geocoder.google(line['location'])
 
         # Add the CSV line data into the Geocoder JSON result
-        result = g.json
+        result = g.object_json
         result.update(line)
 
         # Store Geocoder results in a list to save it later

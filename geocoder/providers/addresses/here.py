@@ -35,7 +35,7 @@ class HereResult(OneResult):
         return self._address.get("PostalCode")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._address.get("HouseNumber")
 
     @property
@@ -68,11 +68,11 @@ class HereResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw_json.get("MatchLevel")
+        return self.object_raw_json.get("MatchLevel")
 
     @property
     def accuracy(self):
-        return self.raw_json.get("MatchType")
+        return self.object_raw_json.get("MatchType")
 
     @property
     def bbox(self):
@@ -94,10 +94,10 @@ class HereQuery(MultipleResultsQuery):
     API Reference: https://developer.here.com/rest-apis/documentation/geocoder
     """
 
-    provider = "here"
-    method = "geocode"
     qualified_address = ["city", "district", "postal", "state", "country"]
 
+    _PROVIDER = "here"
+    _METHOD = "geocode"
     _URL = "http://geocoder.cit.api.here.com/6.2/geocode.json"
     _RESULT_CLASS = HereResult
 
@@ -106,7 +106,13 @@ class HereQuery(MultipleResultsQuery):
         # API key is split between app_id and app_code -> managed in _build_params
         pass
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         # HERE Credentials
         app_id = kwargs.get("app_id", here_app_id)
         app_code = kwargs.get("app_code", here_app_code)
@@ -119,7 +125,7 @@ class HereQuery(MultipleResultsQuery):
             "app_id": app_id,
             "app_code": app_code,
             "gen": 9,
-            "maxresults": kwargs.get("maxRows", 1),
+            "maxresults": max_results,
             "language": kwargs.get("language", "en"),
         }
 

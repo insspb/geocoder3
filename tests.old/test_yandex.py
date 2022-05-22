@@ -16,7 +16,7 @@ def test_yandex():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(location_url, text=input.read())
         g = geocoder.yandex(location, key="mock")
-        assert g.ok
+        assert g.has_data
 
 
 def test_yandex_reverse():
@@ -24,17 +24,17 @@ def test_yandex_reverse():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(coordinates_url, text=input.read())
         g = geocoder.yandex(coordinates, method="reverse", key="mock")
-        assert g.ok
+        assert g.has_data
 
 
 def test_multi_results():
     data_file = "tests/results/yandex_batch.json"
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(location_url, text=input.read())
-        g = geocoder.yandex(location, maxRows=3, key="mock")
+        g = geocoder.yandex(location, max_results=3, key="mock")
         assert len(g) == 3
 
 
 def test_yandex_full_russian_location():
     g = geocoder.yandex("Химки, ул. Сенявинская д 11, кор 16")
-    assert g.ok
+    assert g.has_data

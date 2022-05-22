@@ -32,7 +32,7 @@ class BingResult(OneResult):
         return self._address.get("formattedAddress")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         if self.street:
             expression = r"\d+"
             pattern = re.compile(expression)
@@ -62,11 +62,11 @@ class BingResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw_json.get("entityType")
+        return self.object_raw_json.get("entityType")
 
     @property
     def accuracy(self):
-        return self.raw_json.get("calculationMethod")
+        return self.object_raw_json.get("calculationMethod")
 
     @property
     def postal(self):
@@ -74,7 +74,7 @@ class BingResult(OneResult):
 
     @property
     def bbox(self):
-        _bbox = self.raw_json.get("bbox")
+        _bbox = self.object_raw_json.get("bbox")
         if _bbox:
             south = _bbox[0]
             north = _bbox[2]
@@ -96,9 +96,8 @@ class BingQuery(MultipleResultsQuery):
     Get Bing key: https://www.bingmapsportal.com/
     """
 
-    provider = "bing"
-    method = "geocode"
-
+    _PROVIDER = "bing"
+    _METHOD = "geocode"
     _URL = "http://dev.virtualearth.net/REST/v1/Locations"
     _RESULT_CLASS = BingResult
     _KEY = bing_key
@@ -106,13 +105,19 @@ class BingQuery(MultipleResultsQuery):
     def _build_headers(self, provider_key, **kwargs):
         return {"Referer": "http://addxy.com/", "User-agent": "Mozilla/5.0"}
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "q": location,
             "o": "json",
             "inclnb": 1,
             "key": provider_key,
-            "maxResults": kwargs.get("maxRows", 1),
+            "maxResults": max_results,
         }
 
     def _catch_errors(self, json_response):
@@ -131,14 +136,20 @@ class BingQuery(MultipleResultsQuery):
 
 
 class BingQueryDetail(MultipleResultsQuery):
-    provider = "bing"
-    method = "details"
+    _PROVIDER = "bing"
+    _METHOD = "details"
 
     _URL = "http://dev.virtualearth.net/REST/v1/Locations"
     _RESULT_CLASS = BingResult
     _KEY = bing_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "adminDistrict": kwargs.get("adminDistrict"),
             "countryRegion": kwargs.get("countryRegion"),
@@ -148,7 +159,7 @@ class BingQueryDetail(MultipleResultsQuery):
             "o": "json",
             "inclnb": 1,
             "key": provider_key,
-            "maxResults": kwargs.get("maxRows", 1),
+            "maxResults": max_results,
         }
 
     def _catch_errors(self, json_response):

@@ -10,7 +10,7 @@ class OttawaParcelIdResult(OneResult):
 
     @property
     def address_id(self):
-        return self.raw_json.get("attributes", {}).get("PI Municipal Address ID")
+        return self.object_raw_json.get("attributes", {}).get("PI Municipal Address ID")
 
 
 class OttawaParcelIdQuery(MultipleResultsQuery):
@@ -19,6 +19,8 @@ class OttawaParcelIdQuery(MultipleResultsQuery):
     _URL = "http://maps.ottawa.ca/arcgis/rest/services/Property_Parcels/MapServer/find"
     _RESULT_CLASS = OttawaParcelIdResult
     _KEY_MANDATORY = False
+    _PROVIDER = "ottawa"
+    _METHOD = "geocode"
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
@@ -62,7 +64,7 @@ class OttawaParcelResult(OneResult):
         return self._clean(self.parse["attributes"].get("MUNICIPALITY_NAME"))
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._clean(self.parse["attributes"].get("ADDRESS_NUMBER"))
 
     @property
@@ -115,9 +117,8 @@ class OttawaParcelQuery(MultipleResultsQuery):
     GeocodeServer/findAddressCandidates
     """
 
-    provider = "ottawa"
-    method = "parcel"
-
+    _PROVIDER = "ottawa"
+    _METHOD = "parcel"
     _URL = "http://maps.ottawa.ca/arcgis/rest/services/Property_Parcels/MapServer/find"
     _RESULT_CLASS = OttawaParcelResult
     _KEY_MANDATORY = False

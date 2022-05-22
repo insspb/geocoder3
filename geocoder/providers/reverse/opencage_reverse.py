@@ -26,9 +26,8 @@ class OpenCageReverse(OpenCageQuery):
     API Reference: https://geocoder.opencagedata.com/api
     """
 
-    provider = "opencage"
-    method = "reverse"
-
+    _PROVIDER = "opencage"
+    _METHOD = "reverse"
     _URL = "http://api.opencagedata.com/geocode/v1/json"
     _RESULT_CLASS = OpenCageReverseResult
 

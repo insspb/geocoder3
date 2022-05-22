@@ -39,9 +39,9 @@ class KomootResult(OneResult):
         address = ", ".join([self.state, self.country])
 
         # 453 Booth street, Ottawa ON, Canada
-        if self.housenumber:
+        if self.house_number:
             middle = ", ".join([self.street, self.city])
-            address = " ".join([self.housenumber, middle, address])
+            address = " ".join([self.house_number, middle, address])
 
         # 453 Booth street, Ottawa ON, Canada
         elif self.street:
@@ -75,7 +75,7 @@ class KomootResult(OneResult):
         return self._properties.get("street", "")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._properties.get("housenumber", "")
 
     @property
@@ -106,17 +106,22 @@ class KomootQuery(MultipleResultsQuery):
     API Reference: http://photon.komoot.de
     """
 
-    provider = "komoot"
-    method = "geocode"
-
+    _PROVIDER = "komoot"
+    _METHOD = "geocode"
     _URL = "http://photon.komoot.de/api"
     _RESULT_CLASS = KomootResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "q": location,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
             "lang": "en",
         }
 
@@ -126,5 +131,5 @@ class KomootQuery(MultipleResultsQuery):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = KomootQuery("Ottawa Ontario", maxRows=3)
+    g = KomootQuery("Ottawa Ontario", max_results=3)
     g.debug()

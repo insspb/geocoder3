@@ -9,11 +9,11 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class OttawaResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("location", {}).get("y")
+        return self.object_raw_json.get("location", {}).get("y")
 
     @property
     def lng(self):
-        return self.raw_json.get("location", {}).get("x")
+        return self.object_raw_json.get("location", {}).get("x")
 
     @property
     def postal(self):
@@ -27,7 +27,7 @@ class OttawaResult(OneResult):
                 return match.group(0)
 
     @property
-    def housenumber(self):
+    def house_number(self):
         if self.address:
             expression = r"\d+"
             pattern = re.compile(expression)
@@ -49,11 +49,11 @@ class OttawaResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("address")
+        return self.object_raw_json.get("address")
 
     @property
     def accuracy(self):
-        return self.raw_json.get("score")
+        return self.object_raw_json.get("score")
 
 
 class OttawaQuery(MultipleResultsQuery):
@@ -73,19 +73,24 @@ class OttawaQuery(MultipleResultsQuery):
     GeocodeServer/findAddressCandidates
     """
 
-    provider = "ottawa"
-    method = "geocode"
-
+    _PROVIDER = "ottawa"
+    _METHOD = "geocode"
     _URL = "http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates"  # noqa
     _RESULT_CLASS = OttawaResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "SingleLine": location.replace(", Ottawa, ON", ""),
             "f": "json",
             "outSR": 4326,
-            "maxLocations": kwargs.get("maxRows", 1),
+            "maxLocations": max_results,
         }
 
     def _adapt_results(self, json_response):

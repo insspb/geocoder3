@@ -14,23 +14,23 @@ class TomtomResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw_json.get("position", {}).get("lat")
+        return self.object_raw_json.get("position", {}).get("lat")
 
     @property
     def lng(self):
-        return self.raw_json.get("position", {}).get("lon")
+        return self.object_raw_json.get("position", {}).get("lon")
 
     @property
     def geohash(self):
-        return self.raw_json.get("id")
+        return self.object_raw_json.get("id")
 
     @property
     def quality(self):
-        return self.raw_json.get("type")
+        return self.object_raw_json.get("type")
 
     @property
     def bbox(self):
-        viewport = self.raw_json.get("viewport", {})
+        viewport = self.object_raw_json.get("viewport", {})
         if viewport:
             bbox = {
                 "south": viewport.get("btmRightPoint")["lon"],
@@ -45,7 +45,7 @@ class TomtomResult(OneResult):
         return self._address.get("freeformAddress")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._address.get("streetNumber")
 
     @property
@@ -87,17 +87,22 @@ class TomtomQuery(MultipleResultsQuery):
     API Reference: https://developer.tomtom.com/tomtom-maps-apis-developers
     """
 
-    provider = "tomtom"
-    method = "geocode"
-
+    _PROVIDER = "tomtom"
+    _METHOD = "geocode"
     _URL = "https://api.tomtom.com/search/2/geocode/{0}.json"
     _RESULT_CLASS = TomtomResult
     _KEY = tomtom_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "key": provider_key,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
             "countrySet": kwargs.get("countrySet"),
             "lon": kwargs.get("lon"),
             "lat": kwargs.get("lat"),

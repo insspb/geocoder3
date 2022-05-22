@@ -8,8 +8,8 @@ class GeonamesChildren(GeonamesQuery):
     http://api.geonames.org/childrenJSON?formatted=true&geonameId=6094817
     """
 
-    provider = "geonames"
-    method = "children"
+    _PROVIDER = "geonames"
+    _METHOD = "children"
 
     _URL = "http://api.geonames.org/childrenJSON"
 

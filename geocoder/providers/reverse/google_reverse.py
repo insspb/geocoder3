@@ -22,8 +22,8 @@ class GoogleReverse(GoogleQuery):
     API Reference: https://developers.google.com/maps/documentation/geocoding/
     """
 
-    provider = "google"
-    method = "reverse"
+    _PROVIDER = "google"
+    _METHOD = "reverse"
 
     def _location_init(self, location, **kwargs):
         return {

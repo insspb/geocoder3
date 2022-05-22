@@ -20,18 +20,18 @@ class TgosResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw_json("geometry", {}).get("y")
+        return self.object_raw_json("geometry", {}).get("y")
 
     @property
     def lng(self):
-        return self.raw_json("geometry", {}).get("x")
+        return self.object_raw_json("geometry", {}).get("x")
 
     @property
     def address(self):
-        return self.raw_json.get("FULL_ADDR")
+        return self.object_raw_json.get("FULL_ADDR")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         number = self.number
         if number:
             match = re.match(r"\d+", number)
@@ -64,27 +64,27 @@ class TgosResult(OneResult):
     # TGOS specific attributes
     @property
     def alley(self):
-        return self.raw_json.get("ALLEY")
+        return self.object_raw_json.get("ALLEY")
 
     @property
     def lane(self):
-        return self.raw_json.get("LANE")
+        return self.object_raw_json.get("LANE")
 
     @property
     def neighborhood(self):
-        return self.raw_json.get("NEIGHBORHOOD")
+        return self.object_raw_json.get("NEIGHBORHOOD")
 
     @property
     def number(self):
-        return self.raw_json.get("NUMBER")
+        return self.object_raw_json.get("NUMBER")
 
     @property
     def road(self):
-        return self.raw_json.get("ROAD")
+        return self.object_raw_json.get("ROAD")
 
     @property
     def section(self):
-        section = self.raw_json.get("SECTION")
+        section = self.object_raw_json.get("SECTION")
         if section:
             if self.language == "zh-tw":
                 return {
@@ -103,31 +103,31 @@ class TgosResult(OneResult):
 
     @property
     def sub_alley(self):
-        return self.raw_json.get("sub_alley")
+        return self.object_raw_json.get("sub_alley")
 
     @property
     def tong(self):
-        return self.raw_json.get("TONG")
+        return self.object_raw_json.get("TONG")
 
     @property
     def village(self):
-        return self.raw_json.get("VILLAGE")
+        return self.object_raw_json.get("VILLAGE")
 
     @property
     def county(self):
-        return self.raw_json.get("county")
+        return self.object_raw_json.get("county")
 
     @property
     def name(self):
-        return self.raw_json.get("name")
+        return self.object_raw_json.get("name")
 
     @property
     def town(self):
-        return self.raw_json.get("town")
+        return self.object_raw_json.get("town")
 
     @property
     def type(self):
-        return self.raw_json.get("type")
+        return self.object_raw_json.get("type")
 
 
 class TgosQuery(MultipleResultsQuery):
@@ -140,9 +140,8 @@ class TgosQuery(MultipleResultsQuery):
     http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     """
 
-    provider = "tgos"
-    method = "geocode"
-
+    _PROVIDER = "tgos"
+    _METHOD = "geocode"
     _URL = "http://gis.tgos.nat.gov.tw/TGLocator/TGLocator.ashx"
     _RESULT_CLASS = TgosResult
     _KEY = tgos_key
@@ -174,7 +173,13 @@ class TgosQuery(MultipleResultsQuery):
         else:
             raise ValueError("Cannot find TGOS.tgHash")
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "format": "json",
             "input": location,
@@ -182,7 +187,7 @@ class TgosQuery(MultipleResultsQuery):
             "srs": "EPSG:4326",
             "ignoreGeometry": False,
             "keystr": provider_key,
-            "pnum": kwargs.get("maxRows", 5),
+            "pnum": max_results,
         }
 
     def _before_initialize(self, location, **kwargs):
@@ -213,7 +218,7 @@ class TgosQuery(MultipleResultsQuery):
     def _parse_results(self, json_response):
         # overriding method to pass language to every result
         for json_dict in self._adapt_results(json_response):
-            self.add(self.one_result(json_dict, self.language))
+            self.add(self._RESULT_CLASS(json_dict, self.language))
 
         # set default result to use for delegation
         self.current_result = len(self) > 0 and self[0]

@@ -31,7 +31,7 @@ class GeocodeFarmResult(OneResult):
 
     @property
     def accuracy(self):
-        return self.raw_json.get("accuracy")
+        return self.object_raw_json.get("accuracy")
 
     @property
     def bbox(self):
@@ -43,10 +43,10 @@ class GeocodeFarmResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("formatted_address")
+        return self.object_raw_json.get("formatted_address")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._address.get("street_number")
 
     @property
@@ -113,9 +113,8 @@ class GeocodeFarmQuery(MultipleResultsQuery):
     API Reference: https://geocode.farm/geocoding/free-api-documentation/
     """
 
-    provider = "geocodefarm"
-    method = "geocode"
-
+    _PROVIDER = "geocodefarm"
+    _METHOD = "geocode"
     _URL = "https://www.geocode.farm/v3/json/forward/"
     _RESULT_CLASS = GeocodeFarmResult
     _KEY = geocodefarm_key
@@ -127,13 +126,19 @@ class GeocodeFarmQuery(MultipleResultsQuery):
         self.api_status = {}
         self.api_account = {}
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "addr": location,
             "key": provider_key,
             "lang": kwargs.get("lang", ""),
             "country": kwargs.get("country", ""),
-            "count": kwargs.get("maxRows", 1),
+            "count": max_results,
         }
 
     def _catch_errors(self, json_response):

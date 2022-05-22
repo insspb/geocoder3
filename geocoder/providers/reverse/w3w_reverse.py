@@ -29,9 +29,8 @@ class W3WReverse(W3WQuery):
     Get W3W key: http://developer.what3words.com/api-register/
     """
 
-    provider = "w3w"
-    method = "reverse"
-
+    _PROVIDER = "w3w"
+    _METHOD = "reverse"
     _URL = "https://api.what3words.com/v2/reverse"
     _RESULT_CLASS = W3WReverseResult
 

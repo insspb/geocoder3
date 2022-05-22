@@ -16,7 +16,7 @@ def test_locationiq():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as ip:
         mocker.get(url, text=ip.read())
         g = geocoder.locationiq(location, key="TEST_KEY")
-        assert g.ok
+        assert g.has_data
         assert g[0].lat == ottawa[0]
         assert g[0].lng == ottawa[1]
 
@@ -28,8 +28,8 @@ def test_locationiq_single_result():
         mock_result = json.loads(ip.read())
         single_mock_result = json.dumps(mock_result[0:1])
         mocker.get(url, text=single_mock_result)
-        g = geocoder.locationiq(location, key="TEST_KEY", maxRows=1)
-        assert g.ok
+        g = geocoder.locationiq(location, key="TEST_KEY", max_results=1)
+        assert g.has_data
         assert len(g) == 1
 
 
@@ -39,7 +39,7 @@ def test_locationiq_multi_result():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as ip:
         mocker.get(url, text=ip.read())
         g = geocoder.locationiq(location, key="TEST_KEY")
-        assert g.ok
+        assert g.has_data
         assert len(g) > 1
 
 
@@ -51,6 +51,6 @@ def test_locationiq_reverse():
         g = geocoder.locationiq(
             "{}, {}".format(ottawa[0], ottawa[1]), key="TEST_KEY", method="reverse"
         )
-        assert g.ok
+        assert g.has_data
         assert g.city == city
         assert g.country == country

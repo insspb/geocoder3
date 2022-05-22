@@ -1,6 +1,6 @@
 __all__ = ["GeocodeXYZQuery"]
-
 import logging
+from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geocodexyz_key
@@ -24,15 +24,15 @@ class GeocodeXYZResult(OneResult):
 
     @property
     def lat(self):
-        return self._get_value(self.raw_json, "latt", float)
+        return self._get_value(self.object_raw_json, "latt", float)
 
     @property
     def lng(self):
-        return self._get_value(self.raw_json, "longt", float)
+        return self._get_value(self.object_raw_json, "longt", float)
 
     @property
     def remaining_credits(self):
-        return self._get_value(self.raw_json, "remaining_credits", int)
+        return self._get_value(self.object_raw_json, "remaining_credits", int)
 
     @property
     def confidence(self):
@@ -63,17 +63,21 @@ class GeocodeXYZResult(OneResult):
         return self._get_value(self._standard, "postal")
 
     @property
-    def housenumber(self):
+    def house_number(self):
+        return self.street_number
+
+    @property
+    def street_number(self) -> Optional[str]:
         return self._get_value(self._standard, "stnumber")
 
     @property
     def address(self):
         if self.street_number:
-            return "{0} {1}, {2}".format(self.street_number, self.route, self.locality)
-        elif self.route and self.route != "un-known":
-            return "{0}, {1}".format(self.route, self.locality)
+            return "{0} {1}, {2}".format(self.street_number, self.street, self.city)
+        elif self.street and self.street != "un-known":
+            return "{0}, {1}".format(self.street, self.city)
         else:
-            return self.locality
+            return self.city
 
 
 class GeocodeXYZQuery(MultipleResultsQuery):
@@ -86,9 +90,8 @@ class GeocodeXYZQuery(MultipleResultsQuery):
 
     """
 
-    provider = "geocodexyz"
-    method = "geocode"
-
+    _PROVIDER = "geocodexyz"
+    _METHOD = "geocode"
     _URL = "https://geocode.xyz/"
     _RESULT_CLASS = GeocodeXYZResult
     _KEY = geocodexyz_key

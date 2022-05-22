@@ -14,7 +14,6 @@ from geocoder.providers.reverse.mapbox_reverse import MapboxReverse
 from geocoder.providers.reverse.mapquest_reverse import MapquestReverse
 from geocoder.providers.reverse.mapzen_reverse import MapzenReverse
 from geocoder.providers.reverse.opencage_reverse import OpenCageReverse
-from geocoder.providers.reverse.osm_reverse import OsmReverse
 from geocoder.providers.reverse.uscensus_reverse import USCensusReverse
 from geocoder.providers.reverse.w3w_reverse import W3WReverse
 from geocoder.providers.reverse.yandex_reverse import YandexReverse

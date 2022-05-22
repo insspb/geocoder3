@@ -26,6 +26,10 @@
     <img src="https://codecov.io/gh/insspb/geocoder3/branch/master/graph/badge.svg?token=HoUly1aQHN"
          alt="Codecov" />
   </a>
+  <a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg"
+         alt="Code Style" />
+  </a>
 </p>
 <br>
 
@@ -98,9 +102,10 @@ Many properties are available once the geocoder object is created.
 
 ```python
 import geocoder
+
 g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
 g.geojson
-g.json
+g.object_json
 g.wkt
 g.osm
 ```
@@ -152,8 +157,9 @@ g.country_long
 
 ```python
 import geocoder
+
 g = geocoder.google("453 Booth Street, Ottawa ON", key='YOUR_GOOGLE_API_KEY')
-g.housenumber
+g.house_number
 g.postal
 g.street
 g.street_long
@@ -216,7 +222,7 @@ geocode "Ottawa, ON" --provider osm --output geojson --method geocode
 |                 | [~~Mapzen~~][Mapzen]           | Shutdown  | API key                         | yes              | yes     |           |       |
 |                 | [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
 |                 | [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
-|                 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
+| YES             | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
 |                 | [Tamu][Tamu]                   | US        | API key                         |                  |         |           |       |
 |                 | [TGOS][TGOS]                   | Taiwan    |                                 |                  |         |           |       |
 |                 | [TomTom][TomTom]               | World     | API key                         | yes              |         |           |       |

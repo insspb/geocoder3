@@ -8,5 +8,6 @@ Contents:
 
    migration
    documentation
+   tests
    authors_v1
    authors

@@ -9,31 +9,31 @@ class GeonamesTimezoneResult(GeonamesResult):
 
     @property
     def sunrise(self):
-        return self.raw_json.get("sunrise")
+        return self.object_raw_json.get("sunrise")
 
     @property
     def gmt_offset(self):
-        return self.raw_json.get("gmtOffset")
+        return self.object_raw_json.get("gmtOffset")
 
     @property
     def raw_offset(self):
-        return self.raw_json.get("rawOffset")
+        return self.object_raw_json.get("rawOffset")
 
     @property
     def dst_offest(self):
-        return self.raw_json.get("dstOffset")
+        return self.object_raw_json.get("dstOffset")
 
     @property
     def sunset(self):
-        return self.raw_json.get("sunset")
+        return self.object_raw_json.get("sunset")
 
     @property
     def timezone_id(self):
-        return self.raw_json.get("timezoneId")
+        return self.object_raw_json.get("timezoneId")
 
     @property
     def time(self):
-        return self.raw_json.get("time")
+        return self.object_raw_json.get("time")
 
 
 class GeonamesTimezone(GeonamesQuery):
@@ -41,9 +41,8 @@ class GeonamesTimezone(GeonamesQuery):
     http://api.geonames.org/timezoneJSON?lat=47.01&lng=10.2
     """
 
-    provider = "geonames"
-    method = "timezone"
-
+    _PROVIDER = "geonames"
+    _METHOD = "timezone"
     _URL = "http://api.geonames.org/timezoneJSON"
     _RESULT_CLASS = GeonamesTimezoneResult
 

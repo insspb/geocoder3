@@ -42,6 +42,14 @@ def docs(session):
         sphinx_cmd = "sphinx-build"
     else:
         sphinx_cmd = "sphinx-autobuild"
-        sphinx_args.extend(["--open-browser", "--port", "9812"])
+        sphinx_args.extend(
+            [
+                "--open-browser",
+                "--port",
+                "9812",
+                "--watch",
+                "../geocoder",
+            ]
+        )
 
     session.run(sphinx_cmd, *sphinx_args)

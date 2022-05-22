@@ -32,45 +32,45 @@ class PlacesResult(OneResult):
 
     @property
     def id(self):
-        return self.raw_json.get("id")
+        return self.object_raw_json.get("id")
 
     @property
     def reference(self):
-        return self.raw_json.get("reference")
+        return self.object_raw_json.get("reference")
 
     @property
     def place_id(self):
-        return self.raw_json.get("place_id")
+        return self.object_raw_json.get("place_id")
 
     @property
     def type(self):
-        type = self.raw_json.get("types")
+        type = self.object_raw_json.get("types")
         if type:
             return type[0]
 
     @property
     def address(self):
-        return self.raw_json.get("formatted_address")
+        return self.object_raw_json.get("formatted_address")
 
     @property
     def icon(self):
-        return self.raw_json.get("icon")
+        return self.object_raw_json.get("icon")
 
     @property
     def name(self):
-        return self.raw_json.get("name")
+        return self.object_raw_json.get("name")
 
     @property
     def vicinity(self):
-        return self.raw_json.get("vicinity")
+        return self.object_raw_json.get("vicinity")
 
     @property
     def price_level(self):
-        return self.raw_json.get("price_level")
+        return self.object_raw_json.get("price_level")
 
     @property
     def rating(self):
-        return self.raw_json.get("rating")
+        return self.object_raw_json.get("rating")
 
 
 class PlacesQuery(MultipleResultsQuery):
@@ -121,9 +121,8 @@ class PlacesQuery(MultipleResultsQuery):
     :param type: (optional) restrict results to one type of place
     """
 
-    provider = "google"
-    method = "places"
-
+    _PROVIDER = "google"
+    _METHOD = "places"
     _URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
     _RESULT_CLASS = PlacesResult
     _KEY = google_key

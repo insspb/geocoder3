@@ -8,8 +8,8 @@ class GeonamesHierarchy(GeonamesChildren):
     http://api.geonames.org/hierarchyJSON?formatted=true&geonameId=6094817
     """
 
-    provider = "geonames"
-    method = "hierarchy"
+    _PROVIDER = "geonames"
+    _METHOD = "hierarchy"
 
     _URL = "http://api.geonames.org/hierarchyJSON"
 

@@ -25,10 +25,10 @@ class USCensusResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("matchedAddress")
+        return self.object_raw_json.get("matchedAddress")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         if self.address:
             match = re.search(r"^\d+", self.address, re.UNICODE)
             if match:
@@ -96,9 +96,8 @@ class USCensusQuery(MultipleResultsQuery):
     API Reference: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
     """
 
-    provider = "uscensus"
-    method = "geocode"
-
+    _PROVIDER = "uscensus"
+    _METHOD = "geocode"
     _URL = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
     _RESULT_CLASS = USCensusResult
     _KEY_MANDATORY = False

@@ -40,11 +40,11 @@ class GoogleResult(OneResult):
 
     @property
     def place(self):
-        return self.raw_json.get("place_id")
+        return self.object_raw_json.get("place_id")
 
     @property
     def quality(self):
-        quality = self.raw_json.get("types")
+        quality = self.object_raw_json.get("types")
         if quality:
             return quality[0]
 
@@ -62,27 +62,27 @@ class GoogleResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("formatted_address")
+        return self.object_raw_json.get("formatted_address")
 
     @property
     def postal(self):
-        return self.raw_json.get("postal_code", {}).get("short_name")
+        return self.object_raw_json.get("postal_code", {}).get("short_name")
 
     @property
     def subpremise(self):
-        return self.raw_json.get("subpremise", {}).get("short_name")
+        return self.object_raw_json.get("subpremise", {}).get("short_name")
 
     @property
-    def housenumber(self):
-        return self.raw_json.get("street_number", {}).get("short_name")
+    def house_number(self):
+        return self.object_raw_json.get("street_number", {}).get("short_name")
 
     @property
     def street(self):
-        return self.raw_json.get("route", {}).get("short_name")
+        return self.object_raw_json.get("route", {}).get("short_name")
 
     @property
     def street_long(self):
-        return self.raw_json.get("route", {}).get("long_name")
+        return self.object_raw_json.get("route", {}).get("long_name")
 
     @property
     def road_long(self):
@@ -90,41 +90,51 @@ class GoogleResult(OneResult):
 
     @property
     def neighborhood(self):
-        return self.raw_json.get("neighborhood", {}).get("short_name")
+        return self.object_raw_json.get("neighborhood", {}).get("short_name")
 
     @property
     def sublocality(self):
-        return self.raw_json.get("sublocality", {}).get("short_name")
+        return self.object_raw_json.get("sublocality", {}).get("short_name")
 
     @property
     def city(self):
-        return self.raw_json.get("locality", {}).get("short_name") or self.postal_town
+        return (
+            self.object_raw_json.get("locality", {}).get("short_name")
+            or self.postal_town
+        )
 
     @property
     def city_long(self):
         return (
-            self.raw_json.get("locality", {}).get("long_name") or self.postal_town_long
+            self.object_raw_json.get("locality", {}).get("long_name")
+            or self.postal_town_long
         )
 
     @property
     def postal_town(self):
-        return self.raw_json.get("postal_town", {}).get("short_name")
+        return self.object_raw_json.get("postal_town", {}).get("short_name")
 
     @property
     def postal_town_long(self):
-        return self.raw_json.get("postal_town", {}).get("long_name")
+        return self.object_raw_json.get("postal_town", {}).get("long_name")
 
     @property
     def county(self):
-        return self.raw_json.get("administrative_area_level_2", {}).get("short_name")
+        return self.object_raw_json.get("administrative_area_level_2", {}).get(
+            "short_name"
+        )
 
     @property
     def state(self):
-        return self.raw_json.get("administrative_area_level_1", {}).get("short_name")
+        return self.object_raw_json.get("administrative_area_level_1", {}).get(
+            "short_name"
+        )
 
     @property
     def state_long(self):
-        return self.raw_json.get("administrative_area_level_1", {}).get("long_name")
+        return self.object_raw_json.get("administrative_area_level_1", {}).get(
+            "long_name"
+        )
 
     @property
     def province_long(self):
@@ -132,11 +142,11 @@ class GoogleResult(OneResult):
 
     @property
     def country(self):
-        return self.raw_json.get("country", {}).get("short_name")
+        return self.object_raw_json.get("country", {}).get("short_name")
 
     @property
     def country_long(self):
-        return self.raw_json.get("country", {}).get("long_name")
+        return self.object_raw_json.get("country", {}).get("long_name")
 
 
 class GoogleQuery(MultipleResultsQuery):
@@ -167,9 +177,8 @@ class GoogleQuery(MultipleResultsQuery):
     :param client_secret: Google for Work client secret. Use with client.
     """
 
-    provider = "google"
-    method = "geocode"
-
+    _PROVIDER = "google"
+    _METHOD = "geocode"
     _URL = "https://maps.googleapis.com/maps/api/geocode/json"
     _RESULT_CLASS = GoogleResult
     _KEY = google_key

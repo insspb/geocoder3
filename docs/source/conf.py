@@ -29,11 +29,10 @@ from geocoder import __version__  # noqa
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",  # Create neat summary tables
     "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
     "myst_parser",
 ]
-# autosummary_generate = True
 
 
 # 'releases' (changelog) settings
@@ -139,6 +138,10 @@ html_theme = "sphinx_rtd_theme"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
+html_css_files = [
+    "css/custom.css",
+]
+html_style = "css/custom.css"
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 # html_last_updated_fmt = '%b %d, %Y'
@@ -257,8 +260,16 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"http://docs.python.org/": None}
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "requests": ("https://docs.python-requests.org/en/latest", None),
+}
 
 myst_enable_extensions = [
     "tasklist",
 ]
+
+# Autodic settings
+
+autodoc_member_order = "groupwise"
+autodoc_typehints = "none"

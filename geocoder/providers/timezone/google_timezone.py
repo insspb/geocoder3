@@ -17,19 +17,19 @@ class GoogleTimezoneResult(OneResult):
 
     @property
     def timeZoneId(self):
-        return self.raw_json.get("timeZoneId")
+        return self.object_raw_json.get("timeZoneId")
 
     @property
     def timeZoneName(self):
-        return self.raw_json.get("timeZoneName")
+        return self.object_raw_json.get("timeZoneName")
 
     @property
     def rawOffset(self):
-        return self.raw_json.get("rawOffset")
+        return self.object_raw_json.get("rawOffset")
 
     @property
     def dstOffset(self):
-        return self.raw_json.get("dstOffset")
+        return self.object_raw_json.get("dstOffset")
 
 
 class GoogleTimezone(MultipleResultsQuery):
@@ -45,9 +45,8 @@ class GoogleTimezone(MultipleResultsQuery):
     API Reference: https://developers.google.com/maps/documentation/timezone/
     """
 
-    provider = "google"
-    method = "timezone"
-
+    _PROVIDER = "google"
+    _METHOD = "timezone"
     _URL = "https://maps.googleapis.com/maps/api/timezone/json"
     _RESULT_CLASS = GoogleTimezoneResult
     _KEY = google_key

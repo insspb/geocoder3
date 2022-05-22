@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "interactions": [
+    {
+      "request": {
+        "method": "GET",
+        "uri": "https://nominatim.openstreetmap.org/search?addressdetails=1&format=jsonv2&limit=1&q=45.4215296%2C+-75.697193",
+        "body": null,
+        "headers": {
+          "User-Agent": [
+            "python-requests/2.27.1"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Access-Control-Allow-Methods": [
+            "OPTIONS,GET"
+          ],
+          "Date": [
+            "Mon, 16 May 2022 21:45:25 GMT"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "Keep-Alive": [
+            "timeout=20"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        },
+        "body": {
+          "string": "[{\"place_id\":167128567,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"way\",\"osm_id\":264238499,\"boundingbox\":[\"45.420987\",\"45.421936\",\"-75.698524\",\"-75.696975\"],\"lat\":\"45.4214475\",\"lon\":\"-75.69776623572939\",\"display_name\":\"World Exchange Plaza, 45, O'Connor Street, Centretown, Somerset, (Old) Ottawa, Ottawa, Eastern Ontario, Ontario, K1P 5M4, Canada\",\"place_rank\":30,\"category\":\"shop\",\"type\":\"mall\",\"importance\":0.001,\"address\":{\"shop\":\"World Exchange Plaza\",\"house_number\":\"45\",\"road\":\"O'Connor Street\",\"suburb\":\"Centretown\",\"city_district\":\"Somerset\",\"city\":\"(Old) Ottawa\",\"county\":\"Ottawa\",\"state_district\":\"Eastern Ontario\",\"state\":\"Ontario\",\"ISO3166-2-lvl4\":\"CA-ON\",\"postcode\":\"K1P 5M4\",\"country\":\"Canada\",\"country_code\":\"ca\"}}]"
+        }
+      }
+    }
+  ]
+}

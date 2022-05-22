@@ -17,4 +17,4 @@ def test_mapzen_reverse():
 
 def test_multi_results():
     with pytest.raises(DeprecationWarning):
-        geocoder.mapzen(location, maxRows=3)
+        geocoder.mapzen(location, max_results=3)

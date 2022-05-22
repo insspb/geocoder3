@@ -48,31 +48,31 @@ class MaxmindResults(OneResult):
 
     @property
     def postal(self):
-        return self.raw_json.get("postal", {}).get("code")
+        return self.object_raw_json.get("postal", {}).get("code")
 
     @property
     def city(self):
-        return self.raw_json.get("city", {}).get("names", {}).get("en")
+        return self.object_raw_json.get("city", {}).get("names", {}).get("en")
 
     @property
     def state(self):
-        return self.raw_json.get("subdivision", {}).get("names", {}).get("en")
+        return self.object_raw_json.get("subdivision", {}).get("names", {}).get("en")
 
     @property
     def country(self):
-        return self.raw_json.get("country", {}).get("names", {}).get("en")
+        return self.object_raw_json.get("country", {}).get("names", {}).get("en")
 
     @property
     def country_code(self):
-        return self.raw_json.get("country", {}).get("iso_code")
+        return self.object_raw_json.get("country", {}).get("iso_code")
 
     @property
     def continent(self):
-        return self.raw_json.get("continent", {}).get("names", {}).get("en")
+        return self.object_raw_json.get("continent", {}).get("names", {}).get("en")
 
     @property
     def continent_code(self):
-        return self.raw_json.get("continent", {}).get("code")
+        return self.object_raw_json.get("continent", {}).get("code")
 
     @property
     def address(self):
@@ -98,9 +98,8 @@ class MaxmindQuery(MultipleResultsQuery):
     API Reference: https://www.maxmind.com/en/geolocation_landing
     """
 
-    provider = "maxmind"
-    method = "geocode"
-
+    _PROVIDER = "maxmind"
+    _METHOD = "geocode"
     _URL = "https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}"
     _RESULT_CLASS = MaxmindResults
     _KEY_MANDATORY = False

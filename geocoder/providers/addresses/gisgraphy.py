@@ -8,39 +8,39 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class GisgraphyResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("lat")
+        return self.object_raw_json.get("lat")
 
     @property
     def lng(self):
-        return self.raw_json.get("lng")
+        return self.object_raw_json.get("lng")
 
     @property
     def address(self):
-        return self.raw_json.get("formatedFull", "")
+        return self.object_raw_json.get("formatedFull", "")
 
     @property
     def country(self):
-        return self.raw_json.get("countryCode", "")
+        return self.object_raw_json.get("countryCode", "")
 
     @property
     def state(self):
-        return self.raw_json.get("state", "")
+        return self.object_raw_json.get("state", "")
 
     @property
     def city(self):
-        return self.raw_json.get("city", "")
+        return self.object_raw_json.get("city", "")
 
     @property
     def street(self):
-        return self.raw_json.get("streetName", "")
+        return self.object_raw_json.get("streetName", "")
 
     @property
-    def housenumber(self):
-        return self.raw_json.get("houseNumber", "")
+    def house_number(self):
+        return self.object_raw_json.get("houseNumber", "")
 
     @property
     def postal(self):
-        return self.raw_json.get("zipCode", "")
+        return self.object_raw_json.get("zipCode", "")
 
 
 class GisgraphyQuery(MultipleResultsQuery):
@@ -50,9 +50,8 @@ class GisgraphyQuery(MultipleResultsQuery):
     API Reference: http://www.gisgraphy.com/documentation/user-guide.php
     """
 
-    provider = "gisgraphy"
-    method = "geocode"
-
+    _PROVIDER = "gisgraphy"
+    _METHOD = "geocode"
     _URL = "https://services.gisgraphy.com/geocoding/"
     _RESULT_CLASS = GisgraphyResult
     _KEY_MANDATORY = False
@@ -63,10 +62,16 @@ class GisgraphyQuery(MultipleResultsQuery):
             "User-agent": "geocoder-converter",
         }
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "address": location,
-            "limitnbresult": kwargs.get("maxRows", 1),
+            "limitnbresult": max_results,
             "format": "json",
         }
 
@@ -76,5 +81,5 @@ class GisgraphyQuery(MultipleResultsQuery):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    g = GisgraphyQuery("Ottawa Ontario", maxRows=3)
+    g = GisgraphyQuery("Ottawa Ontario", max_results=3)
     g.debug()

@@ -22,16 +22,22 @@ class BingReverse(BingQuery):
     API Reference: http://msdn.microsoft.com/en-us/library/ff701714.aspx
     """
 
-    provider = "bing"
-    method = "reverse"
+    _PROVIDER = "bing"
+    _METHOD = "reverse"
 
     _URL = "http://dev.virtualearth.net/REST/v1/Locations/{0}"
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "o": "json",
             "key": provider_key,
-            "maxResults": 1,
+            "maxResults": max_results,
         }
 
     def _before_initialize(self, location, **kwargs):

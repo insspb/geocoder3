@@ -28,10 +28,10 @@ class OpenCageResult(OneResult):
 
     @property
     def address(self):
-        return self.raw_json.get("formatted")
+        return self.object_raw_json.get("formatted")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._components.get("house_number")
 
     @property
@@ -329,7 +329,7 @@ class OpenCageResult(OneResult):
 
     @property
     def confidence(self):
-        return self.raw_json.get("confidence")
+        return self.object_raw_json.get("confidence")
 
     @property
     def w3w(self):
@@ -383,18 +383,23 @@ class OpenCageQuery(MultipleResultsQuery):
     API Reference: https://geocoder.opencagedata.com/api
     """
 
-    provider = "opencage"
-    method = "geocode"
-
+    _PROVIDER = "opencage"
+    _METHOD = "geocode"
     _URL = "http://api.opencagedata.com/geocode/v1/json"
     _RESULT_CLASS = OpenCageResult
     _KEY = opencage_key
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         base_params = {
             "query": location,
             "key": provider_key,
-            "limit": kwargs.get("maxRows", 1),
+            "limit": max_results,
         }
         language = kwargs.get("language", None)
         if language:

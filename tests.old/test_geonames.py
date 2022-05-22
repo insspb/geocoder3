@@ -34,7 +34,7 @@ def paid_geonames_response(request):
 
 
 def test_geonames_query(geonames_response):
-    assert geonames_response.ok
+    assert geonames_response.has_data
     assert repr(geonames_response) == "<[OK] Geonames - Geocode [Ottawa]>"
     assert len(geonames_response) == 1
     assert geonames_response.status_code == 200
@@ -44,7 +44,7 @@ def test_geonames_query(geonames_response):
 
 
 def test_paid_geonames_url(paid_geonames_response):
-    assert paid_geonames_response.ok
+    assert paid_geonames_response.has_data
     assert repr(paid_geonames_response) == "<[OK] Geonames - Geocode [Ottawa]>"
     assert len(paid_geonames_response) == 1
     assert paid_geonames_response.status_code == 200
@@ -55,7 +55,7 @@ def test_paid_geonames_url(paid_geonames_response):
 
 def test_geonames_first_result(geonames_response):
     point = geonames_response[0]
-    assert point.ok
+    assert point.has_data
     assert point.geonames_id == 6094817
     assert point.lat == "45.41117"
     assert point.lng == "-75.69812"
@@ -101,7 +101,7 @@ def test_extra():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.geonames(location, key="mock", featureClass="A")
-        assert g.ok
+        assert g.has_data
         assert g.geonames_id == 8581623
         assert g.lat == "45.41858"
         assert g.lng == "-75.69717"
@@ -159,7 +159,7 @@ def test_children():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.geonames(6094817, method="children", key="mock")
-        assert g.ok
+        assert g.has_data
         assert repr(g) == "<[OK] Geonames - Children #2 results>"
         assert len(g) == 2
         assert g.status_code == 200
@@ -176,16 +176,12 @@ def test_children_delegation():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.geonames(6094817, method="children", key="mock")
-        assert g.ok
+        assert g.has_data
         assert repr(g) == "<[OK] Geonames - Children #2 results>"
 
         # next calls are delegated to result
         assert g.address == "Birch Manor"
         assert g.geonames_id == 5901584
-
-        g.set_default_result(1)
-        assert g.address == "Templeton-Est"
-        assert g.geonames_id == 6162703
 
 
 def test_hierarchy():
@@ -194,7 +190,7 @@ def test_hierarchy():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.geonames(6094817, method="hierarchy", key="mock")
-        assert g.ok
+        assert g.has_data
         assert repr(g) == "<[OK] Geonames - Hierarchy #5 results>"
         assert len(g) == 5
         assert g.status_code == 200
@@ -222,4 +218,4 @@ def test_geocoding_with_proximity():
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
         g = geocoder.geonames(location, key="mock", proximity=google.bbox)
-        assert g.ok
+        assert g.has_data

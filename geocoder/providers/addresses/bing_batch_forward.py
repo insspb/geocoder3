@@ -35,7 +35,7 @@ class BingBatchForwardResult(BingBatchResult):
 
 
 class BingBatchForward(BingBatch):
-    method = "batch"
+    _METHOD = "batch"
     _RESULT_CLASS = BingBatchForwardResult
 
     def generate_batch(self, addresses):

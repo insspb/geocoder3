@@ -26,7 +26,6 @@ from geocoder.providers.addresses.mapquest_batch import MapquestBatch
 from geocoder.providers.addresses.mapzen import MapzenQuery, MapzenResult
 from geocoder.providers.addresses.maxmind import MaxmindQuery
 from geocoder.providers.addresses.opencage import OpenCageQuery, OpenCageResult
-from geocoder.providers.addresses.osm import OsmQuery, OsmQueryDetail, OsmResult
 from geocoder.providers.addresses.ottawa import OttawaQuery
 from geocoder.providers.addresses.tamu import TamuQuery
 from geocoder.providers.addresses.tgos import TgosQuery

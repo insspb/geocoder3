@@ -13,18 +13,17 @@ class CanadapostIdResult(OneResult):
 
     @property
     def item_id(self):
-        return self.raw_json.get("Id")
+        return self.object_raw_json.get("Id")
 
     @property
     def next_action(self):
-        return self.raw_json.get("Next")
+        return self.object_raw_json.get("Next")
 
 
 class CanadapostIdQuery(MultipleResultsQuery):
 
-    provider = "canadapost"
-    method = "id"
-
+    _PROVIDER = "canadapost"
+    _METHOD = "id"
     _URL = "https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/json3ex.ws"  # noqa
     _RESULT_CLASS = CanadapostIdResult
     _KEY_MANDATORY = False
@@ -54,51 +53,51 @@ class CanadapostResult(OneResult):
 
     @property
     def quality(self):
-        return self.raw_json.get("Type")
+        return self.object_raw_json.get("Type")
 
     @property
     def accuracy(self):
-        return self.raw_json.get("DataLevel")
+        return self.object_raw_json.get("DataLevel")
 
     @property
     def address(self):
-        return self.raw_json.get("Line1")
+        return self.object_raw_json.get("Line1")
 
     @property
     def postal(self):
-        return self.raw_json.get("PostalCode")
+        return self.object_raw_json.get("PostalCode")
 
     @property
-    def housenumber(self):
-        return self.raw_json.get("BuildingNumber")
+    def house_number(self):
+        return self.object_raw_json.get("BuildingNumber")
 
     @property
     def street(self):
-        return self.raw_json.get("Street")
+        return self.object_raw_json.get("Street")
 
     @property
     def city(self):
-        return self.raw_json.get("City")
+        return self.object_raw_json.get("City")
 
     @property
     def state(self):
-        return self.raw_json.get("ProvinceName")
+        return self.object_raw_json.get("ProvinceName")
 
     @property
     def country(self):
-        return self.raw_json.get("CountryName")
+        return self.object_raw_json.get("CountryName")
 
     @property
     def unit(self):
-        return self.raw_json.get("SubBuilding")
+        return self.object_raw_json.get("SubBuilding")
 
     @property
     def domesticId(self):
-        return self.raw_json.get("DomesticId")
+        return self.object_raw_json.get("DomesticId")
 
     @property
     def label(self):
-        return self.raw_json.get("Label")
+        return self.object_raw_json.get("Label")
 
 
 class CanadapostQuery(MultipleResultsQuery):
@@ -118,14 +117,20 @@ class CanadapostQuery(MultipleResultsQuery):
     API Reference: https://www.canadapost.ca/pca/
     """
 
-    provider = "canadapost"
-    method = "geocode"
+    _PROVIDER = "canadapost"
+    _METHOD = "geocode"
 
     _URL = "https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/RetrieveFormatted/v2.10/json3ex.ws"  # noqa
     _RESULT_CLASS = CanadapostResult
     _KEY_MANDATORY = False
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         if not provider_key:
             provider_key = canadapost_key_getter(**kwargs)
 
@@ -147,7 +152,7 @@ class CanadapostQuery(MultipleResultsQuery):
             "Key": provider_key,
             "Id": ids.item_id,
             "Source": "",
-            "MaxResults": kwargs.get("maxRows", 1),
+            "MaxResults": max_results,
             "cache": "true",
         }
 

@@ -10,13 +10,13 @@ from geocoder.location import Location
 class IpinfoResult(OneResult):
     @property
     def lat(self):
-        loc = self.raw_json.get("loc")
+        loc = self.object_raw_json.get("loc")
         if loc:
             return Location(loc).lat
 
     @property
     def lng(self):
-        loc = self.raw_json.get("loc")
+        loc = self.object_raw_json.get("loc")
         if loc:
             return Location(loc).lng
 
@@ -33,31 +33,31 @@ class IpinfoResult(OneResult):
 
     @property
     def postal(self):
-        return self.raw_json.get("postal")
+        return self.object_raw_json.get("postal")
 
     @property
     def city(self):
-        return self.raw_json.get("city")
+        return self.object_raw_json.get("city")
 
     @property
     def state(self):
-        return self.raw_json.get("region")
+        return self.object_raw_json.get("region")
 
     @property
     def country(self):
-        return self.raw_json.get("country")
+        return self.object_raw_json.get("country")
 
     @property
     def hostname(self):
-        return self.raw_json.get("hostname")
+        return self.object_raw_json.get("hostname")
 
     @property
     def ip(self):
-        return self.raw_json.get("ip")
+        return self.object_raw_json.get("ip")
 
     @property
     def org(self):
-        return self.raw_json.get("org")
+        return self.object_raw_json.get("org")
 
 
 class IpinfoQuery(MultipleResultsQuery):
@@ -65,9 +65,8 @@ class IpinfoQuery(MultipleResultsQuery):
     API Reference: https://ipinfo.io
     """
 
-    provider = "ipinfo"
-    method = "geocode"
-
+    _PROVIDER = "ipinfo"
+    _METHOD = "geocode"
     _URL = "http://ipinfo.io/json"
     _RESULT_CLASS = IpinfoResult
     _KEY = ipinfo_key

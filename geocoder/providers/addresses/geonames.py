@@ -13,55 +13,55 @@ logger = logging.getLogger(__name__)
 class GeonamesResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("lat")
+        return self.object_raw_json.get("lat")
 
     @property
     def lng(self):
-        return self.raw_json.get("lng")
+        return self.object_raw_json.get("lng")
 
     @property
     def geonames_id(self):
-        return self.raw_json.get("geonameId")
+        return self.object_raw_json.get("geonameId")
 
     @property
     def address(self):
-        return self.raw_json.get("name")
+        return self.object_raw_json.get("name")
 
     @property
     def feature_class(self):
-        return self.raw_json.get("fcl")
+        return self.object_raw_json.get("fcl")
 
     @property
     def class_description(self):
-        return self.raw_json.get("fclName")
+        return self.object_raw_json.get("fclName")
 
     @property
     def code(self):
-        return self.raw_json.get("fcode")
+        return self.object_raw_json.get("fcode")
 
     @property
     def description(self):
-        return self.raw_json.get("fcodeName")
+        return self.object_raw_json.get("fcodeName")
 
     @property
     def state(self):
-        return self.raw_json.get("adminName1")
+        return self.object_raw_json.get("adminName1")
 
     @property
     def state_code(self):
-        return self.raw_json.get("adminCode1")
+        return self.object_raw_json.get("adminCode1")
 
     @property
     def country(self):
-        return self.raw_json.get("countryName")
+        return self.object_raw_json.get("countryName")
 
     @property
     def country_code(self):
-        return self.raw_json.get("countryCode")
+        return self.object_raw_json.get("countryCode")
 
     @property
     def population(self):
-        return self.raw_json.get("population")
+        return self.object_raw_json.get("population")
 
 
 class GeonamesQuery(MultipleResultsQuery):
@@ -76,20 +76,25 @@ class GeonamesQuery(MultipleResultsQuery):
     API Reference: http://www.geonames.org/export/web-services.html
     """
 
-    provider = "geonames"
-    method = "geocode"
-
+    _PROVIDER = "geonames"
+    _METHOD = "geocode"
     _URL = "http://api.geonames.org/searchJSON"
     _RESULT_CLASS = GeonamesResult
     _KEY = geonames_username
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         """Will be overridden according to the targetted web service"""
         base_kwargs = {
             "q": location,
             "fuzzy": kwargs.get("fuzzy", 1.0),
             "username": provider_key,
-            "maxRows": kwargs.get("maxRows", 1),
+            "maxRows": max_results,
         }
         # check out for bbox in kwargs
         bbox = kwargs.pop("proximity", None)
@@ -167,6 +172,6 @@ class GeonamesQuery(MultipleResultsQuery):
 
 
 if __name__ == "__main__":
-    g = GeonamesQuery("Ottawa, Ontario", maxRows=1)
+    g = GeonamesQuery("Ottawa, Ontario", max_results=1)
     print(json.dumps(g.geojson, indent=4))
     g.debug()

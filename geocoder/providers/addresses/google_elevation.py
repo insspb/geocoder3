@@ -8,10 +8,7 @@ from geocoder.location import Location
 class ElevationResult(OneResult):
     @property
     def status(self):
-        if self.elevation:
-            return "OK"
-        else:
-            return "ERROR - No Elevation found"
+        return "OK" if self.elevation else "ERROR - No Elevation found"
 
     @property
     def ok(self):
@@ -29,11 +26,11 @@ class ElevationResult(OneResult):
 
     @property
     def elevation(self):
-        return self.raw_json.get("elevation")
+        return self.object_raw_json.get("elevation")
 
     @property
     def resolution(self):
-        return self.raw_json.get("resolution")
+        return self.object_raw_json.get("resolution")
 
 
 class ElevationQuery(MultipleResultsQuery):
@@ -49,9 +46,8 @@ class ElevationQuery(MultipleResultsQuery):
     API Reference: https://developers.google.com/maps/documentation/elevation/
     """
 
-    provider = "google"
-    method = "elevation"
-
+    _PROVIDER = "google"
+    _METHOD = "elevation"
     _URL = "https://maps.googleapis.com/maps/api/elevation/json"
     _RESULT_CLASS = ElevationResult
     _KEY = google_key

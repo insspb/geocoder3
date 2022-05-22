@@ -39,7 +39,7 @@ class Location(object):
                 # Check for string to Geocode using a provider
                 provider = self.kwargs.get("provider", "osm")
                 g = geocoder.get_results(location, provider=provider)
-                if g.ok:
+                if g.has_data:
                     self.lat, self.lng = g.lat, g.lng
 
         # Checking for List of Tuple

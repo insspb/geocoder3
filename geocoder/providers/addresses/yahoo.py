@@ -8,64 +8,64 @@ from geocoder.base import MultipleResultsQuery, OneResult
 class YahooResult(OneResult):
     @property
     def lat(self):
-        return self.raw_json.get("latitude")
+        return self.object_raw_json.get("latitude")
 
     @property
     def lng(self):
-        return self.raw_json.get("longitude")
+        return self.object_raw_json.get("longitude")
 
     @property
     def address(self):
-        line1 = self.raw_json.get("line1")
-        line2 = self.raw_json.get("line2")
+        line1 = self.object_raw_json.get("line1")
+        line2 = self.object_raw_json.get("line2")
         if line1:
             return ", ".join([line1, line2])
         else:
             return line2
 
     @property
-    def housenumber(self):
-        return self.raw_json.get("house")
+    def house_number(self):
+        return self.object_raw_json.get("house")
 
     @property
     def street(self):
-        return self.raw_json.get("street")
+        return self.object_raw_json.get("street")
 
     @property
     def neighborhood(self):
-        return self.raw_json.get("neighborhood")
+        return self.object_raw_json.get("neighborhood")
 
     @property
     def city(self):
-        return self.raw_json.get("city")
+        return self.object_raw_json.get("city")
 
     @property
     def county(self):
-        return self.raw_json.get("county")
+        return self.object_raw_json.get("county")
 
     @property
     def state(self):
-        return self.raw_json.get("state")
+        return self.object_raw_json.get("state")
 
     @property
     def country(self):
-        return self.raw_json.get("country")
+        return self.object_raw_json.get("country")
 
     @property
     def hash(self):
-        return self.raw_json.get("hash")
+        return self.object_raw_json.get("hash")
 
     @property
     def quality(self):
-        return self.raw_json.get("addressMatchType")
+        return self.object_raw_json.get("addressMatchType")
 
     @property
     def postal(self):
-        postal = self.raw_json.get("postal")
+        postal = self.object_raw_json.get("postal")
         if postal:
             return postal
         else:
-            return self.raw_json.get("uzip")
+            return self.object_raw_json.get("uzip")
 
 
 class YahooQuery(MultipleResultsQuery):
@@ -79,9 +79,8 @@ class YahooQuery(MultipleResultsQuery):
     API Reference: https://developer.yahoo.com/boss/geo/
     """
 
-    provider = "yahoo"
-    method = "geocode"
-
+    _PROVIDER = "yahoo"
+    _METHOD = "geocode"
     _URL = "https://sgws2.maps.yahoo.com/FindLocation"
     _RESULT_CLASS = YahooResult
     _KEY_MANDATORY = False

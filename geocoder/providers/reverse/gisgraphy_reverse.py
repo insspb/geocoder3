@@ -19,9 +19,8 @@ class GisgraphyReverse(GisgraphyQuery):
     API Reference: http://www.gisgraphy.com/documentation/user-guide.php
     """
 
-    provider = "gisgraphy"
-    method = "reverse"
-
+    _PROVIDER = "gisgraphy"
+    _METHOD = "reverse"
     _URL = "https://services.gisgraphy.com/reversegeocoding/"
     _RESULT_CLASS = GisgraphyReverseResult
 

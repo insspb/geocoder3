@@ -33,7 +33,7 @@ class MapzenResult(OneResult):
         return self._properties.get("label")
 
     @property
-    def housenumber(self):
+    def house_number(self):
         return self._properties.get("housenumber")
 
     @property
@@ -76,9 +76,8 @@ class MapzenQuery(MultipleResultsQuery):
     API Reference: https://mapzen.com/documentation/search/search/
     """
 
-    provider = "mapzen"
-    method = "geocode"
-
+    _PROVIDER = "mapzen"
+    _METHOD = "geocode"
     _URL = "https://search.mapzen.com/v1/search"
     _RESULT_CLASS = MapzenResult
     _KEY = mapzen_key
@@ -88,11 +87,17 @@ class MapzenQuery(MultipleResultsQuery):
             "MapZen shut down as of January 2018: https://mapzen.com/blog/shutdown"
         )
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
         return {
             "text": location,
             "api_key": provider_key,
-            "size": kwargs.get("maxRows", 1),
+            "size": max_results,
         }
 
     def _adapt_results(self, json_response):

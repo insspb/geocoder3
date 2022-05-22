@@ -1,8 +1,11 @@
-# Confidence Score
+# Confidence Score Calculation
 
-Based from [OpenCage API](https://geocoder.opencagedata.com/api#quickstart)
+Confidence score based on [OpenCage API](https://opencagedata.com/api#confidence)
+implementation, but available in any supported geocoder. For geocoders without default
+confidence score support this property calculated by same definition in `geocoder3`
+internal process.
 
-## Geocoding Confidence
+## What is Confidence Score
 
 The OpenCage Geocoder will always attempt to find a match for as many parts of a query
 as it can, but this isn't always possible to do. Where a partial match is made, for
@@ -10,7 +13,7 @@ example a street name can be matched but a specific house number on that street 
 be matched, the geocoder will still return a result but the granularity of the match
 will not be as high as if the house number was matched.
 
-The confidence that the geocoder has in a match returned in the confidence field. This
+The confidence that the geocoder has in a match returned to the confidence field. This
 contains a value between 0 and 10, where 0 reflects no confidence and 10 reflects high
 confidence.
 
@@ -18,7 +21,13 @@ Confidence is calculated by measuring the distance in kilometres between the Sou
 and North East corners of each results bounding box; a smaller distance represents a
 high confidence while a large distance represents a lower confidence.
 
-Please note, you can supply the optional min_confidence parameter (see below).
+The best way to think of our confidence score is as a measure of how confident we
+are that centre point coordinates returned for the result precisely reflect the
+result. So for example, if you search for "Berlin, Germany", we know exactly where
+that is, but it has a confidence of only 4, as Berlin is a large city (and
+Bundesland, but that's another story). The coordinates we return are in the centre
+of the bounding box, but it would be valid to consider anywhere in that box to be
+"Berlin", hence the relatively low confidence score.
 
 |Score |       Description          |
 |:----:|:---------------------------|

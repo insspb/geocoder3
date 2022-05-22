@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "interactions": [
+    {
+      "request": {
+        "method": "GET",
+        "uri": "https://nominatim.openstreetmap.org/search?addressdetails=1&format=jsonv2&limit=1&q=New+York",
+        "body": null,
+        "headers": {
+          "User-Agent": [
+            "python-requests/2.27.1"
+          ],
+          "Accept-Encoding": [
+            "gzip, deflate"
+          ],
+          "Accept": [
+            "*/*"
+          ],
+          "Connection": [
+            "keep-alive"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ],
+          "Date": [
+            "Mon, 16 May 2022 21:21:24 GMT"
+          ],
+          "Keep-Alive": [
+            "timeout=20"
+          ],
+          "Server": [
+            "nginx"
+          ],
+          "Access-Control-Allow-Origin": [
+            "*"
+          ],
+          "Transfer-Encoding": [
+            "chunked"
+          ],
+          "Connection": [
+            "keep-alive"
+          ],
+          "Access-Control-Allow-Methods": [
+            "OPTIONS,GET"
+          ]
+        },
+        "body": {
+          "string": "[{\"place_id\":283624285,\"licence\":\"Data \u00a9 OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright\",\"osm_type\":\"relation\",\"osm_id\":175905,\"boundingbox\":[\"40.477399\",\"40.9161785\",\"-74.25909\",\"-73.7001809\"],\"lat\":\"40.7127281\",\"lon\":\"-74.0060152\",\"display_name\":\"New York, United States\",\"place_rank\":10,\"category\":\"boundary\",\"type\":\"administrative\",\"importance\":1.017576611451846,\"icon\":\"https://nominatim.openstreetmap.org/ui/mapicons//poi_boundary_administrative.p.20.png\",\"address\":{\"city\":\"New York\",\"state\":\"New York\",\"ISO3166-2-lvl4\":\"US-NY\",\"country\":\"United States\",\"country_code\":\"us\"}}]"
+        }
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 __all__ = ["GeolyticaQuery"]
 
 import logging
+from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 
@@ -23,22 +24,26 @@ class GeolyticaResult(OneResult):
 
     @property
     def lat(self):
-        lat = _correct_empty_dict(self.raw_json, "latt")
+        lat = _correct_empty_dict(self.object_raw_json, "latt")
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = _correct_empty_dict(self.raw_json, "longt")
+        lng = _correct_empty_dict(self.object_raw_json, "longt")
         if lng:
             return float(lng)
 
     @property
     def postal(self):
-        return _correct_empty_dict(self.raw_json, "postal")
+        return _correct_empty_dict(self.object_raw_json, "postal")
 
     @property
-    def housenumber(self):
+    def house_number(self):
+        return self.street_number
+
+    @property
+    def street_number(self) -> Optional[str]:
         return _correct_empty_dict(self._standard, "stnumber")
 
     @property
@@ -56,11 +61,11 @@ class GeolyticaResult(OneResult):
     @property
     def address(self):
         if self.street_number:
-            return "{0} {1}, {2}".format(self.street_number, self.route, self.locality)
-        elif self.route and self.route != "un-known":
-            return "{0}, {1}".format(self.route, self.locality)
+            return "{0} {1}, {2}".format(self.street_number, self.street, self.city)
+        elif self.street and self.street != "un-known":
+            return "{0}, {1}".format(self.street, self.city)
         else:
-            return self.locality
+            return self.city
 
 
 class GeolyticaQuery(MultipleResultsQuery):
@@ -72,9 +77,8 @@ class GeolyticaQuery(MultipleResultsQuery):
     API Reference: http://geocoder.ca/?api=1
     """
 
-    provider = "geolytica"
-    method = "geocode"
-
+    _PROVIDER = "geolytica"
+    _METHOD = "geocode"
     _URL = "http://geocoder.ca"
     _RESULT_CLASS = GeolyticaResult
     _KEY_MANDATORY = False

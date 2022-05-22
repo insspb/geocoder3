@@ -51,9 +51,8 @@ class USCensusBatch(MultipleResultsQuery):
 
     """
 
-    provider = "uscensus"
-    method = "geocode"
-
+    _PROVIDER = "uscensus"
+    _METHOD = "batch"
     _URL = "https://geocoding.geo.census.gov/geocoder/locations/addressbatch"
     _RESULT_CLASS = USCensusBatchResult
     _KEY_MANDATORY = False
@@ -122,7 +121,7 @@ class USCensusBatch(MultipleResultsQuery):
 
         # re looping through the results to give them back in their original order
         for idx in range(0, self.locations_length):
-            self.add(self.one_result(rows.get(str(idx), None)))
+            self.add(self._RESULT_CLASS(rows.get(str(idx), None)))
 
         self.current_result = len(self) > 0 and self[0]
 
