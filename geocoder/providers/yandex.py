@@ -1,9 +1,10 @@
-__all__ = ["YandexResult", "YandexQuery"]
+__all__ = ["YandexResult", "YandexQuery", "YandexReverse", "YandexReverseResult"]
 
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import yandex_key
+from geocoder.location import Location
 
 
 class YandexResult(OneResult):
@@ -115,21 +116,6 @@ class YandexQuery(MultipleResultsQuery):
 
     The Yandex home page has been rated as the most popular website in Russia.
 
-    :param location: Your search location you want geocoded.
-    :param lang: Chose the following language:
-        > ru-RU — Russian (by default)
-        > uk-UA — Ukrainian
-        > be-BY — Belarusian
-        > en-US — American English
-        > en-BR — British English
-        > tr-TR — Turkish (only for maps of Turkey)
-    :param kind: Type of toponym (only for reverse geocoding):
-        > house - house or building
-        > street - street
-        > metro - subway station
-        > district - city district
-        > locality - locality (city, town, village, etc.)
-
     API Reference: http://api.yandex.com/maps/doc/geocoder/desc/concepts/
     input_params.xml
     """
@@ -163,6 +149,48 @@ class YandexQuery(MultipleResultsQuery):
                 "featureMember"
             ]
         ]
+
+
+class YandexReverseResult(YandexResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class YandexReverse(YandexQuery):
+    """
+    Yandex
+
+    Yandex (Russian: Яндекс) is a Russian Internet company
+    which operates the largest search engine in Russia with
+    about 60% market share in that country.
+    The Yandex home page has been rated as the most popular website in Russia.
+
+    API Reference: http://api.yandex.com/maps/doc/geocoder/desc/concepts/
+    input_params.xml
+    """
+
+    _PROVIDER = "yandex"
+    _METHOD = "reverse"
+    _RESULT_CLASS = YandexReverseResult
+
+    def _build_params(
+        self,
+        location,
+        provider_key,
+        max_results: int = 1,
+        **kwargs,
+    ):
+        x, y = Location(location).xy
+        self.location = f"{x}, {y}"
+        return {
+            "geocode": self.location,
+            "lang": kwargs.get("lang", "en-US"),
+            "kind": kwargs.get("kind", ""),
+            "format": "json",
+            "apikey": provider_key,
+            "results": max_results,
+        }
 
 
 if __name__ == "__main__":

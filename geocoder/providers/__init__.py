@@ -28,8 +28,6 @@ from geocoder.providers.addresses import (
     W3WQuery,
     W3WResult,
     YahooQuery,
-    YandexQuery,
-    YandexResult,
 )
 from geocoder.providers.arcgis import ArcgisQuery, ArcgisReverse
 from geocoder.providers.baidu import BaiduQuery, BaiduReverse
@@ -76,5 +74,5 @@ from geocoder.providers.reverse import (
     OpenCageReverse,
     USCensusReverse,
     W3WReverse,
-    YandexReverse,
 )
+from geocoder.providers.yandex import YandexQuery, YandexResult, YandexReverse

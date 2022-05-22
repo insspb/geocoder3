@@ -29,6 +29,8 @@ from geocoder.providers import (
     OsmQuery,
     OsmQueryDetail,
     OsmReverse,
+    YandexQuery,
+    YandexReverse,
 )
 from geocoder.providers.addresses import (
     CanadapostQuery,
@@ -51,7 +53,6 @@ from geocoder.providers.addresses import (
     USCensusQuery,
     W3WQuery,
     YahooQuery,
-    YandexQuery,
 )
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
@@ -64,7 +65,6 @@ from geocoder.providers.reverse import (
     OpenCageReverse,
     USCensusReverse,
     W3WReverse,
-    YandexReverse,
 )
 
 options = {
