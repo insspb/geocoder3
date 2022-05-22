@@ -1,5 +1,7 @@
 from geocoder.distance import Distance
 from geocoder.providers import (
+    ArcgisQuery,
+    ArcgisReverse,
     FreeGeoIPQuery,
     IpfinderQuery,
     IpinfoQuery,
@@ -8,7 +10,6 @@ from geocoder.providers import (
     OsmReverse,
 )
 from geocoder.providers.addresses import (
-    ArcgisQuery,
     BaiduQuery,
     BingBatchForward,
     BingQuery,
@@ -46,7 +47,6 @@ from geocoder.providers.addresses import (
     YandexQuery,
 )
 from geocoder.providers.reverse import (
-    ArcgisReverse,
     BaiduReverse,
     BingBatchReverse,
     BingReverse,
