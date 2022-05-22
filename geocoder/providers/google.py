@@ -174,20 +174,6 @@ class GoogleQuery(MultipleResultsQuery):
 
     For ambiguous queries or 'nearby' type queries, use the Places Text Search instead.
     https://developers.google.com/maps/documentation/geocoding/best-practices#automated-system
-
-    :param location: Your search location you want geocoded.
-    :param components: Component Filtering
-    :param method: (default=geocode) Use the following:
-        > geocode
-        > places
-        > reverse
-        > timezone
-        > elevation
-    :param key: Your Google developers free key.
-    :param language: 2-letter code of preferred language of returned address elements.
-    :param client: Google for Work client ID. Use with client_secret. Cannot use with
-                        key parameter
-    :param client_secret: Google for Work client secret. Use with client.
     """
 
     _PROVIDER = "google"
@@ -259,10 +245,10 @@ class GoogleQuery(MultipleResultsQuery):
             return None
 
         # assuming parameters will be submitted to Requests in identical order!
-        url = urlparse(base_url + "?" + urlencode(params))
+        url = urlparse(f"{base_url}?{urlencode(params)}")
 
         # We only need to sign the path+query part of the string
-        url_to_sign = (url.path + "?" + url.query).encode("utf-8")
+        url_to_sign = f"{url.path}?{url.query}".encode("utf-8")
 
         # Decode the private key into its binary format
         # We need to decode the URL-encoded private key
@@ -272,11 +258,7 @@ class GoogleQuery(MultipleResultsQuery):
         # string using HMAC SHA1. This signature will be binary.
         signature = hmac.new(decoded_key, url_to_sign, hashlib.sha1)
 
-        # Encode the binary signature into base64 for use within a URL
-        encoded_signature = base64.urlsafe_b64encode(signature.digest())
-
-        # Return signature (to be appended as a 'signature' in params)
-        return encoded_signature
+        return base64.urlsafe_b64encode(signature.digest())
 
     def rate_limited_get(self, *args, **kwargs):
         if not self.rate_limit:
@@ -298,7 +280,7 @@ class GoogleQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response.get("status")
-        if not status == "OK":
+        if status != "OK":
             self.error = status
 
         return self.error
@@ -571,7 +553,7 @@ class GoogleReverse(GoogleQuery):
 
 class GoogleTimezoneResult(OneResult):
     def __repr__(self):
-        return "<[{}] [{}]>".format(self.status, self.timeZoneName)
+        return f"<[{self.status}] [{self.timeZoneName}]>"
 
     @property
     def ok(self):
