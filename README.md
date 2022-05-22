@@ -210,7 +210,6 @@ geocode "Ottawa, ON" --provider osm --output geojson --method geocode
 |                 | [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                  |         |           |       |
 |                 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes              | yes     |           |       |
 |                 | [GeoNames][GeoNames]           | World     | Username                        | yes              |         | yes       |       |
-|                 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes              |         |           |       |
 |                 | [Gisgraphy][Gisgraphy]         | World     | API key                         | yes              | yes     | yes       |       |
 |                 | [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes              | yes     | yes       |       |
 |                 | [HERE][HERE]                   | World     | API key                         | yes              | yes     |           |       |
@@ -222,7 +221,7 @@ geocode "Ottawa, ON" --provider osm --output geojson --method geocode
 |                 | [~~Mapzen~~][Mapzen]           | Shutdown  | API key                         | yes              | yes     |           |       |
 |                 | [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
 |                 | [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
-| YES             | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
+|                 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
 |                 | [Tamu][Tamu]                   | US        | API key                         |                  |         |           |       |
 |                 | [TGOS][TGOS]                   | Taiwan    |                                 |                  |         |           |       |
 |                 | [TomTom][TomTom]               | World     | API key                         | yes              |         |           |       |
@@ -312,7 +311,6 @@ See [Releases](https://github.com/insspb/geocoder3/releases)
 [Yandex]: http://geocoder.readthedocs.org/providers/Yandex.html
 [Geocoder.ca]: http://geocoder.readthedocs.org/providers/Geocoder-ca.html
 [Baidu]: http://geocoder.readthedocs.org/providers/Baidu.html
-[GeoOttawa]: http://geocoder.readthedocs.org/providers/GeoOttawa.html
 [FreeGeoIP]: http://geocoder.readthedocs.org/providers/FreeGeoIP.html
 [FreeGeoip-Policy]: https://github.com/apilayer/freegeoip#readme
 [MaxMind]: http://geocoder.readthedocs.org/providers/MaxMind.html
