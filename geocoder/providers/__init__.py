@@ -1,6 +1,5 @@
 # flake8: noqa
 from geocoder.providers.addresses import (
-    GeocodeFarmQuery,
     GisgraphyQuery,
     GisgraphyResult,
     MapboxQuery,
@@ -25,6 +24,7 @@ from geocoder.providers.bing import (
 from geocoder.providers.canadapost import CanadapostQuery
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
+from geocoder.providers.geocodefarm import GeocodeFarmQuery, GeocodeFarmReverse
 from geocoder.providers.geocodexyz import GeocodeXYZQuery
 from geocoder.providers.geolytica import GeolyticaQuery
 from geocoder.providers.geonames import (
@@ -69,7 +69,6 @@ from geocoder.providers.mapquest import (
 from geocoder.providers.maxmind import MaxmindQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
-    GeocodeFarmReverse,
     GisgraphyReverse,
     MapboxReverse,
     MapzenReverse,
