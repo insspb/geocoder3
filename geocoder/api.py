@@ -43,7 +43,6 @@ from geocoder.providers.addresses import (
     MapzenQuery,
     MaxmindQuery,
     OpenCageQuery,
-    OttawaQuery,
     TamuQuery,
     TgosQuery,
     TomtomQuery,
@@ -98,9 +97,6 @@ options = {
     "arcgis": {
         "geocode": ArcgisQuery,
         "reverse": ArcgisReverse,
-    },
-    "ottawa": {
-        "geocode": OttawaQuery,
     },
     "mapbox": {
         "geocode": MapboxQuery,
@@ -348,19 +344,6 @@ def komoot(query, method: str = "geocode", **kwargs):
     :param method: One of provider's supported methods, defaults to ``geocode``.
     """
     return get_results(query, provider="komoot", method=method, **kwargs)
-
-
-def ottawa(query, method: str = "geocode", **kwargs):
-    """Ottawa Provider
-
-    Provider supported methods:
-        * ``geocode``
-
-    :param query: Your search location you want geocoded.
-    :param method: One of provider's supported methods, defaults to ``geocode``.
-    :param max_results: (default=1) Max number of results to fetch
-    """
-    return get_results(query, provider="ottawa", method=method, **kwargs)
 
 
 def bing(query, method: str = "geocode", **kwargs):

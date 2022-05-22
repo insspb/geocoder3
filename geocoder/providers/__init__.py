@@ -21,7 +21,6 @@ from geocoder.providers.addresses import (
     MaxmindQuery,
     OpenCageQuery,
     OpenCageResult,
-    OttawaQuery,
     TamuQuery,
     TgosQuery,
     TomtomQuery,

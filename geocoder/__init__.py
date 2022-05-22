@@ -56,7 +56,6 @@ from geocoder.api import (  # noqa
     maxmind,
     opencage,
     osm,
-    ottawa,
     tamu,
     tgos,
     tomtom,
