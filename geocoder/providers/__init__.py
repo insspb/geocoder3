@@ -4,11 +4,6 @@ from geocoder.providers.addresses import (
     GeocodeFarmQuery,
     GeocodeXYZQuery,
     GeolyticaQuery,
-    GeonamesChildren,
-    GeonamesDetails,
-    GeonamesHierarchy,
-    GeonamesQuery,
-    GeonamesResult,
     GisgraphyQuery,
     GisgraphyResult,
     HereQuery,
@@ -52,6 +47,14 @@ from geocoder.providers.bing import (
 )
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
+from geocoder.providers.geonames import (
+    GeonamesChildren,
+    GeonamesDetails,
+    GeonamesHierarchy,
+    GeonamesQuery,
+    GeonamesResult,
+    GeonamesTimezone,
+)
 from geocoder.providers.google import (
     GoogleElevationQuery,
     GooglePlacesQuery,
@@ -77,4 +80,3 @@ from geocoder.providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
-from geocoder.providers.timezone import GeonamesTimezone

@@ -12,6 +12,11 @@ from geocoder.providers import (
     FreeGeoIPQuery,
     GaodeQuery,
     GaodeReverse,
+    GeonamesChildren,
+    GeonamesDetails,
+    GeonamesHierarchy,
+    GeonamesQuery,
+    GeonamesTimezone,
     GoogleElevationQuery,
     GooglePlacesQuery,
     GoogleQuery,
@@ -28,10 +33,6 @@ from geocoder.providers.addresses import (
     GeocodeFarmQuery,
     GeocodeXYZQuery,
     GeolyticaQuery,
-    GeonamesChildren,
-    GeonamesDetails,
-    GeonamesHierarchy,
-    GeonamesQuery,
     GisgraphyQuery,
     HereQuery,
     KomootQuery,
@@ -66,7 +67,6 @@ from geocoder.providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
-from geocoder.providers.timezone import GeonamesTimezone
 
 options = {
     "osm": {

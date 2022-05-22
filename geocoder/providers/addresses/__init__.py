@@ -3,10 +3,6 @@ from geocoder.providers.addresses.canadapost import CanadapostQuery
 from geocoder.providers.addresses.geocodefarm import GeocodeFarmQuery
 from geocoder.providers.addresses.geocodexyz import GeocodeXYZQuery
 from geocoder.providers.addresses.geolytica import GeolyticaQuery
-from geocoder.providers.addresses.geonames import GeonamesQuery, GeonamesResult
-from geocoder.providers.addresses.geonames_children import GeonamesChildren
-from geocoder.providers.addresses.geonames_details import GeonamesDetails
-from geocoder.providers.addresses.geonames_hierarchy import GeonamesHierarchy
 from geocoder.providers.addresses.gisgraphy import GisgraphyQuery, GisgraphyResult
 from geocoder.providers.addresses.here import HereQuery, HereResult
 from geocoder.providers.addresses.komoot import KomootQuery, KomootResult
