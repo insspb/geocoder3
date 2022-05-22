@@ -19,4 +19,3 @@ from geocoder.providers.addresses.uscensus import USCensusQuery
 from geocoder.providers.addresses.uscensus_batch import USCensusBatch
 from geocoder.providers.addresses.w3w import W3WQuery, W3WResult
 from geocoder.providers.addresses.yahoo import YahooQuery
-from geocoder.providers.addresses.yandex import YandexQuery, YandexResult
