@@ -4,7 +4,7 @@ import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import here_app_code, here_app_id
-from geocoder.location import BBox
+from geocoder.location import BBox, Location
 
 
 class HereResult(OneResult):
@@ -146,16 +146,55 @@ class HereQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response.get("type")
-        if not status == "OK":
+        if status != "OK":
             self.error = status
 
         return self.error
 
     def _adapt_results(self, json_response):
-        # Build intial Tree with results
+        # Build initial Tree with results
         return [
             item["Location"] for item in json_response["Response"]["View"][0]["Result"]
         ]
+
+
+class HereReverseResult(HereResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class HereReverse(HereQuery):
+    """
+    HERE Geocoding REST API
+
+    Send a request to the geocode endpoint to find an address
+    using a combination of country, state, county, city,
+    postal code, district, street and house number.
+
+    API Reference: https://developer.here.com/rest-apis/documentation/geocoder
+    """
+
+    _PROVIDER = "here"
+    _METHOD = "reverse"
+    _RESULT_CLASS = HereReverseResult
+    _URL = "http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json"
+
+    def _build_params(self, location, provider_key, **kwargs):
+        params = super(HereReverse, self)._build_params(
+            location, provider_key, **kwargs
+        )
+        del params["searchtext"]
+
+        location = str(Location(location))
+        params.update(
+            {
+                "prox": location,
+                "mode": "retrieveAddresses",
+                "gen": 8,
+            }
+        )
+        return params
 
 
 if __name__ == "__main__":
