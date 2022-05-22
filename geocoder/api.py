@@ -22,6 +22,8 @@ from geocoder.providers import (
     GeonamesHierarchy,
     GeonamesQuery,
     GeonamesTimezone,
+    GisgraphyQuery,
+    GisgraphyReverse,
     GoogleElevationQuery,
     GooglePlacesQuery,
     GoogleQuery,
@@ -54,18 +56,8 @@ from geocoder.providers import (
     YandexQuery,
     YandexReverse,
 )
-from geocoder.providers.addresses import (
-    GisgraphyQuery,
-    MapboxQuery,
-    MapzenQuery,
-    OpenCageQuery,
-)
-from geocoder.providers.reverse import (
-    GisgraphyReverse,
-    MapboxReverse,
-    MapzenReverse,
-    OpenCageReverse,
-)
+from geocoder.providers.addresses import MapboxQuery, MapzenQuery, OpenCageQuery
+from geocoder.providers.reverse import MapboxReverse, MapzenReverse, OpenCageReverse
 
 options = {
     "osm": {

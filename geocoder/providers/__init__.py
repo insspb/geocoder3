@@ -1,7 +1,5 @@
 # flake8: noqa
 from geocoder.providers.addresses import (
-    GisgraphyQuery,
-    GisgraphyResult,
     MapboxQuery,
     MapboxResult,
     MapzenQuery,
@@ -34,6 +32,11 @@ from geocoder.providers.geonames import (
     GeonamesQuery,
     GeonamesResult,
     GeonamesTimezone,
+)
+from geocoder.providers.gisgraphy import (
+    GisgraphyQuery,
+    GisgraphyResult,
+    GisgraphyReverse,
 )
 from geocoder.providers.google import (
     GoogleElevationQuery,
@@ -68,12 +71,7 @@ from geocoder.providers.mapquest import (
 )
 from geocoder.providers.maxmind import MaxmindQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
-from geocoder.providers.reverse import (
-    GisgraphyReverse,
-    MapboxReverse,
-    MapzenReverse,
-    OpenCageReverse,
-)
+from geocoder.providers.reverse import MapboxReverse, MapzenReverse, OpenCageReverse
 from geocoder.providers.tamu import TamuQuery
 from geocoder.providers.tgos import TgosQuery
 from geocoder.providers.tomtom import TomtomQuery

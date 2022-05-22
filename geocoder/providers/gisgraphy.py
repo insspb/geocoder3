@@ -1,8 +1,14 @@
-__all__ = ["GisgraphyResult", "GisgraphyQuery"]
+__all__ = [
+    "GisgraphyResult",
+    "GisgraphyQuery",
+    "GisgraphyReverseResult",
+    "GisgraphyReverse",
+]
 
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
+from geocoder.location import Location
 
 
 class GisgraphyResult(OneResult):
@@ -77,6 +83,33 @@ class GisgraphyQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return json_response["result"]
+
+
+class GisgraphyReverseResult(GisgraphyResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class GisgraphyReverse(GisgraphyQuery):
+    """
+    Gisgraphy REST API
+
+    API Reference: http://www.gisgraphy.com/documentation/user-guide.php
+    """
+
+    _PROVIDER = "gisgraphy"
+    _METHOD = "reverse"
+    _URL = "https://services.gisgraphy.com/reversegeocoding/"
+    _RESULT_CLASS = GisgraphyReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        return {
+            "lat": location.lat,
+            "lng": location.lng,
+            "format": "json",
+        }
 
 
 if __name__ == "__main__":
