@@ -7,8 +7,6 @@ from geocoder.providers.addresses.gisgraphy import GisgraphyQuery, GisgraphyResu
 from geocoder.providers.addresses.here import HereQuery, HereResult
 from geocoder.providers.addresses.komoot import KomootQuery, KomootResult
 from geocoder.providers.addresses.mapbox import MapboxQuery, MapboxResult
-from geocoder.providers.addresses.mapquest import MapquestQuery, MapquestResult
-from geocoder.providers.addresses.mapquest_batch import MapquestBatch
 from geocoder.providers.addresses.mapzen import MapzenQuery, MapzenResult
 from geocoder.providers.addresses.maxmind import MaxmindQuery
 from geocoder.providers.addresses.opencage import OpenCageQuery, OpenCageResult
