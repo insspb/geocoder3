@@ -51,7 +51,9 @@ from geocoder.providers.addresses import (
     YandexQuery,
     YandexResult,
 )
-from geocoder.providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
+from geocoder.providers.freegeoip import FreeGeoIPQuery
+from geocoder.providers.ipfinder import IpfinderQuery
+from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
     ArcgisReverse,
