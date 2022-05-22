@@ -1,9 +1,6 @@
 # flake8: noqa
 from geocoder.providers.addresses import (
-    CanadapostQuery,
     GeocodeFarmQuery,
-    GeocodeXYZQuery,
-    GeolyticaQuery,
     GisgraphyQuery,
     GisgraphyResult,
     HereQuery,
@@ -14,13 +11,8 @@ from geocoder.providers.addresses import (
     MapboxResult,
     MapzenQuery,
     MapzenResult,
-    MaxmindQuery,
     OpenCageQuery,
     OpenCageResult,
-    TamuQuery,
-    TgosQuery,
-    TomtomQuery,
-    YahooQuery,
 )
 from geocoder.providers.arcgis import ArcgisQuery, ArcgisReverse
 from geocoder.providers.baidu import BaiduQuery, BaiduReverse
@@ -34,8 +26,11 @@ from geocoder.providers.bing import (
     BingResult,
     BingReverse,
 )
+from geocoder.providers.canadapost import CanadapostQuery
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
+from geocoder.providers.geocodexyz import GeocodeXYZQuery
+from geocoder.providers.geolytica import GeolyticaQuery
 from geocoder.providers.geonames import (
     GeonamesChildren,
     GeonamesDetails,
@@ -63,6 +58,7 @@ from geocoder.providers.mapquest import (
     MapquestReverse,
     MapQuestReverseResult,
 )
+from geocoder.providers.maxmind import MaxmindQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
@@ -73,6 +69,9 @@ from geocoder.providers.reverse import (
     MapzenReverse,
     OpenCageReverse,
 )
+from geocoder.providers.tamu import TamuQuery
+from geocoder.providers.tgos import TgosQuery
+from geocoder.providers.tomtom import TomtomQuery
 from geocoder.providers.uscensus import (
     USCensusBatch,
     USCensusBatchResult,
@@ -82,4 +81,5 @@ from geocoder.providers.uscensus import (
     USCensusReverseResult,
 )
 from geocoder.providers.w3w import W3WQuery, W3WResult, W3WReverse
+from geocoder.providers.yahoo import YahooQuery
 from geocoder.providers.yandex import YandexQuery, YandexResult, YandexReverse
