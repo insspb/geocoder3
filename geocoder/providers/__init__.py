@@ -12,9 +12,6 @@ from geocoder.providers.addresses import (
     KomootResult,
     MapboxQuery,
     MapboxResult,
-    MapquestBatch,
-    MapquestQuery,
-    MapquestResult,
     MapzenQuery,
     MapzenResult,
     MaxmindQuery,
@@ -58,6 +55,14 @@ from geocoder.providers.google import (
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.locationiq import LocationIQQuery, LocationIQReverse
+from geocoder.providers.mapquest import (
+    MapquestBatch,
+    MapQuestBatchResult,
+    MapquestQuery,
+    MapquestResult,
+    MapquestReverse,
+    MapQuestReverseResult,
+)
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
@@ -65,7 +70,6 @@ from geocoder.providers.reverse import (
     HereReverse,
     KomootReverse,
     MapboxReverse,
-    MapquestReverse,
     MapzenReverse,
     OpenCageReverse,
 )
