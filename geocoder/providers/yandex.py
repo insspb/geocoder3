@@ -116,21 +116,6 @@ class YandexQuery(MultipleResultsQuery):
 
     The Yandex home page has been rated as the most popular website in Russia.
 
-    :param location: Your search location you want geocoded.
-    :param lang: Chose the following language:
-        > ru-RU — Russian (by default)
-        > uk-UA — Ukrainian
-        > be-BY — Belarusian
-        > en-US — American English
-        > en-BR — British English
-        > tr-TR — Turkish (only for maps of Turkey)
-    :param kind: Type of toponym (only for reverse geocoding):
-        > house - house or building
-        > street - street
-        > metro - subway station
-        > district - city district
-        > locality - locality (city, town, village, etc.)
-
     API Reference: http://api.yandex.com/maps/doc/geocoder/desc/concepts/
     input_params.xml
     """
@@ -181,21 +166,6 @@ class YandexReverse(YandexQuery):
     about 60% market share in that country.
     The Yandex home page has been rated as the most popular website in Russia.
 
-    :param location: Your search location you want geocoded.
-    :param lang: Chose the following language:
-        > ru-RU — Russian (by default)
-        > uk-UA — Ukrainian
-        > be-BY — Belarusian
-        > en-US — American English
-        > en-BR — British English
-        > tr-TR — Turkish (only for maps of Turkey)
-    :param kind: Type of toponym (only for reverse geocoding):
-        > house - house or building
-        > street - street
-        > metro - subway station
-        > district - city district
-        > locality - locality (city, town, village, etc.)
-
     API Reference: http://api.yandex.com/maps/doc/geocoder/desc/concepts/
     input_params.xml
     """
@@ -212,7 +182,7 @@ class YandexReverse(YandexQuery):
         **kwargs,
     ):
         x, y = Location(location).xy
-        self.location = "{}, {}".format(x, y)
+        self.location = f"{x}, {y}"
         return {
             "geocode": self.location,
             "lang": kwargs.get("lang", "en-US"),
