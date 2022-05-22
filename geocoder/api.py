@@ -29,6 +29,8 @@ from geocoder.providers import (
     HereReverse,
     IpfinderQuery,
     IpinfoQuery,
+    KomootQuery,
+    KomootReverse,
     LocationIQQuery,
     LocationIQReverse,
     MapquestBatch,
@@ -53,7 +55,6 @@ from geocoder.providers import (
 from geocoder.providers.addresses import (
     GeocodeFarmQuery,
     GisgraphyQuery,
-    KomootQuery,
     MapboxQuery,
     MapzenQuery,
     OpenCageQuery,
@@ -61,7 +62,6 @@ from geocoder.providers.addresses import (
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
     GisgraphyReverse,
-    KomootReverse,
     MapboxReverse,
     MapzenReverse,
     OpenCageReverse,
