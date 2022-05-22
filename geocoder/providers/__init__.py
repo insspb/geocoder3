@@ -3,8 +3,6 @@ from geocoder.providers.addresses import (
     GeocodeFarmQuery,
     GisgraphyQuery,
     GisgraphyResult,
-    HereQuery,
-    HereResult,
     KomootQuery,
     KomootResult,
     MapboxQuery,
@@ -47,6 +45,12 @@ from geocoder.providers.google import (
     GoogleReverse,
     GoogleTimezone,
 )
+from geocoder.providers.here import (
+    HereQuery,
+    HereResult,
+    HereReverse,
+    HereReverseResult,
+)
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.locationiq import LocationIQQuery, LocationIQReverse
@@ -63,7 +67,6 @@ from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmRever
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
     GisgraphyReverse,
-    HereReverse,
     KomootReverse,
     MapboxReverse,
     MapzenReverse,
