@@ -1,10 +1,10 @@
 __all__ = [
     "GoogleResult",
     "GoogleQuery",
-    "ElevationResult",
-    "ElevationQuery",
-    "PlacesResult",
-    "PlacesQuery",
+    "GoogleElevationResult",
+    "GoogleElevationQuery",
+    "GooglePlacesResult",
+    "GooglePlacesQuery",
     "GoogleReverseResult",
     "GoogleReverse",
     "GoogleTimezoneResult",
@@ -289,7 +289,7 @@ class GoogleQuery(MultipleResultsQuery):
         return json_response.get("results", [])
 
 
-class ElevationResult(OneResult):
+class GoogleElevationResult(OneResult):
     @property
     def status(self):
         return "OK" if self.elevation else "ERROR - No Elevation found"
@@ -317,7 +317,7 @@ class ElevationResult(OneResult):
         return self.object_raw_json.get("resolution")
 
 
-class ElevationQuery(MultipleResultsQuery):
+class GoogleElevationQuery(MultipleResultsQuery):
     """
     Google Elevation API
 
@@ -333,7 +333,7 @@ class ElevationQuery(MultipleResultsQuery):
     _PROVIDER = "google"
     _METHOD = "elevation"
     _URL = "https://maps.googleapis.com/maps/api/elevation/json"
-    _RESULT_CLASS = ElevationResult
+    _RESULT_CLASS = GoogleElevationResult
     _KEY = google_key
 
     def _build_params(self, location, provider_key, **kwargs):
@@ -349,7 +349,7 @@ class ElevationQuery(MultipleResultsQuery):
         return json_response["results"]
 
 
-class PlacesResult(OneResult):
+class GooglePlacesResult(OneResult):
     def __init__(self, json_content):
         # flatten geometry
         geometry = json_content.get("geometry", {})
@@ -358,7 +358,7 @@ class PlacesResult(OneResult):
         json_content["southwest"] = geometry.get("viewport", {}).get("southwest", {})
 
         # proceed with super.__init__
-        super(PlacesResult, self).__init__(json_content)
+        super(GooglePlacesResult, self).__init__(json_content)
 
     @property
     def lat(self):
@@ -411,7 +411,7 @@ class PlacesResult(OneResult):
         return self.object_raw_json.get("rating")
 
 
-class PlacesQuery(MultipleResultsQuery):
+class GooglePlacesQuery(MultipleResultsQuery):
     """
     Google Places API
 
@@ -469,11 +469,11 @@ class PlacesQuery(MultipleResultsQuery):
     _PROVIDER = "google"
     _METHOD = "places"
     _URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-    _RESULT_CLASS = PlacesResult
+    _RESULT_CLASS = GooglePlacesResult
     _KEY = google_key
 
     def __init__(self, location, **kwargs):
-        super(PlacesQuery, self).__init__(location, **kwargs)
+        super(GooglePlacesQuery, self).__init__(location, **kwargs)
 
         self.next_page_token = None
 
@@ -510,7 +510,7 @@ class PlacesQuery(MultipleResultsQuery):
         return params
 
     def _parse_results(self, json_response):
-        super(PlacesQuery, self)._parse_results(json_response)
+        super(GooglePlacesQuery, self)._parse_results(json_response)
 
         # store page token if any
         self.next_page_token = json_response.get("next_page_token")

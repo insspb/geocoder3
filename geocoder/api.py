@@ -9,10 +9,11 @@ from geocoder.providers import (
     BingQuery,
     BingQueryDetail,
     BingReverse,
-    ElevationQuery,
     FreeGeoIPQuery,
     GaodeQuery,
     GaodeReverse,
+    GoogleElevationQuery,
+    GooglePlacesQuery,
     GoogleQuery,
     GoogleReverse,
     GoogleTimezone,
@@ -21,7 +22,6 @@ from geocoder.providers import (
     OsmQuery,
     OsmQueryDetail,
     OsmReverse,
-    PlacesQuery,
 )
 from geocoder.providers.addresses import (
     CanadapostQuery,
@@ -156,8 +156,8 @@ options = {
         "geocode": GoogleQuery,
         "reverse": GoogleReverse,
         "timezone": GoogleTimezone,
-        "elevation": ElevationQuery,
-        "places": PlacesQuery,
+        "elevation": GoogleElevationQuery,
+        "places": GooglePlacesQuery,
     },
     "mapzen": {
         "geocode": MapzenQuery,

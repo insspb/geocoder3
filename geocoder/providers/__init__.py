@@ -53,12 +53,12 @@ from geocoder.providers.bing import (
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
 from geocoder.providers.google import (
-    ElevationQuery,
+    GoogleElevationQuery,
+    GooglePlacesQuery,
     GoogleQuery,
     GoogleResult,
     GoogleReverse,
     GoogleTimezone,
-    PlacesQuery,
 )
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
