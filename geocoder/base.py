@@ -17,11 +17,38 @@ logger = logging.getLogger(__name__)
 
 
 class OneResult(object):
-    """Container for one (JSON) object returned by provider"""
+    """Container for one (JSON) object returned by provider
+
+    **Class variables:**
+
+    :cvar cls._TO_EXCLUDE: List of properties and attributes to exclude in
+        :func:`OneResult._parse_json_with_fieldnames`
+
+    **Instance variables:**
+
+    After creation each instance of :class:`OneResult` has the following mandatory
+    variables. For some providers this list can be extended by provider implementation.
+
+    :ivar self.object_raw_json: Raw json for object, passed by
+        :func:`MultipleResultsQuery._parse_results`
+    :ivar self.object_json: Result of :func:`OneResult._parse_json_with_fieldnames`
+    :ivar self.northeast: Placeholder for northeast corner in :func:`_get_bbox` results
+    :ivar self.northwest: Placeholder for northwest corner in :func:`_get_bbox` results
+    :ivar self.southeast: Placeholder for southeast corner in :func:`_get_bbox` results
+    :ivar self.southwest: Placeholder for southwest corner in :func:`_get_bbox` results
+    :ivar self.fieldnames: Fieldnames list generated in
+        :func:`OneResult._parse_json_with_fieldnames`
+
+    **Init parameters:**
+
+    For initialization parameters, please check :func:`OneResult.__init__`
+    method documentation.
+    """
 
     _TO_EXCLUDE = [
         "parse",
-        "json",
+        "object_raw_json",
+        "object_json",
         "url",
         "fieldnames",
         "help",
@@ -102,7 +129,7 @@ class OneResult(object):
 
     @property
     def bbox(self) -> dict:
-        """Output answer as GeoJSON bbox if can be calculated/retrieved."""
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         return {}
 
     @property
@@ -111,14 +138,16 @@ class OneResult(object):
         return None
 
     def __repr__(self) -> str:
-        """Display [address] if available; [lat,lng] otherwise"""
+        """Display [address] if available; [lat, lng] otherwise"""
         return f"[{self.address}]" if self.address else f"[{self.lat}, {self.lng}]"
 
     def _parse_json_with_fieldnames(self):
-        """Parse the raw JSON with all attributes/methods defined in the class, except for the
-        ones defined starting with '_' or flagged in cls._TO_EXCLUDE.
+        """Parse the instance object with all attributes/methods defined in the class,
+        except for the ones defined starting with '_' or flagged in
+        :attr:`cls._TO_EXCLUDE`.
 
-        The final result is stored in self.json
+        The final result is stored in :attr:`self.object_json` and
+        :attr:`self.fieldnames`
         """
         for key in dir(self):
             if not key.startswith("_") and key not in self._TO_EXCLUDE:
@@ -156,6 +185,7 @@ class OneResult(object):
         logger.debug(json.dumps(self.object_json, indent=4))
 
     def _get_bbox(self, south, west, north, east) -> dict:
+        """Wrapper for bbox data generation"""
         if not all([south, east, north, west]):
             return {}
 

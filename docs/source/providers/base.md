@@ -29,7 +29,7 @@ documentation for exact provider.
    :members:
    :undoc-members:
    :special-members: __init__
-   :private-members:
+   :private-members: _parse_json_with_fieldnames, _get_bbox
 ```
 
 [features]: ../features/index.rst

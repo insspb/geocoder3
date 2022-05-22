@@ -102,9 +102,10 @@ Many properties are available once the geocoder object is created.
 
 ```python
 import geocoder
+
 g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
 g.geojson
-g.json
+g.object_json
 g.wkt
 g.osm
 ```
