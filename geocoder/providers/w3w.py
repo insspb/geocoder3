@@ -45,10 +45,6 @@ class W3WQuery(MultipleResultsQuery):
 
     Everyone and everywhere now has an address
 
-    :param location: Your search location you want geocoded.
-    :param key: W3W API key.
-    :param method: Chose a method (geocode, method)
-
     References
 
     API Reference: https://docs.what3words.com/api/v2/
@@ -88,10 +84,6 @@ class W3WReverse(W3WQuery):
     Addressing the world
 
     Everyone and everywhere now has an address
-
-    :param location: Your search location you want geocoded.
-    :param key: W3W API key.
-    :param method: Chose a method (geocode, method)
 
     API Reference: http://developer.what3words.com/
     Get W3W key: http://developer.what3words.com/api-register/
