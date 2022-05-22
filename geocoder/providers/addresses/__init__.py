@@ -15,5 +15,4 @@ from geocoder.providers.addresses.opencage import OpenCageQuery, OpenCageResult
 from geocoder.providers.addresses.tamu import TamuQuery
 from geocoder.providers.addresses.tgos import TgosQuery
 from geocoder.providers.addresses.tomtom import TomtomQuery
-from geocoder.providers.addresses.w3w import W3WQuery, W3WResult
 from geocoder.providers.addresses.yahoo import YahooQuery
