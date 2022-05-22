@@ -1,9 +1,14 @@
-__all__ = ["KomootResult", "KomootQuery"]
+__all__ = [
+    "KomootResult",
+    "KomootQuery",
+    "KomootReverseResult",
+    "KomootReverse",
+]
 
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
-from geocoder.location import BBox
+from geocoder.location import BBox, Location
 
 
 class KomootResult(OneResult):
@@ -127,6 +132,32 @@ class KomootQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return json_response["features"]
+
+
+class KomootReverseResult(KomootResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class KomootReverse(KomootQuery):
+    """
+    Komoot REST API
+
+    API Reference: http://photon.komoot.de
+    """
+
+    _PROVIDER = "komoot"
+    _METHOD = "reverse"
+    _URL = "https://photon.komoot.de/reverse"
+    _RESULT_CLASS = KomootReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        return {
+            "lat": location.lat,
+            "lon": location.lng,
+        }
 
 
 if __name__ == "__main__":
