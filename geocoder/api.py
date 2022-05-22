@@ -10,6 +10,8 @@ from geocoder.providers import (
     BingQueryDetail,
     BingReverse,
     FreeGeoIPQuery,
+    GaodeQuery,
+    GaodeReverse,
     IpfinderQuery,
     IpinfoQuery,
     OsmQuery,
@@ -19,7 +21,6 @@ from geocoder.providers import (
 from geocoder.providers.addresses import (
     CanadapostQuery,
     ElevationQuery,
-    GaodeQuery,
     GeocodeFarmQuery,
     GeocodeXYZQuery,
     GeolyticaQuery,
@@ -50,7 +51,6 @@ from geocoder.providers.addresses import (
     YandexQuery,
 )
 from geocoder.providers.reverse import (
-    GaodeReverse,
     GeocodeFarmReverse,
     GisgraphyReverse,
     GoogleReverse,
