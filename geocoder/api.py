@@ -1,5 +1,12 @@
 from geocoder.distance import Distance
-from geocoder.providers import OsmQuery, OsmQueryDetail, OsmReverse
+from geocoder.providers import (
+    FreeGeoIPQuery,
+    IpfinderQuery,
+    IpinfoQuery,
+    OsmQuery,
+    OsmQueryDetail,
+    OsmReverse,
+)
 from geocoder.providers.addresses import (
     ArcgisQuery,
     BaiduQuery,
@@ -38,7 +45,6 @@ from geocoder.providers.addresses import (
     YahooQuery,
     YandexQuery,
 )
-from geocoder.providers.ip import FreeGeoIPQuery, IpfinderQuery, IpinfoQuery
 from geocoder.providers.reverse import (
     ArcgisReverse,
     BaiduReverse,

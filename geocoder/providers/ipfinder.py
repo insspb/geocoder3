@@ -186,7 +186,7 @@ class IpfinderQuery(MultipleResultsQuery):
     IPFinder REST Services
 
     IP address details (city, region, country, postal code, latitude and more ..).
-    ASN details (Organization name, registry,domain,comany_type, and more .. ).
+    ASN details (Organization name, registry,domain,company_type, and more .. ).
     Firewall by supported formats details (apache_allow, nginx_deny, CIDR, and more ..)
     IP Address Ranges by the Organization name details (list_asn, list_prefixes,
     and more ..).
@@ -194,10 +194,6 @@ class IpfinderQuery(MultipleResultsQuery):
     Get Domain IP (asn, organization,country_code ....).
     Get Domain IP history (total_ip, list_ip,organization,asn ....).
     Get list Domain By ASN, Country,Ranges (select_by , total_domain , list_domain ..).
-
-    :param location : Your search location you want.
-    :param key      : IPFinder API key.
-    :param method   : Chose a method (geocode, method)
 
     API Reference      : https://ipfinder.io/docs
     Get IPFinder key   : https://ipfinder.io/auth/signup
@@ -216,10 +212,7 @@ class IpfinderQuery(MultipleResultsQuery):
         else:
             self.url = "https://api.ipfinder.io/v1/{0}".format(self.location)
 
-        if provider_key is None:
-            self.provider_key = "free"
-        else:
-            self.provider_key = provider_key
+        self.provider_key = "free" if provider_key is None else provider_key
 
         return {"token": self.provider_key, "format": "json"}
 
