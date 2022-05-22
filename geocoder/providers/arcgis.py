@@ -156,7 +156,7 @@ class ArcgisReverse(ArcgisQuery):
     def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
         return {
-            "location": "{}, {}".format(location.lng, location.lat),
+            "location": f"{location.lng}, {location.lat}",
             "f": "pjson",
             "distance": kwargs.get("distance", 50000),
             "outSR": kwargs.get("outSR", ""),
