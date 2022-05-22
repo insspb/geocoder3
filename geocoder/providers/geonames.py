@@ -98,7 +98,7 @@ class GeonamesQuery(MultipleResultsQuery):
         max_results: int = 1,
         **kwargs,
     ):
-        """Will be overridden according to the targetted web service"""
+        """Will be overridden according to the targeted web service"""
         base_kwargs = {
             "q": location,
             "fuzzy": kwargs.get("fuzzy", 1.0),
@@ -119,37 +119,36 @@ class GeonamesQuery(MultipleResultsQuery):
             )
 
         # look out for valid extra kwargs
-        supported_kwargs = set(
-            (
-                "name",
-                "name_equals",
-                "name_startsWith",
-                "startRow",
-                "country",
-                "countryBias",
-                "continentCode",
-                "adminCode1",
-                "adminCode2",
-                "adminCode3",
-                "cities",
-                "featureClass",
-                "featureCode",
-                "lang",
-                "type",
-                "style",
-                "isNameRequired",
-                "tag",
-                "operator",
-                "charset",
-                "east",
-                "west",
-                "north",
-                "south",
-                "orderby",
-                "inclBbox",
-                "searchlang",
-            )
-        )
+        supported_kwargs = {
+            "name",
+            "name_equals",
+            "name_startsWith",
+            "startRow",
+            "country",
+            "countryBias",
+            "continentCode",
+            "adminCode1",
+            "adminCode2",
+            "adminCode3",
+            "cities",
+            "featureClass",
+            "featureCode",
+            "lang",
+            "type",
+            "style",
+            "isNameRequired",
+            "tag",
+            "operator",
+            "charset",
+            "east",
+            "west",
+            "north",
+            "south",
+            "orderby",
+            "inclBbox",
+            "searchlang",
+        }
+
         found_kwargs = supported_kwargs & set(kwargs.keys())
         logger.debug("Adding extra kwargs %s", found_kwargs)
 
@@ -159,7 +158,7 @@ class GeonamesQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         """Changed: removed check on number of elements:
-        - totalResultsCount not sytematically returned (e.g in hierarchy)
+        - totalResultsCount not systematically returned (e.g in hierarchy)
         - done in base.py
         """
         status = json_response.get("status")
@@ -182,7 +181,7 @@ class GeonamesQuery(MultipleResultsQuery):
 
 class GeonamesFullResult(GeonamesResult):
     """
-    Get more information for given geonames_id, e.g timzone and administrative hierarchy
+    Get information for given geonames_id, e.g. timezone and administrative hierarchy
     """
 
     @property
@@ -282,7 +281,7 @@ class GeonamesDetails(GeonamesQuery):
     _RESULT_CLASS = GeonamesFullResult
 
     def _build_params(self, location, provider_key, **kwargs):
-        """Will be overridden according to the targetted web service"""
+        """Will be overridden according to the targeted web service"""
         return {"geonameId": location, "username": provider_key, "style": "full"}
 
     def _adapt_results(self, json_response):
@@ -302,7 +301,7 @@ class GeonamesChildren(GeonamesQuery):
     _URL = "http://api.geonames.org/childrenJSON"
 
     def _build_params(self, location, provider_key, **kwargs):
-        """Will be overridden according to the targetted web service"""
+        """Will be overridden according to the targeted web service"""
         return {
             "geonameId": location,
             "username": provider_key,
@@ -336,7 +335,7 @@ class GeonamesTimezoneResult(GeonamesResult):
         return self.object_raw_json.get("rawOffset")
 
     @property
-    def dst_offest(self):
+    def dst_offset(self):
         return self.object_raw_json.get("dstOffset")
 
     @property
@@ -363,7 +362,7 @@ class GeonamesTimezone(GeonamesQuery):
     _RESULT_CLASS = GeonamesTimezoneResult
 
     def _build_params(self, location, provider_key, **kwargs):
-        """Will be overridden according to the targetted web service"""
+        """Will be overridden according to the targeted web service"""
         location = Location(location)
         return {
             "lat": location.latitude,
