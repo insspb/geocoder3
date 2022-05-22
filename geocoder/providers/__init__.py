@@ -10,7 +10,6 @@ from geocoder.providers.addresses import (
     HereResult,
     KomootQuery,
     KomootResult,
-    LocationIQQuery,
     MapboxQuery,
     MapboxResult,
     MapquestBatch,
@@ -64,13 +63,13 @@ from geocoder.providers.google import (
 )
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
+from geocoder.providers.locationiq import LocationIQQuery, LocationIQReverse
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
     GisgraphyReverse,
     HereReverse,
     KomootReverse,
-    LocationIQReverse,
     MapboxReverse,
     MapquestReverse,
     MapzenReverse,
