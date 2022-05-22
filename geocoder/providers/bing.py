@@ -4,7 +4,7 @@ import csv
 import io
 import logging
 import re
-from time import time
+import time
 
 import requests
 
@@ -47,7 +47,7 @@ class BingResult(OneResult):
             pattern = re.compile(expression)
             match = pattern.search(self.street, re.UNICODE)
             if match:
-                return match.group(0)
+                return match[0]
 
     @property
     def street(self):
@@ -131,7 +131,7 @@ class BingQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response["statusDescription"]
-        if not status == "OK":
+        if status != "OK":
             self.error = status
 
         return self.error
@@ -213,7 +213,7 @@ class BingQueryDetail(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status = json_response["statusDescription"]
-        if not status == "OK":
+        if status != "OK":
             self.error = status
 
         return self.error
@@ -227,6 +227,7 @@ class BingQueryDetail(MultipleResultsQuery):
 
 
 class BingBatchResult(OneResult):
+    # noinspection PyMissingConstructor
     def __init__(self, content):
         self._content = content
 
@@ -283,9 +284,7 @@ class BingBatch(MultipleResultsQuery):
         raise LookupError("No job ID returned from Bing batch call")
 
     def is_job_done(self, job_id):
-        url = "http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/{}".format(
-            job_id
-        )
+        url = f"http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/{job_id}"
         response = self.session.get(
             url,
             params={"key": self.provider_key},
@@ -303,9 +302,8 @@ class BingBatch(MultipleResultsQuery):
         raise LookupError("Job ID not found in Bing answer - something is wrong")
 
     def get_job_result(self, job_id):
-        url = "http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/{}/output/succeeded".format(  # noqa
-            job_id
-        )
+        url = f"http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/{job_id}/output/succeeded"  # noqa
+
         response = self.session.get(
             url,
             params={"key": self.provider_key},
@@ -357,14 +355,13 @@ class BingBatch(MultipleResultsQuery):
                 if self.is_job_done(resource_id):
                     return self.get_job_result(resource_id)
 
-                elapsed = elapsed + self._BATCH_WAIT
+                elapsed += self._BATCH_WAIT
                 time.sleep(self._BATCH_WAIT)
 
             logger.error("Job was not finished in time.")
 
         except (requests.exceptions.RequestException, LookupError) as err:
-            # store real status code and error
-            self.error = "ERROR - {}".format(str(err))
+            self.error = f"ERROR - {str(err)}"
             logger.error(
                 "Status code %s from %s: %s", self.status_code, self.url, self.error
             )
@@ -375,7 +372,7 @@ class BingBatch(MultipleResultsQuery):
         rows = self._adapt_results(response)
 
         # re looping through the results to give them back in their original order
-        for idx in range(0, self.locations_length):
+        for idx in range(self.locations_length):
             self.add(self._RESULT_CLASS(rows.get(str(idx), None)))
 
         self.current_result = len(self) > 0 and self[0]
@@ -434,14 +431,13 @@ class BingBatchForward(BingBatch):
         # Skipping first line with Bing header
         next(result)
 
-        rows = {}
-        for row in csv.DictReader(result):
-            rows[row["Id"]] = [
+        return {
+            row["Id"]: [
                 row["GeocodeResponse/Point/Latitude"],
                 row["GeocodeResponse/Point/Longitude"],
             ]
-
-        return rows
+            for row in csv.DictReader(result)
+        }
 
 
 class BingBatchReverseResult(BingBatchResult):
@@ -523,17 +519,16 @@ class BingBatchReverse(BingBatch):
         # Skipping first line with Bing header
         next(result)
 
-        rows = {}
-        for row in csv.DictReader(result):
-            rows[row["Id"]] = [
+        return {
+            row["Id"]: [
                 row["GeocodeResponse/Address/FormattedAddress"],
                 row["GeocodeResponse/Address/Locality"],
                 row["GeocodeResponse/Address/PostalCode"],
                 row["GeocodeResponse/Address/AdminDistrict"],
                 row["GeocodeResponse/Address/CountryRegion"],
             ]
-
-        return rows
+            for row in csv.DictReader(result)
+        }
 
 
 if __name__ == "__main__":
