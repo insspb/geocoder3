@@ -20,11 +20,11 @@ class TgosResult(OneResult):
 
     @property
     def lat(self):
-        return self.object_raw_json("geometry", {}).get("y")
+        return self.object_raw_json.get("geometry", {}).get("y")
 
     @property
     def lng(self):
-        return self.object_raw_json("geometry", {}).get("x")
+        return self.object_raw_json.get("geometry", {}).get("x")
 
     @property
     def address(self):
@@ -169,7 +169,7 @@ class TgosQuery(MultipleResultsQuery):
         pattern = re.compile(r'TGOS.tgHash="([a-zA-Z\d/\-_+=]*)"')
         match = pattern.search(r.text)
         if match:
-            return match.group(1)
+            return match[1]
         else:
             raise ValueError("Cannot find TGOS.tgHash")
 
@@ -193,22 +193,18 @@ class TgosQuery(MultipleResultsQuery):
     def _before_initialize(self, location, **kwargs):
         # Custom language output
         language = kwargs.get("language", "taiwan").lower()
-        if language in ["english", "en", "eng"]:
-            self.language = "en"
-        elif language in ["chinese", "zh"]:
-            self.language = "zh-tw"
-        else:
-            self.language = "zh-tw"
+        self.language = "en" if language in ["english", "en", "eng"] else "zh-tw"
 
     def _catch_errors(self, json_response):
         status = json_response["status"]
-        if status != "OK":
-            if status == "REQUEST_DENIED":
-                self.error = json_response["error_message"]
-                self.status_code = 401
-            else:
-                self.error = "Unknown"
-                self.status_code = 500
+        if status == "OK":
+            pass
+        elif status == "REQUEST_DENIED":
+            self.error = json_response["error_message"]
+            self.status_code = 401
+        else:
+            self.error = "Unknown"
+            self.status_code = 500
 
         return self.error
 
