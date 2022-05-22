@@ -42,6 +42,8 @@ from geocoder.providers import (
     MapquestBatch,
     MapquestQuery,
     MapquestReverse,
+    MapzenQuery,
+    MapzenReverse,
     MaxmindQuery,
     OsmQuery,
     OsmQueryDetail,
@@ -58,8 +60,8 @@ from geocoder.providers import (
     YandexQuery,
     YandexReverse,
 )
-from geocoder.providers.addresses import MapzenQuery, OpenCageQuery
-from geocoder.providers.reverse import MapzenReverse, OpenCageReverse
+from geocoder.providers.addresses import OpenCageQuery
+from geocoder.providers.reverse import OpenCageReverse
 
 options = {
     "osm": {
