@@ -8,6 +8,7 @@ from urllib.parse import quote, quote_plus, urlencode
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import baidu_key, baidu_security_key
+from geocoder.location import Location
 
 
 class BaiduResult(OneResult):
@@ -111,6 +112,78 @@ class BaiduQuery(MultipleResultsQuery):
             self.error = json_response.get("message")
 
         return self.error
+
+
+class BaiduReverseResult(OneResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+    @property
+    def address(self):
+        return self.object_raw_json["formatted_address"]
+
+    @property
+    def country(self):
+        return self.object_raw_json["addressComponent"]["country"]
+
+    @property
+    def province(self):
+        return self.object_raw_json["addressComponent"]["province"]
+
+    @property
+    def state(self):
+        return self.object_raw_json["addressComponent"]["province"]
+
+    @property
+    def city(self):
+        return self.object_raw_json["addressComponent"]["city"]
+
+    @property
+    def district(self):
+        return self.object_raw_json["addressComponent"]["district"]
+
+    @property
+    def street(self):
+        return self.object_raw_json["addressComponent"]["street"]
+
+    @property
+    def house_number(self):
+        return self.object_raw_json["addressComponent"]["street_number"]
+
+
+class BaiduReverse(BaiduQuery):
+    """
+    Baidu Geocoding API
+
+    Baidu Maps Geocoding API is a free open the API, the default quota
+    one million times / day.
+
+    :param location: Your search location you want geocoded.
+    :param key: Baidu API key.
+    :param referer: Baidu API referer website.
+
+    API Documentation: http://developer.baidu.com/map
+    Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
+    """
+
+    _PROVIDER = "baidu"
+    _METHOD = "reverse"
+    _URL = "http://api.map.baidu.com/geocoder/v2/"
+    _RESULT_CLASS = BaiduReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        params = {
+            "location": str(location),
+            "ret_coordtype": kwargs.get("coordtype", "wgs84ll"),
+            "output": "json",
+            "ak": provider_key,
+        }
+        if "lang_code" in kwargs:
+            params["accept-language"] = kwargs["lang_code"]
+
+        return params
 
 
 if __name__ == "__main__":

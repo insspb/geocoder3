@@ -1,6 +1,5 @@
 # flake8: noqa
 from geocoder.providers.addresses import (
-    BaiduQuery,
     BingBatch,
     BingBatchForward,
     BingBatchResult,
@@ -50,13 +49,21 @@ from geocoder.providers.addresses import (
     YandexQuery,
     YandexResult,
 )
+<<<<<<< HEAD
 from geocoder.providers.arcgis import ArcgisQuery, ArcgisReverse
+=======
+from geocoder.providers.baidu import BaiduQuery, BaiduReverse
+>>>>>>> 50d7915 (Merge baidu and baidu_reverse and move to core providers)
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
+<<<<<<< HEAD
     BaiduReverse,
+=======
+    ArcgisReverse,
+>>>>>>> 50d7915 (Merge baidu and baidu_reverse and move to core providers)
     BingBatchReverse,
     BingReverse,
     GaodeReverse,
