@@ -1,7 +1,6 @@
 # flake8: noqa
 from geocoder.providers.addresses import (
     CanadapostQuery,
-    ElevationQuery,
     GeocodeFarmQuery,
     GeocodeXYZQuery,
     GeolyticaQuery,
@@ -12,8 +11,6 @@ from geocoder.providers.addresses import (
     GeonamesResult,
     GisgraphyQuery,
     GisgraphyResult,
-    GoogleQuery,
-    GoogleResult,
     HereQuery,
     HereResult,
     KomootQuery,
@@ -30,7 +27,6 @@ from geocoder.providers.addresses import (
     OpenCageQuery,
     OpenCageResult,
     OttawaQuery,
-    PlacesQuery,
     TamuQuery,
     TgosQuery,
     TomtomQuery,
@@ -56,13 +52,20 @@ from geocoder.providers.bing import (
 )
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
+from geocoder.providers.google import (
+    ElevationQuery,
+    GoogleQuery,
+    GoogleResult,
+    GoogleReverse,
+    GoogleTimezone,
+    PlacesQuery,
+)
 from geocoder.providers.ipfinder import IpfinderQuery
 from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
     GisgraphyReverse,
-    GoogleReverse,
     HereReverse,
     KomootReverse,
     LocationIQReverse,
@@ -74,4 +77,4 @@ from geocoder.providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
-from geocoder.providers.timezone import GeonamesTimezone, GoogleTimezone
+from geocoder.providers.timezone import GeonamesTimezone

@@ -9,18 +9,22 @@ from geocoder.providers import (
     BingQuery,
     BingQueryDetail,
     BingReverse,
+    ElevationQuery,
     FreeGeoIPQuery,
     GaodeQuery,
     GaodeReverse,
+    GoogleQuery,
+    GoogleReverse,
+    GoogleTimezone,
     IpfinderQuery,
     IpinfoQuery,
     OsmQuery,
     OsmQueryDetail,
     OsmReverse,
+    PlacesQuery,
 )
 from geocoder.providers.addresses import (
     CanadapostQuery,
-    ElevationQuery,
     GeocodeFarmQuery,
     GeocodeXYZQuery,
     GeolyticaQuery,
@@ -29,7 +33,6 @@ from geocoder.providers.addresses import (
     GeonamesHierarchy,
     GeonamesQuery,
     GisgraphyQuery,
-    GoogleQuery,
     HereQuery,
     KomootQuery,
     LocationIQQuery,
@@ -40,7 +43,6 @@ from geocoder.providers.addresses import (
     MaxmindQuery,
     OpenCageQuery,
     OttawaQuery,
-    PlacesQuery,
     TamuQuery,
     TgosQuery,
     TomtomQuery,
@@ -53,7 +55,6 @@ from geocoder.providers.addresses import (
 from geocoder.providers.reverse import (
     GeocodeFarmReverse,
     GisgraphyReverse,
-    GoogleReverse,
     HereReverse,
     KomootReverse,
     LocationIQReverse,
@@ -65,7 +66,7 @@ from geocoder.providers.reverse import (
     W3WReverse,
     YandexReverse,
 )
-from geocoder.providers.timezone import GeonamesTimezone, GoogleTimezone
+from geocoder.providers.timezone import GeonamesTimezone
 
 options = {
     "osm": {

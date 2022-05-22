@@ -8,9 +8,6 @@ from geocoder.providers.addresses.geonames_children import GeonamesChildren
 from geocoder.providers.addresses.geonames_details import GeonamesDetails
 from geocoder.providers.addresses.geonames_hierarchy import GeonamesHierarchy
 from geocoder.providers.addresses.gisgraphy import GisgraphyQuery, GisgraphyResult
-from geocoder.providers.addresses.google import GoogleQuery, GoogleResult
-from geocoder.providers.addresses.google_elevation import ElevationQuery
-from geocoder.providers.addresses.google_places import PlacesQuery
 from geocoder.providers.addresses.here import HereQuery, HereResult
 from geocoder.providers.addresses.komoot import KomootQuery, KomootResult
 from geocoder.providers.addresses.locationiq import LocationIQQuery
