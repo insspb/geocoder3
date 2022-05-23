@@ -1,5 +1,10 @@
 # flake8: noqa
-from geocoder.providers.arcgis import ArcgisQuery, ArcgisReverse
+from geocoder.providers.arcgis import (
+    ArcgisQuery,
+    ArcgisResult,
+    ArcgisReverse,
+    ArcgisReverseResult,
+)
 from geocoder.providers.baidu import BaiduQuery, BaiduReverse
 from geocoder.providers.bing import (
     BingBatch,

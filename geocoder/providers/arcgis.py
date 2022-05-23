@@ -1,4 +1,4 @@
-__all__ = ["ArcgisQuery"]
+__all__ = ["ArcgisQuery", "ArcgisResult", "ArcgisReverseResult", "ArcgisReverse"]
 
 import json
 import logging
