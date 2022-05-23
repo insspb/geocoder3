@@ -14,12 +14,15 @@ from geocoder.providers.baidu import (
 from geocoder.providers.bing import (
     BingBatch,
     BingBatchForward,
+    BingBatchForwardResult,
     BingBatchResult,
     BingBatchReverse,
+    BingBatchReverseResult,
     BingQuery,
     BingQueryDetail,
     BingResult,
     BingReverse,
+    BingReverseResult,
 )
 from geocoder.providers.canadapost import CanadapostQuery
 from geocoder.providers.freegeoip import FreeGeoIPQuery

@@ -1,4 +1,16 @@
-__all__ = ["BingResult", "BingQuery", "BingQueryDetail"]
+__all__ = [
+    "BingResult",
+    "BingQuery",
+    "BingReverseResult",
+    "BingReverse",
+    "BingQueryDetail",
+    "BingBatchResult",
+    "BingBatch",
+    "BingBatchForwardResult",
+    "BingBatchForward",
+    "BingBatchReverseResult",
+    "BingBatchReverse",
+]
 
 import csv
 import io
