@@ -5,7 +5,12 @@ from geocoder.providers.arcgis import (
     ArcgisReverse,
     ArcgisReverseResult,
 )
-from geocoder.providers.baidu import BaiduQuery, BaiduReverse
+from geocoder.providers.baidu import (
+    BaiduQuery,
+    BaiduResult,
+    BaiduReverse,
+    BaiduReverseResult,
+)
 from geocoder.providers.bing import (
     BingBatch,
     BingBatchForward,
