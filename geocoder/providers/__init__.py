@@ -24,7 +24,12 @@ from geocoder.providers.bing import (
     BingReverse,
     BingReverseResult,
 )
-from geocoder.providers.canadapost import CanadapostQuery
+from geocoder.providers.canadapost import (
+    CanadapostIdQuery,
+    CanadapostIdResult,
+    CanadapostQuery,
+    CanadapostResult,
+)
 from geocoder.providers.freegeoip import FreeGeoIPQuery
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
 from geocoder.providers.geocodefarm import GeocodeFarmQuery, GeocodeFarmReverse
