@@ -1,10 +1,15 @@
-__all__ = ["OpenCageResult", "OpenCageQuery"]
+__all__ = [
+    "OpenCageResult",
+    "OpenCageQuery",
+    "OpenCageReverseResult",
+    "OpenCageReverse",
+]
 
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import opencage_key
-from geocoder.location import BBox
+from geocoder.location import BBox, Location
 
 
 class OpenCageResult(OneResult):
@@ -433,6 +438,39 @@ class OpenCageQuery(MultipleResultsQuery):
 
         # return geo results
         return json_response["results"]
+
+
+class OpenCageReverseResult(OpenCageResult):
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class OpenCageReverse(OpenCageQuery):
+    """
+    OpenCage Geocoding Services
+
+    OpenCage Geocoder simple, easy, and open geocoding for the entire world
+    Our API combines multiple geocoding systems in the background.
+    Each is optimized for different parts of the world and types of requests.
+    We aggregate the best results from open data sources and algorithms so you don't
+    have to.
+    Each is optimized for different parts of the world and types of requests.
+
+    API Reference: https://geocoder.opencagedata.com/api
+    """
+
+    _PROVIDER = "opencage"
+    _METHOD = "reverse"
+    _URL = "http://api.opencagedata.com/geocode/v1/json"
+    _RESULT_CLASS = OpenCageReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        return {
+            "query": location,
+            "key": provider_key,
+        }
 
 
 if __name__ == "__main__":
