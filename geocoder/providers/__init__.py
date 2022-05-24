@@ -42,7 +42,7 @@ from geocoder.providers.geocodefarm import (
     GeocodeFarmResult,
     GeocodeFarmReverse,
 )
-from geocoder.providers.geocodexyz import GeocodeXYZQuery
+from geocoder.providers.geocodexyz import GeocodeXYZQuery, GeocodeXYZResult
 from geocoder.providers.geolytica import GeolyticaQuery
 from geocoder.providers.geonames import (
     GeonamesChildren,
