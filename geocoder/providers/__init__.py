@@ -119,7 +119,7 @@ from geocoder.providers.opencage import (
     OpenCageReverseResult,
 )
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
-from geocoder.providers.tamu import TamuQuery
+from geocoder.providers.tamu import TamuQuery, TamuResult
 from geocoder.providers.tgos import TgosQuery
 from geocoder.providers.tomtom import TomtomQuery
 from geocoder.providers.uscensus import (
