@@ -1,4 +1,9 @@
-__all__ = ["HereResult", "HereQuery"]
+__all__ = [
+    "HereResult",
+    "HereQuery",
+    "HereReverseResult",
+    "HereReverse",
+]
 
 import logging
 
