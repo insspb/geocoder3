@@ -1,4 +1,4 @@
-__all__ = ["YahooQuery"]
+__all__ = ["YahooQuery", "YahooResult"]
 
 import logging
 
