@@ -693,7 +693,7 @@ class MultipleResultsQuery(MutableSequence):
         """
         if not self.is_called:
             raise RuntimeError(
-                "Cannot detect data presence. External request was not made."
+                "Cannot detect data presence. External request was not made. "
                 "Use instance __call__() method to retrieve data."
             )
         return len(self) > 0
