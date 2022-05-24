@@ -23,6 +23,9 @@ class OneResult(object):
 
     :cvar cls._TO_EXCLUDE: List of properties and attributes to exclude in
         :func:`OneResult._parse_json_with_fieldnames`
+    :cvar bool cls._GEOCODER3_READY: Temporary value, representing is provider tested
+        and finished migration to geocoder3. On default value will bypass some internal
+        checks.
 
     **Instance variables:**
 
@@ -45,6 +48,7 @@ class OneResult(object):
     method documentation.
     """
 
+    _GEOCODER3_READY = False
     _TO_EXCLUDE = [
         "parse",
         "object_raw_json",
@@ -300,6 +304,9 @@ class MultipleResultsQuery(MutableSequence):
         :attr:`options` definition.
     :cvar float cls._TIMEOUT: Default timeout for :func:`requests.request`
         configuration, can be overwritten on instance creation or instance calling
+    :cvar bool cls._GEOCODER3_READY: Temporary value, representing is provider tested
+        and finished migration to geocoder3. On default value will generate warning on
+        any provider call.
 
     **Instance variables:**
 
@@ -343,6 +350,7 @@ class MultipleResultsQuery(MutableSequence):
     _METHOD = None
     _PROVIDER = None
     _TIMEOUT = 5.0
+    _GEOCODER3_READY = False
 
     @staticmethod
     def _is_valid_url(url: Optional[str]) -> bool:
@@ -599,7 +607,11 @@ class MultipleResultsQuery(MutableSequence):
             request
         """
         self.is_called = True
-
+        if self._GEOCODER3_READY is False:
+            logger.warning(
+                "This provider behaviour not tested in geocoder3, results may be "
+                "incorrect, or not all features available."
+            )
         # Allow in call overwrite of connection settings
         self.timeout = timeout or self.timeout
         self.proxies = proxies or self.proxies
