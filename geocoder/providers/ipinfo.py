@@ -1,4 +1,4 @@
-__all__ = ["IpinfoQuery"]
+__all__ = ["IpinfoQuery", "IpinfoResult"]
 
 import logging
 

@@ -79,7 +79,7 @@ from geocoder.providers.here import (
     HereReverseResult,
 )
 from geocoder.providers.ipfinder import IpfinderQuery, IpfinderResult
-from geocoder.providers.ipinfo import IpinfoQuery
+from geocoder.providers.ipinfo import IpinfoQuery, IpinfoResult
 from geocoder.providers.komoot import (
     KomootQuery,
     KomootResult,
