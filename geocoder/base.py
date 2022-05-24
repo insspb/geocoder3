@@ -23,6 +23,9 @@ class OneResult(object):
 
     :cvar cls._TO_EXCLUDE: List of properties and attributes to exclude in
         :func:`OneResult._parse_json_with_fieldnames`
+    :cvar bool cls._GEOCODER3_READY: Temporary value, representing is provider tested
+        and finished migration to geocoder3. On default value will bypass some internal
+        checks.
 
     **Instance variables:**
 
@@ -45,6 +48,7 @@ class OneResult(object):
     method documentation.
     """
 
+    _GEOCODER3_READY = False
     _TO_EXCLUDE = [
         "parse",
         "object_raw_json",
@@ -291,7 +295,7 @@ class MultipleResultsQuery(MutableSequence):
     :cvar OneResult cls._RESULT_CLASS: Provider's individual result class.
     :cvar str cls._KEY: Provider's default api_key. Usually map to ENV variable
         responsible for key parsing. Can be overwritten with **key** parameter on
-        instance creation
+        instance creation. Shows actually used key when requested from instance.
     :cvar bool cls._KEY_MANDATORY: Special mark for check of mandatory presence of api
         key, for providers with mandatory key requirement
     :cvar str cls._METHOD: Provider's internal method, that should match with api.py
@@ -300,6 +304,9 @@ class MultipleResultsQuery(MutableSequence):
         :attr:`options` definition.
     :cvar float cls._TIMEOUT: Default timeout for :func:`requests.request`
         configuration, can be overwritten on instance creation or instance calling
+    :cvar bool cls._GEOCODER3_READY: Temporary value, representing is provider tested
+        and finished migration to geocoder3. On default value will generate warning on
+        any provider call.
 
     **Instance variables:**
 
@@ -343,6 +350,7 @@ class MultipleResultsQuery(MutableSequence):
     _METHOD = None
     _PROVIDER = None
     _TIMEOUT = 5.0
+    _GEOCODER3_READY = False
 
     @staticmethod
     def _is_valid_url(url: Optional[str]) -> bool:
@@ -353,7 +361,7 @@ class MultipleResultsQuery(MutableSequence):
         """
         try:
             parsed = urlparse(url)
-            mandatory_parts = [parsed.scheme, parsed.netloc]
+            mandatory_parts = [parsed.scheme in ["http", "https"], parsed.netloc]
             return all(mandatory_parts)
         except AttributeError:
             return False
@@ -466,11 +474,11 @@ class MultipleResultsQuery(MutableSequence):
 
         # Check url if it was changed on instance creation
         if url and not self._is_valid_url(url):
-            raise ValueError("url not valid. Got %s", url)
+            raise ValueError(f"url not valid. Got {url}")
         self.url = url or self._URL
 
         # check validity of provider key
-        provider_key = self._get_api_key(key=key)
+        provider_key = self._KEY = self._get_api_key(key=key)
 
         # point to geocode, as a string or coordinates
         self.location = location
@@ -599,7 +607,11 @@ class MultipleResultsQuery(MutableSequence):
             request
         """
         self.is_called = True
-
+        if self._GEOCODER3_READY is False:
+            logger.warning(
+                "This provider behaviour not tested in geocoder3, results may be "
+                "incorrect, or not all features available."
+            )
         # Allow in call overwrite of connection settings
         self.timeout = timeout or self.timeout
         self.proxies = proxies or self.proxies
@@ -612,7 +624,7 @@ class MultipleResultsQuery(MutableSequence):
         has_error = (
             self._catch_errors(json_response) if json_response is not None else True
         )
-        if self.url != self.raw_response.url:
+        if self.url not in self.raw_response.url:
             logger.warning(
                 "Expected request url (%s) and final request url (%s) do not match. "
                 "Probably redirects was made.",
@@ -637,7 +649,7 @@ class MultipleResultsQuery(MutableSequence):
                 timeout=self.timeout,
                 proxies=self.proxies,
             )
-            logger.info("Requested %s", self.url)
+            logger.info("Requested %s", self.raw_response.url)
 
             # check that response is ok
             self.status_code = self.raw_response.status_code
@@ -693,7 +705,7 @@ class MultipleResultsQuery(MutableSequence):
         """
         if not self.is_called:
             raise RuntimeError(
-                "Cannot detect data presence. External request was not made."
+                "Cannot detect data presence. External request was not made. "
                 "Use instance __call__() method to retrieve data."
             )
         return len(self) > 0
@@ -736,7 +748,7 @@ class MultipleResultsQuery(MutableSequence):
 
         stats = []
 
-        if self.has_data:
+        if self.is_called and self.has_data:
             for index, result in enumerate(self):
                 logger.debug(f"Details for result #{index + 1}")
                 logger.debug("---")
