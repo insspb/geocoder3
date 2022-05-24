@@ -62,11 +62,15 @@ from geocoder.providers.gisgraphy import (
 )
 from geocoder.providers.google import (
     GoogleElevationQuery,
+    GoogleElevationResult,
     GooglePlacesQuery,
+    GooglePlacesResult,
     GoogleQuery,
     GoogleResult,
     GoogleReverse,
+    GoogleReverseResult,
     GoogleTimezone,
+    GoogleTimezoneResult,
 )
 from geocoder.providers.here import (
     HereQuery,
