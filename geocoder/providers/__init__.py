@@ -111,7 +111,7 @@ from geocoder.providers.mapzen import (
     MapzenReverse,
     MapzenReverseResult,
 )
-from geocoder.providers.maxmind import MaxmindQuery
+from geocoder.providers.maxmind import MaxmindQuery, MaxmindResults
 from geocoder.providers.opencage import (
     OpenCageQuery,
     OpenCageResult,

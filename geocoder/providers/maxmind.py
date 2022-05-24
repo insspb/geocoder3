@@ -1,4 +1,4 @@
-__all__ = ["MaxmindQuery"]
+__all__ = ["MaxmindQuery", "MaxmindResults"]
 
 import logging
 
