@@ -16,6 +16,7 @@ import hashlib
 import hmac
 import time
 from collections import OrderedDict
+from typing import Optional
 from urllib.parse import urlencode, urlparse
 
 import ratelim
@@ -291,6 +292,36 @@ class GoogleQuery(MultipleResultsQuery):
 
 class GoogleElevationResult(OneResult):
     @property
+    def lat(self) -> Optional[float]:
+        """Latitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lat property."
+        )
+
+    @property
+    def lng(self) -> Optional[float]:
+        """Longitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lng property."
+        )
+
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
+
+    @property
     def status(self):
         return "OK" if self.elevation else "ERROR - No Elevation found"
 
@@ -554,6 +585,36 @@ class GoogleReverse(GoogleQuery):
 class GoogleTimezoneResult(OneResult):
     def __repr__(self):
         return f"<[{self.status}] [{self.timeZoneName}]>"
+
+    @property
+    def lat(self) -> Optional[float]:
+        """Latitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lat property."
+        )
+
+    @property
+    def lng(self) -> Optional[float]:
+        """Latitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lng property."
+        )
+
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
 
     @property
     def ok(self):

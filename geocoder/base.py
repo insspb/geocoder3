@@ -4,6 +4,7 @@ properties, that should be implemented or overridden in all nested providers.
 """
 import json
 import logging
+from abc import ABCMeta, abstractmethod
 from collections import OrderedDict
 from collections.abc import MutableSequence
 from typing import List, MutableMapping, Optional, Tuple, Union
@@ -16,7 +17,7 @@ from geocoder.distance import Distance
 logger = logging.getLogger(__name__)
 
 
-class OneResult(object):
+class OneResult(metaclass=ABCMeta):
     """Container for one (JSON) object returned by provider
 
     **Class variables:**
@@ -121,12 +122,25 @@ class OneResult(object):
         self.object_json = {}
         self._parse_json_with_fieldnames()
 
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        if getattr(cls.lat, "__isabstractmethod__", False):
+            raise NotImplementedError("All subclasses should implement 'lat' property")
+        if getattr(cls.lng, "__isabstractmethod__", False):
+            raise NotImplementedError("All subclasses should implement 'lng' property")
+        if getattr(cls.address, "__isabstractmethod__", False):
+            raise NotImplementedError(
+                "All subclasses should implement 'address' property"
+            )
+
     @property
+    @abstractmethod
     def lat(self) -> Optional[float]:
         """Latitude of the object"""
         return None
 
     @property
+    @abstractmethod
     def lng(self) -> Optional[float]:
         """Longitude of the object"""
         return None
@@ -137,6 +151,7 @@ class OneResult(object):
         return {}
 
     @property
+    @abstractmethod
     def address(self) -> Optional[str]:
         """Object simple string address."""
         return None
