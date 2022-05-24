@@ -78,7 +78,7 @@ from geocoder.providers.here import (
     HereReverse,
     HereReverseResult,
 )
-from geocoder.providers.ipfinder import IpfinderQuery
+from geocoder.providers.ipfinder import IpfinderQuery, IpfinderResult
 from geocoder.providers.ipinfo import IpinfoQuery
 from geocoder.providers.komoot import (
     KomootQuery,
