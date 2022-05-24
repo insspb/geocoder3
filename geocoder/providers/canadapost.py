@@ -14,6 +14,26 @@ from geocoder.keys import canadapost_key_getter
 
 class CanadapostIdResult(OneResult):
     @property
+    def lat(self) -> Optional[float]:
+        """Latitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lat property."
+        )
+
+    @property
+    def lng(self) -> Optional[float]:
+        """Longitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lng property."
+        )
+
+    @property
     def address(self) -> Optional[str]:
         """Object simple string address.
 
@@ -74,6 +94,26 @@ class CanadapostResult(OneResult):
     @property
     def accuracy(self):
         return self.object_raw_json.get("DataLevel")
+
+    @property
+    def lat(self) -> Optional[float]:
+        """Latitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lat property."
+        )
+
+    @property
+    def lng(self) -> Optional[float]:
+        """Longitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lng property."
+        )
 
     @property
     def address(self):

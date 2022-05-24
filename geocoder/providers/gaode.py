@@ -1,6 +1,7 @@
 __all__ = ["GaodeReverse", "GaodeQuery", "GaodeReverseResult", "GaodeReverse"]
 
 import logging
+from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import gaode_key
@@ -96,6 +97,26 @@ class GaodeReverseResult(OneResult):
     @property
     def ok(self):
         return bool(self.address)
+
+    @property
+    def lat(self) -> Optional[float]:
+        """Latitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lat property."
+        )
+
+    @property
+    def lng(self) -> Optional[float]:
+        """Longitude of the object
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support lng property."
+        )
 
     @property
     def address(self):

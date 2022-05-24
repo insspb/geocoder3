@@ -8,6 +8,16 @@ from geocoder.base import MultipleResultsQuery, OneResult
 
 class IpfinderResult(OneResult):
     @property
+    def lat(self) -> Optional[float]:
+        """Latitude of the object"""
+        return self.latitude
+
+    @property
+    def lng(self) -> Optional[float]:
+        """Longitude of the object"""
+        return self.longitude
+
+    @property
     def address(self) -> Optional[str]:
         """Object simple string address.
 
