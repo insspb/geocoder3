@@ -1,4 +1,4 @@
-__all__ = ["GeolyticaQuery"]
+__all__ = ["GeolyticaQuery", "GeolyticaResult"]
 
 import logging
 from typing import Optional
