@@ -137,13 +137,11 @@ class OneResult(metaclass=ABCMeta):
     @abstractmethod
     def lat(self) -> Optional[float]:
         """Latitude of the object"""
-        return None
 
     @property
     @abstractmethod
     def lng(self) -> Optional[float]:
         """Longitude of the object"""
-        return None
 
     @property
     def bbox(self) -> dict:
@@ -154,7 +152,6 @@ class OneResult(metaclass=ABCMeta):
     @abstractmethod
     def address(self) -> Optional[str]:
         """Object simple string address."""
-        return None
 
     def __repr__(self) -> str:
         """Display [address] if available; [lat, lng] otherwise"""
