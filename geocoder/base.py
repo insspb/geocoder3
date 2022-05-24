@@ -612,7 +612,7 @@ class MultipleResultsQuery(MutableSequence):
         has_error = (
             self._catch_errors(json_response) if json_response is not None else True
         )
-        if self.url != self.raw_response.url:
+        if self.url not in self.raw_response.url:
             logger.warning(
                 "Expected request url (%s) and final request url (%s) do not match. "
                 "Probably redirects was made.",
@@ -637,7 +637,7 @@ class MultipleResultsQuery(MutableSequence):
                 timeout=self.timeout,
                 proxies=self.proxies,
             )
-            logger.info("Requested %s", self.url)
+            logger.info("Requested %s", self.raw_response.url)
 
             # check that response is ok
             self.status_code = self.raw_response.status_code
