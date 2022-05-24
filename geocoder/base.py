@@ -291,7 +291,7 @@ class MultipleResultsQuery(MutableSequence):
     :cvar OneResult cls._RESULT_CLASS: Provider's individual result class.
     :cvar str cls._KEY: Provider's default api_key. Usually map to ENV variable
         responsible for key parsing. Can be overwritten with **key** parameter on
-        instance creation
+        instance creation. Shows actually used key when requested from instance.
     :cvar bool cls._KEY_MANDATORY: Special mark for check of mandatory presence of api
         key, for providers with mandatory key requirement
     :cvar str cls._METHOD: Provider's internal method, that should match with api.py
@@ -470,7 +470,7 @@ class MultipleResultsQuery(MutableSequence):
         self.url = url or self._URL
 
         # check validity of provider key
-        provider_key = self._get_api_key(key=key)
+        provider_key = self._KEY = self._get_api_key(key=key)
 
         # point to geocode, as a string or coordinates
         self.location = location
