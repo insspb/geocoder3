@@ -290,6 +290,18 @@ class OneResult(metaclass=ABCMeta):
         """Longitude of the object"""
         return self.lng
 
+    def __eq__(self, other) -> bool:
+        """Magic method to compare two results
+
+        Instances considered equal when have same class and same input JSON
+        """
+        return all(
+            [
+                self.object_raw_json == other.object_raw_json,
+                isinstance(self, other.__class__),
+            ]
+        )
+
 
 class MultipleResultsQuery(MutableSequence):
     """Base results and query manager container
