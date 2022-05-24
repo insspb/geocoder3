@@ -4,6 +4,7 @@ import hashlib
 import logging
 import re
 from collections import OrderedDict
+from typing import Optional
 from urllib.parse import quote, quote_plus, urlencode
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -19,6 +20,16 @@ class BaiduResult(OneResult):
     @property
     def lng(self):
         return self.object_raw_json.get("location", {}).get("lng")
+
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
 
     @property
     def quality(self):

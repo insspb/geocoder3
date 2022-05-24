@@ -11,6 +11,7 @@ import csv
 import io
 import logging
 import re
+from typing import Optional
 
 import requests
 
@@ -239,6 +240,16 @@ class USCensusBatch(MultipleResultsQuery):
 
 
 class USCensusReverseResult(OneResult):
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
+
     @property
     def ok(self):
         return bool(self.object_raw_json["States"])

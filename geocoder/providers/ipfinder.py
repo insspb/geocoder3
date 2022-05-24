@@ -1,11 +1,22 @@
 __all__ = ["IpfinderQuery", "IpfinderResult"]
 
 import logging
+from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class IpfinderResult(OneResult):
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
+
     @property
     def status(self):
         return self.object_raw_json.get("status")

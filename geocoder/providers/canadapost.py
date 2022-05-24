@@ -6,12 +6,23 @@ __all__ = [
 ]
 
 import logging
+from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import canadapost_key_getter
 
 
 class CanadapostIdResult(OneResult):
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
+
     @property
     def ok(self):
         return bool(self.item_id)

@@ -17,6 +17,7 @@ import io
 import logging
 import re
 import time
+from typing import Optional
 
 import requests
 
@@ -254,6 +255,16 @@ class BingBatchResult(OneResult):
         coord = self._content
         if coord:
             return coord[1]
+
+    @property
+    def address(self) -> Optional[str]:
+        """Object simple string address.
+
+        TODO: Implement during geocode3 migration.
+        """
+        raise NotImplementedError(
+            f"Provider {self.__class__.__name__} does not support address property."
+        )
 
     def debug(self):
         logger.debug("%s result", self.__class__.__name__)
