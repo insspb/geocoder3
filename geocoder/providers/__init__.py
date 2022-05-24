@@ -132,4 +132,9 @@ from geocoder.providers.uscensus import (
 )
 from geocoder.providers.w3w import W3WQuery, W3WResult, W3WReverse, W3WReverseResult
 from geocoder.providers.yahoo import YahooQuery, YahooResult
-from geocoder.providers.yandex import YandexQuery, YandexResult, YandexReverse
+from geocoder.providers.yandex import (
+    YandexQuery,
+    YandexResult,
+    YandexReverse,
+    YandexReverseResult,
+)
