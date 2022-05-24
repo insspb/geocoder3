@@ -121,7 +121,7 @@ from geocoder.providers.opencage import (
 from geocoder.providers.osm import OsmQuery, OsmQueryDetail, OsmResult, OsmReverse
 from geocoder.providers.tamu import TamuQuery, TamuResult
 from geocoder.providers.tgos import TgosQuery, TgosResult
-from geocoder.providers.tomtom import TomtomQuery
+from geocoder.providers.tomtom import TomtomQuery, TomtomResult
 from geocoder.providers.uscensus import (
     USCensusBatch,
     USCensusBatchResult,

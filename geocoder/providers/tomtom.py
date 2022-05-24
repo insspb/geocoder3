@@ -1,4 +1,4 @@
-__all__ = ["TomtomQuery"]
+__all__ = ["TomtomQuery", "TomtomResult"]
 
 import logging
 
