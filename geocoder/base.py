@@ -736,7 +736,7 @@ class MultipleResultsQuery(MutableSequence):
 
         stats = []
 
-        if self.has_data:
+        if self.is_called and self.has_data:
             for index, result in enumerate(self):
                 logger.debug(f"Details for result #{index + 1}")
                 logger.debug("---")
