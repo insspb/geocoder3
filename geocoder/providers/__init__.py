@@ -86,7 +86,11 @@ from geocoder.providers.komoot import (
     KomootReverse,
     KomootReverseResult,
 )
-from geocoder.providers.locationiq import LocationIQQuery, LocationIQReverse
+from geocoder.providers.locationiq import (
+    LocationIQQuery,
+    LocationIQResult,
+    LocationIQReverse,
+)
 from geocoder.providers.mapbox import (
     MapboxQuery,
     MapboxResult,
