@@ -1,4 +1,4 @@
-__all__ = ["GaodeReverse", "GaodeQuery"]
+__all__ = ["GaodeReverse", "GaodeQuery", "GaodeReverseResult", "GaodeReverse"]
 
 import logging
 
