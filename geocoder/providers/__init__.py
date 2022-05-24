@@ -37,7 +37,11 @@ from geocoder.providers.gaode import (
     GaodeReverse,
     GaodeReverseResult,
 )
-from geocoder.providers.geocodefarm import GeocodeFarmQuery, GeocodeFarmReverse
+from geocoder.providers.geocodefarm import (
+    GeocodeFarmQuery,
+    GeocodeFarmResult,
+    GeocodeFarmReverse,
+)
 from geocoder.providers.geocodexyz import GeocodeXYZQuery
 from geocoder.providers.geolytica import GeolyticaQuery
 from geocoder.providers.geonames import (
