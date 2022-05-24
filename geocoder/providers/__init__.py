@@ -58,6 +58,7 @@ from geocoder.providers.gisgraphy import (
     GisgraphyQuery,
     GisgraphyResult,
     GisgraphyReverse,
+    GisgraphyReverseResult,
 )
 from geocoder.providers.google import (
     GoogleElevationQuery,
