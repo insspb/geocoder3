@@ -466,7 +466,7 @@ class MultipleResultsQuery(MutableSequence):
 
         # Check url if it was changed on instance creation
         if url and not self._is_valid_url(url):
-            raise ValueError("url not valid. Got %s", url)
+            raise ValueError(f"url not valid. Got {url}")
         self.url = url or self._URL
 
         # check validity of provider key
