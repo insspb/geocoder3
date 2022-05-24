@@ -1,4 +1,4 @@
-__all__ = ["GeocodeXYZQuery"]
+__all__ = ["GeocodeXYZQuery", "GeocodeXYZResult"]
 import logging
 from typing import Optional
 

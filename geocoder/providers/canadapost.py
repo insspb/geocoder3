@@ -1,4 +1,9 @@
-__all__ = ["CanadapostQuery"]
+__all__ = [
+    "CanadapostIdResult",
+    "CanadapostIdQuery",
+    "CanadapostResult",
+    "CanadapostQuery",
+]
 
 import logging
 

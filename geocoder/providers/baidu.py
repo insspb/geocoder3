@@ -1,4 +1,4 @@
-__all__ = ["BaiduQuery"]
+__all__ = ["BaiduQuery", "BaiduResult", "BaiduReverseResult", "BaiduReverse"]
 
 import hashlib
 import logging

@@ -1,4 +1,4 @@
-__all__ = ["TamuQuery"]
+__all__ = ["TamuQuery", "TamuResult"]
 
 import logging
 

@@ -1,4 +1,4 @@
-__all__ = ["FreeGeoIPQuery"]
+__all__ = ["FreeGeoIPResult", "FreeGeoIPQuery"]
 
 import logging
 

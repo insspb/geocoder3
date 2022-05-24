@@ -1,4 +1,4 @@
-__all__ = ["IpfinderQuery"]
+__all__ = ["IpfinderQuery", "IpfinderResult"]
 
 import logging
 

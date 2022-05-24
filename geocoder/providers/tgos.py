@@ -1,4 +1,4 @@
-__all__ = ["TgosQuery"]
+__all__ = ["TgosQuery", "TgosResult"]
 
 import logging
 import re
