@@ -353,7 +353,7 @@ class MultipleResultsQuery(MutableSequence):
         """
         try:
             parsed = urlparse(url)
-            mandatory_parts = [parsed.scheme, parsed.netloc]
+            mandatory_parts = [parsed.scheme in ["http", "https"], parsed.netloc]
             return all(mandatory_parts)
         except AttributeError:
             return False
