@@ -47,10 +47,12 @@ from geocoder.providers.geolytica import GeolyticaQuery, GeolyticaResult
 from geocoder.providers.geonames import (
     GeonamesChildren,
     GeonamesDetails,
+    GeonamesFullResult,
     GeonamesHierarchy,
     GeonamesQuery,
     GeonamesResult,
     GeonamesTimezone,
+    GeonamesTimezoneResult,
 )
 from geocoder.providers.gisgraphy import (
     GisgraphyQuery,
