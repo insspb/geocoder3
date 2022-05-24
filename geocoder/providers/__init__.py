@@ -30,7 +30,7 @@ from geocoder.providers.canadapost import (
     CanadapostQuery,
     CanadapostResult,
 )
-from geocoder.providers.freegeoip import FreeGeoIPQuery
+from geocoder.providers.freegeoip import FreeGeoIPQuery, FreeGeoIPResult
 from geocoder.providers.gaode import GaodeQuery, GaodeReverse
 from geocoder.providers.geocodefarm import GeocodeFarmQuery, GeocodeFarmReverse
 from geocoder.providers.geocodexyz import GeocodeXYZQuery
