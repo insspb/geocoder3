@@ -130,6 +130,6 @@ from geocoder.providers.uscensus import (
     USCensusReverse,
     USCensusReverseResult,
 )
-from geocoder.providers.w3w import W3WQuery, W3WResult, W3WReverse
+from geocoder.providers.w3w import W3WQuery, W3WResult, W3WReverse, W3WReverseResult
 from geocoder.providers.yahoo import YahooQuery
 from geocoder.providers.yandex import YandexQuery, YandexResult, YandexReverse
