@@ -28,7 +28,7 @@ documentation for exact provider.
 .. autoclass:: geocoder.base.OneResult
    :members:
    :undoc-members:
-   :special-members: __init__
+   :special-members: __init__, __eq__
    :private-members: _parse_json_with_fieldnames, _get_bbox
 ```
 

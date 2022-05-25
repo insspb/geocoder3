@@ -137,13 +137,11 @@ class OneResult(metaclass=ABCMeta):
     @abstractmethod
     def lat(self) -> Optional[float]:
         """Latitude of the object"""
-        return None
 
     @property
     @abstractmethod
     def lng(self) -> Optional[float]:
         """Longitude of the object"""
-        return None
 
     @property
     def bbox(self) -> dict:
@@ -154,7 +152,6 @@ class OneResult(metaclass=ABCMeta):
     @abstractmethod
     def address(self) -> Optional[str]:
         """Object simple string address."""
-        return None
 
     def __repr__(self) -> str:
         """Display [address] if available; [lat, lng] otherwise"""
@@ -292,6 +289,18 @@ class OneResult(metaclass=ABCMeta):
     def x(self) -> Optional[float]:
         """Longitude of the object"""
         return self.lng
+
+    def __eq__(self, other) -> bool:
+        """Magic method to compare two results
+
+        Instances considered equal when have same class and same input JSON
+        """
+        return all(
+            [
+                self.object_raw_json == other.object_raw_json,
+                isinstance(self, other.__class__),
+            ]
+        )
 
 
 class MultipleResultsQuery(MutableSequence):
