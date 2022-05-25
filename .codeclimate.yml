@@ -1,3 +1,11 @@
+version: "2"
+checks:
+  file-lines:
+    enabled: false
+  method-count:
+    enabled: false
+  method-lines:
+    enabled: false
 plugins:
   markdownlint:
     enabled: true
@@ -5,3 +13,6 @@ plugins:
       - ".github/"
   editorconfig:
     enabled: true
+exclude_patterns:
+  - "tests/"
+  - "tests.old/"
