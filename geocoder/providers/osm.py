@@ -32,10 +32,10 @@ class OsmResult(OneResult):
     def bbox(self) -> dict:
         _boundingbox = self.object_raw_json.get("boundingbox")
         if _boundingbox:
-            south = float(_boundingbox[0])
-            west = float(_boundingbox[2])
-            north = float(_boundingbox[1])
-            east = float(_boundingbox[3])
+            south = _boundingbox[0]
+            west = _boundingbox[2]
+            north = _boundingbox[1]
+            east = _boundingbox[3]
             return self._get_bbox(south, west, north, east)
 
     # ========================== #

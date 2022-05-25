@@ -28,9 +28,7 @@ class YandexResult(OneResult):
             east, north = envelope.get("upperCorner", "").split(" ")
             west, south = envelope.get("lowerCorner", "").split(" ")
             try:
-                return self._get_bbox(
-                    float(south), float(west), float(north), float(east)
-                )
+                return self._get_bbox(south, west, north, east)
             except Exception:
                 pass
 
