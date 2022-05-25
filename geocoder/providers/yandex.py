@@ -1,7 +1,4 @@
 __all__ = ["YandexResult", "YandexQuery", "YandexReverse", "YandexReverseResult"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import yandex_key
 from geocoder.location import Location
@@ -191,9 +188,3 @@ class YandexReverse(YandexQuery):
             "apikey": provider_key,
             "results": max_results,
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = YandexQuery("1552 Payette dr., Ottawa", max_results=3)
-    g.debug()

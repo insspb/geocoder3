@@ -552,8 +552,3 @@ class BingBatchReverse(BingBatch):
             ]
             for row in csv.DictReader(result)
         }
-
-
-if __name__ == "__main__":
-    g = BingQuery("453 Booth Street, Ottawa Ontario")
-    g.debug()

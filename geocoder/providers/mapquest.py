@@ -197,8 +197,3 @@ class MapquestReverse(MapquestQuery):
             "maxResults": 1,
             "outFormat": "json",
         }
-
-
-if __name__ == "__main__":
-    g = MapquestQuery("Ottawa", max_results=3)
-    g.debug()

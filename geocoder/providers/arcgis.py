@@ -1,8 +1,4 @@
 __all__ = ["ArcgisQuery", "ArcgisResult", "ArcgisReverseResult", "ArcgisReverse"]
-
-import json
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import Location
 
@@ -171,12 +167,3 @@ class ArcgisReverse(ArcgisQuery):
             self.error = error["message"]
 
         return self.error
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = ArcgisQuery("Toronto")
-    g.debug()
-    g = ArcgisQuery("Ottawa, Ontario", max_results=5)
-    print(json.dumps(g.geojson, indent=4))
-    print([result.address for result in g][:3])

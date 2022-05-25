@@ -1,6 +1,4 @@
 __all__ = ["TgosQuery", "TgosResult"]
-
-import logging
 import re
 
 import requests
@@ -218,9 +216,3 @@ class TgosQuery(MultipleResultsQuery):
 
         # set default result to use for delegation
         self.current_result = len(self) > 0 and self[0]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = TgosQuery("台北市內湖區內湖路一段735號", language="en")
-    g.debug()

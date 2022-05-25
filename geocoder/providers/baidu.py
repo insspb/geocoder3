@@ -1,7 +1,5 @@
 __all__ = ["BaiduQuery", "BaiduResult", "BaiduReverseResult", "BaiduReverse"]
-
 import hashlib
-import logging
 import re
 from collections import OrderedDict
 from typing import Optional
@@ -204,9 +202,3 @@ class BaiduReverse(BaiduQuery):
             params["accept-language"] = kwargs["lang_code"]
 
         return params
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = BaiduQuery("将台路", key="")
-    g.debug()

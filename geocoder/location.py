@@ -215,8 +215,3 @@ class BBox(object):
             "northeast": [self.north, self.east],
             "southwest": [self.south, self.west],
         }
-
-
-if __name__ == "__main__":
-    loc = Location([0.0, 0.0])
-    print(loc.lng)

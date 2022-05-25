@@ -1,7 +1,4 @@
 __all__ = ["YahooQuery", "YahooResult"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 
 
@@ -95,9 +92,3 @@ class YahooQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response["Result"]]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = YahooQuery("1552 Payette dr., Ottawa, ON")
-    g.debug()

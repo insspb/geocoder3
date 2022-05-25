@@ -1,7 +1,4 @@
 __all__ = ["MaxmindQuery", "MaxmindResults"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 
 
@@ -126,9 +123,3 @@ class MaxmindQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = MaxmindQuery("8.8.8.8")
-    g.debug()

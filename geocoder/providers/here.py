@@ -4,9 +4,6 @@ __all__ = [
     "HereReverseResult",
     "HereReverse",
 ]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import here_app_code, here_app_id
 from geocoder.location import BBox, Location
@@ -200,9 +197,3 @@ class HereReverse(HereQuery):
             }
         )
         return params
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = HereQuery("New York City")
-    g.debug()

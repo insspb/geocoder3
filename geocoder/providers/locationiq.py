@@ -1,8 +1,4 @@
 __all__ = ["LocationIQQuery", "LocationIQReverse", "LocationIQResult"]
-
-import json
-import logging
-
 from geocoder.keys import locationiq_key
 from geocoder.location import Location
 from geocoder.providers.osm import OsmQuery, OsmResult
@@ -54,11 +50,3 @@ class LocationIQReverse(LocationIQQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = LocationIQQuery("Ottawa, Ontario")
-    g.debug()
-    g = LocationIQQuery("Ottawa, Ontario", max_results=5)
-    print(json.dumps(g.geojson, indent=4))

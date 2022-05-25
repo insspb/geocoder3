@@ -90,8 +90,3 @@ def haversine(point1, point2, units="kilometers"):
         return units_calculation[LOOKUP_UNITS[units]]
     except KeyError as error:
         raise ValueError("Unknown units of measurement") from error
-
-
-if __name__ == "__main__":
-    d = Distance("Ottawa, ON", "Toronto, ON", "Montreal, QC")
-    print(d)

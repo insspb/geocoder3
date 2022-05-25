@@ -1,7 +1,4 @@
 __all__ = ["TamuQuery", "TamuResult"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import tamu_key
 
@@ -171,12 +168,3 @@ class TamuQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return json_response["OutputGeocodes"]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = TamuQuery(
-        "595 Market Street", city="San Francisco", state="CA", zipcode="94105"
-    )
-
-    g.debug()

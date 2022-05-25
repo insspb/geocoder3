@@ -1,6 +1,4 @@
 __all__ = ["GaodeReverse", "GaodeQuery", "GaodeReverseResult", "GaodeReverse"]
-
-import logging
 from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -192,9 +190,3 @@ class GaodeReverse(GaodeQuery):
 
     def _adapt_results(self, json_response):
         return [json_response["regeocode"]]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = GaodeQuery("将台路")
-    g.debug()
