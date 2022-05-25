@@ -1,5 +1,4 @@
 __all__ = ["GeocodeXYZQuery", "GeocodeXYZResult"]
-import logging
 from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -115,9 +114,3 @@ class GeocodeXYZQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = GeocodeXYZQuery("1552 Payette dr., Ottawa")
-    g.debug()

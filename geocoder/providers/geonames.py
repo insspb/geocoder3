@@ -8,8 +8,6 @@ __all__ = [
     "GeonamesTimezoneResult",
     "GeonamesTimezone",
 ]
-
-import json
 import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -374,9 +372,3 @@ class GeonamesTimezone(GeonamesQuery):
         # the returned JSON contains the object.
         # Need to wrap it into an array
         return [json_response]
-
-
-if __name__ == "__main__":
-    g = GeonamesQuery("Ottawa, Ontario", max_results=1)
-    print(json.dumps(g.geojson, indent=4))
-    g.debug()

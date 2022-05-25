@@ -1,7 +1,4 @@
 __all__ = ["FreeGeoIPResult", "FreeGeoIPQuery"]
-
-import logging
-
 import ratelim
 import requests
 
@@ -121,9 +118,3 @@ class FreeGeoIPQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = FreeGeoIPQuery("99.240.181.199")
-    g.debug()

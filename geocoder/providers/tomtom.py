@@ -1,7 +1,4 @@
 __all__ = ["TomtomQuery", "TomtomResult"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import tomtom_key
 from geocoder.location import BBox
@@ -121,9 +118,3 @@ class TomtomQuery(MultipleResultsQuery):
             self.status_code = 401
 
         return self.error
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = TomtomQuery("1552 Payette dr., Ottawa")
-    g.debug()

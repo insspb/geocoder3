@@ -4,8 +4,6 @@ __all__ = [
     "W3WReverseResult",
     "W3WReverse",
 ]
-
-import logging
 from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -110,9 +108,3 @@ class W3WReverse(W3WQuery):
             "coords": location,
             "key": provider_key,
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = W3WQuery("embedded.fizzled.trial")
-    g.debug()

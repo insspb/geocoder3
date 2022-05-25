@@ -165,11 +165,3 @@ class MapboxReverse(MapboxQuery):
         self.location = str(Location(location))
         lat, lng = Location(location).latlng
         self.url = self.url.format(lng=lng, lat=lat)
-
-
-if __name__ == "__main__":
-    g = MapboxQuery("200 Queen Street", proximity=[45.3, -66.1])
-    print(g.address)
-    g = MapboxQuery("200 Queen Street")
-    print(g.address)
-    g.debug()

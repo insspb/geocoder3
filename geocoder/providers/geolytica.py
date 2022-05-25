@@ -1,6 +1,4 @@
 __all__ = ["GeolyticaQuery", "GeolyticaResult"]
-
-import logging
 from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -95,9 +93,3 @@ class GeolyticaQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = GeolyticaQuery("1552 Payette dr., Ottawa")
-    g.debug()

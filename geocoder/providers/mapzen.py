@@ -1,7 +1,4 @@
 __all__ = ["MapzenResult", "MapzenQuery", "MapzenReverseResult", "MapzenReverse"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapzen_key
 from geocoder.location import BBox, Location
@@ -134,9 +131,3 @@ class MapzenReverse(MapzenQuery):
             "boundary.country": kwargs.get("country"),
             "api_key": provider_key,
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = MapzenQuery("201 Spear Street, San Francisco")
-    g.debug()

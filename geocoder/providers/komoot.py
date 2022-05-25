@@ -4,9 +4,6 @@ __all__ = [
     "KomootReverseResult",
     "KomootReverse",
 ]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import BBox, Location
 
@@ -158,9 +155,3 @@ class KomootReverse(KomootQuery):
             "lat": location.lat,
             "lon": location.lng,
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = KomootQuery("Ottawa Ontario", max_results=3)
-    g.debug()

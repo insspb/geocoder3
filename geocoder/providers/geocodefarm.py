@@ -1,7 +1,4 @@
 __all__ = ["GeocodeFarmResult", "GeocodeFarmQuery", "GeocodeFarmReverse"]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geocodefarm_key
 from geocoder.location import Location
@@ -227,9 +224,3 @@ class GeocodeFarmReverse(GeocodeFarmQuery):
             "lang": kwargs.get("lang", ""),
             "country": kwargs.get("country", ""),
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = GeocodeFarmQuery("New York City")
-    g.debug()

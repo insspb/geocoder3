@@ -668,8 +668,3 @@ class GoogleTimezone(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    g = GoogleQuery("11 Wall Street, New York")
-    g.debug()

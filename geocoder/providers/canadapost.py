@@ -4,8 +4,6 @@ __all__ = [
     "CanadapostResult",
     "CanadapostQuery",
 ]
-
-import logging
 from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -218,9 +216,3 @@ class CanadapostQuery(MultipleResultsQuery):
     @property
     def canadapost_api_key(self):
         return self.key
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = CanadapostQuery("453 Booth Street, ON")
-    g.debug()

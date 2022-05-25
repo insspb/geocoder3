@@ -1,6 +1,4 @@
 __all__ = ["IpfinderQuery", "IpfinderResult"]
-
-import logging
 from typing import Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
@@ -242,9 +240,3 @@ class IpfinderQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         return [json_response]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = IpfinderQuery("8.8.8.8")
-    g.debug()

@@ -4,9 +4,6 @@ __all__ = [
     "OpenCageReverseResult",
     "OpenCageReverse",
 ]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import opencage_key
 from geocoder.location import BBox, Location
@@ -405,9 +402,3 @@ class OpenCageReverse(OpenCageQuery):
             "query": location,
             "key": provider_key,
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = OpenCageQuery("1552 Payette dr., Ottawa")
-    g.debug()

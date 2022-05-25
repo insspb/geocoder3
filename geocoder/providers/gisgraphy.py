@@ -4,9 +4,6 @@ __all__ = [
     "GisgraphyReverseResult",
     "GisgraphyReverse",
 ]
-
-import logging
-
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import Location
 
@@ -110,9 +107,3 @@ class GisgraphyReverse(GisgraphyQuery):
             "lng": location.lng,
             "format": "json",
         }
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = GisgraphyQuery("Ottawa Ontario", max_results=3)
-    g.debug()

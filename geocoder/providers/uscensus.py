@@ -357,9 +357,3 @@ class USCensusReverse(USCensusQuery):
 
     def _adapt_results(self, json_response):
         return [json_response["result"]["geographies"]]
-
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    g = USCensusQuery("4600 Silver Hill Road, Suitland, MD 20746", benchmark=9)
-    g.debug()
