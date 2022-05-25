@@ -1,4 +1,6 @@
 __all__ = ["ArcgisQuery", "ArcgisResult", "ArcgisReverseResult", "ArcgisReverse"]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import Location
 
@@ -32,14 +34,16 @@ class ArcgisResult(OneResult):
         return self._feature.get("attributes", {}).get("Addr_Type", "")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         _extent = self.object_raw_json.get("extent")
         if _extent:
             south = _extent.get("ymin")
             west = _extent.get("xmin")
             north = _extent.get("ymax")
             east = _extent.get("xmax")
-            return self._get_bbox(south, west, north, east)
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
 
 class ArcgisQuery(MultipleResultsQuery):

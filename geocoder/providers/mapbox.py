@@ -1,5 +1,7 @@
 __all__ = ["MapboxResult", "MapboxQuery", "MapboxReverseResult", "MapboxReverse"]
 
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapbox_access_token
 from geocoder.location import BBox, Location
@@ -71,14 +73,16 @@ class MapboxResult(OneResult):
         return self._geometry.get("interpolated")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         _bbox = self.object_raw_json.get("bbox")
         if _bbox:
             west = _bbox[0]
             south = _bbox[1]
             east = _bbox[2]
             north = _bbox[3]
-            return self._get_bbox(south, west, north, east)
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
 
 class MapboxQuery(MultipleResultsQuery):

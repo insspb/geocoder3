@@ -1,7 +1,8 @@
 __all__ = ["TomtomQuery", "TomtomResult"]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import tomtom_key
-from geocoder.location import BBox
 
 
 class TomtomResult(OneResult):
@@ -26,16 +27,16 @@ class TomtomResult(OneResult):
         return self.object_raw_json.get("type")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         viewport = self.object_raw_json.get("viewport", {})
         if viewport:
-            bbox = {
-                "south": viewport.get("btmRightPoint")["lon"],
-                "west": viewport.get("btmRightPoint")["lat"],
-                "north": viewport.get("topLeftPoint")["lon"],
-                "east": viewport.get("topLeftPoint")["lat"],
-            }
-            return BBox.factory(bbox).as_dict
+            south = viewport.get("btmRightPoint")["lon"]
+            west = viewport.get("btmRightPoint")["lat"]
+            north = viewport.get("topLeftPoint")["lon"]
+            east = viewport.get("topLeftPoint")["lat"]
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
     @property
     def address(self):

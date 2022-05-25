@@ -1,7 +1,7 @@
 __all__ = ["MapzenResult", "MapzenQuery", "MapzenReverseResult", "MapzenReverse"]
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapzen_key
-from geocoder.location import BBox, Location
+from geocoder.location import Location
 
 
 class MapzenResult(OneResult):
@@ -20,10 +20,6 @@ class MapzenResult(OneResult):
     @property
     def lng(self):
         return self._geometry["coordinates"][0]
-
-    @property
-    def bbox(self):
-        return BBox.factory(self.latlng).as_dict
 
     @property
     def address(self):

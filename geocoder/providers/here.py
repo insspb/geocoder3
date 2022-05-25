@@ -4,6 +4,8 @@ __all__ = [
     "HereReverseResult",
     "HereReverse",
 ]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import here_app_code, here_app_id
 from geocoder.location import BBox, Location
@@ -77,12 +79,17 @@ class HereResult(OneResult):
         return self.object_raw_json.get("MatchType")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         south = self._mapview["BottomRight"].get("Latitude")
         north = self._mapview["TopLeft"].get("Latitude")
         west = self._mapview["TopLeft"].get("Longitude")
         east = self._mapview["BottomRight"].get("Longitude")
-        return self._get_bbox(south, west, north, east)
+        return (
+            [float(west), float(south), float(east), float(north)]
+            if all([west, south, east, north])
+            else []
+        )
 
 
 class HereQuery(MultipleResultsQuery):

@@ -11,13 +11,12 @@ __all__ = [
     "BingBatchReverseResult",
     "BingBatchReverse",
 ]
-
 import csv
 import io
 import logging
 import re
 import time
-from typing import Optional
+from typing import List, Optional
 
 import requests
 
@@ -95,14 +94,16 @@ class BingResult(OneResult):
         return self._address.get("postalCode")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         _bbox = self.object_raw_json.get("bbox")
         if _bbox:
             south = _bbox[0]
             north = _bbox[2]
             west = _bbox[1]
             east = _bbox[3]
-            return self._get_bbox(south, west, north, east)
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
 
 class BingQuery(MultipleResultsQuery):

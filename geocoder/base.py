@@ -36,10 +36,6 @@ class OneResult(metaclass=ABCMeta):
     :ivar self.object_raw_json: Raw json for object, passed by
         :func:`MultipleResultsQuery._parse_results`
     :ivar self.object_json: Result of :func:`OneResult._parse_json_with_fieldnames`
-    :ivar self.northeast: Placeholder for northeast corner in :func:`_get_bbox` results
-    :ivar self.northwest: Placeholder for northwest corner in :func:`_get_bbox` results
-    :ivar self.southeast: Placeholder for southeast corner in :func:`_get_bbox` results
-    :ivar self.southwest: Placeholder for southwest corner in :func:`_get_bbox` results
     :ivar self.fieldnames: Fieldnames list generated in
         :func:`OneResult._parse_json_with_fieldnames`
 
@@ -85,10 +81,6 @@ class OneResult(metaclass=ABCMeta):
         "proxies",
         "road",
         "xy",
-        "northeast",
-        "northwest",
-        "southeast",
-        "southwest",
         "road_long",
         "city_long",
         "state_long",
@@ -110,13 +102,6 @@ class OneResult(metaclass=ABCMeta):
             :func:`MultipleResultsQuery.__call__`
         """
         self.object_raw_json = json_content
-
-        # attributes required to compute bbox
-        self.northeast = []
-        self.northwest = []
-        self.southeast = []
-        self.southwest = []
-
         # attributes returned in JSON format
         self.fieldnames = []
         self.object_json = {}
@@ -146,9 +131,48 @@ class OneResult(metaclass=ABCMeta):
         return None
 
     @property
-    def bbox(self) -> dict:
+    def west(self) -> Optional[float]:
+        """Return optional west coordinate of bbox, if available."""
+        return self.bbox[0] if self.bbox else None
+
+    @property
+    def south(self) -> Optional[float]:
+        """Return optional south coordinate of bbox, if available."""
+        return self.bbox[1] if self.bbox else None
+
+    @property
+    def east(self) -> Optional[float]:
+        """Return optional east coordinate of bbox, if available."""
+        return self.bbox[2] if self.bbox else None
+
+    @property
+    def north(self) -> Optional[float]:
+        """Return optional north coordinate of bbox, if available."""
+        return self.bbox[3] if self.bbox else None
+
+    @property
+    def northeast(self) -> List[float]:
+        """Return north-east list of coordinates for bounds, if available."""
+        return [self.north, self.east] if self.bbox else []
+
+    @property
+    def southwest(self) -> List[float]:
+        """Return south-west list of coordinates for bounds, if available."""
+        return [self.south, self.west] if self.bbox else []
+
+    @property
+    def bbox(self) -> List[float]:
         """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
-        return {}
+        return []
+
+    @property
+    def bounds(self) -> dict:
+        """Output answer as Google Maps API bounds if it can be calculated/retrieved."""
+        return (
+            {"northeast": self.northeast, "southwest": self.southwest}
+            if self.northeast and self.southwest
+            else {}
+        )
 
     @property
     @abstractmethod
@@ -203,31 +227,12 @@ class OneResult(metaclass=ABCMeta):
         logger.debug("------------")
         logger.debug(json.dumps(self.object_json, indent=4))
 
-    def _get_bbox(self, south, west, north, east) -> dict:
-        """Wrapper for bbox data generation"""
-        if not all([south, east, north, west]):
-            return {}
-
-        # South Latitude, West Longitude, North Latitude, East Longitude
-        self.south = float(south)
-        self.west = float(west)
-        self.north = float(north)
-        self.east = float(east)
-
-        # Bounding Box Corners
-        self.northeast = [self.north, self.east]
-        self.northwest = [self.north, self.west]
-        self.southwest = [self.south, self.west]
-        self.southeast = [self.south, self.east]
-
-        return dict(northeast=self.northeast, southwest=self.southwest)
-
     @property
     def confidence(self) -> int:
         """Is as a measure of how confident we are that centre point coordinates
         returned for the result precisely reflect the result.
         """
-        if not self.bbox:
+        if not self.bounds:
             # Cannot determine score
             return 0
 
@@ -262,8 +267,8 @@ class OneResult(metaclass=ABCMeta):
             "properties": self.object_json,
         }
         if self.bbox:
-            feature["bbox"] = [self.west, self.south, self.east, self.north]
-            feature["properties"]["bbox"] = feature["bbox"]
+            feature["bbox"] = self.bbox
+            feature["properties"]["bbox"] = self.bbox
         if self.geometry:
             feature["geometry"] = self.geometry
         return feature
