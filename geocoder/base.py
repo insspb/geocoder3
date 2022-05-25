@@ -36,10 +36,6 @@ class OneResult(metaclass=ABCMeta):
     :ivar self.object_raw_json: Raw json for object, passed by
         :func:`MultipleResultsQuery._parse_results`
     :ivar self.object_json: Result of :func:`OneResult._parse_json_with_fieldnames`
-    :ivar self.northeast: Placeholder for northeast corner in :func:`_get_bbox` results
-    :ivar self.northwest: Placeholder for northwest corner in :func:`_get_bbox` results
-    :ivar self.southeast: Placeholder for southeast corner in :func:`_get_bbox` results
-    :ivar self.southwest: Placeholder for southwest corner in :func:`_get_bbox` results
     :ivar self.fieldnames: Fieldnames list generated in
         :func:`OneResult._parse_json_with_fieldnames`
 
@@ -85,10 +81,6 @@ class OneResult(metaclass=ABCMeta):
         "proxies",
         "road",
         "xy",
-        "northeast",
-        "northwest",
-        "southeast",
-        "southwest",
         "road_long",
         "city_long",
         "state_long",
@@ -110,13 +102,6 @@ class OneResult(metaclass=ABCMeta):
             :func:`MultipleResultsQuery.__call__`
         """
         self.object_raw_json = json_content
-
-        # attributes required to compute bbox
-        self.northeast = []
-        self.northwest = []
-        self.southeast = []
-        self.southwest = []
-
         # attributes returned in JSON format
         self.fieldnames = []
         self.object_json = {}
