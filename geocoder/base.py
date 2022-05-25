@@ -131,9 +131,48 @@ class OneResult(metaclass=ABCMeta):
         return None
 
     @property
-    def bbox(self) -> dict:
+    def west(self) -> Optional[float]:
+        """Return optional west coordinate of bbox, if available."""
+        return self.bbox[0] if self.bbox else None
+
+    @property
+    def south(self) -> Optional[float]:
+        """Return optional south coordinate of bbox, if available."""
+        return self.bbox[1] if self.bbox else None
+
+    @property
+    def east(self) -> Optional[float]:
+        """Return optional east coordinate of bbox, if available."""
+        return self.bbox[2] if self.bbox else None
+
+    @property
+    def north(self) -> Optional[float]:
+        """Return optional north coordinate of bbox, if available."""
+        return self.bbox[3] if self.bbox else None
+
+    @property
+    def northeast(self) -> List[float]:
+        """Return north-east list of coordinates for bounds, if available."""
+        return [self.north, self.east] if self.bbox else []
+
+    @property
+    def southwest(self) -> List[float]:
+        """Return south-west list of coordinates for bounds, if available."""
+        return [self.south, self.west] if self.bbox else []
+
+    @property
+    def bbox(self) -> List[float]:
         """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
-        return {}
+        return []
+
+    @property
+    def bounds(self) -> dict:
+        """Output answer as Google Maps API bounds if it can be calculated/retrieved."""
+        return (
+            {"northeast": self.northeast, "southwest": self.southwest}
+            if self.northeast and self.southwest
+            else {}
+        )
 
     @property
     @abstractmethod
@@ -212,7 +251,7 @@ class OneResult(metaclass=ABCMeta):
         """Is as a measure of how confident we are that centre point coordinates
         returned for the result precisely reflect the result.
         """
-        if not self.bbox:
+        if not self.bounds:
             # Cannot determine score
             return 0
 
@@ -247,8 +286,8 @@ class OneResult(metaclass=ABCMeta):
             "properties": self.object_json,
         }
         if self.bbox:
-            feature["bbox"] = [self.west, self.south, self.east, self.north]
-            feature["properties"]["bbox"] = feature["bbox"]
+            feature["bbox"] = self.bbox
+            feature["properties"]["bbox"] = self.bbox
         if self.geometry:
             feature["geometry"] = self.geometry
         return feature
