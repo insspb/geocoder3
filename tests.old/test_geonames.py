@@ -147,7 +147,7 @@ def test_details():
         assert g.timeZoneName == "America/Toronto"
         assert g.rawOffset == -5
         assert g.dstOffset == -4
-        assert g.bbox == {
+        assert g.bounds == {
             "northeast": [45.58753415000007, -75.07957784899992],
             "southwest": [44.962202955000066, -76.35400795899994],
         }
@@ -217,5 +217,5 @@ def test_geocoding_with_proximity():
     data_file = "tests/results/geonames_proximity.json"
     with requests_mock.Mocker() as mocker, open(data_file, "r") as input:
         mocker.get(url, text=input.read())
-        g = geocoder.geonames(location, key="mock", proximity=google.bbox)
+        g = geocoder.geonames(location, key="mock", proximity=google.bounds)
         assert g.has_data
