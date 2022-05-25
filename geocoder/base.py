@@ -227,25 +227,6 @@ class OneResult(metaclass=ABCMeta):
         logger.debug("------------")
         logger.debug(json.dumps(self.object_json, indent=4))
 
-    def _get_bbox(self, south, west, north, east) -> dict:
-        """Wrapper for bbox data generation"""
-        if not all([south, east, north, west]):
-            return {}
-
-        # South Latitude, West Longitude, North Latitude, East Longitude
-        self.south = float(south)
-        self.west = float(west)
-        self.north = float(north)
-        self.east = float(east)
-
-        # Bounding Box Corners
-        self.northeast = [self.north, self.east]
-        self.northwest = [self.north, self.west]
-        self.southwest = [self.south, self.west]
-        self.southeast = [self.south, self.east]
-
-        return dict(northeast=self.northeast, southwest=self.southwest)
-
     @property
     def confidence(self) -> int:
         """Is as a measure of how confident we are that centre point coordinates
