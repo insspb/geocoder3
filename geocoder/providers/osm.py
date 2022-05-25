@@ -1,6 +1,5 @@
 __all__ = ["OsmResult", "OsmQuery", "OsmQueryDetail", "OsmReverse"]
-
-from typing import Optional
+from typing import List, Optional
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import Location
@@ -29,14 +28,16 @@ class OsmResult(OneResult):
         return float(lng) if lng else None
 
     @property
-    def bbox(self) -> dict:
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         _boundingbox = self.object_raw_json.get("boundingbox")
         if _boundingbox:
             south = _boundingbox[0]
             west = _boundingbox[2]
             north = _boundingbox[1]
             east = _boundingbox[3]
-            return self._get_bbox(south, west, north, east)
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
     # ========================== #
     # Tags for individual houses #

@@ -1,4 +1,6 @@
 __all__ = ["YandexResult", "YandexQuery", "YandexReverse", "YandexReverseResult"]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import yandex_key
 from geocoder.location import Location
@@ -22,15 +24,14 @@ class YandexResult(OneResult):
             return pos.split(" ")[0]
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         envelope = self._meta_data.get("boundedBy", {}).get("Envelope", {})
         if envelope:
             east, north = envelope.get("upperCorner", "").split(" ")
             west, south = envelope.get("lowerCorner", "").split(" ")
-            try:
-                return self._get_bbox(south, west, north, east)
-            except Exception:
-                pass
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
     @property
     def description(self):

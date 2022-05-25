@@ -10,13 +10,12 @@ __all__ = [
     "GoogleTimezoneResult",
     "GoogleTimezone",
 ]
-
 import base64
 import hashlib
 import hmac
 import time
 from collections import OrderedDict
-from typing import Optional
+from typing import List, Optional
 from urllib.parse import urlencode, urlparse
 
 import ratelim
@@ -67,12 +66,17 @@ class GoogleResult(OneResult):
         return self._location_type
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         south = self._viewport.get("southwest", {}).get("lat")
         west = self._viewport.get("southwest", {}).get("lng")
         north = self._viewport.get("northeast", {}).get("lat")
         east = self._viewport.get("northeast", {}).get("lng")
-        return self._get_bbox(south, west, north, east)
+        return (
+            [float(west), float(south), float(east), float(north)]
+            if all([west, south, east, north])
+            else []
+        )
 
     @property
     def address(self):

@@ -4,9 +4,11 @@ __all__ = [
     "OpenCageReverseResult",
     "OpenCageReverse",
 ]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import opencage_key
-from geocoder.location import BBox, Location
+from geocoder.location import Location
 
 
 class OpenCageResult(OneResult):
@@ -296,13 +298,17 @@ class OpenCageResult(OneResult):
         return self._annotations.get("Mercator")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         south = self._bounds.get("southwest", {}).get("lat")
         north = self._bounds.get("northeast", {}).get("lat")
         west = self._bounds.get("southwest", {}).get("lng")
         east = self._bounds.get("northeast", {}).get("lng")
-        if all([south, west, north, east]):
-            return BBox.factory([south, west, north, east]).as_dict
+        return (
+            [float(west), float(south), float(east), float(north)]
+            if all([west, south, east, north])
+            else []
+        )
 
 
 class OpenCageQuery(MultipleResultsQuery):

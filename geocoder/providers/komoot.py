@@ -4,8 +4,10 @@ __all__ = [
     "KomootReverseResult",
     "KomootReverse",
 ]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
-from geocoder.location import BBox, Location
+from geocoder.location import Location
 
 
 class KomootResult(OneResult):
@@ -26,14 +28,16 @@ class KomootResult(OneResult):
         return self._geometry["coordinates"][0]
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         extent = self._properties.get("extent")
         if extent and all(extent):
             west = extent[0]
             north = extent[1]
             east = extent[2]
             south = extent[3]
-            return BBox.factory([south, west, north, east]).as_dict
+            return [float(west), float(south), float(east), float(north)]
+        return []
 
     @property
     def address(self):

@@ -9,6 +9,7 @@ __all__ = [
     "GeonamesTimezone",
 ]
 import logging
+from typing import List
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geonames_username
@@ -259,13 +260,18 @@ class GeonamesFullResult(GeonamesResult):
             return timezone.get("dstOffset")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         bbox = self.object_raw_json.get("bbox", {})
         south = bbox.get("south")
         west = bbox.get("west")
         north = bbox.get("north")
         east = bbox.get("east")
-        return self._get_bbox(south, west, north, east)
+        return (
+            [float(west), float(south), float(east), float(north)]
+            if all([west, south, east, north])
+            else []
+        )
 
 
 class GeonamesDetails(GeonamesQuery):

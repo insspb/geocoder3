@@ -1,4 +1,6 @@
 __all__ = ["GeocodeFarmResult", "GeocodeFarmQuery", "GeocodeFarmReverse"]
+from typing import List
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geocodefarm_key
 from geocoder.location import Location
@@ -32,12 +34,17 @@ class GeocodeFarmResult(OneResult):
         return self.object_raw_json.get("accuracy")
 
     @property
-    def bbox(self):
+    def bbox(self) -> List[float]:
+        """Output answer as GeoJSON bbox if it can be calculated/retrieved."""
         south = self._boundaries.get("southwest_latitude")
         west = self._boundaries.get("southwest_longitude")
         north = self._boundaries.get("northeast_latitude")
         east = self._boundaries.get("northeast_longitude")
-        return self._get_bbox(south, west, north, east)
+        return (
+            [float(west), float(south), float(east), float(north)]
+            if all([west, south, east, north])
+            else []
+        )
 
     @property
     def address(self):
