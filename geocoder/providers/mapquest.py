@@ -112,10 +112,7 @@ class MapquestQuery(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         results = json_response.get("results", [])
-        if results:
-            return results[0]["locations"]
-
-        return []
+        return results[0]["locations"] if results else []
 
 
 class MapQuestBatchResult(MapquestResult):
@@ -161,10 +158,7 @@ class MapquestBatch(MultipleResultsQuery):
 
     def _adapt_results(self, json_response):
         results = json_response.get("results", [])
-        if results:
-            return [result["locations"][0] for result in results]
-
-        return []
+        return [result["locations"][0] for result in results] if results else []
 
 
 class MapQuestReverseResult(MapquestResult):

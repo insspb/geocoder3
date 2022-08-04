@@ -343,11 +343,11 @@ class OpenCageQuery(MultipleResultsQuery):
             "key": provider_key,
             "limit": max_results,
         }
-        language = kwargs.get("language", None)
+        language = kwargs.get("language")
         if language:
             base_params["language"] = language
 
-        countrycode = kwargs.get("countrycode", None)
+        countrycode = kwargs.get("countrycode")
         if countrycode:
             base_params["countrycode"] = countrycode
 

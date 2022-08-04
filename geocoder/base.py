@@ -214,9 +214,7 @@ class OneResult(metaclass=ABCMeta):
         """Specify current summary status of instance"""
         if self.ok:
             return "OK"
-        if not self.address:
-            return "ERROR - No results found"
-        return "ERROR - No Geometry"
+        return "ERROR - No Geometry" if self.address else "ERROR - No results found"
 
     def debug(self):
         """Display debug information for instance of :class:`OneResult`"""

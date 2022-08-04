@@ -46,7 +46,7 @@ class CanadapostKeyLazySingleton(object):
         key = kwargs.get("key")
         canadapost_key = os.environ.get("CANADAPOST_API_KEY")
         if key or canadapost_key:
-            return key if key else canadapost_key
+            return key or canadapost_key
 
         # fallback
         try:
@@ -60,7 +60,7 @@ class CanadapostKeyLazySingleton(object):
             else:
                 raise ValueError("No API Key found")
         except Exception as err:
-            raise ValueError("Could not retrieve API Key: %s" % err)
+            raise ValueError(f"Could not retrieve API Key: {err}")
 
 
 canadapost_key_getter = CanadapostKeyLazySingleton()

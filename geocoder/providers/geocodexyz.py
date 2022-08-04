@@ -10,9 +10,7 @@ class GeocodeXYZResult(OneResult):
         value = json_obj.get(key, {})
         if value:
             value = value.strip()
-        if type_class and value:
-            return type_class(value)
-        return value
+        return type_class(value) if type_class and value else value
 
     def __init__(self, json_content):
         # create safe shortcuts

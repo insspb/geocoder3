@@ -9,7 +9,8 @@ except ImportError:
 with open("geocoder/__init__.py", "r") as fd:
     version = re.search(
         r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', fd.read(), re.MULTILINE
-    ).group(1)
+    )[1]
+
 
 if not version:
     raise RuntimeError("Cannot find version information")

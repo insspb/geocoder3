@@ -372,13 +372,11 @@ class GoogleElevationQuery(MultipleResultsQuery):
     _KEY = google_key
 
     def _build_params(self, location, provider_key, **kwargs):
-        params = {
+        return {
             # required
             "key": provider_key,
             "locations": str(Location(location)),
         }
-
-        return params
 
     def _adapt_results(self, json_response):
         return json_response["results"]
@@ -661,14 +659,12 @@ class GoogleTimezone(MultipleResultsQuery):
     _KEY = google_key
 
     def _build_params(self, location, provider_key, **kwargs):
-        params = {
+        return {
             # required
             "key": provider_key,
             "location": str(Location(location)),
             "timestamp": kwargs.get("timestamp", time.time()),
         }
-
-        return params
 
     def _adapt_results(self, json_response):
         return [json_response]

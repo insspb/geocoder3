@@ -153,9 +153,7 @@ class BingQuery(MultipleResultsQuery):
     def _adapt_results(self, json_response):
         # extract the array of JSON objects
         sets = json_response["resourceSets"]
-        if sets:
-            return sets[0]["resources"]
-        return []
+        return sets[0]["resources"] if sets else []
 
 
 class BingReverseResult(BingResult):
@@ -235,9 +233,7 @@ class BingQueryDetail(MultipleResultsQuery):
     def _adapt_results(self, json_response):
         # extract the array of JSON objects
         sets = json_response["resourceSets"]
-        if sets:
-            return sets[0]["resources"]
-        return []
+        return sets[0]["resources"] if sets else []
 
 
 class BingBatchResult(OneResult):
@@ -446,9 +442,7 @@ class BingBatchForward(BingBatch):
         for idx, address in enumerate(addresses):
             writer.writerow([idx, address, None, None])
 
-        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode(
-            "utf-8"
-        )
+        return f"Bing Spatial Data Services, 2.0\n{out.getvalue()}".encode("utf-8")
 
     def _adapt_results(self, response):
         result = io.StringIO(response.decode("utf-8"))
@@ -533,9 +527,7 @@ class BingBatchReverse(BingBatch):
                 [idx, location[0], location[1], None, None, None, None, None]
             )
 
-        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue()).encode(
-            "utf-8"
-        )
+        return f"Bing Spatial Data Services, 2.0\n{out.getvalue()}".encode("utf-8")
 
     def _adapt_results(self, response):
         # print(type(response))

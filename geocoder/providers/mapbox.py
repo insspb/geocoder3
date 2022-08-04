@@ -109,7 +109,7 @@ class MapboxQuery(MultipleResultsQuery):
             "types": kwargs.get("types"),
         }
         # handle proximity
-        proximity = kwargs.get("proximity", None)
+        proximity = kwargs.get("proximity")
         if proximity is not None:
             proximity = Location(proximity)
             # do not forget to convert bbox to mapbox expectations...
